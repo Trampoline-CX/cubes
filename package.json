@@ -5,8 +5,9 @@
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
     "clean": "rm -rf dist/ && rm -rf web-build/",
-    "build": "yarn build:icons && yarn build:stories && tsc --p tsconfig.build.json && tsc",
+    "build": "yarn build:schemas && yarn build:icons && yarn build:stories && tsc --p tsconfig.build.json && tsc",
     "build:icons": "yarn svgr --out-dir \"./src/components/icons/__generated__\" \"./assets/icons\" --ext tsx",
+    "build:schemas": "typescript-json-schema tsconfig.json ThemeJson -o src/theme/__GENERATED__/theme-schema.json --noExtraProps && yarn prettier src/theme/__GENERATED__/theme-schema.json --write && ajv -s src/theme/__GENERATED__/theme-schema.json -d \"src/theme/*.json\"",
     "build:stories": "rnstl && yarn prettier ./storybook/story-loader.js --write",
     "build:storybook": "yarn build && build-storybook -c storybook/web -o web-build",
     "test": "jest",
@@ -43,6 +44,7 @@
     "@types/react": "^16.9.35",
     "@types/react-native": "^0.61.23",
     "@types/react-test-renderer": "^16.9.2",
+    "ajv-cli": "^3.2.1",
     "babel-loader": "^8.1.0",
     "babel-preset-expo": "^8.1.0",
     "eslint": "^7.1.0",
@@ -75,6 +77,7 @@
     "react-test-renderer": "16.9.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.2",
+    "typescript-json-schema": "^0.42.0",
     "webpack": "^4.43.0"
   },
   "private": true,
