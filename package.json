@@ -14,8 +14,7 @@
     "start:app": "expo start",
     "prestorybook": "yarn build",
     "predeploy": "yarn build:storybook",
-    "deploy": "firebase deploy --only hosting:storybook",
-    "postinstall": "expo-yarn-workspaces postinstall"
+    "deploy": "firebase deploy --only hosting:storybook"
   },
   "peerDependencies": {
     "react": "16.9.0",
@@ -57,7 +56,6 @@
     "eslint-plugin-react-native": "^3.8.1",
     "expo": "~37.0.8",
     "expo-keep-awake": "~8.1.0",
-    "expo-yarn-workspaces": "^1.2.1",
     "husky": "^3.1.0",
     "jest": "^25.5.1",
     "paths.macro": "^3.0.0",
@@ -77,7 +75,6 @@
     "typescript": "^3.9.2",
     "webpack": "^4.43.0"
   },
-  "private": true,
   "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
