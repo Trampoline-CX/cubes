@@ -1,6 +1,6 @@
 {
-  "name": "@hansgx/design-system",
-  "version": "0.1.26",
+  "name": "@hansgx/proto-quick",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
