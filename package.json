@@ -5,13 +5,11 @@
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
     "clean": "rm -rf dist/ && rm -rf web-build/",
-    "build": "yarn build:icons && yarn build:stories && tsc --p tsconfig.build.json && tsc",
+    "build": "yarn build:icons && tsc --p tsconfig.build.json && tsc",
     "build:icons": "yarn svgr --out-dir \"./src/components/icons/__generated__\" \"./assets/icons\" --ext tsx",
-    "build:stories": "rnstl && yarn prettier ./storybook/story-loader.js --write",
     "build:storybook": "yarn build && build-storybook -c storybook/web -o web-build",
     "test": "jest",
     "start": "start-storybook -c storybook/web -p 9009 -s public",
-    "start:app": "expo start",
     "prestorybook": "yarn build",
     "predeploy": "yarn build:storybook",
     "deploy": "firebase deploy --only hosting:storybook"
@@ -38,15 +36,15 @@
     "@storybook/addon-toolbars": "^6.0.0-beta.26",
     "@storybook/addons": "^6.0.0-beta.26",
     "@storybook/react": "^6.0.0-beta.26",
-    "@storybook/react-native": "^6.0.0-alpha.0",
     "@storybook/source-loader": "^6.0.0-beta.26",
     "@svgr/cli": "^5.4.0",
     "@types/jest": "^25.2.1",
+    "@types/lodash": "^4.14.155",
     "@types/react": "^16.9.35",
     "@types/react-native": "^0.61.23",
     "@types/react-test-renderer": "^16.9.2",
     "babel-loader": "^8.1.0",
-    "babel-preset-expo": "^8.1.0",
+    "babel-preset-expo": "^8.2.1",
     "eslint": "^7.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
@@ -57,8 +55,6 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^2.4.0",
     "eslint-plugin-react-native": "^3.8.1",
-    "expo": "~37.0.8",
-    "expo-keep-awake": "~8.1.0",
     "husky": "^3.1.0",
     "jest": "^25.5.1",
     "paths.macro": "^3.0.0",
@@ -81,15 +77,6 @@
   "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
-  },
-  "config": {
-    "react-native-storybook-loader": {
-      "searchDir": [
-        "./src/components"
-      ],
-      "pattern": "**/*.stories.tsx",
-      "outputFile": "storybook/story-loader.js"
-    }
   },
   "husky": {
     "hooks": {
