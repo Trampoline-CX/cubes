@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "sourceMap": false,
+    "outDir": "dist",
+    "declaration": true,
+    "jsx": "react",
+    "lib": ["es6"],
+    "target": "es2017"
+  },
+  "include": ["src"],
+  "exclude": ["src/storybook", "**/*.stories.tsx"]
+}
