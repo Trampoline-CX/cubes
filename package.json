@@ -1,5 +1,5 @@
 {
-  "name": "@hansgx/proto-quick",
+  "name": "@hansgx/cubes",
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
@@ -78,7 +78,10 @@
     "webpack": "^4.43.0"
   },
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "config": {
     "react-native-storybook-loader": {
       "searchDir": [

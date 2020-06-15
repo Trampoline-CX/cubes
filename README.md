@@ -1,4 +1,4 @@
-# Bounce Design System
+# Cubes
 
 This package contains the components for the Bounce Design System. It also contains 2 Storybook apps:
 
@@ -7,12 +7,13 @@ This package contains the components for the Bounce Design System. It also conta
 
 ---
 
-- [Development Workflow](#development-workflow)
-  - [Create a New Component Guidelines](#create-a-new-component-guidelines)
-  - [Write Efficient Storybook Stories](#write-efficient-storybook-stories)
-- [Directory Structure](#directory-structure)
-- [Typescript Structure](#typescript-structure)
-- [Deploy :rocket:](#deploy-rocket)
+- [Cubes](#cubes)
+  - [Development Workflow](#development-workflow)
+    - [Create a New Component Guidelines](#create-a-new-component-guidelines)
+    - [Write Efficient Storybook Stories](#write-efficient-storybook-stories)
+  - [Directory Structure](#directory-structure)
+  - [Typescript Structure](#typescript-structure)
+  - [Deploy :rocket:](#deploy-)
 
 ## Development Workflow
 
