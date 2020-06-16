@@ -7,7 +7,6 @@ import { SearchField } from '../forms/SearchField/SearchField'
 import { DisplayText } from '../text/DisplayText/DisplayText'
 import { Divider } from '../structure/Divider/Divider'
 import { BodyText } from '../text/BodyText/BodyText'
-import { Stack } from '../structure/Stack/Stack'
 import { Pill } from '../actions/Pill/Pill'
 import { useStyles } from '../../theme'
 import { Touchable } from '../base/Touchable/Touchable'
@@ -47,26 +46,22 @@ export const Explore: React.FC = () => {
               <BodyText variation="strong">Popular searches</BodyText>
             </Box>
 
-            <Box paddingX="medium">
-              <Stack space="small" align="start">
-                <QuickSelectPill onSelect={setQuery} value="uber" />
-                <QuickSelectPill onSelect={setQuery} value="tim hortons" />
-                <QuickSelectPill onSelect={setQuery} value="netflix" />
-                <QuickSelectPill onSelect={setQuery} value="hydro quebec" />
-              </Stack>
+            <Box paddingX="medium" space="small" align="start">
+              <QuickSelectPill onSelect={setQuery} value="uber" />
+              <QuickSelectPill onSelect={setQuery} value="tim hortons" />
+              <QuickSelectPill onSelect={setQuery} value="netflix" />
+              <QuickSelectPill onSelect={setQuery} value="hydro quebec" />
             </Box>
           </>
         )}
 
         {showResults && (
           <>
-            <Box padding="medium">
-              <Stack horizontal>
-                <Box fill>
-                  <BodyText variation="strong">4 matches</BodyText>
-                </Box>
-                <BodyText variation="strong">Total $80.00</BodyText>
-              </Stack>
+            <Box horizontal padding="medium">
+              <Box fill>
+                <BodyText variation="strong">4 matches</BodyText>
+              </Box>
+              <BodyText variation="strong">Total $80.00</BodyText>
             </Box>
 
             <Box>
@@ -115,19 +110,15 @@ const SearchItem: React.FC<{ name: string; amount: string }> = ({ name, amount }
 
   return (
     <Touchable>
-      <Stack horizontal align="center">
-        <Box paddingY="small" paddingX="medium">
-          <View style={styles.date} />
-        </Box>
+      <Box horizontal align="center" paddingY="small" paddingX="medium" space="medium">
+        <View style={styles.date} />
 
         <Box fill>
           <BodyText>{name}</BodyText>
         </Box>
 
-        <Box paddingRight="medium">
-          <BodyText>{amount}</BodyText>
-        </Box>
-      </Stack>
+        <BodyText>{amount}</BodyText>
+      </Box>
     </Touchable>
   )
 }

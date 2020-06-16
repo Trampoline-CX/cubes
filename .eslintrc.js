@@ -157,6 +157,7 @@ module.exports = {
       files: ['*.stories.tsx'],
       rules: {
         'react/jsx-no-bind': 'off',
+        'react-native/no-inline-styles': 'off',
       },
     },
   ],

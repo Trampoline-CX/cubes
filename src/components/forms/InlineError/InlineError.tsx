@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { BodyText } from '../../text/BodyText/BodyText'
-import { Stack } from '../../structure/Stack/Stack'
 import { useStyles } from '../../../theme'
+import { Box } from '../../structure'
 
 export interface InlineErrorProps {
   /**
@@ -24,11 +24,11 @@ export const InlineError: React.FC<InlineErrorProps> = ({ message }) => {
   }))
 
   return (
-    <Stack horizontal>
+    <Box horizontal>
       {/* TODO Put error Icon */}
       <BodyText>
         <Text style={styles.text}>{message}</Text>
       </BodyText>
-    </Stack>
+    </Box>
   )
 }

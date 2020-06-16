@@ -6,7 +6,6 @@ import { DisplayText } from '../text/DisplayText/DisplayText'
 import { Divider } from '../structure/Divider/Divider'
 import { Card } from '../structure/Card/Card'
 import { BodyText } from '../text/BodyText/BodyText'
-import { Stack } from '../structure/Stack/Stack'
 import { IconName, Icon } from '../icons/Icon/Icon'
 import { getStoryTitle } from '../../storybook/get-story-title'
 import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
@@ -55,11 +54,9 @@ export const Money: React.FC = () => (
 )
 
 const Slate: React.FC<{ icon: IconName; label: string }> = ({ icon, label }) => (
-  <Stack horizontal align="center">
-    <Box paddingY="small" paddingX="medium">
-      <Icon name={icon} />
-    </Box>
+  <Box horizontal align="center" paddingY="small" paddingX="medium" space="medium">
+    <Icon name={icon} />
 
     <BodyText>{label}</BodyText>
-  </Stack>
+  </Box>
 )

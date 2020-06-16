@@ -6,7 +6,6 @@ import { Box } from '../structure/Box/Box'
 import { Divider } from '../structure/Divider/Divider'
 import { Touchable } from '../base/Touchable/Touchable'
 import { IconName, Icon } from '../icons/Icon/Icon'
-import { Stack } from '../structure/Stack/Stack'
 import { BodyText } from '../text/BodyText/BodyText'
 import { getStoryTitle } from '../../storybook/get-story-title'
 import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
@@ -48,12 +47,9 @@ const Slate: React.FC<{ icon: IconName; label: string; onClick?: () => void }> =
   onClick,
 }) => (
   <Touchable onClick={onClick}>
-    <Stack horizontal align="center">
-      <Box padding="medium">
-        <Icon name={icon} />
-      </Box>
-
+    <Box horizontal align="center" padding="medium" space="medium">
+      <Icon name={icon} />
       <BodyText>{label}</BodyText>
-    </Stack>
+    </Box>
   </Touchable>
 )

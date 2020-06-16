@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
 import { Centered } from '../../storybook/decorators/Centered'
 import { useStyles, ThemeContext, Theme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Box } from '../structure'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -15,7 +15,7 @@ export default {
 export const All: React.FC = () => {
   const theme = useContext(ThemeContext)
   return (
-    <Stack space="medium">
+    <Box space="medium">
       <Heading>Small ({theme.radius.small}dp)</Heading>
       <Square radius="small" />
 
@@ -27,7 +27,7 @@ export const All: React.FC = () => {
 
       <Heading>Circle ({theme.radius.circle}dp)</Heading>
       <Square radius="circle" />
-    </Stack>
+    </Box>
   )
 }
 

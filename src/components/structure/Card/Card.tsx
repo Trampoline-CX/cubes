@@ -4,7 +4,6 @@ import { Heading } from '../../text/Heading/Heading'
 import { useStyles } from '../../../theme'
 import { Link } from '../../actions/Link/Link'
 import { Box } from '../Box/Box'
-import { Stack } from '../Stack/Stack'
 import { Divider } from '../Divider/Divider'
 import { Touchable } from '../../base/Touchable/Touchable'
 import { TextStyle } from '../../text/TextStyle/TextStyle'
@@ -107,7 +106,7 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
 
 const CardHeader: React.FC<{ title: string; action?: Action }> = ({ title, action }) => (
   <Box padding="medium" paddingBottom="none">
-    <Stack horizontal align="center">
+    <Box horizontal align="center">
       <Box fill>
         <Heading>{title}</Heading>
       </Box>
@@ -117,7 +116,7 @@ const CardHeader: React.FC<{ title: string; action?: Action }> = ({ title, actio
           <Link onClick={action.onClick}>{action.label}</Link>
         </BodyText>
       )}
-    </Stack>
+    </Box>
   </Box>
 )
 
@@ -126,14 +125,14 @@ const CardMainAction: React.FC<{ action: Action }> = ({ action }) => (
     <Divider />
     <Touchable onClick={action.onClick}>
       <Box padding="medium">
-        <Stack horizontal>
-          <Box fill paddingRight="medium">
+        <Box horizontal space="medium">
+          <Box fill>
             <Heading>
               <TextStyle variation="accent">{action.label}</TextStyle>
             </Heading>
           </Box>
           <Icon name="nav-disclosure" color="subdued" />
-        </Stack>
+        </Box>
       </Box>
     </Touchable>
   </>

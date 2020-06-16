@@ -7,7 +7,6 @@ import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { useNav } from '../NavigationProvider/NavigationProvider'
-import { Stack } from '../../structure'
 import { Icon } from './Icon/Icon'
 
 export interface TopBarProps {
@@ -74,9 +73,9 @@ export const TopBar: React.FC<TopBarProps> & { Icon: typeof Icon } = ({
       <Box paddingX="medium" fill>
         <Heading maxLines={1}>{title}</Heading>
       </Box>
-      <Stack horizontal reverse>
+      <Box horizontal reverse>
         {children}
-      </Stack>
+      </Box>
     </View>
   )
 }

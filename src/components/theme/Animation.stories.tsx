@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 import { View, Animated } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
 import { Centered } from '../../storybook/decorators/Centered'
 import { useStyles, ThemeContext, Theme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Box } from '../structure'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -17,7 +17,7 @@ export const Example: React.FC = () => <AnimatedSquare duration="shorter" easing
 export const Duration: React.FC = () => {
   const theme = useContext(ThemeContext)
   return (
-    <Stack space="medium">
+    <Box space="medium">
       <Heading>Shorter Duration ({theme.animation.duration.shorter}ms)</Heading>
       <AnimatedSquare duration="shorter" easing="move" />
 
@@ -26,12 +26,12 @@ export const Duration: React.FC = () => {
 
       <Heading>Longer Duration ({theme.animation.duration.longer}ms)</Heading>
       <AnimatedSquare duration="longer" easing="move" />
-    </Stack>
+    </Box>
   )
 }
 
 export const Easing: React.FC = () => (
-  <Stack space="medium">
+  <Box space="medium">
     <Heading>Move Easing</Heading>
     <AnimatedSquare duration="longer" easing="move" />
 
@@ -40,7 +40,7 @@ export const Easing: React.FC = () => (
 
     <Heading>Exit Easing</Heading>
     <AnimatedSquare duration="longer" easing="exit" />
-  </Stack>
+  </Box>
 )
 
 // ---

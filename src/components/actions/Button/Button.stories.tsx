@@ -2,9 +2,9 @@ import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
 import { Centered } from '../../../storybook/decorators/Centered'
-import { Stack } from '../../structure/Stack/Stack'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { getStoryTitle } from '../../../storybook/get-story-title'
+import { Box } from '../../structure'
 import { Button, ButtonProps } from './Button'
 
 export default {
@@ -20,7 +20,7 @@ Basic.args = {
 }
 
 export const Secondary: React.FC = () => (
-  <Stack horizontal space="medium">
+  <Box horizontal space="medium">
     <Button onClick={action('button clicked')}>Normal</Button>
 
     <Button disabled onClick={action('button clicked')}>
@@ -30,11 +30,11 @@ export const Secondary: React.FC = () => (
     <Button loading onClick={action('button clicked')}>
       Loading
     </Button>
-  </Stack>
+  </Box>
 )
 
 export const Primary: React.FC = () => (
-  <Stack horizontal space="medium">
+  <Box horizontal space="medium">
     <Button primary onClick={action('button clicked')}>
       Normal
     </Button>
@@ -46,5 +46,5 @@ export const Primary: React.FC = () => (
     <Button primary loading onClick={action('button clicked')}>
       Loading
     </Button>
-  </Stack>
+  </Box>
 )
