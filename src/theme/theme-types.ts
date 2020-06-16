@@ -110,8 +110,8 @@ export interface Theme {
     z2: Elevation
     // For Navbar, elements above cards
     z4: Elevation
-    // Sheets, dialogs
-    // z8: Elevation
+    // Sheets, dialogs, Bottom Navigation Bar
+    z8: Elevation
   }
 
   // SIZING
