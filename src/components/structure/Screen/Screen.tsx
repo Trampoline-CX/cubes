@@ -19,7 +19,7 @@ export interface ScreenProps {
 }
 
 /**
- * Basic component representing a Screen.
+ * Basic component representing a Screen. Sets the Theme Background color and fill its parent component.
  */
 export const Screen: React.FC<ScreenProps> = ({
   children,
@@ -32,9 +32,6 @@ export const Screen: React.FC<ScreenProps> = ({
     background: {
       flex: 1,
       backgroundColor: theme.colors.fill.background.default,
-    },
-    backgroundTransparent: {
-      backgroundColor: 'transparent',
     },
     backgroundWithInsetsBase: {
       paddingLeft: insets.left,
