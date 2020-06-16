@@ -1,6 +1,6 @@
 import React from 'react'
-import { BoxProps, Box } from '../../Box/Box'
 import { ScrollView } from 'react-native'
+import { BoxProps, Box } from '../../Box/Box'
 
 export type ContentProps = Omit<BoxProps, 'fill'> & {
   scroll?: boolean

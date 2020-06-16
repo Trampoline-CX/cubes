@@ -1,15 +1,14 @@
 import React from 'react'
-import { getStoryTitle } from '../../../storybook/get-story-title'
 import { fileAbsolute } from 'paths.macro'
+import { action } from '@storybook/addon-actions'
+import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Screen } from '../../structure/Screen/Screen'
 import { NavigationProvider } from '../NavigationProvider/NavigationProvider'
-import { action } from '@storybook/addon-actions'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { TextContainer, DisplayText, BodyText } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
-import { Box } from '../../structure'
-import { BottomNavigationBar } from './BottomNavigationBar'
 import { TopBar } from '../TopBar/TopBar'
+import { BottomNavigationBar } from './BottomNavigationBar'
 
 export default {
   title: getStoryTitle(fileAbsolute),

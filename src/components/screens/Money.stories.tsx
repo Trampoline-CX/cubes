@@ -1,7 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
-import { IconButton } from '../actions/IconButton/IconButton'
 import { Box } from '../structure/Box/Box'
 import { DisplayText } from '../text/DisplayText/DisplayText'
 import { Divider } from '../structure/Divider/Divider'

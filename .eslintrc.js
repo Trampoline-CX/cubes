@@ -69,7 +69,6 @@ module.exports = {
     '@typescript-eslint/no-unused-expressions': 'error',
     '@typescript-eslint/array-type': 'error',
     '@typescript-eslint/await-thenable': 'error',
-    '@typescript-eslint/interface-name-prefix': 'error',
     '@typescript-eslint/member-delimiter-style': [
       'error',
       {
@@ -153,4 +152,12 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off', // TODO: Temporary off because the auto-fixing of it causes too many issues. Please put at warn again with correct fix when this GitHub issue gets resolved: https://github.com/facebook/react/issues/15204
     'no-console': ['error', { allow: ['warn', 'error'] }],
   },
+  overrides: [
+    {
+      files: ['*.stories.tsx'],
+      rules: {
+        'react/jsx-no-bind': 'off',
+      },
+    },
+  ],
 }

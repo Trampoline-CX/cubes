@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSafeArea } from 'react-native-safe-area-context'
-import { View, ViewStyle, KeyboardAvoidingView, Platform } from 'react-native'
+import { View, ViewStyle, KeyboardAvoidingView } from 'react-native'
 import { useStyles } from '../../../theme'
 import { Content } from './Content/Content'
 

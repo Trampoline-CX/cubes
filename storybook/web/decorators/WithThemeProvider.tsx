@@ -1,7 +1,6 @@
 import React from 'react'
 import { StoryWrapper, StoryGetter, StoryContext } from '@storybook/addons'
 import { themes, ThemeContext } from '../../../src'
-import { Background } from '../../../src/storybook/decorators/Background'
 
 export const WithThemeProvider: StoryWrapper = (Story: StoryGetter, context: StoryContext) => {
   // context.globalArgs.theme here will be either 'light' or 'dark'

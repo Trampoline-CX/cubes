@@ -1,6 +1,6 @@
 import React from 'react'
-import { useStyles } from '../../../theme'
 import { View } from 'react-native'
+import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { IconName } from '../../icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
@@ -59,7 +59,7 @@ export const TopBar: React.FC<TopBarProps> = ({
     <View style={[styles.root, transparent ? styles.transparentRoot : null]}>
       {iconStart !== 'none' ? (
         <Box paddingX="xSmall">
-          <IconButton icon={iconStart} onClick={onIconStartClick}></IconButton>
+          <IconButton icon={iconStart} onClick={onIconStartClick} />
         </Box>
       ) : null}
       <Box paddingX="medium">

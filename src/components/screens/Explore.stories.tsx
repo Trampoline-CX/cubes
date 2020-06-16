@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
+import { action } from '@storybook/addon-actions'
 import { Box } from '../structure/Box/Box'
 import { SearchField } from '../forms/SearchField/SearchField'
 import { DisplayText } from '../text/DisplayText/DisplayText'
@@ -14,7 +15,6 @@ import { getStoryTitle } from '../../storybook/get-story-title'
 import { Screen } from '../structure'
 import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
 import { BottomNavigationBar } from '../navigation/BottomNavigationBar/BottomNavigationBar'
-import { action } from '@storybook/addon-actions'
 
 export default {
   title: getStoryTitle(fileAbsolute),

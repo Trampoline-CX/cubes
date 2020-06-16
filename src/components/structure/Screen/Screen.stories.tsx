@@ -1,7 +1,7 @@
 import React from 'react'
-import { getStoryTitle } from '../../../storybook/get-story-title'
 import { fileAbsolute } from 'paths.macro'
-import { Screen } from './Screen'
+import { action } from '@storybook/addon-actions'
+import { getStoryTitle } from '../../../storybook/get-story-title'
 import { TextContainer } from '../../text/TextContainer/TextContainer'
 import { DisplayText } from '../../text/DisplayText/DisplayText'
 import { BodyText } from '../../text/BodyText/BodyText'
@@ -9,9 +9,7 @@ import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { TopBar } from '../../navigation'
 import { BottomNavigationBar } from '../../navigation/BottomNavigationBar/BottomNavigationBar'
-import { action } from '@storybook/addon-actions'
-import { Box } from '../Box/Box'
-import { ScrollView } from 'react-native'
+import { Screen } from './Screen'
 
 export default {
   title: getStoryTitle(fileAbsolute),

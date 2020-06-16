@@ -3,7 +3,7 @@ import { Skeleton } from '../Skeleton/Skeleton'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 
-export type SkeletonAvatarProps = {}
+export type SkeletonAvatarProps = Record<string, never>
 
 /**
  * Skeleton acting as a placeholder for an Avatar.

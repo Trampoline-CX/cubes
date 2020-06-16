@@ -17,7 +17,7 @@ export type ControlType =
   | 'color'
   | 'date'
 
-export type StoryFn<Props extends object> = React.FC<Props> & {
+export type StoryFn<Props> = React.FC<Props> & {
   args?: Props
   argTypes?: Partial<Record<Extract<keyof Props, string>, { control: { type: ControlType } }>>
 }

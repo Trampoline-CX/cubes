@@ -14,7 +14,7 @@ export type FontFamily = string | undefined
 /**
  * Type for a font-weight.
  */
-export type FontWeight = TextStyle['fontWeight']
+export type FontWeight = Required<TextStyle>['fontWeight']
 
 export interface FontSize {
   size: number

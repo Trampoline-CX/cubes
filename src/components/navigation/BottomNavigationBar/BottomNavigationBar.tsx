@@ -1,7 +1,7 @@
 import React from 'react'
-import { Tab } from './Tab/Tab'
-import { useStyles } from '../../../theme'
 import { View } from 'react-native'
+import { useStyles } from '../../../theme'
+import { Tab } from './Tab/Tab'
 
 export interface BottomNavigationBarProps {
   /**

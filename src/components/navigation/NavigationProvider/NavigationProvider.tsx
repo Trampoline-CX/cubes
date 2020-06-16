@@ -21,9 +21,9 @@ export interface NavigationProviderProps {
  * Provides navigation features to Navigation components.
  * You can customize it with any Navigation framework you like.
  */
-export const NavigationProvider: React.FC<NavigationProviderProps> = ({ goBack, children }) => {
-  return <NavigationContext.Provider value={{ goBack }}>{children}</NavigationContext.Provider>
-}
+export const NavigationProvider: React.FC<NavigationProviderProps> = ({ goBack, children }) => (
+  <NavigationContext.Provider value={{ goBack }}>{children}</NavigationContext.Provider>
+)
 
 /**
  * Return a `Navigation` object provided by the `NavigationProvider`.
