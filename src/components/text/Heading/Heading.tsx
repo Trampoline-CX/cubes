@@ -1,21 +1,14 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { useTextStyles } from '../use-text-styles'
-import { TestProps } from '../../../utils/TestProps'
+import { TextProps } from '../TextProps'
+import { TextStyle } from '../TextStyle/TextStyle'
 
-export interface HeadingProps extends TestProps {
-  /**
-   * Text or Text components (like `TextStyle`).
-   */
-  children: React.ReactNode
+export interface HeadingProps extends TextProps {
   /**
    * Element to use for HTML rendering **(Web only)**
    */
   element?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
-  /**
-   * Set a maximum number of lines. If text doesn't fit on these lines, the end of the text is ellipsized.
-   */
-  maxLines?: number
 }
 
 /**
@@ -24,6 +17,8 @@ export interface HeadingProps extends TestProps {
 export const Heading: React.FC<HeadingProps> = ({
   children,
   element = 'p',
+  textAlign,
+  variation,
   maxLines,
   testID,
   accessibilityLabel,
@@ -34,13 +29,13 @@ export const Heading: React.FC<HeadingProps> = ({
     <Text
       accessibilityRole={element.startsWith('h') ? 'header' : undefined}
       aria-level={element.startsWith('h') ? element[1] : undefined}
-      style={textStyles.heading}
+      style={[textStyles.heading, { textAlign }]}
       numberOfLines={maxLines}
       ellipsizeMode="tail"
       testID={testID}
       accessibilityLabel={accessibilityLabel}
     >
-      {children}
+      {variation ? <TextStyle variation={variation}>{children}</TextStyle> : children}
     </Text>
   )
 }
