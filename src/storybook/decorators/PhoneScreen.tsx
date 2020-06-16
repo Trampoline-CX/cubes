@@ -11,7 +11,7 @@ export const PhoneScreen: DecoratorFunction<React.ReactNode> = storyFn => {
       alignItems: 'center',
     },
     phone: {
-      maxWidth: 480,
+      width: 480,
       height: 800,
       overflow: 'hidden',
       ...theme.elevation.z4,

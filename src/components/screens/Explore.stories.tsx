@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { FakeScreen } from '../../storybook/decorators/FakeScreen'
 import { Box } from '../structure/Box/Box'
 import { SearchField } from '../forms/SearchField/SearchField'
 import { DisplayText } from '../text/DisplayText/DisplayText'
@@ -12,6 +11,15 @@ import { Pill } from '../actions/Pill/Pill'
 import { useStyles } from '../../theme'
 import { Touchable } from '../base/Touchable/Touchable'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Screen } from '../structure'
+import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
+import { BottomNavigationBar } from '../navigation/BottomNavigationBar/BottomNavigationBar'
+import { action } from '@storybook/addon-actions'
+
+export default {
+  title: getStoryTitle(fileAbsolute),
+  decorators: [PhoneScreen],
+}
 
 export const Explore: React.FC = () => {
   const [query, setQuery] = useState('')
@@ -21,62 +29,69 @@ export const Explore: React.FC = () => {
   const showNoResults = query.length && query.length >= 8
 
   return (
-    <>
-      <Box padding="medium" paddingBottom="none">
-        <DisplayText>Explore</DisplayText>
-      </Box>
+    <Screen>
+      <Screen.Content scroll>
+        <Box padding="medium" paddingBottom="none">
+          <DisplayText>Explore</DisplayText>
+        </Box>
 
-      <Box padding="medium">
-        <SearchField placeholder="Search by name" value={query} onChange={setQuery} />
-      </Box>
+        <Box padding="medium">
+          <SearchField placeholder="Search by name" value={query} onChange={setQuery} />
+        </Box>
 
-      <Divider />
+        <Divider />
 
-      {showQuickSelects && (
-        <>
-          <Box padding="medium">
-            <BodyText variation="strong">Popular searches</BodyText>
-          </Box>
+        {showQuickSelects && (
+          <>
+            <Box padding="medium">
+              <BodyText variation="strong">Popular searches</BodyText>
+            </Box>
 
-          <Box paddingX="medium">
-            <Stack space="small" align="start">
-              <QuickSelectPill onSelect={setQuery} value="uber" />
-              <QuickSelectPill onSelect={setQuery} value="tim hortons" />
-              <QuickSelectPill onSelect={setQuery} value="netflix" />
-              <QuickSelectPill onSelect={setQuery} value="hydro quebec" />
-            </Stack>
-          </Box>
-        </>
-      )}
+            <Box paddingX="medium">
+              <Stack space="small" align="start">
+                <QuickSelectPill onSelect={setQuery} value="uber" />
+                <QuickSelectPill onSelect={setQuery} value="tim hortons" />
+                <QuickSelectPill onSelect={setQuery} value="netflix" />
+                <QuickSelectPill onSelect={setQuery} value="hydro quebec" />
+              </Stack>
+            </Box>
+          </>
+        )}
 
-      {showResults && (
-        <>
-          <Box padding="medium">
-            <Stack horizontal>
-              <Box fill>
-                <BodyText variation="strong">4 matches</BodyText>
-              </Box>
-              <BodyText variation="strong">Total $80.00</BodyText>
-            </Stack>
-          </Box>
+        {showResults && (
+          <>
+            <Box padding="medium">
+              <Stack horizontal>
+                <Box fill>
+                  <BodyText variation="strong">4 matches</BodyText>
+                </Box>
+                <BodyText variation="strong">Total $80.00</BodyText>
+              </Stack>
+            </Box>
 
-          <Box>
-            <SearchItem name="Transaction Title" amount="$20.00" />
-            <SearchItem name="Transaction Title" amount="$20.00" />
-            <SearchItem name="Transaction Title" amount="$20.00" />
-            <SearchItem name="Transaction Title" amount="$20.00" />
-          </Box>
-        </>
-      )}
+            <Box>
+              <SearchItem name="Transaction Title" amount="$20.00" />
+              <SearchItem name="Transaction Title" amount="$20.00" />
+              <SearchItem name="Transaction Title" amount="$20.00" />
+              <SearchItem name="Transaction Title" amount="$20.00" />
+            </Box>
+          </>
+        )}
 
-      {showNoResults === true && (
-        <>
-          <Box padding="medium">
-            <BodyText>No results</BodyText>
-          </Box>
-        </>
-      )}
-    </>
+        {showNoResults === true && (
+          <>
+            <Box padding="medium">
+              <BodyText>No results</BodyText>
+            </Box>
+          </>
+        )}
+      </Screen.Content>
+      <BottomNavigationBar>
+        <BottomNavigationBar.Tab icon="money" onClick={action('Money Tab Clicked')} />
+        <BottomNavigationBar.Tab icon="search" selected onClick={action('Explore Tab Clicked')} />
+        <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Clicked')} />
+      </BottomNavigationBar>
+    </Screen>
   )
 }
 
@@ -115,10 +130,4 @@ const SearchItem: React.FC<{ name: string; amount: string }> = ({ name, amount }
       </Stack>
     </Touchable>
   )
-}
-
-export default {
-  title: getStoryTitle(fileAbsolute),
-  component: Explore,
-  decorators: [FakeScreen],
 }

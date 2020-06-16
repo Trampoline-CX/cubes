@@ -1,7 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
-import { FakeScreen } from '../../storybook/decorators/FakeScreen'
 import { DisplayText } from '../text/DisplayText/DisplayText'
 import { Box } from '../structure/Box/Box'
 import { Divider } from '../structure/Divider/Divider'
@@ -10,22 +9,37 @@ import { IconName, Icon } from '../icons/Icon/Icon'
 import { Stack } from '../structure/Stack/Stack'
 import { BodyText } from '../text/BodyText/BodyText'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
+import { Screen } from '../structure'
+import { BottomNavigationBar } from '../navigation/BottomNavigationBar/BottomNavigationBar'
+
+export default {
+  title: getStoryTitle(fileAbsolute),
+  decorators: [PhoneScreen],
+}
 
 export const Profile: React.FC = () => (
-  <>
-    <Box padding="medium">
-      <DisplayText>Profile</DisplayText>
-    </Box>
+  <Screen>
+    <Screen.Content scroll>
+      <Box padding="medium">
+        <DisplayText>Profile</DisplayText>
+      </Box>
 
-    <Divider />
+      <Divider />
 
-    <Box paddingY="medium">
-      <Slate icon="profile" label="My account" />
-      <Slate icon="accounts" label="Linked bank connections" />
-      <Slate icon="security" label="Security" />
-      <Slate icon="sign-out" label="Sign out" onClick={action('Sign out Clicked')} />
-    </Box>
-  </>
+      <Box paddingY="medium">
+        <Slate icon="profile" label="My account" />
+        <Slate icon="accounts" label="Linked bank connections" />
+        <Slate icon="security" label="Security" />
+        <Slate icon="sign-out" label="Sign out" onClick={action('Sign out Clicked')} />
+      </Box>
+    </Screen.Content>
+    <BottomNavigationBar>
+      <BottomNavigationBar.Tab icon="money" onClick={action('Money Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="search" onClick={action('Explore Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="profile" selected onClick={action('Profile Tab Clicked')} />
+    </BottomNavigationBar>
+  </Screen>
 )
 
 const Slate: React.FC<{ icon: IconName; label: string; onClick?: () => void }> = ({
@@ -43,9 +57,3 @@ const Slate: React.FC<{ icon: IconName; label: string; onClick?: () => void }> =
     </Stack>
   </Touchable>
 )
-
-export default {
-  title: getStoryTitle(fileAbsolute),
-  component: Profile,
-  decorators: [FakeScreen],
-}
