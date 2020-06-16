@@ -34,6 +34,11 @@ const storybookConfig: StorybookConfig = {
       '@storybook/react-native': '@storybook/react',
       // Make react-native-svg work
       'react-native-svg': 'react-native-svg/lib/commonjs/ReactNativeSVG.web',
+      // Mock react-native-safe-area-context on Web
+      'react-native-safe-area-context': path.resolve(
+        __dirname,
+        '../../src/utils/web/react-native-safe-area-context',
+      ),
     }
 
     return config

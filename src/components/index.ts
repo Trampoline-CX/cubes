@@ -32,6 +32,7 @@ export * from './structure/ButtonGroup/ButtonGroup'
 export * from './structure/Card/Card'
 export * from './structure/Divider/Divider'
 export * from './structure/Layout/Layout'
+export * from './structure/Screen/Screen'
 export * from './structure/Space/Space'
 export * from './structure/Stack/Stack'
 
