@@ -3,7 +3,13 @@ import { Theme, themes } from '../../../theme'
 import { AppProviderContext } from './AppProviderContext'
 
 export interface AppProviderProps {
+  /**
+   * Theme to use (will use light theme if none is provided).
+   */
   theme?: Theme
+  /**
+   * Children views.
+   */
   children: React.ReactNode
 }
 
