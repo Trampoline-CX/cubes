@@ -6,10 +6,12 @@ import { TextContainer } from '../../text/TextContainer/TextContainer'
 import { DisplayText } from '../../text/DisplayText/DisplayText'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
+import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Screen,
+  decorators: [PhoneScreen],
 }
 
 export const Default: React.FC = () => (

@@ -39,4 +39,7 @@ export const shameStyles = {
       backgroundColor: '#F5F1F0',
     },
   },
+  topBar: {
+    height: 56,
+  },
 }
