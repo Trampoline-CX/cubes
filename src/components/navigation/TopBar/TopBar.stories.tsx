@@ -19,7 +19,9 @@ export default {
 export const Basic: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
-      <TopBar title="Bar Title" />
+      <TopBar title="Bar Title">
+        <TopBar.Icon name="action-edit" onClick={action('Edit Clicked')} />
+      </TopBar>
       <Screen.Content>
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>
