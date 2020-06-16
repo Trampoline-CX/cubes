@@ -57,6 +57,20 @@ export const WithoutTitle: React.FC = () => (
   </NavigationProvider>
 )
 
+export const WithLongTitle: React.FC = () => (
+  <NavigationProvider goBack={action('Back pressed')}>
+    <Screen>
+      <TopBar title="This is a long title that should be truncated after a lot of characters" />
+      <Screen.Content>
+        <TextContainer>
+          <DisplayText>Screen Title</DisplayText>
+          <BodyText>{LOREM_IPSUM}</BodyText>
+        </TextContainer>
+      </Screen.Content>
+    </Screen>
+  </NavigationProvider>
+)
+
 export const Transparent: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>

@@ -62,8 +62,8 @@ export const TopBar: React.FC<TopBarProps> = ({
           <IconButton icon={iconStart} onClick={onIconStartClick} />
         </Box>
       ) : null}
-      <Box paddingX="medium">
-        <Heading>{title}</Heading>
+      <Box paddingX="medium" fill>
+        <Heading maxLines={1}>{title}</Heading>
       </Box>
     </View>
   )
