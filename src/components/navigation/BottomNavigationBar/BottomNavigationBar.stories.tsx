@@ -22,12 +22,12 @@ export const Basic: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
       <TopBar title="Bar Title" />
-      <Box padding="medium">
+      <Screen.Content padding="medium">
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>
           <BodyText>{LOREM_IPSUM}</BodyText>
         </TextContainer>
-      </Box>
+      </Screen.Content>
       <BottomNavigationBar>
         <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Click')} />
         <BottomNavigationBar.Tab icon="accounts" onClick={action('Accounts Tab Click')} />

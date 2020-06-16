@@ -7,18 +7,36 @@ import { DisplayText } from '../../text/DisplayText/DisplayText'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
+import { TopBar } from '../../navigation'
+import { BottomNavigationBar } from '../../navigation/BottomNavigationBar/BottomNavigationBar'
+import { action } from '@storybook/addon-actions'
+import { Box } from '../Box/Box'
+import { ScrollView } from 'react-native'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Screen,
+  subcomponents: { 'Screen.Content': Screen.Content },
   decorators: [PhoneScreen],
 }
 
 export const Default: React.FC = () => (
   <Screen>
-    <TextContainer>
-      <DisplayText>Title</DisplayText>
-      <BodyText>{LOREM_IPSUM}</BodyText>
-    </TextContainer>
+    <TopBar title="Bar Title" />
+    <Screen.Content padding="medium" scroll>
+      <TextContainer>
+        <DisplayText>Screen Title</DisplayText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+      </TextContainer>
+    </Screen.Content>
+    <BottomNavigationBar>
+      <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Click')} />
+      <BottomNavigationBar.Tab icon="accounts" onClick={action('Accounts Tab Click')} />
+      <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Click')} />
+    </BottomNavigationBar>
   </Screen>
 )

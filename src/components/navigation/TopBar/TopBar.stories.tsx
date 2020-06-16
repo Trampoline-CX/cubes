@@ -20,12 +20,12 @@ export const Basic: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
       <TopBar title="Bar Title" />
-      <Box padding="medium">
+      <Screen.Content>
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>
           <BodyText>{LOREM_IPSUM}</BodyText>
         </TextContainer>
-      </Box>
+      </Screen.Content>
     </Screen>
   </NavigationProvider>
 )
@@ -34,12 +34,12 @@ export const WithoutIcon: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
       <TopBar title="Bar Title" iconStart="none" />
-      <Box padding="medium">
+      <Screen.Content>
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>
           <BodyText>{LOREM_IPSUM}</BodyText>
         </TextContainer>
-      </Box>
+      </Screen.Content>
     </Screen>
   </NavigationProvider>
 )
@@ -48,12 +48,12 @@ export const WithoutTitle: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
       <TopBar />
-      <Box padding="medium">
+      <Screen.Content>
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>
           <BodyText>{LOREM_IPSUM}</BodyText>
         </TextContainer>
-      </Box>
+      </Screen.Content>
     </Screen>
   </NavigationProvider>
 )

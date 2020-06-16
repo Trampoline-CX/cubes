@@ -2,6 +2,7 @@ import React from 'react'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { View, ViewStyle, KeyboardAvoidingView, Platform } from 'react-native'
 import { useStyles } from '../../../theme'
+import { Content } from './Content/Content'
 
 export interface ScreenProps {
   /**
@@ -21,7 +22,7 @@ export interface ScreenProps {
 /**
  * Basic component representing a Screen. Sets the Theme Background color and fill its parent component.
  */
-export const Screen: React.FC<ScreenProps> = ({
+export const Screen: React.FC<ScreenProps> & { Content: typeof Content } = ({
   children,
   useInsets = 'none',
   avoidKeyboard = false,
@@ -75,3 +76,5 @@ export const Screen: React.FC<ScreenProps> = ({
     </View>
   )
 }
+
+Screen.Content = Content

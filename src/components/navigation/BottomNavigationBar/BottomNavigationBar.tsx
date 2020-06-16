@@ -19,13 +19,8 @@ export const BottomNavigationBar: React.FC<BottomNavigationBarProps> & {
   const styles = useStyles(theme => ({
     background: {
       flexDirection: 'row',
-      alignSelf: 'flex-end',
       alignItems: 'stretch',
       background: theme.colors.fill.background.lighter,
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 0,
       ...theme.elevation.z8,
     },
   }))
