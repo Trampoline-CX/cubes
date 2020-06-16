@@ -48,33 +48,3 @@ export const Primary: React.FC = () => (
     </Button>
   </Stack>
 )
-export const Borderless: React.FC = () => (
-  <Stack horizontal space="medium">
-    <Button borderless onClick={action('button clicked')}>
-      Normal
-    </Button>
-
-    <Button borderless disabled onClick={action('button clicked')}>
-      Disable
-    </Button>
-
-    <Button borderless loading onClick={action('button clicked')}>
-      Loading
-    </Button>
-  </Stack>
-)
-export const Destructive: React.FC = () => (
-  <Stack horizontal space="medium">
-    <Button destructive onClick={action('button clicked')}>
-      Normal
-    </Button>
-
-    <Button destructive disabled onClick={action('button clicked')}>
-      Disabled
-    </Button>
-
-    <Button destructive loading onClick={action('button clicked')}>
-      Loading
-    </Button>
-  </Stack>
-)
