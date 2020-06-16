@@ -21,7 +21,7 @@ export default {
 export const Money: React.FC = () => (
   <Screen>
     <TopBar iconStart="close-modal" transparent />
-    <Screen.Content scroll>
+    <Screen.Content>
       <Box padding="medium">
         <DisplayText>Payment transfer to LN02</DisplayText>
         <DisplayText>$480.50</DisplayText>

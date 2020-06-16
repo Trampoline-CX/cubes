@@ -1,6 +1,6 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { View, ViewStyle } from 'react-native'
-import { Theme, ThemeContext } from '../../../theme'
+import { Theme, useTheme } from '../../../theme'
 import { Space } from '../Space/Space'
 
 type Spacing = Extract<keyof Theme['spacing'], string>
@@ -87,7 +87,7 @@ export const Box: React.FC<BoxProps> = ({
   distribution = 'start',
   reverse = false,
 }) => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
 
   const boxStyle: ViewStyle = useMemo(
     () => ({

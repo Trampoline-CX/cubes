@@ -1,5 +1,4 @@
 import React, {
-  useContext,
   useMemo,
   useState,
   useCallback,
@@ -11,7 +10,7 @@ import { TextInput, View, TextInputProps, TouchableWithoutFeedback, Platform } f
 import { BodyText } from '../../text/BodyText/BodyText'
 import { TextStyle } from '../../text/TextStyle/TextStyle'
 import { InlineError } from '../InlineError/InlineError'
-import { useStyles, ThemeContext } from '../../../theme'
+import { useStyles, useTheme } from '../../../theme'
 import { useTextStyles } from '../../text/use-text-styles'
 import { Heading } from '../../text/Heading/Heading'
 import { IconButton } from '../../actions/IconButton/IconButton'
@@ -143,7 +142,7 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
     },
     ref,
   ) => {
-    const currentTheme = useContext(ThemeContext)
+    const currentTheme = useTheme()
     const { textStyles } = useTextStyles()
     const styles = useStyles(theme => ({
       // Base Styles

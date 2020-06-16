@@ -29,7 +29,7 @@ export const Explore: React.FC = () => {
 
   return (
     <Screen>
-      <Screen.Content scroll>
+      <Screen.Content>
         <Box padding="medium" paddingBottom="none">
           <DisplayText>Explore</DisplayText>
         </Box>

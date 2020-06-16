@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Box } from '../structure/Box/Box'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
@@ -13,7 +13,7 @@ export default {
 }
 
 export const All: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   return (
     <Box padding="medium" space="medium">
       <Heading>thinner ({theme.border.thinner}dp)</Heading>
@@ -46,7 +46,7 @@ const Square: React.FC<SquareProps> = ({ border }) => {
       borderColor: theme.colors.fill.primary.default,
     },
   }))
-  const { border: borders } = useContext(ThemeContext)
+  const { border: borders } = useTheme()
 
   return <View style={[styles.container, { borderWidth: borders[border] }]} />
 }

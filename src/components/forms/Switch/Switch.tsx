@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Switch as RNSwitch, Platform } from 'react-native'
-import { ThemeContext } from '../../../theme'
+import { useTheme } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 
 export interface SwitchProps {
@@ -20,7 +20,7 @@ export interface SwitchProps {
  * >**Note:** The look of this component is very different depending if you are on Android or iOS.
  */
 export const Switch: React.FC<SwitchProps> = ({ checked, onChecked }) => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
 
   return (
     <RNSwitch

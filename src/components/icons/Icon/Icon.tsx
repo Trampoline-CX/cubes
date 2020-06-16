@@ -1,6 +1,6 @@
-import React, { useMemo, useContext } from 'react'
+import React, { useMemo } from 'react'
 
-import { Theme, ThemeContext } from '../../../theme'
+import { Theme, useTheme } from '../../../theme'
 import { IconName, iconsMap } from './icons-map'
 
 // Re-export for convenience
@@ -27,7 +27,7 @@ export interface IconProps {
  * Displays an icon of the Design System.
  */
 export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'primary' }) => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   const IconComponent = useMemo(() => iconsMap[name], [name])
   const iconColor = useMemo(() => {
     switch (color) {

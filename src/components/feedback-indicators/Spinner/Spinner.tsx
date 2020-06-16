@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { ActivityIndicator, View, StyleSheet } from 'react-native'
-import { ThemeContext } from '../../../theme'
+import { useTheme } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { TestProps } from '../../../utils/TestProps'
 
@@ -19,7 +19,7 @@ export const Spinner: React.FC<SpinnerProps> = ({
   accessibilityLabel,
   testID,
 }) => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   const indicatorColor =
     color === 'inverse'
       ? theme.colors.text.inverse

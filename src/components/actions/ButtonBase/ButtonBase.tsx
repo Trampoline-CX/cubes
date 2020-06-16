@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { View, Text, ViewStyle, TextStyle, Animated, Easing, Platform } from 'react-native'
 import { Spinner, SpinnerProps } from '../../feedback-indicators/Spinner/Spinner'
 import { Touchable, TouchableProps } from '../../base/Touchable/Touchable'
 import { Box } from '../../structure/Box/Box'
-import { useStyles, Theme, ThemeContext } from '../../../theme'
+import { useStyles, Theme, useTheme } from '../../../theme'
 import { useTextStyles } from '../../text/use-text-styles'
 import { shameStyles } from '../../../theme/shame-styles'
 import { TestProps } from '../../../utils/TestProps'
@@ -92,7 +92,7 @@ export const ButtonBase: React.FC<ButtonBaseProps> = ({
     },
   }))
 
-  const currentTheme = useContext(ThemeContext)
+  const currentTheme = useTheme()
   const borderRadius = currentTheme.radius[borderRadiusRaw]
   const [isPressed, setPressed] = useState(false)
   const [pressedAnim] = useState(new Animated.Value(1))

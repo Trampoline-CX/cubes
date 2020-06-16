@@ -19,7 +19,7 @@ export default {
 
 export const Profile: React.FC = () => (
   <Screen>
-    <Screen.Content scroll>
+    <Screen.Content>
       <Box padding="medium">
         <DisplayText>Profile</DisplayText>
       </Box>

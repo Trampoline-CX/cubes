@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
 import { Box } from '../structure'
@@ -39,7 +39,7 @@ const Square: React.FC<SquareProps> = ({ z }) => {
       backgroundColor: theme.colors.fill.background.lighter,
     },
   }))
-  const { elevation } = useContext(ThemeContext)
+  const { elevation } = useTheme()
 
   return <View style={[styles.container, elevation[z]]} />
 }

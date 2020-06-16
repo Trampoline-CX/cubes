@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
-import { Theme, ThemeContext } from '../../../theme'
+import { Theme, useTheme } from '../../../theme'
 
 export interface SpaceProps {
   /**
@@ -13,7 +13,7 @@ export interface SpaceProps {
  * Add spacing between components.
  */
 export const Space: React.FC<SpaceProps> = ({ value }) => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
 
   return <View style={{ width: theme.spacing[value], height: theme.spacing[value] }} />
 }

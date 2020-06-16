@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View, Animated } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
 import { Box } from '../structure'
@@ -15,7 +15,7 @@ export default {
 export const Example: React.FC = () => <AnimatedSquare duration="shorter" easing="move" />
 
 export const Duration: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   return (
     <Box space="medium">
       <Heading>Shorter Duration ({theme.animation.duration.shorter}ms)</Heading>
@@ -63,7 +63,7 @@ const AnimatedSquare: React.FC<SquareProps> = ({ duration, easing }) => {
       backgroundColor: theme.colors.fill.primary.default,
     },
   }))
-  const { animation } = useContext(ThemeContext)
+  const { animation } = useTheme()
 
   // Reset animation every second
   useInterval(

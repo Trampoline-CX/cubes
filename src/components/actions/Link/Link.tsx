@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Text, TextStyle } from 'react-native'
-import { ThemeContext } from '../../../theme'
+import { useTheme } from '../../../theme'
 
 export interface LinkProps {
   /**
@@ -21,7 +21,7 @@ export interface LinkProps {
  * Component displaying an inline link, pretty much like web links.
  */
 export const Link: React.FC<LinkProps> = ({ children, onClick, color = 'accent' }) => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   const labelStyles: TextStyle[] = [{ color: theme.colors.text[color] }]
 
   return (

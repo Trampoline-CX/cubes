@@ -1,6 +1,6 @@
-import React, { useContext, useCallback, DependencyList, useEffect, useRef } from 'react'
+import React, { useCallback, DependencyList, useEffect, useRef } from 'react'
 import { TextInput, View, Keyboard, Platform } from 'react-native'
-import { useStyles, ThemeContext } from '../../../theme'
+import { useStyles, useTheme } from '../../../theme'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { useTextStyles } from '../../text/use-text-styles'
@@ -73,7 +73,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
   const inputRef = useRef<TextInput>(null)
   const hasFocus = inputRef.current?.isFocused()
 
-  const currentTheme = useContext(ThemeContext)
+  const currentTheme = useTheme()
   const { textStyles } = useTextStyles()
   const styles = useStyles(theme => ({
     container: {

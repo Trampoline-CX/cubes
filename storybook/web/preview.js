@@ -1,6 +1,6 @@
 import { addParameters } from '@storybook/react'
 import { Background } from '../../src/storybook/decorators/Background'
-import { WithThemeProvider } from './decorators/WithThemeProvider'
+import { WithAppProvider } from '../../src/storybook/decorators/WithAppProvider'
 
 addParameters({
   options: {
@@ -26,4 +26,4 @@ export const globalArgTypes = {
   },
 }
 
-export const decorators = [Background, WithThemeProvider]
+export const decorators = [Background, WithAppProvider]

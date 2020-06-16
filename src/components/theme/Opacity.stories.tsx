@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
 import { Box } from '../structure'
@@ -13,7 +13,8 @@ export default {
 }
 
 export const All: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
+
   return (
     <Box space="medium">
       <Heading>Disabled ({theme.opacity.disabled})</Heading>
@@ -42,7 +43,7 @@ const Square: React.FC<SquareProps> = ({ opacity }) => {
       backgroundColor: theme.colors.fill.primary.default,
     },
   }))
-  const { opacity: themeOpacity } = useContext(ThemeContext)
+  const { opacity: themeOpacity } = useTheme()
 
   return <View style={[styles.container, { opacity: themeOpacity[opacity] }]} />
 }
