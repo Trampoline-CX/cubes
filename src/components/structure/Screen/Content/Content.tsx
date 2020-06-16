@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native'
 import { BoxProps, Box } from '../../Box/Box'
 
 export type ContentProps = Omit<BoxProps, 'fill'> & {
-  scroll?: boolean
+  disableScroll?: boolean
 }
 
 /**
@@ -11,8 +11,8 @@ export type ContentProps = Omit<BoxProps, 'fill'> & {
  *
  * Can also use a `ScrollView` to make content scrollable.
  */
-export const Content: React.FC<ContentProps> = ({ scroll = false, ...props }) => {
-  const Wrapper = scroll ? ScrollView : React.Fragment
+export const Content: React.FC<ContentProps> = ({ disableScroll = false, ...props }) => {
+  const Wrapper = disableScroll ? React.Fragment : ScrollView
 
   return (
     <Wrapper>

@@ -21,7 +21,28 @@ export default {
 export const Default: React.FC = () => (
   <Screen>
     <TopBar title="Bar Title" />
-    <Screen.Content padding="medium" scroll>
+    <Screen.Content padding="medium">
+      <TextContainer>
+        <DisplayText>Screen Title</DisplayText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+        <BodyText>{LOREM_IPSUM}</BodyText>
+      </TextContainer>
+    </Screen.Content>
+    <BottomNavigationBar>
+      <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Click')} />
+      <BottomNavigationBar.Tab icon="accounts" onClick={action('Accounts Tab Click')} />
+      <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Click')} />
+    </BottomNavigationBar>
+  </Screen>
+)
+
+export const NotScrollable: React.FC = () => (
+  <Screen>
+    <TopBar title="Bar Title" />
+    <Screen.Content padding="medium" disableScroll>
       <TextContainer>
         <DisplayText>Screen Title</DisplayText>
         <BodyText>{LOREM_IPSUM}</BodyText>
