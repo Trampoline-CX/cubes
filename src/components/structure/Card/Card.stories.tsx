@@ -17,10 +17,10 @@ export const DefaultSectioned: React.FC = () => (
   <Card
     title="Card Title"
     sectioned
-    headerAction={{ label: 'Header Action', onClick: action('Header Action Clicked') }}
+    headerAction={{ label: 'Header Action', action: action('Header Action Clicked') }}
     mainActions={[
-      { label: 'Action 1', onClick: action('Action 1 Clicked') },
-      { label: 'Action 2', onClick: action('Action 2 Clicked') },
+      { label: 'Action 1', action: action('Action 1 Clicked') },
+      { label: 'Action 2', action: action('Action 2 Clicked') },
     ]}
   >
     <BodyText>This is the text of the card.</BodyText>

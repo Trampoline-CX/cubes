@@ -10,18 +10,8 @@ import { TextStyle } from '../../text/TextStyle/TextStyle'
 import { Icon } from '../../icons/Icon/Icon'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
+import { TextAction } from '../../actions'
 import { Section } from './Section/Section'
-
-interface Action {
-  /**
-   * Text of the action.
-   */
-  label: string
-  /**
-   * Action triggered on click.
-   */
-  onClick: () => void
-}
 
 export interface CardProps {
   /**
@@ -31,7 +21,7 @@ export interface CardProps {
   /**
    * Header action displayed as a `Button`.
    */
-  headerAction?: Action
+  headerAction?: TextAction
   /**
    * Set to `true` to have the card have a single `Card.Section` by default.
    */
@@ -51,7 +41,7 @@ export interface CardProps {
   /**
    * Main actions displayed as buttons at the bottom of the Card.
    */
-  mainActions?: Action[]
+  mainActions?: TextAction[]
 }
 
 /**
@@ -104,7 +94,7 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   )
 }
 
-const CardHeader: React.FC<{ title: string; action?: Action }> = ({ title, action }) => (
+const CardHeader: React.FC<{ title: string; action?: TextAction }> = ({ title, action }) => (
   <Box padding="medium" paddingBottom="none">
     <Box horizontal align="center">
       <Box fill>
@@ -113,17 +103,17 @@ const CardHeader: React.FC<{ title: string; action?: Action }> = ({ title, actio
 
       {action && (
         <BodyText>
-          <Link onClick={action.onClick}>{action.label}</Link>
+          <Link onClick={action.action}>{action.label}</Link>
         </BodyText>
       )}
     </Box>
   </Box>
 )
 
-const CardMainAction: React.FC<{ action: Action }> = ({ action }) => (
+const CardMainAction: React.FC<{ action: TextAction }> = ({ action }) => (
   <>
     <Divider />
-    <Touchable onClick={action.onClick}>
+    <Touchable onClick={action.action}>
       <Box padding="medium">
         <Box horizontal space="medium">
           <Box fill>

@@ -14,11 +14,11 @@ import { InlineError } from '../InlineError/InlineError'
 import { useStyles, ThemeContext } from '../../../theme'
 import { useTextStyles } from '../../text/use-text-styles'
 import { Heading } from '../../text/Heading/Heading'
-import { IconName } from '../../icons/Icon/Icon'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { Box } from '../../structure/Box/Box'
 import { Caption } from '../../text/Caption/Caption'
 import { TestProps } from '../../../utils/TestProps'
+import { IconAction } from '../../actions'
 
 export interface TextFieldProps extends TestProps {
   /**
@@ -76,7 +76,7 @@ export interface TextFieldProps extends TestProps {
   /**
    * If set, display an icon at the end of the input to handle a certain action on click.
    */
-  endAction?: Action
+  endAction?: IconAction
   /**
    * Set to `true` to select all text when focused.
    */
@@ -111,11 +111,6 @@ export interface TextFieldProps extends TestProps {
    * Called when a key is pressed.
    */
   onKeyPress?: TextInputProps['onKeyPress']
-}
-
-interface Action {
-  icon: IconName
-  onClick: () => void
 }
 
 /**
@@ -326,7 +321,7 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
           </View>
           {endAction ? (
             <View style={styles.endActionContainer}>
-              <IconButton icon={endAction.icon} onClick={endAction.onClick} size="small" />
+              <IconButton icon={endAction.icon} onClick={endAction.action} size="small" />
             </View>
           ) : null}
         </View>
@@ -361,7 +356,7 @@ const useSecureTextEntry = (
       type === 'new-password'
         ? {
             icon: secureTextEntry ? 'visibility' : 'visibility-off',
-            onClick: (): void => setSecureTextEntry(prev => !prev),
+            action: (): void => setSecureTextEntry(prev => !prev),
           }
         : undefined,
     [type, secureTextEntry],

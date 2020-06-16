@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { View } from 'react-native'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
@@ -7,6 +7,7 @@ import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { useNav } from '../NavigationProvider/NavigationProvider'
+import { IconAction } from '../../actions'
 import { Icon } from './Icon/Icon'
 
 export interface TopBarProps {
@@ -27,11 +28,12 @@ export interface TopBarProps {
    */
   transparent?: boolean
   /**
-   * Should only contain `TopBar.Icon` components. Display icon buttons to the right of the toolbar.
-   * Note that the icons will appear in reverse order, as first icon is more important and should be
+   * Actions displayed at the right in the bar.
+   *
+   * > **Note:** Icons will appear in reverse order, as first icon is more important and should be
    * the rightmost icon.
    */
-  children?: React.ReactNode
+  actions?: IconAction[]
 }
 
 const { height } = shameStyles.topBar
@@ -39,12 +41,12 @@ const { height } = shameStyles.topBar
 /**
  * Top Bar used for navigation and title display. Acts as an App Bar for Android and Navigation Bar for iOS.
  */
-export const TopBar: React.FC<TopBarProps> & { Icon: typeof Icon } = ({
+export const TopBar: React.FC<TopBarProps> = ({
   title,
   iconStart = 'go-back',
   onIconStartClick: onIconStartClickRaw,
   transparent = false,
-  children,
+  actions,
 }) => {
   const styles = useStyles(theme => ({
     root: {
@@ -62,6 +64,11 @@ export const TopBar: React.FC<TopBarProps> & { Icon: typeof Icon } = ({
 
   const { goBack } = useNav()
   const onIconStartClick = onIconStartClickRaw || goBack
+  const actionComponents = useMemo(
+    () =>
+      actions?.map(({ icon, action }, index) => <Icon key={index} name={icon} onClick={action} />),
+    [actions],
+  )
 
   return (
     <View style={[styles.root, transparent ? styles.transparentRoot : null]}>
@@ -74,10 +81,8 @@ export const TopBar: React.FC<TopBarProps> & { Icon: typeof Icon } = ({
         <Heading maxLines={1}>{title}</Heading>
       </Box>
       <Box horizontal reverse>
-        {children}
+        {actionComponents}
       </Box>
     </View>
   )
 }
-
-TopBar.Icon = Icon

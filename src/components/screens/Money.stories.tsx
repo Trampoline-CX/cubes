@@ -37,7 +37,7 @@ export const Money: React.FC = () => (
 
       <Card
         title="More like this"
-        headerAction={{ label: 'See all', onClick: action('See all Clicked') }}
+        headerAction={{ label: 'See all', action: action('See all Clicked') }}
         fullWidth
         sectioned
       >

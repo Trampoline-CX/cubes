@@ -12,16 +12,16 @@ import { TopBar } from './TopBar'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: TopBar,
-  subcomponents: { 'TopBar.Icon': TopBar.Icon },
   decorators: [PhoneScreen],
 }
 
 export const Basic: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
-      <TopBar title="Bar Title">
-        <TopBar.Icon name="action-edit" onClick={action('Edit Clicked')} />
-      </TopBar>
+      <TopBar
+        title="Bar Title"
+        actions={[{ icon: 'action-edit', action: action('Edit Clicked') }]}
+      />
       <Screen.Content>
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>
@@ -77,11 +77,14 @@ export const WithLongTitle: React.FC = () => (
 export const WithIconsRight: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
-      <TopBar title="Title">
-        <TopBar.Icon name="action-edit" onClick={action('Edit clicked')} />
-        <TopBar.Icon name="note" onClick={action('Note clicked')} />
-        <TopBar.Icon name="search" onClick={action('Search clicked')} />
-      </TopBar>
+      <TopBar
+        title="Title"
+        actions={[
+          { icon: 'action-edit', action: action('Edit clicked') },
+          { icon: 'note', action: action('Note clicked') },
+          { icon: 'search', action: action('Search clicked') },
+        ]}
+      />
       <Screen.Content>
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>
