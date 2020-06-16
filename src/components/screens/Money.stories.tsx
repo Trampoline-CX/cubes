@@ -13,6 +13,7 @@ import { getStoryTitle } from '../../storybook/get-story-title'
 import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
 import { Screen } from '../structure'
 import { BottomNavigationBar } from '../navigation/BottomNavigationBar/BottomNavigationBar'
+import { TopBar } from '../navigation'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -21,11 +22,8 @@ export default {
 
 export const Money: React.FC = () => (
   <Screen>
+    <TopBar iconStart="close-modal" transparent />
     <Screen.Content scroll>
-      <Box padding="small">
-        <IconButton icon="close-modal" color="accent" onClick={action('Close modal Clicked')} />
-      </Box>
-
       <Box padding="medium">
         <DisplayText>Payment transfer to LN02</DisplayText>
         <DisplayText>$480.50</DisplayText>

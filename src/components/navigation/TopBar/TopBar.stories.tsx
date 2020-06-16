@@ -57,3 +57,17 @@ export const WithoutTitle: React.FC = () => (
     </Screen>
   </NavigationProvider>
 )
+
+export const Transparent: React.FC = () => (
+  <NavigationProvider goBack={action('Back pressed')}>
+    <Screen>
+      <TopBar title="TopBar Title" iconStart="close-modal" transparent />
+      <Screen.Content>
+        <TextContainer>
+          <DisplayText>Screen Title</DisplayText>
+          <BodyText>{LOREM_IPSUM}</BodyText>
+        </TextContainer>
+      </Screen.Content>
+    </Screen>
+  </NavigationProvider>
+)

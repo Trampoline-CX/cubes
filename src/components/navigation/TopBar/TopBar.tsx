@@ -3,7 +3,6 @@ import { useStyles } from '../../../theme'
 import { View } from 'react-native'
 import { shameStyles } from '../../../theme/shame-styles'
 import { IconName } from '../../icons/Icon/Icon'
-import { BodyText } from '../../text/BodyText/BodyText'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
@@ -22,6 +21,10 @@ export interface TopBarProps {
    * Action to do when the `iconStart` is clicked. If not set, will call `useNav().goBack()`.
    */
   onIconStartClick?: () => void
+  /**
+   * Set to true to use a transparent background.
+   */
+  transparent?: boolean
 }
 
 const { height } = shameStyles.topBar
@@ -33,6 +36,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   title,
   iconStart = 'go-back',
   onIconStartClick: onIconStartClickRaw,
+  transparent = false,
 }) => {
   const styles = useStyles(theme => ({
     root: {
@@ -42,13 +46,17 @@ export const TopBar: React.FC<TopBarProps> = ({
       alignItems: 'center',
       ...theme.elevation.z4,
     },
+    transparentRoot: {
+      backgroundColor: theme.colors.transparent,
+      ...theme.elevation.z0,
+    },
   }))
 
   const { goBack } = useNav()
   const onIconStartClick = onIconStartClickRaw || goBack
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, transparent ? styles.transparentRoot : null]}>
       {iconStart !== 'none' ? (
         <Box paddingX="xSmall">
           <IconButton icon={iconStart} onClick={onIconStartClick}></IconButton>
