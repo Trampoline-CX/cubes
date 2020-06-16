@@ -7,6 +7,8 @@ import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { useNav } from '../NavigationProvider/NavigationProvider'
+import { Stack } from '../../structure'
+import { Icon } from './Icon/Icon'
 
 export interface TopBarProps {
   /**
@@ -25,6 +27,12 @@ export interface TopBarProps {
    * Set to true to use a transparent background.
    */
   transparent?: boolean
+  /**
+   * Should only contain `TopBar.Icon` components. Display icon buttons to the right of the toolbar.
+   * Note that the icons will appear in reverse order, as first icon is more important and should be
+   * the rightmost icon.
+   */
+  children?: React.ReactNode
 }
 
 const { height } = shameStyles.topBar
@@ -32,11 +40,12 @@ const { height } = shameStyles.topBar
 /**
  * Top Bar used for navigation and title display. Acts as an App Bar for Android and Navigation Bar for iOS.
  */
-export const TopBar: React.FC<TopBarProps> = ({
+export const TopBar: React.FC<TopBarProps> & { Icon: typeof Icon } = ({
   title,
   iconStart = 'go-back',
   onIconStartClick: onIconStartClickRaw,
   transparent = false,
+  children,
 }) => {
   const styles = useStyles(theme => ({
     root: {
@@ -65,6 +74,11 @@ export const TopBar: React.FC<TopBarProps> = ({
       <Box paddingX="medium" fill>
         <Heading maxLines={1}>{title}</Heading>
       </Box>
+      <Stack horizontal reverse>
+        {children}
+      </Stack>
     </View>
   )
 }
+
+TopBar.Icon = Icon

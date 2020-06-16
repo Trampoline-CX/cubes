@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { View, StyleSheet, ViewStyle } from 'react-native'
+import { View, ViewStyle } from 'react-native'
 import { Theme } from '../../../theme'
 import { Space } from '../Space/Space'
 
@@ -20,13 +20,11 @@ export interface StackProps {
    * Defines how children views are aligned (in opposite direction of the Stack).
    */
   align?: 'stretch' | 'start' | 'end' | 'center'
+  /**
+   * If true, children order will be reversed.
+   */
+  reverse?: boolean
 }
-
-const styles = StyleSheet.create({
-  containerHorizontal: {
-    flexDirection: 'row',
-  },
-})
 
 /**
  * Stack components vertically or horizontally.
@@ -36,8 +34,16 @@ export const Stack: React.FC<StackProps> = ({
   space = 'none',
   horizontal = false,
   align = 'stretch',
+  reverse = false,
 }) => {
-  const alignStyle: ViewStyle = {
+  const style: ViewStyle = {
+    flexDirection: reverse
+      ? horizontal
+        ? 'row-reverse'
+        : 'column-reverse'
+      : horizontal
+      ? 'row'
+      : 'column',
     alignItems:
       align === 'stretch'
         ? 'stretch'
@@ -56,5 +62,6 @@ export const Stack: React.FC<StackProps> = ({
       {child}
     </>
   ))
-  return <View style={[horizontal ? styles.containerHorizontal : null, alignStyle]}>{items}</View>
+
+  return <View style={style}>{items}</View>
 }

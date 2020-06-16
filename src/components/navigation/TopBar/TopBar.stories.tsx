@@ -12,6 +12,7 @@ import { TopBar } from './TopBar'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: TopBar,
+  subcomponents: { 'TopBar.Icon': TopBar.Icon },
   decorators: [PhoneScreen],
 }
 
@@ -61,6 +62,24 @@ export const WithLongTitle: React.FC = () => (
   <NavigationProvider goBack={action('Back pressed')}>
     <Screen>
       <TopBar title="This is a long title that should be truncated after a lot of characters" />
+      <Screen.Content>
+        <TextContainer>
+          <DisplayText>Screen Title</DisplayText>
+          <BodyText>{LOREM_IPSUM}</BodyText>
+        </TextContainer>
+      </Screen.Content>
+    </Screen>
+  </NavigationProvider>
+)
+
+export const WithIconsRight: React.FC = () => (
+  <NavigationProvider goBack={action('Back pressed')}>
+    <Screen>
+      <TopBar title="Title">
+        <TopBar.Icon name="action-edit" onClick={action('Edit clicked')} />
+        <TopBar.Icon name="note" onClick={action('Note clicked')} />
+        <TopBar.Icon name="search" onClick={action('Search clicked')} />
+      </TopBar>
       <Screen.Content>
         <TextContainer>
           <DisplayText>Screen Title</DisplayText>

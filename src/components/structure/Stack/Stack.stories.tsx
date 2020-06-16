@@ -36,6 +36,14 @@ export const MediumSpacing: React.FC = () => (
   </Stack>
 )
 
+export const Reversed: React.FC = () => (
+  <Stack space="medium" reverse>
+    <BodyText>Test1</BodyText>
+    <BodyText>Test2</BodyText>
+    <BodyText>Test3</BodyText>
+  </Stack>
+)
+
 export const HorizontalWithFill: React.FC = () => (
   <Stack horizontal space="medium">
     <BodyText>Test1</BodyText>
