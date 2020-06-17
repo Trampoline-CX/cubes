@@ -1,8 +1,8 @@
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Theme, themes } from '../../../theme'
-import { NavigationProvider } from '../../../navigation/NavigationProvider'
 import { NavigationSchema } from '../../../navigation'
+import { NavigationContainer } from '../../../navigation/NavigationContainer'
 import { AppProviderContext } from './AppProviderContext'
 
 export interface WithNavigationSchema {
@@ -43,7 +43,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({
 }) => (
   <SafeAreaProvider>
     <AppProviderContext.Provider value={{ theme }}>
-      <NavigationProvider schema={navigationSchema}>{children}</NavigationProvider>
+      <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
     </AppProviderContext.Provider>
   </SafeAreaProvider>
 )

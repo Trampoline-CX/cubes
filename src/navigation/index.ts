@@ -1,3 +1,4 @@
 export * from './types'
 export * from './hooks'
-export { NavigationProvider } from './NavigationProvider'
+export { Navigation } from './NavigationProvider'
+export { NavigationContainer } from './NavigationContainer'

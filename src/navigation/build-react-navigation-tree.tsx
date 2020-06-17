@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationSchema, StackNavigator, Navigator, SwitchNavigator, Screen } from './types'
+import { ReactNavigationProvider } from './NavigationProvider'
 
 export const buildReactNavigationTree = <Schema extends NavigationSchema>(
   schema: Schema,
@@ -31,7 +32,13 @@ const _buildStackNavigator = (navigator: StackNavigator): React.ComponentType =>
       )
     } else {
       const screenName = Object.keys(x)[0]
-      return <Stack.Screen key={screenName} name={screenName} component={x[screenName]} />
+      return (
+        <Stack.Screen
+          key={screenName}
+          name={screenName}
+          component={_wrapScreenWithNavigationProvider(x[screenName])}
+        />
+      )
     }
   })
 
@@ -51,7 +58,13 @@ const _buildSwitchNavigator = (navigator: SwitchNavigator): React.ComponentType 
       )
     } else {
       const screenName = Object.keys(x)[0]
-      return <Stack.Screen key={screenName} name={screenName} component={x[screenName]} />
+      return (
+        <Stack.Screen
+          key={screenName}
+          name={screenName}
+          component={_wrapScreenWithNavigationProvider(x[screenName])}
+        />
+      )
     }
   })
 
@@ -65,3 +78,11 @@ const _isNavigator = (element: Screen<string> | Navigator): element is Navigator
     return false
   }
 }
+
+const _wrapScreenWithNavigationProvider = (
+  Comp: React.ComponentType,
+): React.ComponentType => () => (
+  <ReactNavigationProvider>
+    <Comp />
+  </ReactNavigationProvider>
+)
