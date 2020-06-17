@@ -31,21 +31,6 @@ export type Screen<Name extends string> = {
 
 export type NavigationSchema = Navigator
 
-// const MoneyScreen: React.FC = () => <Text>Money</Text>
-// const TransactionScreen: React.FC<{ id: string }> = () => <Text>TransactionScreen</Text>
-// const ExploreScreen: React.FC = () => <Text>Explore</Text>
-// const ProfileScreen: React.FC = () => <Text>ProfileScreen</Text>
-
-// export const schema = {
-//   switch: [
-//     {
-//       stack: [{ MoneyScreen }, { TransactionScreen }],
-//     },
-//     { ExploreScreen },
-//     { ProfileScreen },
-//   ],
-// } as const
-
 type Screens<T extends NavigatorsOrScreens> = {
   [P in keyof T]: T[P] extends Screen<string>
     ? T[P]
@@ -60,14 +45,6 @@ export type NavigatorScreens<T extends Navigator> = T extends StackNavigator
   ? Screens<T['switch']>
   : never
 
-type ScreenNames<T extends Screen<string>> = keyof {
-  [P in Extract<keyof UnionToIntersection<T>, string>]: UnionToIntersection<
-    T
-  >[P] extends React.ComponentType<any>
-    ? P
-    : never
-}
-
 export type ScreenArguments<T> = {
   [P in Extract<keyof UnionToIntersection<T>, string>]: UnionToIntersection<
     T
@@ -81,7 +58,3 @@ export type ScreenArguments<T> = {
 type ScreenPropType<T extends React.ComponentType<any>> = T extends React.ComponentType<infer P>
   ? P
   : never
-
-// type screens = NavigatorScreens<typeof schema>
-// type Names = ScreenNames<screens>
-// type Args = ScreenArguments<screens>
