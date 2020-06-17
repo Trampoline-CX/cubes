@@ -1,18 +1,34 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Theme, themes } from '../../../theme'
+import { NavigationProvider } from '../../../navigation/NavigationProvider'
+import { NavigationSchema } from '../../../navigation'
 import { AppProviderContext } from './AppProviderContext'
 
-export interface AppProviderProps {
+export interface WithNavigationSchema {
+  /**
+   * Navigation Schema used to configure Navigation tree.
+   */
+  navigationSchema: NavigationSchema
+}
+
+export interface WithoutNavigationSchema {
+  /**
+   * Navigation Schema used to configure Navigation tree.
+   */
+  children: React.ReactNode
+}
+
+export type AppProviderProps = {
   /**
    * Theme to use (will use light theme if none is provided).
    */
   theme?: Theme
   /**
-   * Children views.
+   * Navigation Schema used
    */
-  children: React.ReactNode
-}
+  navigationSchema?: NavigationSchema
+} & (WithNavigationSchema | WithoutNavigationSchema)
 
 /**
  * Component that should be defined at the root of the App and controls many elements, like
@@ -20,8 +36,14 @@ export interface AppProviderProps {
  *
  * > **Note:** You don't need to pass any properties to this component. They are present for customization purpose only.
  */
-export const AppProvider: React.FC<AppProviderProps> = ({ theme = themes.light, children }) => (
-  <AppProviderContext.Provider value={{ theme }}>
-    <NavigationContainer>{children}</NavigationContainer>
-  </AppProviderContext.Provider>
+export const AppProvider: React.FC<AppProviderProps> = ({
+  theme = themes.light,
+  navigationSchema,
+  children,
+}) => (
+  <SafeAreaProvider>
+    <AppProviderContext.Provider value={{ theme }}>
+      <NavigationProvider schema={navigationSchema}>{children}</NavigationProvider>
+    </AppProviderContext.Provider>
+  </SafeAreaProvider>
 )

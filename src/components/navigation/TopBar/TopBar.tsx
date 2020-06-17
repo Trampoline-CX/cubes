@@ -6,8 +6,8 @@ import { IconName } from '../../icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
-import { useNav } from '../NavigationProvider/NavigationProvider'
 import { IconAction } from '../../actions'
+import { useNav } from '../../../navigation'
 import { Icon } from './Icon/Icon'
 
 export interface TopBarProps {
@@ -62,8 +62,8 @@ export const TopBar: React.FC<TopBarProps> = ({
     },
   }))
 
-  const { goBack } = useNav()
-  const onIconStartClick = onIconStartClickRaw || goBack
+  const { back } = useNav()
+  const onIconStartClick = onIconStartClickRaw || back
   const actionComponents = useMemo(
     () =>
       actions?.map(({ icon, action }, index) => <Icon key={index} name={icon} onClick={action} />),

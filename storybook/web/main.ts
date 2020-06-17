@@ -37,7 +37,7 @@ const storybookConfig: StorybookConfig = {
       // Mock react-native-safe-area-context on Web
       'react-native-safe-area-context': path.resolve(
         __dirname,
-        '../../src/utils/web/react-native-safe-area-context',
+        '../../src/storybook/utils/react-native-safe-area-context',
       ),
     }
 
