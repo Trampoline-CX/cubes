@@ -58,17 +58,17 @@ const BottomBar: React.FC<{
       <BottomNavigationBar.Tab
         selected={current === 'MoneyScreen'}
         icon="money"
-        onClick={() => navigate.to('MoneyScreen', {})}
+        onClick={() => navigate.to('MoneyScreen')}
       />
       <BottomNavigationBar.Tab
         selected={current === 'ExploreScreen'}
         icon="search"
-        onClick={() => navigate.to('ExploreScreen', {})}
+        onClick={() => navigate.to('ExploreScreen')}
       />
       <BottomNavigationBar.Tab
         selected={current === 'ProfileScreen'}
         icon="profile"
-        onClick={() => navigate.to('ProfileScreen', {})}
+        onClick={() => navigate.to('ProfileScreen')}
       />
     </BottomNavigationBar>
   )
@@ -111,15 +111,22 @@ const ExploreScreen: React.FC = () => (
     <BottomBar current="ExploreScreen" />
   </Screen>
 )
-const ProfileScreen: React.FC = () => (
-  <Screen>
-    <TopBar iconStart="none" title="Profile" />
-    <Screen.Content padding="medium">
-      <BodyText>This is my profile</BodyText>
-    </Screen.Content>
-    <BottomBar current="ProfileScreen" />
-  </Screen>
-)
+const ProfileScreen: React.FC = () => {
+  const navigate = useNav<Schema>()
+
+  return (
+    <Screen>
+      <TopBar iconStart="none" title="Profile" />
+      <Screen.Content padding="medium">
+        <BodyText>This is my profile</BodyText>
+        <Button onClick={() => navigate.to('TransactionScreen', { id: 'abc' })}>
+          Go to Transaction
+        </Button>
+      </Screen.Content>
+      <BottomBar current="ProfileScreen" />
+    </Screen>
+  )
+}
 
 const schema = {
   switch: [

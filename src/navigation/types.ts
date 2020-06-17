@@ -72,7 +72,9 @@ export type ScreenArguments<T> = {
   [P in Extract<keyof UnionToIntersection<T>, string>]: UnionToIntersection<
     T
   >[P] extends React.ComponentType<any>
-    ? [P, ScreenPropType<UnionToIntersection<T>[P]>]
+    ? ScreenPropType<UnionToIntersection<T>[P]> extends Record<string, never>
+      ? [P]
+      : [P, ScreenPropType<UnionToIntersection<T>[P]>]
     : never
 }[Extract<keyof UnionToIntersection<T>, string>]
 
