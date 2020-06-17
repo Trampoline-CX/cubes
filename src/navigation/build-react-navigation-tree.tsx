@@ -81,8 +81,4 @@ const _isNavigator = (element: Screen<string> | Navigator): element is Navigator
 
 const _wrapScreenWithNavigationProvider = (
   Comp: React.ComponentType,
-): React.ComponentType => () => (
-  <ReactNavigationProvider>
-    <Comp />
-  </ReactNavigationProvider>
-)
+): React.ComponentType => () => <ReactNavigationProvider component={Comp} />

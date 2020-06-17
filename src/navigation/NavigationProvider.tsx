@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { NavigationSchema, NavigatorScreens, ScreenArguments } from './types'
 
 export interface Navigation<Schema extends NavigationSchema> {
@@ -11,12 +11,14 @@ export const NavigationContext = React.createContext<Navigation<NavigationSchema
   (undefined as unknown) as Navigation<NavigationSchema>,
 )
 
-export interface ScreenNavigationProviderProps {
-  children?: React.ReactNode
+export interface ReactNavigationProviderProps {
+  component: React.ComponentType
 }
 
-export const ReactNavigationProvider: React.FC<ScreenNavigationProviderProps> = ({ children }) => {
+export const ReactNavigationProvider: React.FC<ReactNavigationProviderProps> = ({ component }) => {
+  const Component = component
   const navigation = useNavigation()
+  const route = useRoute()
 
   return (
     <NavigationContext.Provider
@@ -25,12 +27,16 @@ export const ReactNavigationProvider: React.FC<ScreenNavigationProviderProps> = 
         to: (screen, args) => navigation.navigate(screen, args),
       }}
     >
-      {children}
+      <Component {...route.params} />
     </NavigationContext.Provider>
   )
 }
 
-export const DummyNavigationProvider: React.FC<ScreenNavigationProviderProps> = ({ children }) => (
+export interface DummyNavigationProviderProps {
+  children: React.ReactNode
+}
+
+export const DummyNavigationProvider: React.FC<DummyNavigationProviderProps> = ({ children }) => (
   <NavigationContext.Provider
     value={{
       back: () => {
