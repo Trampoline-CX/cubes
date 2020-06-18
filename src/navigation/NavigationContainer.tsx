@@ -23,7 +23,7 @@ export const NavigationContainer = <Schema extends NavigationSchema>({
   const ReactNavigationTree = useMemo(() => (schema ? buildReactNavigationTree(schema) : null), [
     schema,
   ])
-  const linkingOptions = buildReactNavigationLinkingOptions()
+  const linkingOptions = schema ? buildReactNavigationLinkingOptions() : undefined
 
   return (
     <RNNavigationContainer independent linking={linkingOptions}>

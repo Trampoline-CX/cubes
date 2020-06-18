@@ -1,86 +1,24 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationSchema, StackNavigator, Navigator, SwitchNavigator, Screen } from './types'
+import { NavigationSchema } from './types'
 import { ReactNavigationProvider } from './NavigationProvider'
+import { Navigator } from './navigators'
+import { navigatorBuilders } from './navigators/all'
 
 export const buildReactNavigationTree = (schema: NavigationSchema): React.ComponentType =>
   _buildReactNavigationTreeRecursive(schema)
 
 export const _buildReactNavigationTreeRecursive = (navigator: Navigator): React.ComponentType => {
-  if ('stack' in navigator) {
-    return _buildStackNavigator(navigator)
-  } else if ('switch' in navigator) {
-    return _buildSwitchNavigator(navigator)
+  const builder = navigatorBuilders.find(x => x.name in navigator)
+
+  if (builder) {
+    return builder.build({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      navigator: navigator as any,
+      buildScreen: _wrapScreenWithNavigationProvider,
+      buildTreeForNavigator: _buildReactNavigationTreeRecursive,
+    })
   } else {
     throw new Error(`Unknown Navigator in NavigationSchema: ${JSON.stringify(navigator, null, 2)}`)
-  }
-}
-
-const _buildStackNavigator = (navigator: StackNavigator): React.ComponentType => {
-  const Stack = createStackNavigator()
-  const screens = navigator.stack.map((x, i) => {
-    if (_isNavigator(x)) {
-      return (
-        <Stack.Screen
-          key={`Navigator-${i}`}
-          name={`Navigator-${i}`}
-          component={_buildReactNavigationTreeRecursive(x)}
-        />
-      )
-    } else {
-      const screenName = Object.keys(x)[0]
-      return (
-        <Stack.Screen
-          key={screenName}
-          name={screenName}
-          component={_wrapScreenWithNavigationProvider(x[screenName])}
-        />
-      )
-    }
-  })
-
-  const { options } = navigator
-
-  return () => (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false, animationEnabled: options?.animation !== 'none' }}
-    >
-      {screens}
-    </Stack.Navigator>
-  )
-}
-
-const _buildSwitchNavigator = (navigator: SwitchNavigator): React.ComponentType => {
-  const Stack = createStackNavigator()
-  const screens = navigator.switch.map((x, i) => {
-    if (_isNavigator(x)) {
-      return (
-        <Stack.Screen
-          key={`Navigator-${i}`}
-          name={`Navigator-${i}`}
-          component={_buildReactNavigationTreeRecursive(x)}
-        />
-      )
-    } else {
-      const screenName = Object.keys(x)[0]
-      return (
-        <Stack.Screen
-          key={screenName}
-          name={screenName}
-          component={_wrapScreenWithNavigationProvider(x[screenName])}
-        />
-      )
-    }
-  })
-
-  return () => <Stack.Navigator screenOptions={{ headerShown: false }}>{screens}</Stack.Navigator>
-}
-
-const _isNavigator = (element: Screen<string> | Navigator): element is Navigator => {
-  if ('stack' in element || 'switch' in element) {
-    return true
-  } else {
-    return false
   }
 }
 

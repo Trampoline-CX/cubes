@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { NavigationSchema, NavigatorScreens, ScreenArguments } from './types'
+import { NavigationSchema, ScreenArguments } from './types'
+import { NavigatorScreens } from './navigators/types'
 
 export interface Navigation<Schema extends NavigationSchema> {
   back: () => void
