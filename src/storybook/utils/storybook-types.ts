@@ -19,5 +19,5 @@ export type ControlType =
 
 export type StoryFn<Props> = React.FC<Props> & {
   args?: Props
-  argTypes?: Partial<Record<Extract<keyof Props, string>, { control: { type: ControlType } }>>
+  argTypes?: Partial<Record<Extract<keyof Props, string>, { control: ControlType }>>
 }

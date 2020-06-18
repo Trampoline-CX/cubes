@@ -13,7 +13,7 @@ export interface ButtonProps extends ButtonBasePublicProps {
 /**
  * Button triggering certain user actions.
  */
-export const Button: React.FC<ButtonProps> = ({ primary = false, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ primary, ...props }) => {
   if (primary) {
     return <PrimaryButton {...props} />
   } else {
