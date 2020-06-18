@@ -4,7 +4,7 @@ import type { StorybookConfig } from '@storybook/core/types'
 const tsconfig = path.resolve(__dirname, '../../tsconfig.json')
 
 const storybookConfig: StorybookConfig = {
-  stories: ['../../src/components/**/*.stories.tsx'],
+  stories: ['../../src/components/**/*.stories.@(tsx|mdx)'],
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-toolbars',
