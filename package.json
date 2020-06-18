@@ -1,6 +1,6 @@
 {
   "name": "@hansgx/cubes",
-  "version": "0.0.2-alpha.2",
+  "version": "0.0.2-alpha.3",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
