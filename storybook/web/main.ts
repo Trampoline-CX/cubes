@@ -4,7 +4,7 @@ import type { StorybookConfig } from '@storybook/core/types'
 const tsconfig = path.resolve(__dirname, '../../tsconfig.json')
 
 const storybookConfig: StorybookConfig = {
-  stories: ['../../src/components/**/*.stories.tsx'],
+  stories: ['../../src/components/**/*.stories.@(tsx|mdx)'],
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-toolbars',
@@ -34,10 +34,15 @@ const storybookConfig: StorybookConfig = {
       '@storybook/react-native': '@storybook/react',
       // Make react-native-svg work
       'react-native-svg': 'react-native-svg/lib/commonjs/ReactNativeSVG.web',
-      // Mock react-native-safe-area-context on Web
+      // Mock react-native-safe-area-context
       'react-native-safe-area-context': path.resolve(
         __dirname,
-        '../../src/utils/web/react-native-safe-area-context',
+        '../../src/storybook/utils/react-native-safe-area-context',
+      ),
+      // Mock react-native-screens
+      'react-native-screens': path.resolve(
+        __dirname,
+        '../../src/storybook/utils/react-native-screens',
       ),
     }
 

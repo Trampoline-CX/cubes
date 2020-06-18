@@ -1,6 +1,6 @@
 {
   "name": "@hansgx/cubes",
-  "version": "0.0.2-alpha.1",
+  "version": "0.0.2-alpha.2",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
@@ -25,6 +25,9 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
+    "@react-navigation/bottom-tabs": "^5.5.2",
+    "@react-navigation/native": "^5.5.1",
+    "@react-navigation/stack": "^5.5.1",
     "lodash": "^4.17.15",
     "react": "16.9.0",
     "react-dom": "^16.9.0",

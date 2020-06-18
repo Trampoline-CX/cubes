@@ -1,2 +1,2 @@
-export * from './NavigationProvider/NavigationProvider'
+export * from './BottomNavigationBar/BottomNavigationBar'
 export * from './TopBar/TopBar'

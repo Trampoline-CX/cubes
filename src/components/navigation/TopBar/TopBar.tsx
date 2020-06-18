@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { IconName } from '../../icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
-import { useNav } from '../NavigationProvider/NavigationProvider'
 import { IconAction } from '../../actions'
+import { useNav } from '../../../navigation'
 import { Icon } from './Icon/Icon'
 
 export interface TopBarProps {
@@ -48,11 +49,11 @@ export const TopBar: React.FC<TopBarProps> = ({
   transparent = false,
   actions,
 }) => {
+  const insets = useSafeArea()
   const styles = useStyles(theme => ({
     root: {
       flexDirection: 'row',
       backgroundColor: theme.colors.fill.background.lighter,
-      height,
       alignItems: 'center',
       ...theme.elevation.z4,
     },
@@ -62,8 +63,8 @@ export const TopBar: React.FC<TopBarProps> = ({
     },
   }))
 
-  const { goBack } = useNav()
-  const onIconStartClick = onIconStartClickRaw || goBack
+  const { back } = useNav()
+  const onIconStartClick = onIconStartClickRaw || back
   const actionComponents = useMemo(
     () =>
       actions?.map(({ icon, action }, index) => <Icon key={index} name={icon} onClick={action} />),
@@ -71,7 +72,13 @@ export const TopBar: React.FC<TopBarProps> = ({
   )
 
   return (
-    <View style={[styles.root, transparent ? styles.transparentRoot : null]}>
+    <View
+      style={[
+        styles.root,
+        transparent ? styles.transparentRoot : null,
+        { paddingTop: insets.top, height: insets.top + height },
+      ]}
+    >
       {iconStart !== 'none' ? (
         <Box paddingX="xSmall">
           <IconButton icon={iconStart} onClick={onIconStartClick} />
