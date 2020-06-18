@@ -20,7 +20,7 @@ export const BottomNavigationBar: React.FC<BottomNavigationBarProps> & {
     background: {
       flexDirection: 'row',
       alignItems: 'stretch',
-      background: theme.colors.fill.background.lighter,
+      backgroundColor: theme.colors.fill.background.lighter,
       ...theme.elevation.z8,
     },
   }))

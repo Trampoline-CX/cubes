@@ -42,9 +42,4 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
-  bottomNavigationBar: {
-    tab: {
-      height: 56,
-    },
-  },
 }

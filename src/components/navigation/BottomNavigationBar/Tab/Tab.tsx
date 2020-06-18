@@ -1,9 +1,8 @@
 import React from 'react'
-import { View } from 'react-native'
 import { IconName, Icon } from '../../../icons'
 import { useStyles } from '../../../../theme'
-import { shameStyles } from '../../../../theme/shame-styles'
 import { Touchable } from '../../../base'
+import { Box } from '../../../structure'
 
 export interface TabProps {
   /**
@@ -20,28 +19,23 @@ export interface TabProps {
   onClick: () => void
 }
 
-const { height } = shameStyles.bottomNavigationBar.tab
-
 /**
  * Tab component to display in `BottomNavigationBar`.
  */
 export const Tab: React.FC<TabProps> = ({ icon, onClick, selected = false }) => {
-  const styles = useStyles(() => ({
-    tab: {
-      flex: 1,
-    },
+  const styles = useStyles(theme => ({
     touchable: {
       alignItems: 'center',
       justifyContent: 'center',
-      height,
+      padding: theme.spacing.medium,
     },
   }))
 
   return (
-    <View style={styles.tab}>
+    <Box fill>
       <Touchable viewStyle={styles.touchable} onClick={onClick}>
         <Icon name={icon} color={selected ? 'accent' : 'primary'} />
       </Touchable>
-    </View>
+    </Box>
   )
 }
