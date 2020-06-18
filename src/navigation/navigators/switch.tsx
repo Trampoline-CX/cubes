@@ -1,7 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { NavigatorBuilder } from './base'
-import { NavigatorsOrScreens } from './types'
+import { NavigatorsOrScreens, NavigatorBuilder } from './types'
 import { isNavigator } from './is-navigator'
 
 export interface SwitchNavigator {

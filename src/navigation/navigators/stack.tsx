@@ -1,8 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isNavigator } from './is-navigator'
-import { NavigatorBuilder } from './base'
-import { NavigatorsOrScreens } from './types'
+import { NavigatorsOrScreens, NavigatorBuilder } from './types'
 
 export interface StackNavigator {
   readonly stack: NavigatorsOrScreens
