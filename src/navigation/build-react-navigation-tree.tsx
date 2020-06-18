@@ -3,13 +3,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationSchema, StackNavigator, Navigator, SwitchNavigator, Screen } from './types'
 import { ReactNavigationProvider } from './NavigationProvider'
 
-export const buildReactNavigationTree = <Schema extends NavigationSchema>(
-  schema: Schema,
-): React.ComponentType => _buildReactNavigationTreeRecursive(schema)
+export const buildReactNavigationTree = (schema: NavigationSchema): React.ComponentType =>
+  _buildReactNavigationTreeRecursive(schema)
 
-export const _buildReactNavigationTreeRecursive = <Schema extends Navigator>(
-  navigator: Navigator,
-): React.ComponentType => {
+export const _buildReactNavigationTreeRecursive = (navigator: Navigator): React.ComponentType => {
   if ('stack' in navigator) {
     return _buildStackNavigator(navigator)
   } else if ('switch' in navigator) {
