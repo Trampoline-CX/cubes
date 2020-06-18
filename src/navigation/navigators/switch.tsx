@@ -3,6 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigatorsOrScreens, NavigatorBuilder } from './types'
 import { isNavigator } from './is-navigator'
 
+/**
+ * Default Navigator for Switch Navigation (navigating to a new screen does not add it on the stack).
+ */
 export interface SwitchNavigator {
   switch: NavigatorsOrScreens
 }

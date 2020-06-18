@@ -16,6 +16,9 @@ export interface ReactNavigationProviderProps {
   component: React.ComponentType
 }
 
+/**
+ * Provides a `NavigationContext` for every screen, using React Navigation behind the scenes.
+ */
 export const ReactNavigationProvider: React.FC<ReactNavigationProviderProps> = ({ component }) => {
   const Component = component
   const navigation = useNavigation()
@@ -37,6 +40,12 @@ export interface DummyNavigationProviderProps {
   children: React.ReactNode
 }
 
+/**
+ * Provide a dummy `NavigationContext` for when no `NavigationSchema` is provided
+ * (when we simply wrap children).
+ *
+ * All navigation performed simply log a warning to the console.
+ */
 export const DummyNavigationProvider: React.FC<DummyNavigationProviderProps> = ({ children }) => (
   <NavigationContext.Provider
     value={{

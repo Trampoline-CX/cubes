@@ -3,12 +3,23 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { isNavigator } from './is-navigator'
 import { NavigatorsOrScreens, NavigatorBuilder } from './types'
 
+/**
+ * Stack Navigator, used to stack screens.
+ */
 export interface StackNavigator {
   readonly stack: NavigatorsOrScreens
   readonly options?: StackNavigatorOptions
 }
 
+/**
+ * StackNavigator Options.
+ */
 export interface StackNavigatorOptions {
+  /**
+   * Animation to use when pushing/removing screens.
+   *
+   * "default" animation is a "push" animation, which is the standard animation when pushing new screens on a stack.
+   */
   animation?: 'none' | 'default'
 }
 
@@ -33,11 +44,11 @@ export const stackBuilder: NavigatorBuilder<'stack', StackNavigator> = {
       }
     })
 
-    const { options } = navigator
+    const { animation = 'default' } = navigator.options ?? {}
 
     return () => (
       <Stack.Navigator
-        screenOptions={{ headerShown: false, animationEnabled: options?.animation !== 'none' }}
+        screenOptions={{ headerShown: false, animationEnabled: animation === 'default' }}
       >
         {screens}
       </Stack.Navigator>

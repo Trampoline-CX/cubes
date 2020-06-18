@@ -4,9 +4,15 @@ import { ReactNavigationProvider } from './NavigationProvider'
 import { Navigator } from './navigators'
 import { navigatorBuilders } from './navigators/all'
 
+/**
+ * Build a React Navigation Navigator tree using a `NavigationSchema`.
+ */
 export const buildReactNavigationTree = (schema: NavigationSchema): React.ComponentType =>
   _buildReactNavigationTreeRecursive(schema)
 
+/**
+ * Build Navigators recursively.
+ */
 export const _buildReactNavigationTreeRecursive = (navigator: Navigator): React.ComponentType => {
   const builder = navigatorBuilders.find(x => x.name in navigator)
 
@@ -22,6 +28,9 @@ export const _buildReactNavigationTreeRecursive = (navigator: Navigator): React.
   }
 }
 
+/**
+ * Wrap screens with their own `ReactNavigationProvider`.
+ */
 const _wrapScreenWithNavigationProvider = (
   Comp: React.ComponentType,
 ): React.ComponentType => () => <ReactNavigationProvider component={Comp} />

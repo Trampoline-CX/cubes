@@ -16,6 +16,11 @@ export interface NavigationProviderProps<Schema extends NavigationSchema> {
   children?: React.ReactNode
 }
 
+/**
+ * Provides React Navigation support from a `NavigationSchema`. If a schema is provided,
+ * Navigation will follow this schema. If no schema is provided, `children` will be used
+ * as the only screen instead.
+ */
 export const NavigationContainer = <Schema extends NavigationSchema>({
   schema,
   children,
