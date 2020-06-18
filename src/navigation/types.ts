@@ -15,8 +15,13 @@ type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
   ? I
   : never
 
+export interface StackNavigatorOptions {
+  animation?: 'none' | 'default'
+}
+
 export interface StackNavigator {
   readonly stack: NavigatorsOrScreens
+  readonly options?: StackNavigatorOptions
 }
 
 export interface SwitchNavigator {

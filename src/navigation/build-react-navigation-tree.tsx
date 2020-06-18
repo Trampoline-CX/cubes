@@ -42,7 +42,15 @@ const _buildStackNavigator = (navigator: StackNavigator): React.ComponentType =>
     }
   })
 
-  return () => <Stack.Navigator screenOptions={{ headerShown: false }}>{screens}</Stack.Navigator>
+  const { options } = navigator
+
+  return () => (
+    <Stack.Navigator
+      screenOptions={{ headerShown: false, animationEnabled: options?.animation !== 'none' }}
+    >
+      {screens}
+    </Stack.Navigator>
+  )
 }
 
 const _buildSwitchNavigator = (navigator: SwitchNavigator): React.ComponentType => {

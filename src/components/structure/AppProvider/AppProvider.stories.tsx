@@ -129,11 +129,12 @@ const ProfileScreen: React.FC = () => {
 }
 
 const schema = {
-  switch: [
+  stack: [
     { stack: [{ MoneyScreen }, { TransactionScreen }] },
     { ExploreScreen },
     { ProfileScreen },
   ],
+  options: { animation: 'none' },
 } as const
 
 type Schema = typeof schema
