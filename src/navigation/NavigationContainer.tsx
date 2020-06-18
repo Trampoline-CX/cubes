@@ -30,13 +30,11 @@ export const NavigationContainer = <Schema extends NavigationSchema>({
   ])
   const linkingOptions = schema ? buildReactNavigationLinkingOptions() : undefined
 
-  return (
-    <RNNavigationContainer independent linking={linkingOptions}>
-      {ReactNavigationTree ? (
-        <ReactNavigationTree />
-      ) : (
-        <DummyNavigationProvider>{children}</DummyNavigationProvider>
-      )}
+  return ReactNavigationTree ? (
+    <RNNavigationContainer linking={linkingOptions}>
+      <ReactNavigationTree />
     </RNNavigationContainer>
+  ) : (
+    <DummyNavigationProvider>{children}</DummyNavigationProvider>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { IconName } from '../../icons/Icon/Icon'
@@ -48,11 +49,11 @@ export const TopBar: React.FC<TopBarProps> = ({
   transparent = false,
   actions,
 }) => {
+  const insets = useSafeArea()
   const styles = useStyles(theme => ({
     root: {
       flexDirection: 'row',
       backgroundColor: theme.colors.fill.background.lighter,
-      height,
       alignItems: 'center',
       ...theme.elevation.z4,
     },
@@ -71,7 +72,13 @@ export const TopBar: React.FC<TopBarProps> = ({
   )
 
   return (
-    <View style={[styles.root, transparent ? styles.transparentRoot : null]}>
+    <View
+      style={[
+        styles.root,
+        transparent ? styles.transparentRoot : null,
+        { paddingTop: insets.top, height: insets.top + height },
+      ]}
+    >
       {iconStart !== 'none' ? (
         <Box paddingX="xSmall">
           <IconButton icon={iconStart} onClick={onIconStartClick} />
