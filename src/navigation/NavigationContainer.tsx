@@ -3,6 +3,7 @@ import { NavigationContainer as RNNavigationContainer } from '@react-navigation/
 import { NavigationSchema } from './types'
 import { buildReactNavigationTree } from './build-react-navigation-tree'
 import { DummyNavigationProvider } from './NavigationProvider'
+import { buildReactNavigationLinkingOptions } from './build-react-navigation-linking-options'
 
 export interface NavigationProviderProps<Schema extends NavigationSchema> {
   /**
@@ -22,9 +23,10 @@ export const NavigationContainer = <Schema extends NavigationSchema>({
   const ReactNavigationTree = useMemo(() => (schema ? buildReactNavigationTree(schema) : null), [
     schema,
   ])
+  const linkingOptions = buildReactNavigationLinkingOptions()
 
   return (
-    <RNNavigationContainer independent>
+    <RNNavigationContainer independent linking={linkingOptions}>
       {ReactNavigationTree ? (
         <ReactNavigationTree />
       ) : (
