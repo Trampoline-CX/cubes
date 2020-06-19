@@ -9,6 +9,7 @@ import { Dialog } from './Dialog'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Dialog,
+  subcomponents: { 'Dialog.Section': Dialog.Section },
 }
 
 export const Basic: React.FC = () => {

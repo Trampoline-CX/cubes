@@ -145,6 +145,7 @@ module.exports = {
           'Badge',
           'HeaderActionButton',
           'Pill',
+          'Alert',
         ],
       },
     ],
