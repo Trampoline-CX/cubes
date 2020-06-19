@@ -1,5 +1,6 @@
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Modal from 'modal-react-native-web'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
@@ -29,6 +30,9 @@ export type AppProviderProps = {
    */
   navigationSchema?: NavigationSchema
 } & (WithNavigationSchema | WithoutNavigationSchema)
+
+// Set App Element of Modal
+Modal.setAppElement('body')
 
 /**
  * Component that should be defined at the root of the App and controls many elements, like

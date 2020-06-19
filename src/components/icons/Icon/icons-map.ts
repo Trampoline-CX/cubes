@@ -29,6 +29,7 @@ import {
   SvgRent,
   SvgPropertyDebt,
   SvgPreferences,
+  SvgClose,
 } from '../__generated__'
 
 export const iconsMap = {
@@ -44,6 +45,7 @@ export const iconsMap = {
   note: SvgNotes,
   navigate: SvgNavigate,
   security: SvgSecurity,
+  close: SvgClose,
   'close-modal': SvgCloseModal,
   backspace: SvgBackspace,
   'go-back': SvgGoBack,
