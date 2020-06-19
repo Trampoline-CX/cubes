@@ -1,4 +1,4 @@
-import { IconName } from '../icons'
+import { IconName } from '../images-and-icons'
 
 /**
  * Action with a Label.
