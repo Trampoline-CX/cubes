@@ -10,7 +10,7 @@ export interface AlertProps {
   /**
    * Text to display in the Alert.
    */
-  children: React.ReactNode
+  message: React.ReactNode
   /**
    * Decides if the Alert is displayed or not.
    */
@@ -29,14 +29,15 @@ export interface AlertProps {
  * Alert the user of something important. Should be used sparingly, as this interrupts the
  * user flow.
  */
-export const Alert: React.FC<AlertProps> = ({ title, children, open, onClose, buttonText }) => (
+export const Alert: React.FC<AlertProps> = ({ title, message, open, onClose, buttonText }) => (
   <Dialog
     sectioned
+    hideClose
     open={open}
     onClose={onClose}
     title={title}
     primaryAction={{ label: buttonText, action: onClose }}
   >
-    <BodyText>{children}</BodyText>
+    <BodyText>{message}</BodyText>
   </Dialog>
 )

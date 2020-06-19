@@ -28,6 +28,10 @@ export interface DialogProps extends FooterProps {
    * Provides a default `Dialog.Section` in the Dialog. All content will be wrapped in it.
    */
   sectioned?: boolean
+  /**
+   * Set to true to hide the close modal button.
+   */
+  hideClose?: boolean
 }
 
 const { backdropColor, defaultWidth, minWidth } = shameStyles.dialog
@@ -43,6 +47,7 @@ export const Dialog: React.FC<DialogProps> & { Section: typeof Section } = ({
   primaryAction,
   secondaryActions = [],
   sectioned = false,
+  hideClose = false,
 }) => {
   const styles = useStyles(theme => ({
     backdrop: {
@@ -70,7 +75,7 @@ export const Dialog: React.FC<DialogProps> & { Section: typeof Section } = ({
     >
       <View style={styles.backdrop}>
         <View style={styles.modal}>
-          <Header title={title} onClose={onClose} />
+          <Header title={title} onClose={onClose} hideClose={hideClose} />
           {sectioned ? <Section>{children}</Section> : children}
           <Footer primaryAction={primaryAction} secondaryActions={secondaryActions} />
         </View>

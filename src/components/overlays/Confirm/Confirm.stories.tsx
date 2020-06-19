@@ -4,25 +4,31 @@ import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure'
 import { Button } from '../../actions'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
-import { Alert, AlertProps } from './Alert'
+import { Confirm, ConfirmProps } from './Confirm'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  component: Alert,
+  component: Confirm,
 }
 
-export const Basic: StoryFn<AlertProps> = ({ title, message, buttonText }) => {
+export const Basic: StoryFn<ConfirmProps> = ({
+  title,
+  message,
+  positiveActionText,
+  negativeActionText,
+}) => {
   const [visible, setVisible] = useState(false)
 
   return (
     <Box padding="medium" align="start">
       <Button onClick={() => setVisible(true)}>Alert me!</Button>
-      <Alert
+      <Confirm
         title={title}
         message={message}
         open={visible}
         onClose={() => setVisible(false)}
-        buttonText={buttonText}
+        positiveActionText={positiveActionText}
+        negativeActionText={negativeActionText}
       />
     </Box>
   )
@@ -30,8 +36,9 @@ export const Basic: StoryFn<AlertProps> = ({ title, message, buttonText }) => {
 
 Basic.args = {
   title: 'This is very important!',
-  message: "Damn you're cute! 😊",
-  buttonText: 'Wow thanks!',
+  message: 'Are you a cute unicorn? 🦄',
+  positiveActionText: 'Yes',
+  negativeActionText: 'Probably',
 }
 
 Basic.argTypes = {
@@ -45,11 +52,12 @@ export const WithoutTitle: React.FC = () => {
   return (
     <Box padding="medium" align="start">
       <Button onClick={() => setVisible(true)}>Alert me!</Button>
-      <Alert
+      <Confirm
+        message="Do you want to have peace in the world?"
         open={visible}
         onClose={() => setVisible(false)}
-        buttonText="Close"
-        message="This is some important content!"
+        positiveActionText="Yes"
+        negativeActionText="No"
       />
     </Box>
   )
