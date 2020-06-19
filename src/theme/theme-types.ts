@@ -124,6 +124,7 @@ export interface Theme {
       xLarge: number
     }
     avatar: {
+      small: number
       default: number
     }
     divider: number
