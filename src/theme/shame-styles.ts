@@ -42,4 +42,11 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
+  toast: {
+    maxWidth: '80%',
+    duration: {
+      default: 2500,
+      longer: 4000,
+    },
+  },
 }
