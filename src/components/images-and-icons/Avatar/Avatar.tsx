@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Image, ImageSourcePropType } from 'react-native'
+import Identicon from 'identicon.js'
 import { Theme, useStyles, useTheme } from '../../../theme'
+import { generateSha512 } from '../../../utils/sha512'
 
 export interface GeneratedAvatarSource {
   /**
@@ -37,26 +39,20 @@ export const Avatar: React.FC<AvatarProps> = ({ size: sizeRaw = 'default', sourc
   }))
 
   const size = currentTheme.size.avatar[sizeRaw]
-
-  return (
-    <Image
-      style={[styles.base, { width: size, height: size }]}
-      source={
-        typeof source === 'number' || !('hash' in source)
-          ? source
-          : _getGeneratedAvatarSource(source, size)
-      }
-    />
+  const realSource = useMemo<ImageSourcePropType>(
+    () =>
+      typeof source === 'number' || !('hash' in source)
+        ? source
+        : _getGeneratedAvatarSource(source, size),
+    [source, size],
   )
+
+  return <Image style={[styles.base, { width: size, height: size }]} source={realSource} />
 }
 
 const _getGeneratedAvatarSource = (
   source: GeneratedAvatarSource,
   size: number,
-): ImageSourcePropType => {
-  const urlEncodedHash = encodeURIComponent(source.hash)
-
-  return {
-    uri: `https://avatars.dicebear.com/api/identicon/${urlEncodedHash}.svg?width=${size}&height=${size}`,
-  }
-}
+): ImageSourcePropType => ({
+  uri: 'data:image/png;base64,' + new Identicon(generateSha512(source.hash), { size }).toString(),
+})
