@@ -42,4 +42,7 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
+  progressBar: {
+    height: 24,
+  },
 }
