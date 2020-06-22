@@ -18,4 +18,11 @@ export const Basic: StoryFn<RadioButtonProps> = props => {
 Basic.args = {
   checked: false,
   label: 'A smoothie',
+  helpText: 'Contains orange juice, mangos and love ❤️',
+}
+
+export const WithoutHelpText: React.FC = () => {
+  const [checked, setChecked] = useState(false)
+
+  return <RadioButton label="Pizza" checked={checked} onChange={setChecked} />
 }
