@@ -1,5 +1,6 @@
 export * from './FormLayout/FormLayout'
 export * from './InlineError/InlineError'
+export * from './RadioButton/RadioButton'
 export * from './TextField/TextField'
 export * from './SearchField/SearchField'
 export * from './Switch/Switch'

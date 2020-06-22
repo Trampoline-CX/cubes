@@ -18,6 +18,6 @@ export type ControlType =
   | 'date'
 
 export type StoryFn<Props> = React.FC<Props> & {
-  args?: Props
+  args?: Partial<Props>
   argTypes?: Partial<Record<Extract<keyof Props, string>, { control: ControlType }>>
 }
