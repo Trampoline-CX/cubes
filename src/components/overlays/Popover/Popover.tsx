@@ -1,20 +1,26 @@
+import _ from 'lodash'
 import React, { useMemo, useState, useCallback, useRef } from 'react'
 import {
   View,
   TouchableWithoutFeedback,
   ViewProps,
   LayoutRectangle,
-  useWindowDimensions,
   Dimensions,
-  ViewStyle,
-  StyleProp,
 } from 'react-native'
 import { TextAction } from '../../actions'
-import { useStyles, ColorHex } from '../../../theme'
-import { Box } from '../../structure'
+import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
+import { useWindowDimensions } from '../../../utils/hooks/use-window-dimensions'
 import { Item, ItemProps } from './Item/Item'
-import { PopoverPlacement, getOppositePlacement, selectFromPlacement } from './popover-placement'
+import {
+  PopoverPlacement,
+  isTop,
+  isBottom,
+  isStart,
+  isEnd,
+  isLeft,
+  isRight,
+} from './popover-placement'
 
 export interface PopoverWithActions {
   /**
@@ -49,11 +55,6 @@ export type PopoverProps = {
    * For example, if we set `preferredPlacement="top"`, and there is not enough space for the Popover
    * to show itself above the triggering view, it will show at the bottom of it.
    */
-  preferredPlacement?: PopoverPlacement
-  /**
-   * Placement of the popover. If set, `preferredPlacement` will be ignored and Popover will be placed
-   * according to this property.
-   */
   placement?: PopoverPlacement
   /**
    * Called when the Popover needs to be discarded. This should update `open` property accordingly.
@@ -73,13 +74,14 @@ export type PopoverProps = {
 
 const { backdrop } = shameStyles.popover
 
+const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
+
 export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   open,
   anchor,
   actions,
   children,
-  preferredPlacement = PopoverPlacement.BOTTOM,
-  placement,
+  placement = 'bottom',
   onRequestClose,
   hideBackdrop = false,
   matchWidth = false,
@@ -100,8 +102,16 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
 
   const content = useContent(actions, children)
 
+  const [layout, setLayout] = useState<LayoutRectangle | null>(null)
+  const ref = useRef<View>(null)
+  const onLayout = useCallback(() => {
+    ref.current?.measure((x, y, width, height, pageX, pageY) => {
+      setLayout({ x: pageX, y: pageY, width, height })
+    })
+  }, [ref.current])
+
   return (
-    <View onLayout={}>
+    <View ref={ref} onLayout={onLayout}>
       {anchor}
       {open ? (
         <>
@@ -109,9 +119,9 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
             <View style={[styles.backdrop, hideBackdrop ? styles.backdropHidden : null]} />
           </TouchableWithoutFeedback>
           <PopoverView
-            preferredPlacement={preferredPlacement}
             placement={placement}
             matchWidth={matchWidth}
+            anchorLayout={layout ?? LAYOUT_ZERO}
           >
             {content}
           </PopoverView>
@@ -148,89 +158,97 @@ const useContent = (
 
 interface PopoverViewProps {
   children: React.ReactNode
-  preferredPlacement: PopoverPlacement
-  placement?: PopoverPlacement
+  placement: PopoverPlacement
   matchWidth: boolean
+  anchorLayout: LayoutRectangle
 }
 
 const PopoverView: React.FC<PopoverViewProps> = ({
   children,
-  preferredPlacement,
-  placement: placementRaw,
+  placement,
   matchWidth,
+  anchorLayout,
 }) => {
   const styles = useStyles(theme => ({
     container: {
       position: 'absolute',
-      top: -9999999,
-      left: -9999999,
-      right: -9999999,
-      bottom: -9999999,
+      top: 0,
+      left: 0,
+      alignItems: 'flex-start',
     },
     popover: {
-      position: 'absolute',
       backgroundColor: theme.colors.fill.background.lighter,
-      right: 0,
       ...theme.elevation.z8,
     },
     popoverNotYetLayout: {
       opacity: 0,
-    },
-    popoverBottom: {
-      top: '100%',
-    },
-    popoverTop: {
-      bottom: '100%',
-    },
-    popoverLeft: {
-      right: '100%',
-    },
-    popoverRight: {
-      left: '100%',
     },
     popoverMatchWidth: {
       left: 0,
       right: 0,
     },
   }))
-  const ref = useRef<View>(null)
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions()
+
   const [layout, setLayout] = useState<LayoutRectangle | null>(null)
-  const { width: windowWidth, height: windowHeight } = Dimensions.get('window')
-
-  const onLayout = useCallback(() => {
-    ref.current?.measure((x, y, width, height, pageX, pageY) => {
-      setLayout({ x: pageX, y: pageY, width, height })
-    })
-  }, [ref.current])
-
-  const intersects = _popoverIntersectsWindow(
-    windowWidth,
-    windowHeight,
-    layout ?? { x: 0, y: 0, width: 0, height: 0 },
+  const onLayout = useCallback<Required<ViewProps>['onLayout']>(
+    ({ nativeEvent }) => setLayout(nativeEvent.layout),
+    [setLayout],
   )
 
-  // Define real placement from preferredPlacement or placement prop
-  const placement =
-    placementRaw ?? intersects ? getOppositePlacement(preferredPlacement) : preferredPlacement
+  // Calculate the offset of the Popover relative to parent according to placement
+  const placementOffset: Offset = {
+    x: isLeft(placement)
+      ? -(layout?.width ?? 0)
+      : isRight(placement)
+      ? anchorLayout.width
+      : isStart(placement)
+      ? 0
+      : isEnd(placement)
+      ? -(layout?.width ?? 0) + anchorLayout.width
+      : (anchorLayout.width - (layout?.width ?? 0)) / 2, // Top or bottom centered
+    y: isTop(placement)
+      ? -(layout?.height ?? 0)
+      : isBottom(placement)
+      ? anchorLayout?.height ?? 0
+      : isStart(placement)
+      ? 0
+      : isEnd(placement)
+      ? -(layout?.height ?? 0) + anchorLayout.height
+      : (anchorLayout.height - (layout?.height ?? 0)) / 2, // Left or right centered
+  }
+
+  // Corrects the placement to be inside window bounds
+  const correctedPlacementOffset = _correctOffsetsToBeInWindow(
+    placementOffset,
+    layout,
+    anchorLayout,
+    windowWidth,
+    windowHeight,
+  )
 
   return (
     <View
-      ref={ref}
-      style={[
-        styles.popover,
-        layout === null ? styles.popoverNotYetLayout : null,
-        { maxWidth: windowWidth, maxHeight: windowHeight },
-        selectFromPlacement<ViewStyle>(placement, {
-          top: styles.popoverTop,
-          bottom: styles.popoverBottom,
-          left: styles.popoverLeft,
-          right: styles.popoverRight,
-        }),
-        matchWidth ? styles.popoverMatchWidth : null,
-      ]}
-      onLayout={onLayout}
+      style={[styles.container, { width: windowWidth, height: windowHeight }]}
+      pointerEvents="none"
     >
-      {children}
+      <View
+        style={[
+          styles.popover,
+          layout === null
+            ? styles.popoverNotYetLayout
+            : {
+                transform: [
+                  { translateY: correctedPlacementOffset.y },
+                  { translateX: correctedPlacementOffset.x },
+                ],
+              },
+          { maxWidth: windowWidth, maxHeight: windowHeight },
+        ]}
+        onLayout={onLayout}
+      >
+        {children}
+      </View>
     </View>
   )
 }
@@ -240,3 +258,46 @@ const _popoverIntersectsWindow = (
   windowHeight: number,
   { x, y, width, height }: LayoutRectangle,
 ): boolean => x < 0 || x + width > windowWidth || y < 0 || y + height > windowHeight
+
+const _correctOffsetsToBeInWindow = (
+  offset: Offset,
+  popoverLayout: LayoutRectangle | null,
+  anchorLayout: LayoutRectangle,
+  windowWidth: number,
+  windowHeight: number,
+): Offset => {
+  if (popoverLayout === null) {
+    return { x: 0, y: 0 }
+  }
+
+  // Compute where the popover will be displayed
+  const realPopoverLayout: LayoutRectangle = {
+    x: anchorLayout.x + offset.x + (popoverLayout?.x ?? 0),
+    y: anchorLayout.y + offset.y + (popoverLayout?.y ?? 0),
+    width: popoverLayout?.width ?? 0,
+    height: popoverLayout?.height ?? 0,
+  }
+
+  // Correct the popover display to be within Window bounds
+  const correctedPopoverLayout: LayoutRectangle = {
+    x: _.clamp(realPopoverLayout.x, 0, windowWidth - realPopoverLayout.width),
+    y: _.clamp(realPopoverLayout.y, 0, windowHeight - realPopoverLayout.height),
+    width: realPopoverLayout.width,
+    height: realPopoverLayout.height,
+  }
+
+  console.log(offset, anchorLayout, popoverLayout, realPopoverLayout, correctedPopoverLayout, {
+    x: correctedPopoverLayout.x - realPopoverLayout.x + offset.x,
+    y: correctedPopoverLayout.y - realPopoverLayout.y + offset.y,
+  })
+
+  return {
+    x: correctedPopoverLayout.x - realPopoverLayout.x + offset.x,
+    y: correctedPopoverLayout.y - realPopoverLayout.y + offset.y,
+  }
+}
+
+interface Offset {
+  x: number
+  y: number
+}
