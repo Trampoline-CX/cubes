@@ -105,8 +105,8 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   const [layout, setLayout] = useState<LayoutRectangle | null>(null)
   const ref = useRef<View>(null)
   const onLayout = useCallback(() => {
-    ref.current?.measure((x, y, width, height, pageX, pageY) => {
-      setLayout({ x: pageX, y: pageY, width, height })
+    ref.current?.measureInWindow((x, y, width, height) => {
+      setLayout({ x, y, width, height })
     })
   }, [ref.current])
 
@@ -253,12 +253,6 @@ const PopoverView: React.FC<PopoverViewProps> = ({
   )
 }
 
-const _popoverIntersectsWindow = (
-  windowWidth: number,
-  windowHeight: number,
-  { x, y, width, height }: LayoutRectangle,
-): boolean => x < 0 || x + width > windowWidth || y < 0 || y + height > windowHeight
-
 const _correctOffsetsToBeInWindow = (
   offset: Offset,
   popoverLayout: LayoutRectangle | null,
@@ -270,30 +264,9 @@ const _correctOffsetsToBeInWindow = (
     return { x: 0, y: 0 }
   }
 
-  // Compute where the popover will be displayed
-  const realPopoverLayout: LayoutRectangle = {
-    x: anchorLayout.x + offset.x + (popoverLayout?.x ?? 0),
-    y: anchorLayout.y + offset.y + (popoverLayout?.y ?? 0),
-    width: popoverLayout?.width ?? 0,
-    height: popoverLayout?.height ?? 0,
-  }
-
-  // Correct the popover display to be within Window bounds
-  const correctedPopoverLayout: LayoutRectangle = {
-    x: _.clamp(realPopoverLayout.x, 0, windowWidth - realPopoverLayout.width),
-    y: _.clamp(realPopoverLayout.y, 0, windowHeight - realPopoverLayout.height),
-    width: realPopoverLayout.width,
-    height: realPopoverLayout.height,
-  }
-
-  console.log(offset, anchorLayout, popoverLayout, realPopoverLayout, correctedPopoverLayout, {
-    x: correctedPopoverLayout.x - realPopoverLayout.x + offset.x,
-    y: correctedPopoverLayout.y - realPopoverLayout.y + offset.y,
-  })
-
   return {
-    x: correctedPopoverLayout.x - realPopoverLayout.x + offset.x,
-    y: correctedPopoverLayout.y - realPopoverLayout.y + offset.y,
+    x: _.clamp(offset.x, -anchorLayout.x, -anchorLayout.x + windowWidth - popoverLayout.width),
+    y: _.clamp(offset.y, -anchorLayout.y, -anchorLayout.y + windowHeight - popoverLayout.height),
   }
 }
 

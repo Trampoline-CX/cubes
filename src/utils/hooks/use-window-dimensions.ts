@@ -1,5 +1,5 @@
 import { Dimensions, ScaledSize } from 'react-native'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 
 /**
  * Custom `useWindowDimensions` hook as React Native Web doesn't supply one right now.
@@ -9,11 +9,11 @@ import { useState, useEffect, useCallback } from 'react'
 export const useWindowDimensions = (): ScaledSize => {
   const [dimensions, setDimensions] = useState(Dimensions.get('window'))
 
-  const onChange = useCallback(({ window }: { window: ScaledSize }): void => {
-    setDimensions(window)
-  }, [])
-
   useEffect(() => {
+    const onChange = ({ window }: { window: ScaledSize }): void => {
+      setDimensions(window)
+    }
+
     Dimensions.addEventListener('change', onChange)
     return () => {
       Dimensions.removeEventListener('change', onChange)
