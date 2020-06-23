@@ -30,11 +30,11 @@ export const Select: React.FC<SelectProps> = ({ options }) => {
 
   return (
     <Popover
-      trigger={show => (
-        <Touchable viewStyle={styles.container} onClick={show}>
+      trigger={
+        <Touchable viewStyle={styles.container}>
           <BodyText>{selectedOption?.label ?? 'Please select something'}</BodyText>
         </Touchable>
-      )}
+      }
     >
       {options.map((option, i) => (
         <Popover.Item key={i} label={option.label} onSelect={() => setSelectedOption(option)} />

@@ -42,4 +42,9 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
+  popover: {
+    backdrop: {
+      color: 'rgba(0, 0, 0, 0.3)',
+    },
+  },
 }
