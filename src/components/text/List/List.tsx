@@ -7,11 +7,12 @@ import { Item, ItemProps } from './Item/Item'
 
 type ListType = 'bullet' | 'number'
 
-export interface ListWithDataSourceProps {
+export interface ListWithValuesProps {
   /**
    * Strings to display in the List.
    */
-  dataSource: string[]
+  values: string[]
+  children?: never
 }
 
 export interface ListWithChildrenProps {
@@ -19,6 +20,7 @@ export interface ListWithChildrenProps {
    * Strings to display in the list (can be stylized using `TextStyle` component).
    */
   children: React.ReactNode
+  values?: never
 }
 
 export type ListProps = {
@@ -26,25 +28,17 @@ export type ListProps = {
    * Type of list displayed.
    */
   type?: ListType
-  /**
-   * Strings to display in the List.
-   */
-  dataSource?: string[]
-  /**
-   * Strings to display in the list (can be stylized using `TextStyle` component).
-   */
-  children?: React.ReactNode
-} & (ListWithDataSourceProps | ListWithChildrenProps)
+} & (ListWithValuesProps | ListWithChildrenProps)
 
 /**
  * Component displaying texts in a List.
  */
 export const List: React.FC<ListProps> & { Item: typeof Item } = ({
   type = 'bullet',
-  dataSource,
+  values,
   children,
 }) => {
-  const items = useItems(dataSource, children, type)
+  const items = useItems(values, children, type)
 
   return <Box space="small">{items}</Box>
 }
@@ -53,21 +47,21 @@ export const List: React.FC<ListProps> & { Item: typeof Item } = ({
  * Get items to display in the list
  */
 const useItems = (
-  dataSource: string[] | undefined,
+  values: string[] | undefined,
   children: React.ReactNode | undefined,
   type: ListType,
 ): React.ReactNode =>
   useMemo(() => {
-    if (dataSource && children) {
+    if (values && children) {
       console.warn(
-        'Both children and dataSource props are defined in List component. Only dataSource will be considered.',
+        'Both children and values props are defined in List component. Only values will be considered.',
       )
     }
 
     let items = children
 
-    if (dataSource) {
-      items = dataSource.map((item, i) => <Item key={i}>{item}</Item>)
+    if (values) {
+      items = values.map((item, i) => <Item key={i}>{item}</Item>)
     }
 
     return React.Children.map(items, (item, index) => (
@@ -76,7 +70,7 @@ const useItems = (
         {item}
       </Box>
     ))
-  }, [dataSource, children, type])
+  }, [values, children, type])
 
 const _getBullet = (type: ListType, index: number): React.ReactNode => {
   switch (type) {

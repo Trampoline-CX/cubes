@@ -21,17 +21,17 @@ export const Basic: StoryFn<ListProps> = ({ type }) => (
   </List>
 )
 Basic.argTypes = {
-  dataSource: { control: null },
+  values: { control: null },
   children: { control: null },
 }
 
-export const UsingDataSource: StoryFn<ListProps> = () => (
-  <List dataSource={['Hospitals', 'Police Stations', 'Elementary School', 'University']} />
+export const UsingValues: StoryFn<ListProps> = () => (
+  <List values={['Hospitals', 'Police Stations', 'Elementary School', 'University']} />
 )
 
 export const Numbered: StoryFn<ListProps> = () => (
   <List
     type="number"
-    dataSource={['Hospitals', 'Police Stations', 'Elementary School', 'University']}
+    values={['Hospitals', 'Police Stations', 'Elementary School', 'University']}
   />
 )
