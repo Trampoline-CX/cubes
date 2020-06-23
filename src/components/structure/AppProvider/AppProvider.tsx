@@ -1,5 +1,6 @@
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { MenuProvider } from 'react-native-popup-menu'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
@@ -43,7 +44,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({
 }) => (
   <SafeAreaProvider>
     <AppProviderContext.Provider value={{ theme }}>
-      <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+      <MenuProvider backHandler>
+        <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+      </MenuProvider>
     </AppProviderContext.Provider>
   </SafeAreaProvider>
 )
