@@ -5,7 +5,7 @@ import { BodyText } from '../BodyText/BodyText'
 import { useStyles } from '../../../theme'
 import { Item, ItemProps } from './Item/Item'
 
-type ListType = 'bullet' | 'numbered'
+type ListType = 'bullet' | 'number'
 
 export interface ListWithDataSourceProps {
   /**
@@ -82,7 +82,7 @@ const _getBullet = (type: ListType, index: number): React.ReactNode => {
   switch (type) {
     case 'bullet':
       return <Bullet />
-    case 'numbered':
+    case 'number':
       return <BodyText>{index + 1}.</BodyText>
     default:
       throw new Error(`Unknown List with type "${type}".`)

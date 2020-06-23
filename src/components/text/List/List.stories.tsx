@@ -31,7 +31,7 @@ export const UsingDataSource: StoryFn<ListProps> = () => (
 
 export const Numbered: StoryFn<ListProps> = () => (
   <List
-    type="numbered"
+    type="number"
     dataSource={['Hospitals', 'Police Stations', 'Elementary School', 'University']}
   />
 )
