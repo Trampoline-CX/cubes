@@ -7,6 +7,7 @@ interface ListViewWithChildren {
    * List Items to display (supply either this or `dataSource` prop).
    */
   children: React.ReactNode
+  dataSource?: never
 }
 
 interface ListViewWithDataSource {
@@ -14,6 +15,7 @@ interface ListViewWithDataSource {
    * List Items to display (supply either this or `children` prop).
    */
   dataSource: ItemProps[]
+  children?: never
 }
 
 export type ListViewProps = {
@@ -21,10 +23,6 @@ export type ListViewProps = {
    * Divider placed between each item. If none is provided, no separator is shown.
    */
   divider: React.ReactNode
-  /**
-   * List Items to display (supply either this or `children` prop).
-   */
-  dataSource?: ItemProps[]
 } & (ListViewWithChildren | ListViewWithDataSource)
 
 /**
