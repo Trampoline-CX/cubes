@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconName, IconProps as OriginalIconProps } from '../../../icons'
+import { IconName, IconProps as OriginalIconProps } from '../../../images-and-icons'
 import { IconButton } from '../../../actions'
 
 export interface IconProps {
