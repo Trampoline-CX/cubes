@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconName, Icon } from '../../../icons'
+import { IconName, Icon } from '../../../images-and-icons'
 import { useStyles } from '../../../../theme'
 import { Touchable } from '../../../base'
 import { Box } from '../../../structure'
