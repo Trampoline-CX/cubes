@@ -25,13 +25,13 @@ Basic.argTypes = {
   children: { control: null },
 }
 
-export const UsingValues: StoryFn<ListProps> = () => (
-  <List values={['Hospitals', 'Police Stations', 'Elementary School', 'University']} />
-)
-
 export const Numbered: StoryFn<ListProps> = () => (
   <List
     type="number"
     values={['Hospitals', 'Police Stations', 'Elementary School', 'University']}
   />
+)
+
+export const UsingValues: StoryFn<ListProps> = () => (
+  <List values={['Hospitals', 'Police Stations', 'Elementary School', 'University']} />
 )
