@@ -8,21 +8,21 @@ import { Icon } from '../../images-and-icons'
 
 export interface CheckboxProps {
   /**
-   * Label to display next to the Checkbox.
-   */
-  label: string
-  /**
    * True if selected.
    */
   checked: boolean
   /**
-   * Called when selection state changes. Should propagate change to `checked` prop.
+   * Label to display next to the Checkbox.
    */
-  onChange: (checked: boolean) => void
+  label: string
   /**
    * Additional text to aid in use.
    */
   helpText?: string
+  /**
+   * Called when selection state changes. Should propagate change to `checked` prop.
+   */
+  onChange: (checked: boolean) => void
 }
 
 const { size } = shameStyles.checkbox
