@@ -9,6 +9,8 @@ jobs:
       # Checks-out the Repository
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history (for Chromatic)
       - name: Install node_modules
         run: yarn install --frozen-lockfile
       - name: Build
