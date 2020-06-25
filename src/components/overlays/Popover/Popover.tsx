@@ -1,13 +1,12 @@
 import React, { useMemo, useRef } from 'react'
-import { View, TouchableWithoutFeedback, LayoutRectangle } from 'react-native'
+import { View, LayoutRectangle } from 'react-native'
 import { TextWithOptionalIconAction } from '../../actions'
-import { useStyles } from '../../../theme'
-import { shameStyles } from '../../../theme/shame-styles'
 import { usePositionInAppProvider } from '../../dev'
 import { Item, ItemProps } from './Item/Item'
 import { PopoverPlacement } from './popover-placement'
 import { PopoverView } from './PopoverView'
 import { PopoverContext } from './PopoverContext'
+import { PopoverBackdrop } from './PopoverBackdrop'
 
 export interface PopoverWithActions {
   /**
@@ -63,8 +62,6 @@ export type PopoverProps = {
   onRequestClose: () => void
 } & (PopoverWithActions | PopoverWithChildren)
 
-const { backdrop } = shameStyles.popover
-
 const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
 /**
  * Popover Implementation Details (for developers usage)
@@ -94,24 +91,10 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   matchWidth = false,
   aboveAnchor = false,
 }) => {
-  const styles = useStyles(() => ({
-    backdrop: {
-      backgroundColor: backdrop.color,
-      position: 'absolute',
-      top: -9999999,
-      left: -9999999,
-      right: -9999999,
-      bottom: -9999999,
-    },
-    backdropHidden: {
-      opacity: 0,
-    },
-  }))
-
   const content = useContent(actions, children)
 
   const ref = useRef<View>(null)
-  const layout = usePositionInAppProvider(ref.current) // Get position relative to AppProvider
+  const anchorLayout = usePositionInAppProvider(ref.current) // Get position relative to AppProvider
 
   return (
     <View ref={ref}>
@@ -119,13 +102,11 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
         {anchor}
         {open && (
           <>
-            <TouchableWithoutFeedback onPress={onRequestClose}>
-              <View style={[styles.backdrop, hideBackdrop ? styles.backdropHidden : null]} />
-            </TouchableWithoutFeedback>
+            <PopoverBackdrop hide={hideBackdrop} />
             <PopoverView
               placement={placement}
               matchWidth={matchWidth}
-              anchorLayout={layout ?? LAYOUT_ZERO}
+              anchorLayout={anchorLayout ?? LAYOUT_ZERO}
               aboveAnchor={aboveAnchor}
             >
               {content}
