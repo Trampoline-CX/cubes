@@ -17,8 +17,8 @@ export const Basic: StoryFn<CheckboxProps> = props => {
 
 Basic.args = {
   checked: false,
-  label: 'A smoothie',
-  helpText: 'With orange juice, mangos and love ❤️',
+  label: 'A pizza',
+  helpText: 'With onions, mushrooms and green peppers 🍕',
 }
 
 export const WithoutHelpText: React.FC = () => {
