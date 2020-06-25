@@ -217,6 +217,7 @@ const PopoverView: React.FC<PopoverViewProps> = ({
                 ],
               },
           { maxWidth: windowWidth, maxHeight: windowHeight },
+          matchWidth ? { width: anchorLayout.width } : null,
         ]}
         onLayout={onLayout}
       >
