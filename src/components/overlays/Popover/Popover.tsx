@@ -6,7 +6,8 @@ import { shameStyles } from '../../../theme/shame-styles'
 import { useAppProviderPosition } from '../../dev/SizeProvider/AppProviderSizeProvider'
 import { Item, ItemProps } from './Item/Item'
 import { PopoverPlacement } from './popover-placement'
-import { PopoverView } from './PopoverView/PopoverView'
+import { PopoverView } from './PopoverView'
+import { PopoverContext } from './PopoverContext'
 
 export interface PopoverWithActions {
   /**
@@ -96,21 +97,23 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
 
   return (
     <View ref={ref}>
-      {anchor}
-      {open ? (
-        <>
-          <TouchableWithoutFeedback onPress={onRequestClose}>
-            <View style={[styles.backdrop, hideBackdrop ? styles.backdropHidden : null]} />
-          </TouchableWithoutFeedback>
-          <PopoverView
-            placement={placement}
-            matchWidth={matchWidth}
-            anchorLayout={layout ?? LAYOUT_ZERO}
-          >
-            {content}
-          </PopoverView>
-        </>
-      ) : null}
+      <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
+        {anchor}
+        {open && (
+          <>
+            <TouchableWithoutFeedback onPress={onRequestClose}>
+              <View style={[styles.backdrop, hideBackdrop ? styles.backdropHidden : null]} />
+            </TouchableWithoutFeedback>
+            <PopoverView
+              placement={placement}
+              matchWidth={matchWidth}
+              anchorLayout={layout ?? LAYOUT_ZERO}
+            >
+              {content}
+            </PopoverView>
+          </>
+        )}
+      </PopoverContext.Provider>
     </View>
   )
 }

@@ -2,6 +2,8 @@ import _ from 'lodash'
 import React, { useCallback, useState, useMemo } from 'react'
 import { LayoutRectangle, ViewProps, View } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
+import { useStyles } from '../../../theme'
+import { useAppProviderDimensions } from '../../dev/SizeProvider/AppProviderSizeProvider'
 import {
   PopoverPlacement,
   isLeft,
@@ -10,9 +12,7 @@ import {
   isEnd,
   isTop,
   isBottom,
-} from '../popover-placement'
-import { useStyles } from '../../../../theme'
-import { useAppProviderDimensions } from '../../../dev/SizeProvider/AppProviderSizeProvider'
+} from './popover-placement'
 
 export interface PopoverViewProps {
   children: React.ReactNode
