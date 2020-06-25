@@ -3,7 +3,7 @@ import React, { useCallback, useState, useMemo } from 'react'
 import { LayoutRectangle, ViewProps, View } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles } from '../../../theme'
-import { useAppProviderDimensions } from '../../dev/SizeProvider/AppProviderSizeProvider'
+import { useAppProviderDimensions } from '../../dev'
 import {
   PopoverPlacement,
   isLeft,
@@ -22,6 +22,9 @@ export interface PopoverViewProps {
   aboveAnchor: boolean
 }
 
+/**
+ * Actual Popover View which is displayed.
+ */
 export const PopoverView: React.FC<PopoverViewProps> = ({
   children,
   placement,
@@ -78,6 +81,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
           height: windowHeight - insets.top - insets.bottom,
         },
         {
+          // SafeArea insets support
           marginTop: insets.top,
           marginBottom: insets.bottom,
           marginLeft: insets.left,
@@ -90,14 +94,15 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
         style={[
           styles.popover,
           layout === null
-            ? styles.popoverNotYetLayout
+            ? styles.popoverNotYetLayout // Hide Popover as long as we don't have its correct layout
             : {
+                // Offset Popover to display correctly according to anchor position and window bounds
                 transform: [
                   { translateY: correctedPlacementOffset.y },
                   { translateX: correctedPlacementOffset.x },
                 ],
               },
-          { maxWidth: windowWidth, maxHeight: windowHeight },
+          { maxWidth: windowWidth, maxHeight: windowHeight }, // Set max dimensions to prevent going out of Window
           matchWidth ? { width: anchorLayout.width } : null,
         ]}
         onLayout={onLayout}
@@ -108,6 +113,11 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
   )
 }
 
+/**
+ * Get the offset of the Popover View according to its placement.
+ *
+ * Ignores Window bounds, this is the ideal position calculation.
+ */
 const usePlacementOffset = (
   placement: PopoverPlacement,
   aboveAnchor: boolean,
@@ -150,8 +160,11 @@ const usePlacementOffset = (
     }
 
     return offset
-  }, [placement, popoverLayout, anchorLayout])
+  }, [placement, aboveAnchor, popoverLayout, anchorLayout])
 
+/**
+ * Corrects the ideal Popover offset to prevent crossing View bounds.
+ */
 const useOffsetsCorrectionToBeInWindow = (
   offset: Offset,
   popoverLayout: LayoutRectangle | null,

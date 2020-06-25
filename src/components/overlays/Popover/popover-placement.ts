@@ -1,3 +1,6 @@
+/**
+ * Determines placement of the `Popover`.
+ */
 export type PopoverPlacement =
   | 'top'
   | 'top-start'

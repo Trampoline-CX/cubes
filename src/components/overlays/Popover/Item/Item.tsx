@@ -25,7 +25,7 @@ export interface ItemProps {
 }
 
 /**
- * Item shown in a Popover.
+ * Action to display in a `Popover`.
  */
 export const Item: React.FC<ItemProps> = ({ label, icon, iconColor, onSelect: onSelectRaw }) => {
   const { requestClose } = useContext(PopoverContext)

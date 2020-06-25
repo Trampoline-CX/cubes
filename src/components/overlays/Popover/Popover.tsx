@@ -3,7 +3,7 @@ import { View, TouchableWithoutFeedback, LayoutRectangle } from 'react-native'
 import { TextWithOptionalIconAction } from '../../actions'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
-import { useAppProviderPosition } from '../../dev/SizeProvider/AppProviderSizeProvider'
+import { usePositionInAppProvider } from '../../dev'
 import { Item, ItemProps } from './Item/Item'
 import { PopoverPlacement } from './popover-placement'
 import { PopoverView } from './PopoverView'
@@ -66,6 +66,19 @@ export type PopoverProps = {
 const { backdrop } = shameStyles.popover
 
 const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
+/**
+ * Popover Implementation Details (for developers usage)
+ * ---
+ * Popover view tree can be summarized like this:
+ * - AppProvider
+ *   - ...Views, that can be nested X times
+ *     - Popover
+ *       - Popover Backdrop View, which shows the backdrop + provides dismissal of Popover on touch.
+ *       - PopoverView
+ *         - Absolutely positioned container, where height = AppProvider.height and width = AppProvider.width.
+ *           Position origin is equal to position of Anchor View.
+ *           - Actual Popover View displayed to the user. Positioned relatively to its parent.
+ */
 
 /**
  * Popovers are small overlays that open on demand. They are meant to access additional content without cluttering the screen.
@@ -98,7 +111,7 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   const content = useContent(actions, children)
 
   const ref = useRef<View>(null)
-  const layout = useAppProviderPosition(ref.current)
+  const layout = usePositionInAppProvider(ref.current) // Get position relative to AppProvider
 
   return (
     <View ref={ref}>

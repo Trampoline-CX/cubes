@@ -3,7 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
-import { AppProviderSizeProvider } from '../../dev/SizeProvider/AppProviderSizeProvider'
+import { AppProviderSizeProvider } from '../../dev'
 import { AppProviderContext } from './AppProviderContext'
 
 export interface WithNavigationSchema {
