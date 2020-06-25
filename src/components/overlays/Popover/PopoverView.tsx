@@ -4,6 +4,7 @@ import { LayoutRectangle, ViewProps, View, Animated } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles, useTheme } from '../../../theme'
 import { useAppProviderDimensions } from '../../dev'
+import { shameStyles } from '../../../theme/shame-styles'
 import {
   PopoverPlacement,
   isLeft,
@@ -13,6 +14,8 @@ import {
   isTop,
   isBottom,
 } from './popover-placement'
+
+const { zIndex } = shameStyles.popover
 
 export interface PopoverViewProps {
   open: boolean
@@ -40,6 +43,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
       top: 0,
       left: 0,
       alignItems: 'flex-start',
+      zIndex,
     },
     popover: {
       backgroundColor: theme.colors.fill.background.lighter,
@@ -55,7 +59,6 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
   }))
   const [anim] = useState(new Animated.Value(0))
   const { animation } = useTheme()
-  const insets = useSafeArea()
   const { width: windowWidth, height: windowHeight } = useAppProviderDimensions()
 
   const [layout, setLayout] = useState<LayoutRectangle | null>(null)
@@ -71,7 +74,6 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
   const correctedPlacementOffset = useOffsetsCorrectionToBeInWindow(
     placementOffset,
     layout,
-    anchorLayout,
     windowWidth,
     windowHeight,
   )
@@ -87,21 +89,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
 
   return (
     <Animated.View
-      style={[
-        styles.container,
-        {
-          width: windowWidth - insets.left - insets.right,
-          height: windowHeight - insets.top - insets.bottom,
-        },
-        {
-          // SafeArea insets support
-          marginTop: insets.top,
-          marginBottom: insets.bottom,
-          marginLeft: insets.left,
-          marginRight: insets.right,
-        },
-        { opacity: anim },
-      ]}
+      style={[styles.container, { width: windowWidth, height: windowHeight }, { opacity: anim }]}
       pointerEvents="box-none" // Children views can receive touches but not this View
     >
       <View
@@ -141,24 +129,28 @@ const usePlacementOffset = (
 ): Offset =>
   useMemo(() => {
     const offset = {
-      x: isLeft(placement)
-        ? -(popoverLayout?.width ?? 0)
-        : isRight(placement)
-        ? anchorLayout.width
-        : isStart(placement)
-        ? 0
-        : isEnd(placement)
-        ? -(popoverLayout?.width ?? 0) + anchorLayout.width
-        : (anchorLayout.width - (popoverLayout?.width ?? 0)) / 2, // Top or bottom centered
-      y: isTop(placement)
-        ? -(popoverLayout?.height ?? 0)
-        : isBottom(placement)
-        ? anchorLayout?.height ?? 0
-        : isStart(placement)
-        ? 0
-        : isEnd(placement)
-        ? -(popoverLayout?.height ?? 0) + anchorLayout.height
-        : (anchorLayout.height - (popoverLayout?.height ?? 0)) / 2, // Left or right centered
+      x:
+        anchorLayout.x +
+        (isLeft(placement)
+          ? -(popoverLayout?.width ?? 0)
+          : isRight(placement)
+          ? anchorLayout.width
+          : isStart(placement)
+          ? 0
+          : isEnd(placement)
+          ? -(popoverLayout?.width ?? 0) + anchorLayout.width
+          : (anchorLayout.width - (popoverLayout?.width ?? 0)) / 2), // Top or bottom centered
+      y:
+        anchorLayout.y +
+        (isTop(placement)
+          ? -(popoverLayout?.height ?? 0)
+          : isBottom(placement)
+          ? anchorLayout?.height ?? 0
+          : isStart(placement)
+          ? 0
+          : isEnd(placement)
+          ? -(popoverLayout?.height ?? 0) + anchorLayout.height
+          : (anchorLayout.height - (popoverLayout?.height ?? 0)) / 2), // Left or right centered
     }
 
     if (aboveAnchor) {
@@ -183,20 +175,30 @@ const usePlacementOffset = (
 const useOffsetsCorrectionToBeInWindow = (
   offset: Offset,
   popoverLayout: LayoutRectangle | null,
-  anchorLayout: LayoutRectangle,
   windowWidth: number,
   windowHeight: number,
-): Offset =>
-  useMemo(() => {
+): Offset => {
+  const insets = useSafeArea()
+
+  return useMemo(() => {
     if (popoverLayout === null) {
-      return { x: 0, y: 0 }
+      return offset
     }
 
     return {
-      x: _.clamp(offset.x, -anchorLayout.x, -anchorLayout.x + windowWidth - popoverLayout.width),
-      y: _.clamp(offset.y, -anchorLayout.y, -anchorLayout.y + windowHeight - popoverLayout.height),
+      x: _.clamp(
+        offset.x,
+        insets.left,
+        windowWidth - popoverLayout.width - insets.left - insets.right,
+      ),
+      y: _.clamp(
+        offset.y,
+        insets.top,
+        windowHeight - popoverLayout.height - insets.top - insets.bottom,
+      ),
     }
-  }, [popoverLayout, anchorLayout, offset, windowWidth, windowHeight])
+  }, [popoverLayout, offset, windowWidth, windowHeight, insets])
+}
 
 interface Offset {
   x: number

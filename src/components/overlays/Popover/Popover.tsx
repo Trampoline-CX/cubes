@@ -7,6 +7,7 @@ import { PopoverPlacement } from './popover-placement'
 import { PopoverView } from './PopoverView'
 import { PopoverContext } from './PopoverContext'
 import { PopoverBackdrop } from './PopoverBackdrop'
+import { PopoverPortal } from './PopoverPortalProvider/PopoverPortalProvider'
 
 export interface PopoverWithActions {
   /**
@@ -66,16 +67,20 @@ const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
 /**
  * Popover Implementation Details (for developers usage)
  * ---
+ * The Popover is actually rendered near the AppProvider using `PopoverPortal`.
+ *
  * Popover view tree can be summarized like this:
  * - AppProvider
+ *   - PopoverPortal
+ *     - Popover Backdrop View, which shows the backdrop + provides dismissal of Popover on touch.
+ *     - PopoverView
+ *       - Absolutely positioned container, where height = AppProvider.height and width = AppProvider.width.
+ *         Position origin is equal to position of Anchor View.
+ *         - Actual Popover View displayed to the user. Positioned relatively to its parent.
+ *           - Popover children
  *   - ...Views, that can be nested X times
  *     - Popover
- *       - Popover Backdrop View, which shows the backdrop + provides dismissal of Popover on touch.
- *       - PopoverView
- *         - Absolutely positioned container, where height = AppProvider.height and width = AppProvider.width.
- *           Position origin is equal to position of Anchor View.
- *           - Actual Popover View displayed to the user. Positioned relatively to its parent.
- *             - Popover children
+ *       - Anchor
  */
 
 /**
@@ -99,19 +104,21 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
 
   return (
     <View ref={ref}>
-      <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
-        {anchor}
-        <PopoverBackdrop open={open} invisible={hideBackdrop} />
-        <PopoverView
-          open={open}
-          placement={placement}
-          matchWidth={matchWidth}
-          anchorLayout={anchorLayout ?? LAYOUT_ZERO}
-          aboveAnchor={aboveAnchor}
-        >
-          {content}
-        </PopoverView>
-      </PopoverContext.Provider>
+      {anchor}
+      <PopoverPortal popoverRef={ref}>
+        <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
+          <PopoverBackdrop open={open} invisible={hideBackdrop} />
+          <PopoverView
+            open={open}
+            placement={placement}
+            matchWidth={matchWidth}
+            anchorLayout={anchorLayout ?? LAYOUT_ZERO}
+            aboveAnchor={aboveAnchor}
+          >
+            {content}
+          </PopoverView>
+        </PopoverContext.Provider>
+      </PopoverPortal>
     </View>
   )
 }

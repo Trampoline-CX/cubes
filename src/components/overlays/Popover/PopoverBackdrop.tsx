@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { TouchableWithoutFeedback, Animated } from 'react-native'
+import { TouchableWithoutFeedback, Animated, StyleSheet } from 'react-native'
 import { shameStyles } from '../../../theme/shame-styles'
 import { useStyles, useTheme } from '../../../theme'
 import { PopoverContext } from './PopoverContext'
@@ -9,18 +9,15 @@ export interface PopoverBackdropProps {
   invisible: boolean
 }
 
-const { backdrop } = shameStyles.popover
+const { zIndex, backdrop } = shameStyles.popover
 
 export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ open, invisible }) => {
   const styles = useStyles(() => ({
     backdrop: {
       backgroundColor: backdrop.color,
-      position: 'absolute',
-      top: -9999999,
-      left: -9999999,
-      right: -9999999,
-      bottom: -9999999,
+      ...StyleSheet.absoluteFillObject,
       opacity: 0,
+      zIndex,
     },
   }))
   const { animation } = useTheme()

@@ -43,6 +43,7 @@ export const shameStyles = {
     height: 56,
   },
   popover: {
+    zIndex: 99999,
     backdrop: {
       color: 'rgba(0, 0, 0, 0.3)',
     },
