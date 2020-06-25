@@ -53,28 +53,6 @@ Basic.argTypes = {
   anchor: { control: null },
 }
 
-export const PlacementCorrection: React.FC = () => {
-  const [visible, setVisible] = useState(false)
-
-  return (
-    <AppProvider>
-      <Screen>
-        <Box fill distribution="end">
-          <Popover
-            open={visible}
-            onRequestClose={() => setVisible(false)}
-            anchor={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
-            actions={[
-              { label: 'A pizza', action: action('Option selected: A pizza') },
-              { label: 'A taco', action: action('Option selected: A taco') },
-            ]}
-          />
-        </Box>
-      </Screen>
-    </AppProvider>
-  )
-}
-
 export const MatchWidth: React.FC = () => {
   const [visible, setVisible] = useState(false)
 
@@ -96,4 +74,60 @@ export const MatchWidth: React.FC = () => {
       </Screen>
     </AppProvider>
   )
+}
+
+export const AboveAnchorAndHideBackdrop: React.FC = () => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <AppProvider>
+      <Screen>
+        <Box fill distribution="center" align="center">
+          <Popover
+            aboveAnchor
+            hideBackdrop
+            placement="bottom-end"
+            open={visible}
+            onRequestClose={() => setVisible(false)}
+            anchor={<IconButton icon="more" onClick={() => setVisible(true)} />}
+            actions={[
+              { label: 'A pizza', action: action('Option selected: A pizza') },
+              { label: 'A taco', action: action('Option selected: A taco') },
+            ]}
+          />
+        </Box>
+      </Screen>
+    </AppProvider>
+  )
+}
+
+export const AutomaticPlacementCorrection: StoryFn<PopoverProps> = () => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <AppProvider>
+      <Screen>
+        <Box fill distribution="end">
+          <Popover
+            open={visible}
+            onRequestClose={() => setVisible(false)}
+            anchor={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+            actions={[
+              { label: 'A pizza', action: action('Option selected: A pizza') },
+              { label: 'A taco', action: action('Option selected: A taco') },
+            ]}
+          />
+        </Box>
+      </Screen>
+    </AppProvider>
+  )
+}
+
+AutomaticPlacementCorrection.story = {
+  parameters: {
+    docs: {
+      storyDescription:
+        'The Popover will automatically replace itself so it does not go outside the Window. In this example, the Popover should be displayed below button, but instead goes on top of it.',
+    },
+  },
 }
