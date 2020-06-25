@@ -6,9 +6,9 @@ import { generateSha512 } from '../../../utils/sha512'
 
 export interface GeneratedAvatarSource {
   /**
-   * The image will be generated from this value using RoboHash.
+   * The image will be generated from this value using Identicon.
    *
-   * @see https://robohash.org/
+   * @see https://github.com/stewartlord/identicon.js
    */
   hash: string
 }
