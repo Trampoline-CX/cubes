@@ -134,6 +134,7 @@ const lightTheme: Theme = {
       default: 40,
     },
     divider: 1,
+    bullet: 8,
   },
 
   // SPACING

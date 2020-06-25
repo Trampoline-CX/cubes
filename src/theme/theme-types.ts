@@ -127,6 +127,7 @@ export interface Theme {
       default: number
     }
     divider: number
+    bullet: number
   }
 
   // RADIUS
