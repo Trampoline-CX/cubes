@@ -108,7 +108,7 @@ export const WithEndActionAndHiddenLabel: React.FC = () => {
       value={value}
       onChange={setValue}
       hideLabel
-      endAction={{ icon: 'theme', action: action('EndAction Clicked') }}
+      endAction={{ icon: 'theme', action: action('EndAction Clicked'), color: 'accent' }}
     />
   )
 }
