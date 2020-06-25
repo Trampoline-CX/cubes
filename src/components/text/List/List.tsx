@@ -79,7 +79,8 @@ const _getBullet = (type: ListType, index: number): React.ReactNode => {
     case 'number':
       return <BodyText>{index + 1}.</BodyText>
     default:
-      throw new Error(`Unknown List with type "${type}".`)
+      console.warn(`List type must be either "bullet" or "number". Received ${type}`)
+      return _getBullet('bullet', index) // Fallback to bullet list type.
   }
 }
 
