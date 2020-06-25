@@ -7,21 +7,21 @@ import { shameStyles } from '../../../theme/shame-styles'
 
 export interface RadioButtonProps {
   /**
-   * Label to display next to the Radio Button.
-   */
-  label: string
-  /**
    * True if selected.
    */
   checked: boolean
   /**
-   * Called when selection state changes. Should propagate change to `checked` prop.
+   * Label to display next to the Radio Button.
    */
-  onChange: (checked: boolean) => void
+  label: string
   /**
    * Additional text to aid in use.
    */
   helpText?: string
+  /**
+   * Called when selection state changes. Should propagate change to `checked` prop.
+   */
+  onChange: (checked: boolean) => void
 }
 
 const { size, checkSize } = shameStyles.radioButton
