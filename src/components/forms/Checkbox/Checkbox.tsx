@@ -55,7 +55,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, he
       <View>
         <Box horizontal space="medium" paddingY="medium">
           <View style={[styles.background, checked ? styles.backgroundChecked : null]}>
-            {checked ? <Icon name="clear" color="accent" /> : null}
+            {checked && <Icon name="clear" color="accent" />}
           </View>
           <Box>
             <BodyText>{label}</BodyText>
