@@ -131,6 +131,7 @@ const lightTheme: Theme = {
       xLarge: 64,
     },
     avatar: {
+      small: 32,
       default: 40,
     },
     divider: 1,
