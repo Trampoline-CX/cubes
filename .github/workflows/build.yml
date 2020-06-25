@@ -15,3 +15,7 @@ jobs:
         run: yarn build
       - name: Lint
         run: yarn lint
+      - uses: chromaui/action@v1
+        with:
+          projectToken: t00yilwkcv
+          token: ${{ secrets.GITHUB_TOKEN }}
