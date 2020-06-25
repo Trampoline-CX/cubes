@@ -1,16 +1,17 @@
-import React, { useContext } from 'react'
-import { TouchableWithoutFeedback, View } from 'react-native'
+import React, { useContext, useState, useEffect } from 'react'
+import { TouchableWithoutFeedback, Animated } from 'react-native'
 import { shameStyles } from '../../../theme/shame-styles'
-import { useStyles } from '../../../theme'
+import { useStyles, useTheme } from '../../../theme'
 import { PopoverContext } from './PopoverContext'
 
 export interface PopoverBackdropProps {
-  hide: boolean
+  open: boolean
+  invisible: boolean
 }
 
 const { backdrop } = shameStyles.popover
 
-export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ hide }) => {
+export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ open, invisible }) => {
   const styles = useStyles(() => ({
     backdrop: {
       backgroundColor: backdrop.color,
@@ -19,17 +20,29 @@ export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ hide }) => {
       left: -9999999,
       right: -9999999,
       bottom: -9999999,
-    },
-    backdropHidden: {
       opacity: 0,
     },
   }))
+  const { animation } = useTheme()
+  const [anim] = useState(new Animated.Value(0))
 
   const { requestClose } = useContext(PopoverContext)
 
+  useEffect(() => {
+    Animated.timing(anim, {
+      easing: animation.easing.move,
+      toValue: open ? 1 : 0,
+      duration: animation.duration.shorter,
+      useNativeDriver: true,
+    }).start()
+  }, [open, invisible])
+
   return (
     <TouchableWithoutFeedback onPress={requestClose}>
-      <View style={[styles.backdrop, hide ? styles.backdropHidden : null]} />
+      <Animated.View
+        style={[styles.backdrop, !invisible && { opacity: anim }]}
+        pointerEvents={open ? 'auto' : 'none'}
+      />
     </TouchableWithoutFeedback>
   )
 }

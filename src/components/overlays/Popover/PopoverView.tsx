@@ -1,8 +1,8 @@
 import _ from 'lodash'
-import React, { useCallback, useState, useMemo } from 'react'
-import { LayoutRectangle, ViewProps, View } from 'react-native'
+import React, { useCallback, useState, useMemo, useEffect } from 'react'
+import { LayoutRectangle, ViewProps, View, Animated } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
-import { useStyles } from '../../../theme'
+import { useStyles, useTheme } from '../../../theme'
 import { useAppProviderDimensions } from '../../dev'
 import {
   PopoverPlacement,
@@ -15,6 +15,7 @@ import {
 } from './popover-placement'
 
 export interface PopoverViewProps {
+  open: boolean
   children: React.ReactNode
   placement: PopoverPlacement
   anchorLayout: LayoutRectangle
@@ -26,6 +27,7 @@ export interface PopoverViewProps {
  * Actual Popover View which is displayed.
  */
 export const PopoverView: React.FC<PopoverViewProps> = ({
+  open,
   children,
   placement,
   anchorLayout,
@@ -51,6 +53,8 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
       right: 0,
     },
   }))
+  const [anim] = useState(new Animated.Value(0))
+  const { animation } = useTheme()
   const insets = useSafeArea()
   const { width: windowWidth, height: windowHeight } = useAppProviderDimensions()
 
@@ -72,8 +76,17 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
     windowHeight,
   )
 
+  useEffect(() => {
+    Animated.timing(anim, {
+      easing: animation.easing.move,
+      toValue: open ? 1 : 0,
+      duration: animation.duration.shorter,
+      useNativeDriver: true,
+    }).start()
+  }, [open])
+
   return (
-    <View
+    <Animated.View
       style={[
         styles.container,
         {
@@ -87,6 +100,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
           marginLeft: insets.left,
           marginRight: insets.right,
         },
+        { opacity: anim },
       ]}
       pointerEvents="box-none" // Children views can receive touches but not this View
     >
@@ -106,10 +120,11 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
           matchWidth ? { width: anchorLayout.width } : null,
         ]}
         onLayout={onLayout}
+        pointerEvents={open ? 'auto' : 'none'} // Make sure we can't click items if popover is closed
       >
         {children}
       </View>
-    </View>
+    </Animated.View>
   )
 }
 

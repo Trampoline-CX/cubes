@@ -75,6 +75,7 @@ const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
  *         - Absolutely positioned container, where height = AppProvider.height and width = AppProvider.width.
  *           Position origin is equal to position of Anchor View.
  *           - Actual Popover View displayed to the user. Positioned relatively to its parent.
+ *             - Popover children
  */
 
 /**
@@ -100,19 +101,16 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
     <View ref={ref}>
       <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
         {anchor}
-        {open && (
-          <>
-            <PopoverBackdrop hide={hideBackdrop} />
-            <PopoverView
-              placement={placement}
-              matchWidth={matchWidth}
-              anchorLayout={anchorLayout ?? LAYOUT_ZERO}
-              aboveAnchor={aboveAnchor}
-            >
-              {content}
-            </PopoverView>
-          </>
-        )}
+        <PopoverBackdrop open={open} invisible={hideBackdrop} />
+        <PopoverView
+          open={open}
+          placement={placement}
+          matchWidth={matchWidth}
+          anchorLayout={anchorLayout ?? LAYOUT_ZERO}
+          aboveAnchor={aboveAnchor}
+        >
+          {content}
+        </PopoverView>
       </PopoverContext.Provider>
     </View>
   )
