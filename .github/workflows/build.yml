@@ -1,6 +1,6 @@
 name: Build
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
@@ -19,7 +19,6 @@ jobs:
         run: yarn lint
       - name: Deploy to Chromatic
         uses: chromaui/action@v1
-        if: ${{ github.event_name == 'pull_request' }}
         with:
           projectToken: t00yilwkcv
           token: ${{ secrets.GITHUB_TOKEN }}
