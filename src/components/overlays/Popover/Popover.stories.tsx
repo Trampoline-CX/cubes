@@ -6,6 +6,8 @@ import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { AppProvider, Screen, Box } from '../../structure'
 import { Button, IconButton } from '../../actions'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { DisplayText, TextContainer, BodyText } from '../../text'
+import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { Popover, PopoverProps } from './Popover'
 
 export default {
@@ -51,6 +53,32 @@ Basic.argTypes = {
   open: { control: null },
   children: { control: null },
   anchor: { control: null },
+}
+
+export const UsingChildrenItems: StoryFn<PopoverProps> = () => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <AppProvider>
+      <Screen>
+        <Box fill align="center" distribution="center">
+          <Popover
+            open={visible}
+            onRequestClose={() => setVisible(false)}
+            anchor={<IconButton icon="more" onClick={() => setVisible(true)} />}
+          >
+            <Popover.Item label="Edit" icon="action-edit" onSelect={action('Edit selected')} />
+            <Popover.Item
+              label="Unlink"
+              icon="broken-connection"
+              iconColor="accent"
+              onSelect={action('Unlink selected')}
+            />
+          </Popover>
+        </Box>
+      </Screen>
+    </AppProvider>
+  )
 }
 
 export const MatchWidth: React.FC = () => {
@@ -130,4 +158,30 @@ AutomaticPlacementCorrection.story = {
         'The Popover will automatically replace itself so it does not go outside the Window. In this example, the Popover should be displayed below button, but instead goes on top of it.',
     },
   },
+}
+
+export const CustomContent: StoryFn<PopoverProps> = () => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <AppProvider>
+      <Screen>
+        <Box fill distribution="center">
+          <Popover
+            open={visible}
+            onRequestClose={() => setVisible(false)}
+            anchor={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+          >
+            <Box padding="medium" space="large">
+              <TextContainer>
+                <DisplayText>Custom content</DisplayText>
+                <BodyText>{LOREM_IPSUM}</BodyText>
+              </TextContainer>
+              <Button onClick={action('Button clicked')}>Click me!</Button>
+            </Box>
+          </Popover>
+        </Box>
+      </Screen>
+    </AppProvider>
+  )
 }
