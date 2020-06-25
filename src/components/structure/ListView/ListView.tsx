@@ -7,14 +7,14 @@ interface ListViewWithChildren {
    * List Items to display (supply either this or `dataSource` prop).
    */
   children: React.ReactNode
-  dataSource?: never
+  values?: never
 }
 
-interface ListViewWithDataSource {
+interface ListViewWithValues {
   /**
    * List Items to display (supply either this or `children` prop).
    */
-  dataSource: ItemProps[]
+  values: ItemProps[]
   children?: never
 }
 
@@ -23,7 +23,7 @@ export type ListViewProps = {
    * Divider placed between each item. If none is provided, no separator is shown.
    */
   divider: React.ReactNode
-} & (ListViewWithChildren | ListViewWithDataSource)
+} & (ListViewWithChildren | ListViewWithValues)
 
 /**
  * Display rich list items. Basic Item support is supported via `ListView.Item`
@@ -38,10 +38,10 @@ export type ListViewProps = {
  */
 export const ListView: React.FC<ListViewProps> & { Item: typeof Item } = ({
   divider,
-  dataSource,
+  values,
   children,
 }) => {
-  const { items } = useListItems(dataSource, children, divider)
+  const { items } = useListItems(values, children, divider)
 
   return <Box>{items}</Box>
 }
@@ -50,21 +50,21 @@ export const ListView: React.FC<ListViewProps> & { Item: typeof Item } = ({
  * Return the ListItems to display with the number of them.
  */
 const useListItems = (
-  dataSource: ItemProps[] | undefined,
+  values: ItemProps[] | undefined,
   children: React.ReactNode | undefined,
   divider: ListViewProps['divider'],
 ): { count: number; items: React.ReactNode } =>
   useMemo(() => {
-    if (dataSource && children) {
+    if (values && children) {
       console.warn(
-        'Both dataSource and children are provided on ListView. Only dataSource will be used.',
+        'Both values and children are provided on ListView. Only dataSource will be used.',
       )
     }
 
     let dataItems = children
 
-    if (dataSource) {
-      dataItems = dataSource.map((item, i) => <Item key={i} {...item} />)
+    if (values) {
+      dataItems = values.map((item, i) => <Item key={i} {...item} />)
     }
 
     const count = React.Children.count(dataItems)
@@ -77,7 +77,7 @@ const useListItems = (
         </>
       )),
     }
-  }, [dataSource, children, divider])
+  }, [values, children, divider])
 
 ListView.Item = Item
 export type ListViewItemProps = ItemProps

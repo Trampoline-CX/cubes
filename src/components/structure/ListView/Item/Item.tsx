@@ -54,11 +54,11 @@ export const Item: React.FC<ItemProps> = ({ title, description, actions, onClick
           </Box>
         </Box>
 
-        {actionItems ? (
+        {actionItems && (
           <Box horizontal reverse>
             {actionItems}
           </Box>
-        ) : null}
+        )}
       </Box>
     </Touchable>
   )

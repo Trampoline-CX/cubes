@@ -25,10 +25,10 @@ export const Basic: React.FC = () => (
   </ListView>
 )
 
-export const UsingDataSource: React.FC = () => (
+export const UsingValues: React.FC = () => (
   <ListView
     divider={<Divider />}
-    dataSource={[
+    values={[
       { title: 'Cats' },
       { title: 'Cheetahs' },
       { title: 'Dogs' },
@@ -46,52 +46,12 @@ export const WithActions: React.FC = () => {
   return (
     <ListView
       divider={<Divider />}
-      dataSource={[
+      values={[
         { title: 'Cats', actions, onClick: action('Cats clicked') },
         { title: 'Cheetahs', actions, onClick: action('Cheetahs clicked') },
         { title: 'Dogs', actions, onClick: action('Dogs clicked') },
         { title: 'Hummingbirds', actions, onClick: action('Hummingbirds clicked') },
       ]}
     />
-  )
-}
-
-export const AdvancedExample: React.FC = () => {
-  const actions: ListViewItemProps['actions'] = [
-    { icon: 'action-edit', action: action('Item Edit Clicked') },
-    { icon: 'feedback', action: action('Item Favorite Clicked'), color: 'accent' },
-  ]
-
-  return (
-    <ScrollView>
-      <Box padding="medium">
-        <Heading>Animals</Heading>
-      </Box>
-      <Card fullWidth>
-        <ListView
-          divider={<Divider />}
-          dataSource={[
-            { title: 'Cats', actions, onClick: action('Cats clicked') },
-            { title: 'Cheetahs', actions, onClick: action('Cheetahs clicked') },
-            { title: 'Dogs', actions, onClick: action('Dogs clicked') },
-            { title: 'Hummingbirds', actions, onClick: action('Hummingbirds clicked') },
-          ]}
-        />
-      </Card>
-      <Box padding="medium">
-        <Heading>People</Heading>
-      </Box>
-      <Card fullWidth>
-        <ListView
-          divider={<Divider />}
-          dataSource={[
-            { title: 'Francis Morin' },
-            { title: 'Jonas Chase' },
-            { title: 'Caldwell Christensen' },
-            { title: 'Griffith Harrell' },
-          ]}
-        />
-      </Card>
-    </ScrollView>
   )
 }
