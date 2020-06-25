@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React, { useMemo, useState, useCallback, useRef } from 'react'
 import { View, TouchableWithoutFeedback, ViewProps, LayoutRectangle } from 'react-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 import { TextAction } from '../../actions'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
@@ -180,6 +181,7 @@ const PopoverView: React.FC<PopoverViewProps> = ({
       right: 0,
     },
   }))
+  const insets = useSafeArea()
   const { width: windowWidth, height: windowHeight } = useAppProviderDimensions()
 
   const [layout, setLayout] = useState<LayoutRectangle | null>(null)
@@ -202,7 +204,19 @@ const PopoverView: React.FC<PopoverViewProps> = ({
 
   return (
     <View
-      style={[styles.container, { width: windowWidth, height: windowHeight }]}
+      style={[
+        styles.container,
+        {
+          width: windowWidth - insets.left - insets.right,
+          height: windowHeight - insets.top - insets.bottom,
+        },
+        {
+          marginTop: insets.top,
+          marginBottom: insets.bottom,
+          marginLeft: insets.left,
+          marginRight: insets.right,
+        },
+      ]}
       pointerEvents="none"
     >
       <View
