@@ -1,4 +1,4 @@
-import { IconName } from '../images-and-icons'
+import { IconName, IconProps } from '../images-and-icons'
 
 /**
  * Action with a Label.
@@ -20,7 +20,13 @@ export interface IconAction {
    */
   icon: IconName
   /**
+   * Color of the icon.
+   */
+  color?: IconProps['color']
+  /**
    * Action to execute on click.
    */
   action: () => void
 }
+
+export type TextWithOptionalIconAction = TextAction & Partial<IconAction>

@@ -37,8 +37,13 @@ export const Basic: StoryFn<PopoverProps> = props => {
 Basic.args = {
   placement: 'left-end',
   actions: [
-    { label: 'A pizza', action: action('Option selected: A pizza') },
-    { label: 'A taco', action: action('Option selected: A taco') },
+    { label: 'Edit', action: action('Option selected: Edit'), icon: 'action-edit' },
+    {
+      label: 'Unlink',
+      action: action('Option selected: Unlink'),
+      icon: 'broken-connection',
+      color: 'accent',
+    },
   ],
 }
 
