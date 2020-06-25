@@ -1,16 +1,13 @@
 import _ from 'lodash'
 import React, { useMemo, useState, useCallback, useRef } from 'react'
-import {
-  View,
-  TouchableWithoutFeedback,
-  ViewProps,
-  LayoutRectangle,
-  Dimensions,
-} from 'react-native'
+import { View, TouchableWithoutFeedback, ViewProps, LayoutRectangle } from 'react-native'
 import { TextAction } from '../../actions'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
-import { useWindowDimensions } from '../../../utils/hooks/use-window-dimensions'
+import {
+  useAppProviderDimensions,
+  useAppProviderPosition,
+} from '../../dev/SizeProvider/AppProviderSizeProvider'
 import { Item, ItemProps } from './Item/Item'
 import {
   PopoverPlacement,
@@ -86,7 +83,7 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   hideBackdrop = false,
   matchWidth = false,
 }) => {
-  const styles = useStyles(theme => ({
+  const styles = useStyles(() => ({
     backdrop: {
       backgroundColor: backdrop.color,
       position: 'absolute',
@@ -102,16 +99,11 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
 
   const content = useContent(actions, children)
 
-  const [layout, setLayout] = useState<LayoutRectangle | null>(null)
   const ref = useRef<View>(null)
-  const onLayout = useCallback(() => {
-    ref.current?.measureInWindow((x, y, width, height) => {
-      setLayout({ x, y, width, height })
-    })
-  }, [ref.current])
+  const layout = useAppProviderPosition(ref.current)
 
   return (
-    <View ref={ref} onLayout={onLayout}>
+    <View ref={ref}>
       {anchor}
       {open ? (
         <>
@@ -188,7 +180,7 @@ const PopoverView: React.FC<PopoverViewProps> = ({
       right: 0,
     },
   }))
-  const { width: windowWidth, height: windowHeight } = useWindowDimensions()
+  const { width: windowWidth, height: windowHeight } = useAppProviderDimensions()
 
   const [layout, setLayout] = useState<LayoutRectangle | null>(null)
   const onLayout = useCallback<Required<ViewProps>['onLayout']>(
@@ -197,29 +189,10 @@ const PopoverView: React.FC<PopoverViewProps> = ({
   )
 
   // Calculate the offset of the Popover relative to parent according to placement
-  const placementOffset: Offset = {
-    x: isLeft(placement)
-      ? -(layout?.width ?? 0)
-      : isRight(placement)
-      ? anchorLayout.width
-      : isStart(placement)
-      ? 0
-      : isEnd(placement)
-      ? -(layout?.width ?? 0) + anchorLayout.width
-      : (anchorLayout.width - (layout?.width ?? 0)) / 2, // Top or bottom centered
-    y: isTop(placement)
-      ? -(layout?.height ?? 0)
-      : isBottom(placement)
-      ? anchorLayout?.height ?? 0
-      : isStart(placement)
-      ? 0
-      : isEnd(placement)
-      ? -(layout?.height ?? 0) + anchorLayout.height
-      : (anchorLayout.height - (layout?.height ?? 0)) / 2, // Left or right centered
-  }
+  const placementOffset = usePlacementOffset(placement, layout, anchorLayout)
 
   // Corrects the placement to be inside window bounds
-  const correctedPlacementOffset = _correctOffsetsToBeInWindow(
+  const correctedPlacementOffset = useOffsetsCorrectionToBeInWindow(
     placementOffset,
     layout,
     anchorLayout,
@@ -253,22 +226,52 @@ const PopoverView: React.FC<PopoverViewProps> = ({
   )
 }
 
-const _correctOffsetsToBeInWindow = (
+const usePlacementOffset = (
+  placement: PopoverPlacement,
+  popoverLayout: LayoutRectangle | null,
+  anchorLayout: LayoutRectangle,
+): Offset =>
+  useMemo(
+    () => ({
+      x: isLeft(placement)
+        ? -(popoverLayout?.width ?? 0)
+        : isRight(placement)
+        ? anchorLayout.width
+        : isStart(placement)
+        ? 0
+        : isEnd(placement)
+        ? -(popoverLayout?.width ?? 0) + anchorLayout.width
+        : (anchorLayout.width - (popoverLayout?.width ?? 0)) / 2, // Top or bottom centered
+      y: isTop(placement)
+        ? -(popoverLayout?.height ?? 0)
+        : isBottom(placement)
+        ? anchorLayout?.height ?? 0
+        : isStart(placement)
+        ? 0
+        : isEnd(placement)
+        ? -(popoverLayout?.height ?? 0) + anchorLayout.height
+        : (anchorLayout.height - (popoverLayout?.height ?? 0)) / 2, // Left or right centered
+    }),
+    [placement, popoverLayout, anchorLayout],
+  )
+
+const useOffsetsCorrectionToBeInWindow = (
   offset: Offset,
   popoverLayout: LayoutRectangle | null,
   anchorLayout: LayoutRectangle,
   windowWidth: number,
   windowHeight: number,
-): Offset => {
-  if (popoverLayout === null) {
-    return { x: 0, y: 0 }
-  }
+): Offset =>
+  useMemo(() => {
+    if (popoverLayout === null) {
+      return { x: 0, y: 0 }
+    }
 
-  return {
-    x: _.clamp(offset.x, -anchorLayout.x, -anchorLayout.x + windowWidth - popoverLayout.width),
-    y: _.clamp(offset.y, -anchorLayout.y, -anchorLayout.y + windowHeight - popoverLayout.height),
-  }
-}
+    return {
+      x: _.clamp(offset.x, -anchorLayout.x, -anchorLayout.x + windowWidth - popoverLayout.width),
+      y: _.clamp(offset.y, -anchorLayout.y, -anchorLayout.y + windowHeight - popoverLayout.height),
+    }
+  }, [popoverLayout, anchorLayout, offset, windowWidth, windowHeight])
 
 interface Offset {
   x: number

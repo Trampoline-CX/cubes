@@ -3,6 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
+import { AppProviderSizeProvider } from '../../dev/SizeProvider/AppProviderSizeProvider'
 import { AppProviderContext } from './AppProviderContext'
 
 export interface WithNavigationSchema {
@@ -42,8 +43,10 @@ export const AppProvider: React.FC<AppProviderProps> = ({
   children,
 }) => (
   <SafeAreaProvider>
-    <AppProviderContext.Provider value={{ theme }}>
-      <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
-    </AppProviderContext.Provider>
+    <AppProviderSizeProvider>
+      <AppProviderContext.Provider value={{ theme }}>
+        <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+      </AppProviderContext.Provider>
+    </AppProviderSizeProvider>
   </SafeAreaProvider>
 )
