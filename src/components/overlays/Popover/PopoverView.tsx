@@ -17,15 +17,17 @@ import {
 export interface PopoverViewProps {
   children: React.ReactNode
   placement: PopoverPlacement
-  matchWidth: boolean
   anchorLayout: LayoutRectangle
+  matchWidth: boolean
+  aboveAnchor: boolean
 }
 
 export const PopoverView: React.FC<PopoverViewProps> = ({
   children,
   placement,
-  matchWidth,
   anchorLayout,
+  matchWidth,
+  aboveAnchor,
 }) => {
   const styles = useStyles(theme => ({
     container: {
@@ -56,7 +58,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
   )
 
   // Calculate the offset of the Popover relative to parent according to placement
-  const placementOffset = usePlacementOffset(placement, layout, anchorLayout)
+  const placementOffset = usePlacementOffset(placement, aboveAnchor, layout, anchorLayout)
 
   // Corrects the placement to be inside window bounds
   const correctedPlacementOffset = useOffsetsCorrectionToBeInWindow(
@@ -108,11 +110,12 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
 
 const usePlacementOffset = (
   placement: PopoverPlacement,
+  aboveAnchor: boolean,
   popoverLayout: LayoutRectangle | null,
   anchorLayout: LayoutRectangle,
 ): Offset =>
-  useMemo(
-    () => ({
+  useMemo(() => {
+    const offset = {
       x: isLeft(placement)
         ? -(popoverLayout?.width ?? 0)
         : isRight(placement)
@@ -131,9 +134,23 @@ const usePlacementOffset = (
         : isEnd(placement)
         ? -(popoverLayout?.height ?? 0) + anchorLayout.height
         : (anchorLayout.height - (popoverLayout?.height ?? 0)) / 2, // Left or right centered
-    }),
-    [placement, popoverLayout, anchorLayout],
-  )
+    }
+
+    if (aboveAnchor) {
+      // Offset to be above anchor
+      if (isTop(placement)) {
+        offset.y += anchorLayout.height
+      } else if (isBottom(placement)) {
+        offset.y -= anchorLayout.height
+      } else if (isLeft(placement)) {
+        offset.x += anchorLayout.width
+      } else {
+        offset.x -= anchorLayout.width
+      }
+    }
+
+    return offset
+  }, [placement, popoverLayout, anchorLayout])
 
 const useOffsetsCorrectionToBeInWindow = (
   offset: Offset,

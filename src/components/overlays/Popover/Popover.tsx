@@ -44,10 +44,6 @@ export type PopoverProps = {
    */
   placement?: PopoverPlacement
   /**
-   * Called when the Popover needs to be discarded. This should update `open` property accordingly.
-   */
-  onRequestClose: () => void
-  /**
    * If true, backdrop will be hidden.
    */
   hideBackdrop?: boolean
@@ -57,6 +53,14 @@ export type PopoverProps = {
    * **IMPORTANT:** Must only be used with `top` or `bottom` placements.
    */
   matchWidth?: boolean
+  /**
+   * If true, the popover will appear above the anchor view instead of next to it.
+   */
+  aboveAnchor?: boolean
+  /**
+   * Called when the Popover needs to be discarded. This should update `open` property accordingly.
+   */
+  onRequestClose: () => void
 } & (PopoverWithActions | PopoverWithChildren)
 
 const { backdrop } = shameStyles.popover
@@ -75,6 +79,7 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   onRequestClose,
   hideBackdrop = false,
   matchWidth = false,
+  aboveAnchor = false,
 }) => {
   const styles = useStyles(() => ({
     backdrop: {
@@ -108,6 +113,7 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
               placement={placement}
               matchWidth={matchWidth}
               anchorLayout={layout ?? LAYOUT_ZERO}
+              aboveAnchor={aboveAnchor}
             >
               {content}
             </PopoverView>
