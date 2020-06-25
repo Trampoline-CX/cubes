@@ -1,0 +1,16 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out the Repository
+      - uses: actions/checkout@v2
+      - name: Install node_modules
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
+      - name: Lint
+        run: yarn lint
