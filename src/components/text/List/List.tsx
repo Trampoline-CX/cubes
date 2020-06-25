@@ -40,7 +40,18 @@ export const List: React.FC<ListProps> & { Item: typeof Item } = ({
 }) => {
   const items = useItems(values, children, type)
 
-  return <Box space="small">{items}</Box>
+  const wrappedItems = useMemo(
+    () =>
+      React.Children.map(items, (item, index) => (
+        <Box horizontal space="small">
+          {_getBullet(type, index)}
+          {item}
+        </Box>
+      )),
+    [items],
+  )
+
+  return <Box space="small">{wrappedItems}</Box>
 }
 
 /**
@@ -64,12 +75,7 @@ const useItems = (
       items = values.map((item, i) => <Item key={i}>{item}</Item>)
     }
 
-    return React.Children.map(items, (item, index) => (
-      <Box horizontal space="small">
-        {_getBullet(type, index)}
-        {item}
-      </Box>
-    ))
+    return items
   }, [values, children, type])
 
 const _getBullet = (type: ListType, index: number): React.ReactNode => {
