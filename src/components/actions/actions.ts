@@ -1,4 +1,4 @@
-import { IconName } from '../icons'
+import { IconName, IconProps } from '../images-and-icons'
 
 /**
  * Action with a Label.
@@ -19,6 +19,10 @@ export interface IconAction {
    * Icon to display.
    */
   icon: IconName
+  /**
+   * Color of the icon.
+   */
+  color?: IconProps['color']
   /**
    * Action to execute on click.
    */

@@ -3,9 +3,9 @@ import { fileAbsolute } from 'paths.macro'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure'
 import { Button } from '../../actions'
-import { BodyText, DisplayText, TextContainer, Caption } from '../../text'
+import { BodyText, DisplayText, TextContainer } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
-import { Icon } from '../../icons'
+import { Icon } from '../../images-and-icons'
 import { Dialog } from './Dialog'
 
 export default {

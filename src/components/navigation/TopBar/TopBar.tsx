@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
-import { IconName } from '../../icons/Icon/Icon'
+import { IconName } from '../../images-and-icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
@@ -67,7 +67,9 @@ export const TopBar: React.FC<TopBarProps> = ({
   const onIconStartClick = onIconStartClickRaw || back
   const actionComponents = useMemo(
     () =>
-      actions?.map(({ icon, action }, index) => <Icon key={index} name={icon} onClick={action} />),
+      actions?.map(({ icon, action, color }, index) => (
+        <Icon key={index} name={icon} onClick={action} color={color} />
+      )),
     [actions],
   )
 

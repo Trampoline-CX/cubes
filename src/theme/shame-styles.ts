@@ -47,4 +47,14 @@ export const shameStyles = {
     defaultWidth: '70%',
     minWidth: 280,
   },
+  radioButton: {
+    size: 16,
+    checkSize: 8,
+  },
+  checkbox: {
+    size: 16,
+  },
+  progressBar: {
+    height: 24,
+  },
 } as const

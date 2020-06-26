@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Touchable, TouchableProps } from '../../base/Touchable/Touchable'
-import { IconProps, Icon } from '../../icons/Icon/Icon'
+import { IconProps, Icon } from '../../images-and-icons/Icon/Icon'
 import { useStyles } from '../../../theme'
 
 export interface IconButtonProps {
