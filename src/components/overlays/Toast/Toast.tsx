@@ -23,7 +23,7 @@ export interface ToastProps {
 const { duration: durationValues, maxWidth } = shameStyles.toast
 
 /**
- * Displays a Toast to confirm a User's action.
+ * Confirm a User's action by displaying a small text at the bottom of the screen.
  */
 export const Toast: React.FC<ToastProps> = ({ message, duration = 'default', onDismiss }) => {
   const styles = useStyles(theme => ({
