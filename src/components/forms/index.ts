@@ -1,3 +1,4 @@
+export * from './Checkbox/Checkbox'
 export * from './FormLayout/FormLayout'
 export * from './InlineError/InlineError'
 export * from './TextField/TextField'
