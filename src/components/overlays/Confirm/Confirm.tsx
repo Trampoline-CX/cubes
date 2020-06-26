@@ -30,7 +30,7 @@ export interface ConfirmProps {
 }
 
 /**
- * Alert the user of something important. Should be used sparingly, as this interrupts the
+ * Ask the user a yes/no question. Should be used sparingly, as this interrupts the
  * user flow.
  */
 export const Confirm: React.FC<ConfirmProps> = ({

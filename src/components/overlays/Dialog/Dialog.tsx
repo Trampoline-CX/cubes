@@ -37,7 +37,8 @@ export interface DialogProps extends FooterProps {
 const { backdropColor, defaultWidth, minWidth } = shameStyles.dialog
 
 /**
- * Dialog to show interactive content on top of an existing screen.
+ * Show interactive content on top of an existing screen.
+ * It should be used thoughtfully and sparingly, as it stops the user in its current flow.
  */
 export const Dialog: React.FC<DialogProps> & { Section: typeof Section } = ({
   title,
