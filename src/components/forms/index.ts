@@ -1,4 +1,5 @@
 export * from './Checkbox/Checkbox'
+export * from './ChoiceList/ChoiceList'
 export * from './FormLayout/FormLayout'
 export * from './InlineError/InlineError'
 export * from './RadioButton/RadioButton'

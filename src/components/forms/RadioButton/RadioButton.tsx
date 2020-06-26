@@ -13,11 +13,11 @@ export interface RadioButtonProps {
   /**
    * Label to display next to the Radio Button.
    */
-  label: string
+  label: React.ReactNode
   /**
    * Additional text to aid in use.
    */
-  helpText?: string
+  helpText?: React.ReactNode
   /**
    * Called when selection state changes. Should propagate change to `checked` prop.
    */
@@ -67,7 +67,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({ label, checked, onChan
   return (
     <TouchableWithoutFeedback onPress={onClick}>
       <View>
-        <Box horizontal space="medium" paddingY="medium">
+        <Box horizontal space="medium">
           <View style={[styles.background, checked ? styles.backgroundChecked : null]}>
             <View style={[styles.checkmark, checked ? styles.checkmarkChecked : null]} />
           </View>

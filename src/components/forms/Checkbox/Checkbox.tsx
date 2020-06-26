@@ -14,11 +14,11 @@ export interface CheckboxProps {
   /**
    * Label to display next to the Checkbox.
    */
-  label: string
+  label: React.ReactNode
   /**
    * Additional text to aid in use.
    */
-  helpText?: string
+  helpText?: React.ReactNode
   /**
    * Called when selection state changes. Should propagate change to `checked` prop.
    */
@@ -53,7 +53,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, he
   return (
     <TouchableWithoutFeedback onPress={onClick}>
       <View>
-        <Box horizontal space="medium" paddingY="medium">
+        <Box horizontal space="medium">
           <View style={[styles.background, checked ? styles.backgroundChecked : null]}>
             {checked && <Icon name="clear" color="accent" />}
           </View>
