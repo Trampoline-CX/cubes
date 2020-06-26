@@ -10,6 +10,7 @@ export interface WithNavigationSchema {
    * Navigation Schema used to configure Navigation tree.
    */
   navigationSchema: NavigationSchema
+  children?: never
 }
 
 export interface WithoutNavigationSchema {
@@ -17,6 +18,7 @@ export interface WithoutNavigationSchema {
    * Navigation Schema used to configure Navigation tree.
    */
   children: React.ReactNode
+  navigationSchema?: never
 }
 
 export type AppProviderProps = {
@@ -24,10 +26,6 @@ export type AppProviderProps = {
    * Theme to use (will use light theme if none is provided).
    */
   theme?: Theme
-  /**
-   * Navigation Schema used
-   */
-  navigationSchema?: NavigationSchema
 } & (WithNavigationSchema | WithoutNavigationSchema)
 
 /**

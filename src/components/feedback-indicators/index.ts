@@ -1,3 +1,4 @@
+export * from './ProgressBar/ProgressBar'
 export * from './SkeletonAvatar/SkeletonAvatar'
 export * from './SkeletonIcon/SkeletonIcon'
 export * from './SkeletonBodyText/SkeletonBodyText'

@@ -67,7 +67,7 @@ export const WithIconsRight: React.FC = () => (
     <TopBar
       title="Title"
       actions={[
-        { icon: 'action-edit', action: action('Edit clicked') },
+        { icon: 'action-edit', action: action('Edit clicked'), color: 'accent' },
         { icon: 'note', action: action('Note clicked') },
         { icon: 'search', action: action('Search clicked') },
       ]}

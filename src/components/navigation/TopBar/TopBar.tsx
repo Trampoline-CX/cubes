@@ -67,7 +67,9 @@ export const TopBar: React.FC<TopBarProps> = ({
   const onIconStartClick = onIconStartClickRaw || back
   const actionComponents = useMemo(
     () =>
-      actions?.map(({ icon, action }, index) => <Icon key={index} name={icon} onClick={action} />),
+      actions?.map(({ icon, action, color }, index) => (
+        <Icon key={index} name={icon} onClick={action} color={color} />
+      )),
     [actions],
   )
 
