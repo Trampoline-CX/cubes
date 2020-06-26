@@ -20,6 +20,10 @@ export interface CheckboxProps {
    */
   helpText?: React.ReactNode
   /**
+   * Disables the input.
+   */
+  disabled?: boolean
+  /**
    * Called when selection state changes. Should propagate change to `checked` prop.
    */
   onChange: (checked: boolean) => void
@@ -30,7 +34,13 @@ const { size } = shameStyles.checkbox
 /**
  * Use when the user needs to choose a single item in a list.
  */
-export const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, helpText }) => {
+export const Checkbox: React.FC<CheckboxProps> = ({
+  label,
+  checked,
+  helpText,
+  disabled = false,
+  onChange,
+}) => {
   const styles = useStyles(theme => ({
     background: {
       backgroundColor: theme.colors.fill.background.lighter,
@@ -46,13 +56,16 @@ export const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, he
     backgroundChecked: {
       borderColor: theme.colors.fill.accent.default,
     },
+    disabled: {
+      opacity: theme.opacity.disabled,
+    },
   }))
 
   const onClick = useCallback(() => onChange(!checked), [checked, onChange])
 
   return (
-    <TouchableWithoutFeedback onPress={onClick}>
-      <View>
+    <TouchableWithoutFeedback onPress={onClick} disabled={disabled}>
+      <View style={disabled ? styles.disabled : null}>
         <Box horizontal space="medium">
           <View style={[styles.background, checked ? styles.backgroundChecked : null]}>
             {checked && <Icon name="clear" color="accent" />}

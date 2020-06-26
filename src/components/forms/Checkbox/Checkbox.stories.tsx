@@ -26,3 +26,9 @@ export const WithoutHelpText: React.FC = () => {
 
   return <Checkbox label="A pizza" checked={checked} onChange={setChecked} />
 }
+
+export const Disabled: React.FC = () => {
+  const [checked, setChecked] = useState(false)
+
+  return <Checkbox label="A pizza" checked={checked} onChange={setChecked} disabled />
+}

@@ -19,6 +19,10 @@ export interface RadioButtonProps {
    */
   helpText?: React.ReactNode
   /**
+   * Disables the input.
+   */
+  disabled?: boolean
+  /**
    * Called when selection state changes. Should propagate change to `checked` prop.
    */
   onChange: (checked: boolean) => void
@@ -29,7 +33,13 @@ const { size, checkSize } = shameStyles.radioButton
 /**
  * Use when the user needs to choose a single item in a list.
  */
-export const RadioButton: React.FC<RadioButtonProps> = ({ label, checked, onChange, helpText }) => {
+export const RadioButton: React.FC<RadioButtonProps> = ({
+  label,
+  checked,
+  helpText,
+  disabled = false,
+  onChange,
+}) => {
   const styles = useStyles(theme => ({
     background: {
       backgroundColor: theme.colors.fill.background.lighter,
@@ -44,6 +54,9 @@ export const RadioButton: React.FC<RadioButtonProps> = ({ label, checked, onChan
     },
     backgroundChecked: {
       borderColor: theme.colors.fill.accent.default,
+    },
+    disabled: {
+      opacity: theme.opacity.disabled,
     },
     checkmark: {
       height: checkSize,
@@ -65,8 +78,8 @@ export const RadioButton: React.FC<RadioButtonProps> = ({ label, checked, onChan
   }, [checked, onChange])
 
   return (
-    <TouchableWithoutFeedback onPress={onClick}>
-      <View>
+    <TouchableWithoutFeedback onPress={onClick} disabled={disabled}>
+      <View style={disabled ? styles.disabled : null}>
         <Box horizontal space="medium">
           <View style={[styles.background, checked ? styles.backgroundChecked : null]}>
             <View style={[styles.checkmark, checked ? styles.checkmarkChecked : null]} />

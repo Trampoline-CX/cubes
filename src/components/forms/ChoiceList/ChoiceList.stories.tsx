@@ -11,7 +11,7 @@ export default {
 }
 
 export const Basic: StoryFn<ChoiceListProps> = props => {
-  const [selected, setSelected] = useState<string[]>([])
+  const [selected, setSelected] = useState<string[]>(props.selected ?? [])
 
   useEffect(() => {
     action('Selection changed')(selected)
@@ -44,5 +44,5 @@ Basic.args = {
 
 Basic.argTypes = {
   title: { control: 'text' },
-  selected: { control: null },
+  selected: { control: 'array' },
 }
