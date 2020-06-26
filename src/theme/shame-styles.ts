@@ -42,6 +42,13 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
+  radioButton: {
+    size: 16,
+    checkSize: 8,
+  },
+  checkbox: {
+    size: 16,
+  },
   progressBar: {
     height: 24,
   },

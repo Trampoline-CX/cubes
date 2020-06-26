@@ -1,12 +1,8 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
-import { ScrollView } from 'react-native'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Divider } from '../Divider/Divider'
-import { Box } from '../Box/Box'
-import { Heading } from '../../text'
-import { Card } from '../Card/Card'
 import { ListView, ListViewItemProps } from './ListView'
 
 export default {
