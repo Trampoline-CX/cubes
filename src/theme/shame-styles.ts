@@ -48,4 +48,14 @@ export const shameStyles = {
       color: 'rgba(0, 0, 0, 0.3)',
     },
   },
+  radioButton: {
+    size: 16,
+    checkSize: 8,
+  },
+  checkbox: {
+    size: 16,
+  },
+  progressBar: {
+    height: 24,
+  },
 }
