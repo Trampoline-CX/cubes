@@ -46,3 +46,70 @@ Basic.argTypes = {
   title: { control: 'text' },
   selected: { control: 'array' },
 }
+
+export const AllowMultiple: React.FC = () => {
+  const [selected, setSelected] = useState<string[]>([])
+
+  useEffect(() => {
+    action('Selection changed')(selected)
+  }, [selected])
+
+  return (
+    <ChoiceList
+      title="My to-do list"
+      choices={[
+        { label: 'Camping in the wilderness', value: 'camping' },
+        { label: 'Bungee jumping', value: 'bungee' },
+        { label: 'Drink a coca', value: 'coca' },
+      ]}
+      selected={selected}
+      onChange={setSelected}
+      allowMultiple
+    />
+  )
+}
+
+export const WithError: React.FC = () => {
+  const [selected, setSelected] = useState<string[]>([])
+
+  useEffect(() => {
+    action('Selection changed')(selected)
+  }, [selected])
+
+  return (
+    <ChoiceList
+      title="My to-do list"
+      choices={[
+        { label: 'Camping in the wilderness', value: 'camping' },
+        { label: 'Bungee jumping', value: 'bungee' },
+        { label: 'Drink a coca', value: 'coca' },
+      ]}
+      selected={selected}
+      onChange={setSelected}
+      allowMultiple
+      error="You should have at least 5 items on your list."
+    />
+  )
+}
+
+export const WithDisabledItems: React.FC = () => {
+  const [selected, setSelected] = useState<string[]>([])
+
+  useEffect(() => {
+    action('Selection changed')(selected)
+  }, [selected])
+
+  return (
+    <ChoiceList
+      title="My to-do list"
+      choices={[
+        { label: 'Camping in the wilderness', value: 'camping' },
+        { label: 'Bungee jumping', value: 'bungee' },
+        { label: 'Drink a coca', value: 'coca', disabled: true },
+      ]}
+      selected={selected}
+      onChange={setSelected}
+      allowMultiple
+    />
+  )
+}
