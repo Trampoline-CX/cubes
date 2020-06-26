@@ -12,7 +12,10 @@ export interface InlineErrorProps {
 }
 
 /**
- * Component used to display an error message.
+ * Brief, in-context messages telling the user that something went wrong
+ * with a single or group of inputs in a form.
+ *
+ * Use to let users know why a form input is invalid and how to fix it.
  *
  * > Used in `TextField` component to display error message.
  */

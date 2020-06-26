@@ -29,7 +29,7 @@ export type AppProviderProps = {
 } & (WithNavigationSchema | WithoutNavigationSchema)
 
 /**
- * Component that should be defined at the root of the App and controls many elements, like
+ * Required component that should be defined at the root of the App and controls many elements, like
  * theming, navigation and so on.
  *
  * > **Note:** You don't need to pass any properties to this component. They are present for customization purpose only.

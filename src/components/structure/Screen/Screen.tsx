@@ -20,7 +20,7 @@ export interface ScreenProps {
 }
 
 /**
- * Basic component representing a Screen. Sets the Theme Background color and fill its parent component.
+ * Build the outer wrapper of a screen, with themed background and insets support for mobile devices.
  */
 export const Screen: React.FC<ScreenProps> & { Content: typeof Content } = ({
   children,

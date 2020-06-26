@@ -45,7 +45,7 @@ export interface CardProps {
 }
 
 /**
- * Component displaying information in a Card.
+ * Group similar concepts and tasks together to simplify content representation for the user.
  */
 export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   children,

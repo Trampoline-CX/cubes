@@ -14,7 +14,7 @@ export interface TextStyleProps {
 }
 
 /**
- * Style a Text. Should be wrapped in another Text component like `DisplayText`, `Heading`, `BodyText` or `Caption`.
+ * Enhances text with additional visual meaning.
  */
 export const TextStyle: React.FC<TextStyleProps> = ({ children, variation }) => {
   const styles = useStyles(theme => ({

@@ -15,7 +15,7 @@ export interface SwitchProps {
 }
 
 /**
- * Switch component to toggle yes/no, enabled/disabled options.
+ * Used to toggle yes/no enabled/disabled options.
  *
  * >**Note:** The look of this component is very different depending if you are on Web, Android or iOS.
  */

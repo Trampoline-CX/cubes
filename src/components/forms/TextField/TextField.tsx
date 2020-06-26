@@ -113,7 +113,7 @@ export interface TextFieldProps extends TestProps {
 }
 
 /**
- * Let the user enter/edit text content.
+ * Input field that users can type into.
  */
 export const TextField = React.forwardRef<TextInput, TextFieldProps>(
   (

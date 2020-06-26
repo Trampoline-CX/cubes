@@ -31,7 +31,7 @@ export type ListProps = {
 } & (ListWithValuesProps | ListWithChildrenProps)
 
 /**
- * Component displaying texts in a List.
+ * Display a set of related text-only content. Each list item begins with a bullet or a number.
  */
 export const List: React.FC<ListProps> & { Item: typeof Item } = ({
   type = 'bullet',
