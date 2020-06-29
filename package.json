@@ -1,6 +1,6 @@
 {
-  "name": "@hansgx/cubes",
-  "version": "0.0.2-alpha.3",
+  "name": "@trampoline/cubes",
+  "version": "0.0.2-alpha.6",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
@@ -11,7 +11,8 @@
     "test": "jest",
     "start": "start-storybook -c storybook/web -p 9009 -s public",
     "prestorybook": "yarn build",
-    "chromatic": "chromatic --project-token=t00yilwkcv"
+    "chromatic": "chromatic --project-token=t00yilwkcv",
+    "prepublish": "yarn build && yarn lint"
   },
   "files": [
     "dist/*"
@@ -85,8 +86,9 @@
     "webpack": "^4.43.0"
   },
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Trampoline-CX/Cubes"
   },
   "husky": {
     "hooks": {
