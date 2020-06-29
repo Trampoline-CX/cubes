@@ -4,6 +4,7 @@ module.exports = {
     node: true,
     'react-native/react-native': true,
   },
+  ignorePatterns: ['**/__generated__/*'],
   extends: [
     'eslint:recommended',
     'plugin:jest/recommended',
