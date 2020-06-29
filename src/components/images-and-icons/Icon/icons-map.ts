@@ -29,6 +29,7 @@ import {
   SvgRent,
   SvgPropertyDebt,
   SvgPreferences,
+  SvgIc3DRotation,
 } from '../__generated__'
 
 export const iconsMap = {
@@ -62,6 +63,7 @@ export const iconsMap = {
   feedback: SvgFeedback,
   visibility: SvgVisibility,
   'visibility-off': SvgVisibilityOff,
+  ic_3d_rotation: SvgIc3DRotation,
 }
 
 export type IconName = Extract<keyof typeof iconsMap, string>

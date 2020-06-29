@@ -4,7 +4,15 @@ module.exports = {
   native: true,
   typescript: true,
   svgoConfig: {
-    plugins: [{ removeViewBox: false }],
+    plugins: [
+      {
+        addAttributesToSVGElement: {
+          attributes: ['fill="#000"'],
+        },
+        removeViewBox: false,
+        removeUnknownsAndDefaults: false,
+      },
+    ],
   },
   replaceAttrValues: {
     '#000': '{props.color}',

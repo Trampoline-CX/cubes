@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
-    "clean": "rm -rf dist/ && rm -rf web-build/",
+    "clean": "rm -rf dist/ && rm -rf web-build/ && rm -rf src/components/images-and-icons/__generated__/",
     "build": "yarn build:icons && tsc --p tsconfig.build.json && tsc",
     "build:icons": "yarn svgr --out-dir \"./src/components/images-and-icons/__generated__\" \"./assets/icons\" --ext tsx",
     "build-storybook": "yarn build && build-storybook -c storybook/web -o web-build",
@@ -78,7 +78,6 @@
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react-native-storybook-loader": "^1.8.1",
-    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "16.9.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.2",
