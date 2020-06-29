@@ -57,7 +57,7 @@ const BottomBar: React.FC<{
     <BottomNavigationBar>
       <BottomNavigationBar.Tab
         selected={current === 'MoneyScreen'}
-        icon="money"
+        icon="dashboard"
         onClick={() => navigate.to('MoneyScreen')}
       />
       <BottomNavigationBar.Tab
@@ -67,7 +67,7 @@ const BottomBar: React.FC<{
       />
       <BottomNavigationBar.Tab
         selected={current === 'ProfileScreen'}
-        icon="profile"
+        icon="person"
         onClick={() => navigate.to('ProfileScreen')}
       />
     </BottomNavigationBar>

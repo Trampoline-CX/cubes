@@ -6,7 +6,7 @@
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
     "clean": "rm -rf dist/ && rm -rf web-build/ && rm -rf src/components/images-and-icons/__generated__/ && rm -rf assets/icons/temp",
     "build": "yarn build:icons && tsc --p tsconfig.build.json && tsc",
-    "build:icons": "yarn svgr --out-dir \"./src/components/images-and-icons/__generated__\" \"./assets/icons\" --ext tsx",
+    "build:icons": "./scripts/build-icons.sh",
     "build-storybook": "yarn build && build-storybook -c storybook/web -o web-build",
     "test": "jest",
     "start": "start-storybook -c storybook/web -p 9009 -s public",

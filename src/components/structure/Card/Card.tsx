@@ -121,7 +121,7 @@ const CardMainAction: React.FC<{ action: TextAction }> = ({ action }) => (
               <TextStyle variation="accent">{action.label}</TextStyle>
             </Heading>
           </Box>
-          <Icon name="nav-disclosure" color="subdued" />
+          <Icon name="navigate-next" color="subdued" />
         </Box>
       </Box>
     </Touchable>

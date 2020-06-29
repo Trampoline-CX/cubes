@@ -129,7 +129,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
     <View style={styles.container}>
       <Box paddingX="xSmall">
         <IconButton
-          icon={showBackAction ? 'go-back' : 'search'}
+          icon={showBackAction ? 'arrow-back' : 'search'}
           onClick={showBackAction ? goBack : focusSearch}
         />
       </Box>

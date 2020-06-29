@@ -5,8 +5,8 @@ import { Centered } from '../../../storybook/decorators/Centered'
 import { DarkBackground } from '../../../storybook/decorators/DarkBackground'
 import { useStyles } from '../../../theme'
 import { getStoryTitle } from '../../../storybook/get-story-title'
+import { iconMap } from '../__generated__'
 import { Icon, IconProps, IconName } from './Icon'
-import { iconsMap } from './icons-map'
 
 const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
   const styles = useStyles(() => ({
@@ -18,8 +18,8 @@ const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
 
   const icons = []
 
-  for (const icon in iconsMap) {
-    if (Object.prototype.hasOwnProperty.call(iconsMap, icon)) {
+  for (const icon in iconMap) {
+    if (Object.prototype.hasOwnProperty.call(iconMap, icon)) {
       icons.push(<Icon key={icon} name={icon as IconName} {...props} />)
     }
   }
@@ -40,4 +40,4 @@ All_Inverse.story = {
   decorators: [DarkBackground],
 }
 
-export const LargeAccent: React.FC = () => <Icon name="rent" size="large" color="accent" />
+export const LargeAccent: React.FC = () => <Icon name="home" size="large" color="accent" />

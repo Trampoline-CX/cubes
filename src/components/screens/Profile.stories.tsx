@@ -27,16 +27,16 @@ export const Profile: React.FC = () => (
       <Divider />
 
       <Box paddingY="medium">
-        <Slate icon="profile" label="My account" />
-        <Slate icon="accounts" label="Linked bank connections" />
+        <Slate icon="person" label="My account" />
+        <Slate icon="account-balance" label="Linked bank connections" />
         <Slate icon="security" label="Security" />
-        <Slate icon="sign-out" label="Sign out" onClick={action('Sign out Clicked')} />
+        <Slate icon="exit-to-app" label="Sign out" onClick={action('Sign out Clicked')} />
       </Box>
     </Screen.Content>
     <BottomNavigationBar>
-      <BottomNavigationBar.Tab icon="money" onClick={action('Money Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="dashboard" onClick={action('Money Tab Clicked')} />
       <BottomNavigationBar.Tab icon="search" onClick={action('Explore Tab Clicked')} />
-      <BottomNavigationBar.Tab icon="profile" selected onClick={action('Profile Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="person" selected onClick={action('Profile Tab Clicked')} />
     </BottomNavigationBar>
   </Screen>
 )

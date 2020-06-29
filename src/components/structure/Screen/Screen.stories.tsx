@@ -32,9 +32,9 @@ export const Default: React.FC = () => (
       </TextContainer>
     </Screen.Content>
     <BottomNavigationBar>
-      <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Click')} />
-      <BottomNavigationBar.Tab icon="accounts" onClick={action('Accounts Tab Click')} />
-      <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Click')} />
+      <BottomNavigationBar.Tab icon="dashboard" selected onClick={action('Money Tab Click')} />
+      <BottomNavigationBar.Tab icon="account-balance" onClick={action('Accounts Tab Click')} />
+      <BottomNavigationBar.Tab icon="person" onClick={action('Profile Tab Click')} />
     </BottomNavigationBar>
   </Screen>
 )
@@ -53,9 +53,9 @@ export const NotScrollable: React.FC = () => (
       </TextContainer>
     </Screen.Content>
     <BottomNavigationBar>
-      <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Click')} />
-      <BottomNavigationBar.Tab icon="accounts" onClick={action('Accounts Tab Click')} />
-      <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Click')} />
+      <BottomNavigationBar.Tab icon="dashboard" selected onClick={action('Money Tab Click')} />
+      <BottomNavigationBar.Tab icon="account-balance" onClick={action('Accounts Tab Click')} />
+      <BottomNavigationBar.Tab icon="person" onClick={action('Profile Tab Click')} />
     </BottomNavigationBar>
   </Screen>
 )

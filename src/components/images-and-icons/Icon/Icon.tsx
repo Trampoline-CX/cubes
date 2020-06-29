@@ -1,11 +1,8 @@
 import React, { useMemo } from 'react'
-
 import { Theme, useTheme } from '../../../theme'
-import { IconName, iconsMap } from './icons-map'
+import { iconMap } from '../__generated__'
 
-// Re-export for convenience
-export { IconName }
-
+export type IconName = keyof typeof iconMap
 export type IconSize = Extract<keyof Theme['size']['icon'], string>
 
 export interface IconProps {
@@ -28,7 +25,7 @@ export interface IconProps {
  */
 export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'primary' }) => {
   const theme = useTheme()
-  const IconComponent = useMemo(() => iconsMap[name], [name])
+  const IconComponent = useMemo(() => iconMap[name], [name])
   const iconColor = useMemo(() => {
     switch (color) {
       case 'primary':
