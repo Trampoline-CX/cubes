@@ -6,14 +6,12 @@ module.exports = {
   svgoConfig: {
     plugins: [
       {
-        addAttributesToSVGElement: {
-          attributes: ['fill="#000"'],
-        },
         removeViewBox: false,
         removeUnknownsAndDefaults: false,
       },
     ],
   },
+  svgProps: { fill: '#000' },
   replaceAttrValues: {
     '#000': '{props.color}',
   },
