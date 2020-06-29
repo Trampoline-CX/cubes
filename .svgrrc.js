@@ -16,6 +16,7 @@ module.exports = {
   svgProps: { fill: '#000' },
   replaceAttrValues: {
     '#000': '{props.color}',
+    '#010101': '{props.color}',
   },
   indexTemplate: function (files) {
     const exportEntries = files.map(file => {
