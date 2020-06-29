@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
-    "clean": "rm -rf dist/ && rm -rf web-build/ && rm -rf src/components/images-and-icons/__generated__/ && rm -rf assets/icons/temp",
+    "clean": "rm -rf dist/ && rm -rf web-build/ && rm -rf src/assets/icons",
     "build": "yarn build:icons && tsc --p tsconfig.build.json && tsc",
     "build:icons": "./scripts/build-icons.sh",
     "build-storybook": "yarn build && build-storybook -c storybook/web -o web-build",

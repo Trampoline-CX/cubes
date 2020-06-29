@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react'
+import { Image } from 'react-native'
 import { Theme, useTheme } from '../../../theme'
-import { iconMap } from '../__generated__'
+import { iconsMap } from '../../../assets/icons'
 
-export type IconName = keyof typeof iconMap
+export type IconName = keyof typeof iconsMap
 export type IconSize = Extract<keyof Theme['size']['icon'], string>
 
 export interface IconProps {
@@ -25,7 +26,7 @@ export interface IconProps {
  */
 export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'primary' }) => {
   const theme = useTheme()
-  const IconComponent = useMemo(() => iconMap[name], [name])
+  const source = useMemo(() => iconsMap[name], [name])
   const iconColor = useMemo(() => {
     switch (color) {
       case 'primary':
@@ -46,6 +47,9 @@ export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'pri
   }, [color, theme])
 
   return (
-    <IconComponent height={theme.size.icon[size]} width={theme.size.icon[size]} color={iconColor} />
+    <Image
+      style={{ width: theme.size.icon[size], height: theme.size.icon[size], tintColor: iconColor }}
+      source={source}
+    />
   )
 }
