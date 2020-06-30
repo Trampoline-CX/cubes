@@ -30,6 +30,22 @@ const storybookConfig: StorybookConfig = {
       return config
     }
 
+    if (config.module) {
+      config.module.rules.push({
+        test: /\.js$/,
+        include: [path.resolve(__dirname, '../../node_modules/react-native-vector-icons/')],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: false,
+            presets: [
+              ['module:metro-react-native-babel-preset', { disableImportExportTransform: true }],
+            ],
+          },
+        },
+      })
+    }
+
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       // Replace react-native dependencies with react-native-web
@@ -48,6 +64,8 @@ const storybookConfig: StorybookConfig = {
         __dirname,
         '../../src/storybook/utils/react-native-screens',
       ),
+      // Mock @expo/vector-icons with react-native-vector-icons
+      '@expo/vector-icons$': path.resolve(__dirname, '../../src/storybook/utils/expo-vector-icons'),
     }
 
     return config

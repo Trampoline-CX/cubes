@@ -1,11 +1,12 @@
+import _ from 'lodash'
 import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
+import MaterialGlyphs from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialIcons.json'
 import { Centered } from '../../../storybook/decorators/Centered'
 import { DarkBackground } from '../../../storybook/decorators/DarkBackground'
 import { useStyles } from '../../../theme'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { iconMap } from '../__generated__'
 import { Icon, IconProps, IconName } from './Icon'
 
 const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
@@ -16,13 +17,9 @@ const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
     },
   }))
 
-  const icons = []
-
-  for (const icon in iconMap) {
-    if (Object.prototype.hasOwnProperty.call(iconMap, icon)) {
-      icons.push(<Icon key={icon} name={icon as IconName} {...props} />)
-    }
-  }
+  const icons = _.keys(MaterialGlyphs).map(icon => (
+    <Icon key={icon} name={icon as IconName} {...props} />
+  ))
 
   return <View style={styles.container}>{icons}</View>
 }

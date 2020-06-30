@@ -1,8 +1,11 @@
 import React, { useMemo } from 'react'
+import { MaterialIcons } from '@expo/vector-icons'
+import MaterialGlyphs from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialIcons.json'
 import { Theme, useTheme } from '../../../theme'
-import { iconMap } from '../__generated__'
 
-export type IconName = keyof typeof iconMap
+// Re-export for convenience
+export type IconName = keyof typeof MaterialGlyphs
+
 export type IconSize = Extract<keyof Theme['size']['icon'], string>
 
 export interface IconProps {
@@ -25,7 +28,6 @@ export interface IconProps {
  */
 export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'primary' }) => {
   const theme = useTheme()
-  const IconComponent = useMemo(() => iconMap[name], [name])
   const iconColor = useMemo(() => {
     switch (color) {
       case 'primary':
@@ -45,7 +47,5 @@ export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'pri
     }
   }, [color, theme])
 
-  return (
-    <IconComponent height={theme.size.icon[size]} width={theme.size.icon[size]} color={iconColor} />
-  )
+  return <MaterialIcons name={name} size={theme.size.icon[size]} color={iconColor} />
 }
