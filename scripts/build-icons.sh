@@ -1,12 +1,27 @@
 #!/bin/bash
 set -o pipefail
 
+# -----
+# Script extracting all Production SVG icons from a Material Design Icons zip 
+# and renaming them correctly for usage in Cubes.
+#
+# Renaming consists of:
+# - Removing "ic_" prefix
+# - Removing "_24px" suffix
+# - Replacing snake_case with kebab-case
+#
+# This script also emits an `index.ts` file with an `iconsMap`, mapping 
+# Icon names with their `require()` path.
+# -----
+
 MATERIAL_ICONS_VERSION="3.0.1"
 OUTPUT_DIR="./src/assets/icons"
 INDEX_FILE="$OUTPUT_DIR/index.ts"
+OUTPUT_DIST_DIR="./dist/assets/icons"
 
 # Clean icons directory
 rm -rf $OUTPUT_DIR
+rm -rf $OUTPUT_DIST_DIR
 
 # Unzip all Material Icons ending with "_24px.svg" to temp directory
 unzip -jo assets/icons/material-design-icons-$MATERIAL_ICONS_VERSION.zip "material-design-icons-$MATERIAL_ICONS_VERSION/**/svg/production/*_24px.svg" -d $OUTPUT_DIR
@@ -30,3 +45,7 @@ echo "}" >> $INDEX_FILE
 
 # Prettify
 yarn prettier --write "$OUTPUT_DIR/*.ts"
+
+# Copy to dist/
+mkdir -p $OUTPUT_DIST_DIR
+cp $OUTPUT_DIR/*.svg $OUTPUT_DIST_DIR
