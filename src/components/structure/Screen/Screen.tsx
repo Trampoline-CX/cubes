@@ -33,6 +33,7 @@ export const Screen: React.FC<ScreenProps> & { Content: typeof Content } = ({
     background: {
       flex: 1,
       backgroundColor: theme.colors.fill.background.default,
+      position: 'relative',
     },
     backgroundWithInsetsBase: {
       paddingLeft: insets.left,

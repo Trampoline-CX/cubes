@@ -45,7 +45,7 @@ export interface Theme {
       primary: ComplexColor
       accent: ComplexColor
       accentSecondary: ComplexColor
-      background: ComplexColor
+      background: ComplexColor & { inverse: ColorHex }
       divider: ComplexColor
     }
     text: {
