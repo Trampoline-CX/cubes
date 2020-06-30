@@ -38,8 +38,8 @@ export const Table: React.FC<TableProps> = ({ headings, rows, columnsImportance 
     () =>
       rows.map((row, rowIndex) => (
         <Box key={rowIndex} horizontal>
-          {row.map((x, index) =>
-            _createCellFromDescriptor(x, rowIndex + 1, index, columnsImportance),
+          {row.map((cell, index) =>
+            _createCellFromDescriptor(cell, rowIndex + 1, index, columnsImportance),
           )}
         </Box>
       )),
