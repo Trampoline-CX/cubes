@@ -28,7 +28,9 @@ export interface CheckboxProps {
 const { size } = shameStyles.checkbox
 
 /**
- * Use when the user needs to choose a single item in a list.
+ * Use when the user needs to choose zero, one or multiple items in a list.
+ * It may also be used as an indicator that the user performed a certain action
+ * (like reading the terms and conditions).
  */
 export const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, helpText }) => {
   const styles = useStyles(theme => ({

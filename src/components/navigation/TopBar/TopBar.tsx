@@ -40,7 +40,9 @@ export interface TopBarProps {
 const { height } = shameStyles.topBar
 
 /**
- * Top Bar used for navigation and title display. Acts as an App Bar for Android and Navigation Bar for iOS.
+ * Used for displaying title and back navigation. Can optionally include additional quick actions.
+ *
+ * Acts as an App Bar for Android and Navigation Bar for iOS.
  */
 export const TopBar: React.FC<TopBarProps> = ({
   title,
