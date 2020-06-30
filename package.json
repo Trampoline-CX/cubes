@@ -12,7 +12,7 @@
     "start": "start-storybook -c storybook/web -p 9009 -s public",
     "prestorybook": "yarn build",
     "chromatic": "chromatic --project-token=t00yilwkcv",
-    "prepublish": "yarn build && yarn lint"
+    "prepublish": "yarn clean && yarn build && yarn lint"
   },
   "files": [
     "dist/*"
