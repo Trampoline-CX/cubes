@@ -14,11 +14,15 @@ export interface CheckboxProps {
   /**
    * Label to display next to the Checkbox.
    */
-  label: string
+  label: React.ReactNode
   /**
    * Additional text to aid in use.
    */
-  helpText?: string
+  helpText?: React.ReactNode
+  /**
+   * Disables the input.
+   */
+  disabled?: boolean
   /**
    * Called when selection state changes. Should propagate change to `checked` prop.
    */
@@ -32,7 +36,13 @@ const { size } = shameStyles.checkbox
  * It may also be used as an indicator that the user performed a certain action
  * (like reading the terms and conditions).
  */
-export const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, helpText }) => {
+export const Checkbox: React.FC<CheckboxProps> = ({
+  label,
+  checked,
+  helpText,
+  disabled = false,
+  onChange,
+}) => {
   const styles = useStyles(theme => ({
     background: {
       backgroundColor: theme.colors.fill.background.lighter,
@@ -48,14 +58,17 @@ export const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, he
     backgroundChecked: {
       borderColor: theme.colors.fill.accent.default,
     },
+    disabled: {
+      opacity: theme.opacity.disabled,
+    },
   }))
 
   const onClick = useCallback(() => onChange(!checked), [checked, onChange])
 
   return (
-    <TouchableWithoutFeedback onPress={onClick}>
-      <View>
-        <Box horizontal space="medium" paddingY="medium">
+    <TouchableWithoutFeedback onPress={onClick} disabled={disabled}>
+      <View style={disabled ? styles.disabled : null}>
+        <Box horizontal space="medium">
           <View style={[styles.background, checked ? styles.backgroundChecked : null]}>
             {checked && <Icon name="clear" color="accent" />}
           </View>
