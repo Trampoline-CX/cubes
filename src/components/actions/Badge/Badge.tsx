@@ -16,7 +16,7 @@ export interface BadgeProps {
 }
 
 /**
- * Badge component used to display short information.
+ * Used to inform the user about the status of an object or give additional non-critical information about it.
  */
 export const Badge: React.FC<BadgeProps> = ({ children, variation = 'default' }) => {
   const styles = useStyles(theme => ({

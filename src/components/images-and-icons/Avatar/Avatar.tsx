@@ -27,7 +27,7 @@ export interface AvatarProps {
 }
 
 /**
- * Displays an Avatar.
+ * Used to show a thumbnail representation of a user or organization.
  */
 export const Avatar: React.FC<AvatarProps> = ({ size: sizeRaw = 'default', source }) => {
   const currentTheme = useTheme()

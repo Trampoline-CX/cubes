@@ -27,7 +27,7 @@ export interface RadioButtonProps {
 const { size, checkSize } = shameStyles.radioButton
 
 /**
- * Use when the user needs to choose a single item in a list.
+ * Use in a list where the user needs to select a single item.
  */
 export const RadioButton: React.FC<RadioButtonProps> = ({ label, checked, onChange, helpText }) => {
   const styles = useStyles(theme => ({
