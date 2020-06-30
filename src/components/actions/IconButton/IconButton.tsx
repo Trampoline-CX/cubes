@@ -28,7 +28,7 @@ export interface IconButtonProps {
 }
 
 /**
- * Button with only an `Icon` in it. Used to display actions that should be clearly understood using only an `Icon`.
+ * Used to display actions that should be clearly understood using only an `Icon`.
  */
 export const IconButton: React.FC<IconButtonProps> = ({
   icon,

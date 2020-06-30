@@ -12,7 +12,9 @@ export interface HeadingProps extends TextProps {
 }
 
 /**
- * Text with less emphasis than `DisplayText`, but more than `BodyText`.
+ * Used as titles of major sections or screens.
+ *
+ * > For example, `Card` components generally use `Heading` as their title.
  */
 export const Heading: React.FC<HeadingProps> = ({
   children,

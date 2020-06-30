@@ -18,7 +18,7 @@ export interface ButtonGroupProps {
 }
 
 /**
- * Component wrapping `Button` components in a consistent manner.
+ * Arrange `Button` components with consistent spacing.
  */
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, alignment = 'fill' }) => {
   const styles = useStyles(theme => ({

@@ -7,7 +7,8 @@ import { TextStyle } from '../TextStyle/TextStyle'
 export type CaptionProps = TextProps
 
 /**
- * Display a caption, less important text than `BodyText`.
+ * Text size is smaller than the recommended size for general reading.
+ * Can be used as help text or for secondary information.
  */
 export const Caption: React.FC<CaptionProps> = ({
   maxLines,

@@ -3,6 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
+import { ToastProvider } from '../../overlays/Toast/ToastProvider'
 import { AppProviderContext } from './AppProviderContext'
 
 export interface WithNavigationSchema {
@@ -29,7 +30,7 @@ export type AppProviderProps = {
 } & (WithNavigationSchema | WithoutNavigationSchema)
 
 /**
- * Component that should be defined at the root of the App and controls many elements, like
+ * Required component that should be defined at the root of the App and controls many elements, like
  * theming, navigation and so on.
  *
  * > **Note:** You don't need to pass any properties to this component. They are present for customization purpose only.
@@ -41,7 +42,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({
 }) => (
   <SafeAreaProvider>
     <AppProviderContext.Provider value={{ theme }}>
-      <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+      <ToastProvider>
+        <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+      </ToastProvider>
     </AppProviderContext.Provider>
   </SafeAreaProvider>
 )

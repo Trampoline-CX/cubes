@@ -59,7 +59,7 @@ const useOnKeyboardHide = (callback: () => void, deps: DependencyList): void => 
 }
 
 /**
- * Component used to enter a search query.
+ * Let the user search content in a List using free-form text.
  */
 export const SearchField: React.FC<SearchFieldProps> = ({
   value,
