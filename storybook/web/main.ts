@@ -31,6 +31,20 @@ const storybookConfig: StorybookConfig = {
     }
 
     if (config.module) {
+      /**
+       * Use metro-react-native-babel-preset for loading react-native-vector-icons, as otherwise
+       * Storybook crashes at launch with following error:
+       *
+       * ERROR in ./node_modules/react-native-vector-icons/lib/create-icon-set.js 43:21
+       * Module parse failed: Unexpected token (43:21)
+       * You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+       * |
+       * |   class Icon extends PureComponent {
+       * >     static propTypes = {
+       * |       allowFontScaling: PropTypes.bool,
+       * |       name: IconNamePropType,
+       *  @ ./node_modules/react-native-vector-icons/MaterialIcons.js 6:0-50 9:16-29
+       */
       config.module.rules.push({
         test: /\.js$/,
         include: [path.resolve(__dirname, '../../node_modules/react-native-vector-icons/')],
