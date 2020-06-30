@@ -7,6 +7,8 @@ import { Centered } from '../../../storybook/decorators/Centered'
 import { DarkBackground } from '../../../storybook/decorators/DarkBackground'
 import { useStyles } from '../../../theme'
 import { getStoryTitle } from '../../../storybook/get-story-title'
+import { Box } from '../../structure'
+import { Caption } from '../../text'
 import { Icon, IconProps, IconName } from './Icon'
 
 const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
@@ -15,10 +17,18 @@ const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
       flexDirection: 'row',
       flexWrap: 'wrap',
     },
+    single: {
+      width: 90,
+    },
   }))
 
   const icons = _.keys(MaterialGlyphs).map(icon => (
-    <Icon key={icon} name={icon as IconName} {...props} />
+    <View key={icon} style={styles.single}>
+      <Box space="small" padding="small" align="center">
+        <Icon name={icon as IconName} {...props} />
+        <Caption textAlign="center">{icon}</Caption>
+      </Box>
+    </View>
   ))
 
   return <View style={styles.container}>{icons}</View>
