@@ -19,7 +19,7 @@ export interface TabsProps {
   /**
    * List of tabs.
    */
-  tabs: [TabDescriptor, ...TabDescriptor[]]
+  tabs: TabDescriptor[]
   /**
    * Index of selected tab.
    */
