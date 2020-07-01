@@ -7,7 +7,7 @@ import { DisplayText } from '../../text/DisplayText/DisplayText'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
-import { TopBar } from '../../navigation'
+import { TopBar } from '../../navigation/TopBar/TopBar'
 import { BottomNavigationBar } from '../../navigation/BottomNavigationBar/BottomNavigationBar'
 import { Screen } from './Screen'
 

@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react'
 import { View, TouchableWithoutFeedback } from 'react-native'
 import { useStyles } from '../../../theme'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { BodyText } from '../../text'
 import { shameStyles } from '../../../theme/shame-styles'
-import { Icon } from '../../images-and-icons'
+import { Icon } from '../../images-and-icons/Icon/Icon'
 
 export interface CheckboxProps {
   /**
