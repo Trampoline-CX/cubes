@@ -24,7 +24,7 @@ Start swiftly ⚡ using [CodeSandbox](https://codesandbox.io/s/github/alexbchr/c
 
 ### CodeSandbox
 
-We recommend you to use CodeSandbox, as previewing is much faster and reliable than Expo Snacks. First time startup may take a bit longer though...
+We recommend you to use CodeSandbox, as previewing is much faster and reliable than Expo Snacks. First time startup may take some time, but testing is fast afterwards.
 
 ### Expo Snack
 
