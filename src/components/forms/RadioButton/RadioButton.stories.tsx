@@ -26,3 +26,9 @@ export const WithoutHelpText: React.FC = () => {
 
   return <RadioButton label="Pizza" checked={checked} onChange={setChecked} />
 }
+
+export const Disabled: React.FC = () => {
+  const [checked, setChecked] = useState(false)
+
+  return <RadioButton label="Pizza" checked={checked} onChange={setChecked} disabled />
+}

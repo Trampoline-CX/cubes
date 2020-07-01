@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 
 export interface TextContainerProps {
   /**

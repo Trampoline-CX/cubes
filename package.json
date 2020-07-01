@@ -1,6 +1,6 @@
 {
   "name": "@trampoline/cubes",
-  "version": "0.0.2-alpha.6",
+  "version": "0.0.2-alpha.7",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
@@ -11,7 +11,7 @@
     "start": "start-storybook -c storybook/web -p 9009 -s public",
     "prestorybook": "yarn build",
     "chromatic": "chromatic --project-token=t00yilwkcv",
-    "prepublish": "yarn build && yarn lint"
+    "prepublishOnly": "yarn clean && yarn build && yarn lint"
   },
   "files": [
     "dist/*"
