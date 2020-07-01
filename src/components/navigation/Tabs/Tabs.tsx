@@ -4,16 +4,10 @@ import { Box } from '../../structure'
 import { useStyles } from '../../../theme'
 import { Tab } from './Tab/Tab'
 
-export interface TabDescriptor {
-  /**
-   * ID of the tab.
-   */
-  id: string
-  /**
-   * Text of the tab.
-   */
-  label: string
-}
+/**
+ * Text of the tab.
+ */
+export type TabDescriptor = string
 
 export interface TabsProps {
   /**
@@ -49,10 +43,10 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, selected, onSelect, children }
 
   const tabItems = useMemo(
     () =>
-      tabs.map(({ id, label }, index) => (
+      tabs.map((tab, index) => (
         <Tab
-          key={id}
-          label={label}
+          key={tab}
+          label={tab}
           selected={selected === index}
           // eslint-disable-next-line react/jsx-no-bind
           onSelect={() => onSelect(index)}

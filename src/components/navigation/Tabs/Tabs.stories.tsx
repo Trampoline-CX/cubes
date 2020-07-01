@@ -7,7 +7,7 @@ import { TextContainer, Heading, BodyText } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { Icon } from '../../images-and-icons'
-import { Tabs, TabsProps, TabDescriptor } from './Tabs'
+import { Tabs, TabsProps } from './Tabs'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -40,10 +40,7 @@ export const Basic: StoryFn<TabsProps> = props => {
 }
 
 Basic.args = {
-  tabs: [
-    { label: 'Developers', id: 'devs' },
-    { label: 'Designers', id: 'designers' },
-  ],
+  tabs: ['Developers', 'Designers'],
   selected: 0,
 }
 
@@ -53,10 +50,7 @@ Basic.argTypes = {
 
 export const SimilarTabContent: React.FC = () => {
   const [selected, setSelected] = useState(0)
-  const tabs: TabDescriptor[] = [
-    { label: 'Developers', id: 'devs' },
-    { label: 'Designers', id: 'designers' },
-  ]
+  const tabs = ['Developers', 'Designers']
 
   return (
     <Screen>
@@ -64,7 +58,7 @@ export const SimilarTabContent: React.FC = () => {
         <Screen.Content>
           <Box padding="medium">
             <TextContainer>
-              <Heading>{tabs[selected].label}</Heading>
+              <Heading>{tabs[selected]}</Heading>
               <BodyText>{LOREM_IPSUM}</BodyText>
             </TextContainer>
           </Box>
