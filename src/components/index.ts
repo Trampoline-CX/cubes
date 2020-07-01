@@ -36,6 +36,9 @@ export * from './navigation/BottomNavigationBar/BottomNavigationBar'
 export * from './navigation/Tabs/Tabs'
 export * from './navigation/TopBar/TopBar'
 
+export * from './overlays/Alert/Alert'
+export * from './overlays/Confirm/Confirm'
+export * from './overlays/Dialog/Dialog'
 export { ToastOptions } from './overlays/Toast/ToastProvider'
 export * from './overlays/Toast/use-toast'
 
