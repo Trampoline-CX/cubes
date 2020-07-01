@@ -1,8 +1,8 @@
 import React from 'react'
-import { IconName, Icon } from '../../../images-and-icons'
+import { IconName, Icon } from '../../../images-and-icons/Icon/Icon'
 import { useStyles } from '../../../../theme'
-import { Touchable } from '../../../base'
-import { Box } from '../../../structure'
+import { Touchable } from '../../../base/Touchable/Touchable'
+import { Box } from '../../../structure/Box/Box'
 
 export interface TabProps {
   /**

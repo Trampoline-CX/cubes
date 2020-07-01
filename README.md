@@ -1,9 +1,6 @@
 # Cubes
 
-This package contains the components for the Bounce Design System. It also contains 2 Storybook apps:
-
-- A web Storybook based on `@storybook/react` and built using React Native Web.
-- A native Storybook based on `@storybook/react-native` and using an Expo App.
+This package contains the Cubes library, for quick prototyping. It also contains a Storybook Web app.
 
 ---
 
@@ -13,20 +10,14 @@ This package contains the components for the Bounce Design System. It also conta
     - [Write Efficient Storybook Stories](#write-efficient-storybook-stories)
   - [Directory Structure](#directory-structure)
   - [Typescript Structure](#typescript-structure)
-  - [Deploy :rocket:](#deploy-)
+  - [Publish :rocket:](#publish-)
 
 ## Development Workflow
 
 Simply start the Web Storybook and then develop components!
 
 ```shell
-$ yarn start:storybook
-```
-
-If you want to use the Native Storybook, which is useful to validate that components will look exactly like you mean to on both Android & iOS, use this command:
-
-```shell
-$ yarn start:app
+$ yarn start
 ```
 
 ### Create a New Component Guidelines
@@ -37,7 +28,7 @@ Let's say we want to develop a new component, named `MyComponent`.
 2. Create a subfolder with your component's name, with a file in it with the same name. Following our example: `src/components/<category>/MyComponent/MyComponent.tsx`. The component **must** be exported using `export const MyComponent`. **NO** `export default`. Using `export default` would break Typescript Documentation generation.
 3. Along with our new file, create a Storybook stories file: `MyComponent.stories.tsx`.
 4. Reference your component in `src/components/index.ts`
-5. Develop your component and look at it using Storybook Stories (in Web or Native). :rocket:
+5. Develop your component and look at it using Storybook. :rocket:
 
 For additional guidelines on how to develop a component, see [Develop a New Component](/docs/mobile-app/Develop-a-New-Component).
 
@@ -59,35 +50,37 @@ For additional guidelines on how to develop a component, see [Develop a New Comp
 **Example Story:**
 
 ```tsx
+import React from 'react'
 import { MyComponent } from './MyComponent'
+import { fileAbsolute } from 'paths.macro'
+import { getStoryTitle } from '../../../storybook/get-story-title'
 
-// Declaration of the Stories detail
+// Declaration of the Stories configuration for this component
 export default {
-  title: 'MyComponent', // Component Name
+  title: getStoryTitle(fileAbsolute), // Component Name (automatically generated from file name)
   component: MyComponent, // Component instance
 }
 
 // Declare stories using `export const`
-// The first story is shown differently in "Docs" Tab
-export const MyFirstStory: React.FC = () => <MyComponent prop="value" />
+// The first story is shown differently in "Docs" Tab.
+// If the first story receives a props parameter, it will show controls in the Props Table to dynamically change props.
+export const MyFirstStory: React.FC = props => <MyComponent {...props} />
 export const MySecondStory: React.FC = () => <MyComponent loading />
 
-// DON'T ENCAPSULATE COMPONENT USAGE IN FUNCTION
+// DON'T ENCAPSULATE COMPONENT USAGE IN FUNCTION LIKE SO:
 const funcReturningMyComponent = () => <MyComponent prop="value">
-export const MyNotSoCoolStory = funcReturningMyComponent() // JUST DON'T
+export const MyNotSoCoolStory = funcReturningMyComponent()
 ```
 
 > **Additional Notes**
 >
-> - When adding new `.stories.tsx` files, you will need to rebuild the project to see them in Storybook Native (`yarn build`). On Web, new stories should be picked up automatically without rebuilding.
 > - There should be stories for every component of the DS, for documentation purpose.
 > - For now, we only have stories written in Typescript, but later on, we could expand them further using MDX.
-> - In Storybook 6, the first story will need to use Story Args, to make arguments of component customizable.
 
 ## Directory Structure
 
-- `src/` contains sources for the Design System. Output does not contain the `src/storybook/` folder and the `*.stories.tsx` files.
-- `storybook/` contains the storybook related code. `web/` subdirectory is for the Web Storybook while the `native/` subdirectory is for the Storybook Expo App.
+- `src/` contains sources for the package. Output does not contain the `src/storybook/` folder and the `*.stories.tsx` files.
+- `storybook/` contains the storybook related code. `web/` subdirectory is for the Web Storybook.
 - `public/` directory contains the basic React App assets for Storybook to work with.
 
 ## Typescript Structure
@@ -97,12 +90,12 @@ export const MyNotSoCoolStory = funcReturningMyComponent() // JUST DON'T
 There are 2 `tsconfig.json` files in this package:
 
 - `tsconfig.json`: Used by VS Code for code completion and stuff and when building Storybook (doesn't emit anything).
-- `tsconfig.build.json`: Used when building the Design System (output code to `dist/` folder).
+- `tsconfig.build.json`: Used when building the package (output code to `dist/` folder).
 
-## Deploy :rocket:
+## Publish :rocket:
 
-Deploy the Storybook to a website on Firebase Hosting (dev), using:
+Deploy the package to NPM using:
 
 ```shell
-$ yarn deploy
+$ yarn version && yarn publish --access public
 ```

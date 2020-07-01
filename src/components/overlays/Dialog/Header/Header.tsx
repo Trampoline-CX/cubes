@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box } from '../../../structure'
+import { Box } from '../../../structure/Box/Box'
 import { Heading } from '../../../text'
-import { IconButton } from '../../../actions'
+import { IconButton } from '../../../actions/IconButton/IconButton'
 
 export interface HeaderProps {
   title?: string

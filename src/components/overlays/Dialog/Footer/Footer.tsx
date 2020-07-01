@@ -1,6 +1,8 @@
 import React from 'react'
-import { TextAction, Button } from '../../../actions'
-import { ButtonGroup, Box } from '../../../structure'
+import { Button } from '../../../actions/Button/Button'
+import { TextAction } from '../../../actions/actions'
+import { ButtonGroup } from '../../../structure/ButtonGroup/ButtonGroup'
+import { Box } from '../../../structure/Box/Box'
 
 export interface FooterProps {
   /**

@@ -47,6 +47,13 @@ export const shameStyles = {
     defaultWidth: '70%',
     minWidth: 280,
   },
+  toast: {
+    maxWidth: '80%',
+    duration: {
+      default: 2500,
+      longer: 4000,
+    },
+  },
   radioButton: {
     size: 16,
     checkSize: 8,

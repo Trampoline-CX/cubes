@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Box } from '../../structure'
-import { Button } from '../../actions'
+import { Box } from '../../structure/Box/Box'
+import { Button } from '../../actions/Button/Button'
 import { BodyText, DisplayText, TextContainer } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
-import { Icon } from '../../images-and-icons'
+import { Icon } from '../../images-and-icons/Icon/Icon'
 import { Dialog } from './Dialog'
 
 export default {

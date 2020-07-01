@@ -15,7 +15,7 @@ export interface LayoutProps {
 }
 
 /**
- * Organize content in sections with standardized padding. Very useful when used with `Card` components.
+ * Create the main layout of a page or screen.
  */
 export const Layout: React.FC<LayoutProps> & { Section: typeof Section } = ({
   children,

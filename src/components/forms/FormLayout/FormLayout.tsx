@@ -10,7 +10,7 @@ export interface FormLayoutProps {
 }
 
 /**
- * Component used to organize display of children form components like `TextField`.
+ * Component used to arrange fields presented in a Form with standard spacing.
  */
 export const FormLayout: React.FC<FormLayoutProps> = ({ children }) => {
   // Map in Items components for layouting

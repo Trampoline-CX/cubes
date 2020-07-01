@@ -17,7 +17,7 @@ import { IconButton } from '../../actions/IconButton/IconButton'
 import { Box } from '../../structure/Box/Box'
 import { Caption } from '../../text/Caption/Caption'
 import { TestProps } from '../../../utils/TestProps'
-import { IconAction } from '../../actions'
+import { IconAction } from '../../actions/actions'
 
 export interface TextFieldProps extends TestProps {
   /**
@@ -113,7 +113,7 @@ export interface TextFieldProps extends TestProps {
 }
 
 /**
- * Let the user enter/edit text content.
+ * Input field that users can type into.
  */
 export const TextField = React.forwardRef<TextInput, TextFieldProps>(
   (
