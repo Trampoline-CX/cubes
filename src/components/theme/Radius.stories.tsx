@@ -5,7 +5,7 @@ import { Centered } from '../../storybook/decorators/Centered'
 import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
-import { Box } from '../structure'
+import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),

@@ -65,7 +65,7 @@ export interface BoxProps {
 }
 
 /**
- * Box component, used as a basic building block to layout views. Layouting follow a flexbox like approach.
+ * Used as a basic building block to layout views. Layouting follow a flexbox like approach.
  *
  * > **Note:** Padding is applied from the more generic ones to the more specific.
  * >

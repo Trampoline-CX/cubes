@@ -7,7 +7,7 @@ import { TextProps } from '../TextProps'
 export type BodyTextProps = TextProps
 
 /**
- * Normal size text.
+ * Text for general reading.
  */
 export const BodyText: React.FC<BodyTextProps> = ({
   children,

@@ -18,7 +18,7 @@ export interface LinkProps {
 }
 
 /**
- * Component displaying an inline link, pretty much like web links.
+ * Let the user perform less important or less commonly used actions. Look a lot like a web link.
  */
 export const Link: React.FC<LinkProps> = ({ children, onClick, color = 'accent' }) => {
   const theme = useTheme()

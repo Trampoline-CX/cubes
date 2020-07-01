@@ -10,11 +10,11 @@ export interface TextStyleProps {
   /**
    * Style variation of the text.
    */
-  variation: 'positive' | 'negative' | 'strong' | 'subdued' | 'error' | 'accent'
+  variation: 'positive' | 'negative' | 'strong' | 'subdued' | 'error' | 'accent' | 'inverse'
 }
 
 /**
- * Style a Text. Should be wrapped in another Text component like `DisplayText`, `Heading`, `BodyText` or `Caption`.
+ * Enhances text with additional visual meaning.
  */
 export const TextStyle: React.FC<TextStyleProps> = ({ children, variation }) => {
   const styles = useStyles(theme => ({
@@ -35,6 +35,9 @@ export const TextStyle: React.FC<TextStyleProps> = ({ children, variation }) => 
     },
     accent: {
       color: theme.colors.text.accent,
+    },
+    inverse: {
+      color: theme.colors.text.inverse,
     },
   }))
 

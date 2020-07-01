@@ -10,7 +10,7 @@ export interface SpaceProps {
 }
 
 /**
- * Add spacing between components.
+ * Used to add spacing between components.
  */
 export const Space: React.FC<SpaceProps> = ({ value }) => {
   const theme = useTheme()
