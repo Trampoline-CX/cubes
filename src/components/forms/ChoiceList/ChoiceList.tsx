@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox'
 import { RadioButton, RadioButtonProps } from '../RadioButton/RadioButton'
 import { BodyText } from '../../text'

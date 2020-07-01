@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react'
 import { Box } from '../../Box/Box'
 import { Heading, Caption } from '../../../text'
-import { IconAction, IconButton } from '../../../actions'
-import { Touchable } from '../../../base'
+import { IconButton } from '../../../actions/IconButton/IconButton'
+import { IconAction } from '../../../actions/actions'
+import { Touchable } from '../../../base/Touchable/Touchable'
 
 export interface ItemProps {
   /**
