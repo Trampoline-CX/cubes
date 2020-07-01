@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { BodyText } from '../BodyText/BodyText'
 import { useStyles } from '../../../theme'
 import { Item, ItemProps } from './Item/Item'

@@ -2,7 +2,7 @@ import React from 'react'
 import { Text } from 'react-native'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { useStyles } from '../../../theme'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 
 export interface InlineErrorProps {
   /**

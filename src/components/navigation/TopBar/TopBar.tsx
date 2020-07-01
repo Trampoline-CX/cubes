@@ -7,7 +7,7 @@ import { IconName } from '../../images-and-icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
-import { IconAction } from '../../actions'
+import { IconAction } from '../../actions/actions'
 import { useNav } from '../../../navigation'
 import { Icon } from './Icon/Icon'
 

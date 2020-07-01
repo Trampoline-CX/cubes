@@ -10,7 +10,7 @@ import { TextStyle } from '../../text/TextStyle/TextStyle'
 import { Icon } from '../../images-and-icons/Icon/Icon'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
-import { TextAction } from '../../actions'
+import { TextAction } from '../../actions/actions'
 import { Section } from './Section/Section'
 
 export interface CardProps {

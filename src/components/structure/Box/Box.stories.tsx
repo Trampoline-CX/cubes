@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { View } from 'react-native'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Pill } from '../../actions'
+import { Pill } from '../../actions/Pill/Pill'
 import { Box } from './Box'
 
 export default {
