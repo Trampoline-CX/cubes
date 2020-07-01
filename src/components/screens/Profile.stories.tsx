@@ -36,7 +36,11 @@ export const Profile: React.FC = () => (
     <BottomNavigationBar>
       <BottomNavigationBar.Tab icon="dashboard" onClick={action('Money Tab Clicked')} />
       <BottomNavigationBar.Tab icon="search" onClick={action('Explore Tab Clicked')} />
-      <BottomNavigationBar.Tab icon="person" selected onClick={action('Profile Tab Clicked')} />
+      <BottomNavigationBar.Tab
+        icon="account-circle"
+        selected
+        onClick={action('Profile Tab Clicked')}
+      />
     </BottomNavigationBar>
   </Screen>
 )

@@ -84,7 +84,7 @@ export const Explore: React.FC = () => {
       <BottomNavigationBar>
         <BottomNavigationBar.Tab icon="dashboard" onClick={action('Money Tab Clicked')} />
         <BottomNavigationBar.Tab icon="search" selected onClick={action('Explore Tab Clicked')} />
-        <BottomNavigationBar.Tab icon="person" onClick={action('Profile Tab Clicked')} />
+        <BottomNavigationBar.Tab icon="account-circle" onClick={action('Profile Tab Clicked')} />
       </BottomNavigationBar>
     </Screen>
   )

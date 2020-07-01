@@ -48,7 +48,7 @@ export const Money: React.FC = () => (
     <BottomNavigationBar>
       <BottomNavigationBar.Tab icon="dashboard" selected onClick={action('Money Tab Clicked')} />
       <BottomNavigationBar.Tab icon="search" onClick={action('Explore Tab Clicked')} />
-      <BottomNavigationBar.Tab icon="person" onClick={action('Profile Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="account-circle" onClick={action('Profile Tab Clicked')} />
     </BottomNavigationBar>
   </Screen>
 )
