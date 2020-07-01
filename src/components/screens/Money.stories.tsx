@@ -9,9 +9,9 @@ import { BodyText } from '../text/BodyText/BodyText'
 import { IconName, Icon } from '../images-and-icons/Icon/Icon'
 import { getStoryTitle } from '../../storybook/get-story-title'
 import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
-import { Screen } from '../structure'
+import { Screen } from '../structure/Screen/Screen'
 import { BottomNavigationBar } from '../navigation/BottomNavigationBar/BottomNavigationBar'
-import { TopBar } from '../navigation'
+import { TopBar } from '../navigation/TopBar/TopBar'
 
 export default {
   title: getStoryTitle(fileAbsolute),

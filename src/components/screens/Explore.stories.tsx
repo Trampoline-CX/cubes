@@ -11,7 +11,7 @@ import { Pill } from '../actions/Pill/Pill'
 import { useStyles } from '../../theme'
 import { Touchable } from '../base/Touchable/Touchable'
 import { getStoryTitle } from '../../storybook/get-story-title'
-import { Screen } from '../structure'
+import { Screen } from '../structure/Screen/Screen'
 import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
 import { BottomNavigationBar } from '../navigation/BottomNavigationBar/BottomNavigationBar'
 
