@@ -4,8 +4,9 @@ import { shameStyles } from '../../../theme/shame-styles'
 import { useStyles, useTheme } from '../../../theme'
 import { BodyText } from '../../text'
 import { useTimeout } from '../../../utils/hooks/use-timeout'
-import { TextAction, Button } from '../../actions'
-import { Box } from '../../structure'
+import { TextAction } from '../../actions/actions'
+import { Button } from '../../actions/Button/Button'
+import { Box } from '../../structure/Box/Box'
 
 export interface SnackbarProps {
   /**
