@@ -5,12 +5,44 @@ This package contains the Cubes library, for quick prototyping. It also contains
 ---
 
 - [Cubes](#cubes)
+  - [Experiment Now!](#experiment-now)
+    - [CodeSandbox](#codesandbox)
+    - [Expo Snack](#expo-snack)
+  - [Or Install Locally](#or-install-locally)
   - [Development Workflow](#development-workflow)
     - [Create a New Component Guidelines](#create-a-new-component-guidelines)
     - [Write Efficient Storybook Stories](#write-efficient-storybook-stories)
   - [Directory Structure](#directory-structure)
   - [Typescript Structure](#typescript-structure)
   - [Publish :rocket:](#publish-)
+
+## Experiment Now!
+
+Start swiftly ⚡ using [CodeSandbox](https://codesandbox.io/s/github/alexbchr/cubes-basic-sandbox) or [Expo Snacks](https://snack.expo.io/@git/github.com/alexbchr/cubes-basic-sandbox).
+
+> First time launch can take a few seconds to a minute using these services because of the packages install time.
+
+### CodeSandbox
+
+We recommend you to use CodeSandbox, as previewing is much faster and reliable than Expo Snacks. First time startup may take a bit longer though...
+
+### Expo Snack
+
+Use Expo Snacks if you want to test on Web, Android and iOS. You can even test the native results directly in your browser using embedded [Appetize.io](https://appetize.io/).
+
+## Or Install Locally
+
+Install the module from NPM:
+
+```shell
+yarn add @trampoline/cubes
+```
+
+Or using npm:
+
+```shell
+npm install @trampoline/cubes
+```
 
 ## Development Workflow
 
