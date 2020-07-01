@@ -1,9 +1,14 @@
 import React from 'react'
 import { View } from 'react-native'
-import { DecoratorFunction } from '@storybook/addons'
-import { useStyles } from '../../theme'
+import { StoryWrapper } from '@storybook/addons'
+import { useStyles, themes } from '../../theme'
+import { AppProvider } from '../../components'
 
-export const PhoneScreen: DecoratorFunction<React.ReactNode> = storyFn => {
+export const PhoneScreen: StoryWrapper = (Story, context) => {
+  // context.globalArgs.theme here will be either 'light' or 'dark'
+  // getTheme being a function retrieving the actual theme object from that value
+  const themeName: 'light' | 'dark' = context.globalArgs.theme
+
   const styles = useStyles(theme => ({
     background: {
       flex: 1,
@@ -20,7 +25,11 @@ export const PhoneScreen: DecoratorFunction<React.ReactNode> = storyFn => {
 
   return (
     <View style={styles.background}>
-      <View style={styles.phone}>{storyFn()}</View>
+      <View style={styles.phone}>
+        <AppProvider theme={themes[themeName]}>
+          <Story {...context} />
+        </AppProvider>
+      </View>
     </View>
   )
 }

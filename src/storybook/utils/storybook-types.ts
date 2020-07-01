@@ -18,6 +18,14 @@ export type ControlType =
   | 'date'
 
 export type StoryFn<Props> = React.FC<Props> & {
+  story?: {
+    name?: string
+    parameters?: {
+      docs?: {
+        storyDescription?: string // TODO: Replace with JSDoc on stories once this is closed: https://github.com/storybookjs/storybook/issues/8527
+      }
+    }
+  }
   args?: Partial<Props>
   argTypes?: Partial<Record<Extract<keyof Props, string>, { control: ControlType | null }>>
 }

@@ -49,6 +49,12 @@ export const shameStyles = {
       longer: 4000,
     },
   },
+  snackbar: {
+    duration: {
+      default: 2500,
+      longer: 4000,
+    },
+  },
   radioButton: {
     size: 16,
     checkSize: 8,
