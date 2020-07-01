@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { useStyles } from '../../../theme'
 
 /**
- * Used to separate content into logical sections.
+ * Separate content into logical sections.
  */
 export const Divider: React.FC = () => {
   const styles = useStyles(theme => ({

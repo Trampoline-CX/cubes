@@ -24,7 +24,7 @@ export interface IconProps {
 }
 
 /**
- * Displays an icon of the Design System.
+ * Used to visually communicate core parts of the product and available actions.
  */
 export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'primary' }) => {
   const theme = useTheme()

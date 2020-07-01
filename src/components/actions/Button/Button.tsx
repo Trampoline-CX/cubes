@@ -11,7 +11,9 @@ export interface ButtonProps extends ButtonBasePublicProps {
 }
 
 /**
- * Button triggering certain user actions.
+ * Buttons are used primarily for actions, such as "Add", "Close", "Cancel", or "Save".
+ * Primary buttons, which have more emphasis, should be used to highlight a primary
+ * action.
  */
 export const Button: React.FC<ButtonProps> = ({ primary, ...props }) => {
   if (primary) {

@@ -16,7 +16,7 @@ export interface SkeletonLoadingProps {
 }
 
 /**
- * Component used to wrap other `Skeleton` components to control their loading state.
+ * Wraps other `Skeleton` components to control their loading state.
  */
 export const SkeletonLoading: React.FC<SkeletonLoadingProps> = ({ loading, children }) => {
   const [anim] = useState(new Animated.Value(0))

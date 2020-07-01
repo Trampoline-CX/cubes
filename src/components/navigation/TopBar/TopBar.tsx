@@ -7,7 +7,7 @@ import { IconName } from '../../images-and-icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
-import { IconAction } from '../../actions'
+import { IconAction } from '../../actions/actions'
 import { useNav } from '../../../navigation'
 import { Icon } from './Icon/Icon'
 
@@ -40,7 +40,9 @@ export interface TopBarProps {
 const { height } = shameStyles.topBar
 
 /**
- * Top Bar used for navigation and title display. Acts as an App Bar for Android and Navigation Bar for iOS.
+ * Used for displaying title and back navigation. Can optionally include additional quick actions.
+ *
+ * Acts as an App Bar for Android and Navigation Bar for iOS.
  */
 export const TopBar: React.FC<TopBarProps> = ({
   title,

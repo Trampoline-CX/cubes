@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 
 export interface TextContainerProps {
   /**
@@ -9,7 +9,7 @@ export interface TextContainerProps {
 }
 
 /**
- * Displays multiple Text components in a consistent manner, with spacing between each of them.
+ * Arrange multiple text components with consistent spacing.
  */
 export const TextContainer: React.FC<TextContainerProps> = ({ children }) => (
   <Box space="medium">{children}</Box>

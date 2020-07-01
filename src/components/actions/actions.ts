@@ -1,4 +1,4 @@
-import { IconName, IconProps } from '../images-and-icons'
+import { IconName, IconProps } from '../images-and-icons/Icon/Icon'
 
 /**
  * Action with a Label.

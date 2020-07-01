@@ -20,7 +20,7 @@ export interface PillProps {
 }
 
 /**
- * Small component displaying quick actions.
+ * Display quick actions such as data filters.
  */
 export const Pill: React.FC<PillProps> = ({ children, onClick, highlight = false }) => {
   const styles = useStyles(theme => ({

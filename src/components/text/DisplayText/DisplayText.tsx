@@ -12,7 +12,8 @@ export interface DisplayTextProps extends TextProps {
 }
 
 /**
- * Text that has a strong emphasis. Should be used for titles.
+ * Make a bold visual statement. Use to create impact when the main goal is
+ * visual storytelling.
  */
 export const DisplayText: React.FC<DisplayTextProps> = ({
   children,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { Heading } from '../../text'
 import { useTheme } from '../../../theme'
 import { Avatar } from './Avatar'

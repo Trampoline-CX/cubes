@@ -12,7 +12,7 @@ export interface SkeletonProps {
 }
 
 /**
- * Basic Skeleton component used to display placeholder content.
+ * Base Skeleton used to build other Skeleton components.
  */
 export const Skeleton: React.FC<SkeletonProps> = ({ style }) => {
   const styles = useStyles(theme => ({

@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from 'react'
 import { View, LayoutRectangle } from 'react-native'
-import { TextWithOptionalIconAction } from '../../actions'
+import { TextWithOptionalIconAction } from '../../actions/actions'
 import { usePositionInAppProvider } from '../../dev'
 import { Item, ItemProps } from './Item/Item'
 import { PopoverPlacement } from './popover-placement'

@@ -1,8 +1,8 @@
 import React, { useContext, useCallback } from 'react'
 import { BodyText } from '../../../text'
-import { Box } from '../../../structure'
-import { Touchable } from '../../../base'
-import { IconName, IconProps, Icon } from '../../../images-and-icons'
+import { Box } from '../../../structure/Box/Box'
+import { Touchable } from '../../../base/Touchable/Touchable'
+import { IconName, IconProps, Icon } from '../../../images-and-icons/Icon/Icon'
 import { PopoverContext } from '../PopoverContext'
 
 export interface ItemProps {

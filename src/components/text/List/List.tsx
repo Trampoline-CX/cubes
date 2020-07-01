@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { BodyText } from '../BodyText/BodyText'
 import { useStyles } from '../../../theme'
 import { Item, ItemProps } from './Item/Item'
@@ -31,7 +31,7 @@ export type ListProps = {
 } & (ListWithValuesProps | ListWithChildrenProps)
 
 /**
- * Component displaying texts in a List.
+ * Display a set of related text-only content. Each list item begins with a bullet or a number.
  */
 export const List: React.FC<ListProps> & { Item: typeof Item } = ({
   type = 'bullet',

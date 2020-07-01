@@ -12,7 +12,9 @@ export interface SpinnerProps extends TestProps {
 }
 
 /**
- * Spinner component displaying an indefinite loading indicator.
+ * Used to notify the user that their action is being processed.
+ * Spinners should be used only for loading content that can't be
+ * represented with Skeleton loading components.
  */
 export const Spinner: React.FC<SpinnerProps> = ({
   color = 'primary',
