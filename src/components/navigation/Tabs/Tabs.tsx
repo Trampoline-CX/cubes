@@ -1,19 +1,14 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { useStyles } from '../../../theme'
 import { Tab } from './Tab/Tab'
-
-/**
- * Text of the tab.
- */
-export type TabDescriptor = string
 
 export interface TabsProps {
   /**
    * List of tabs.
    */
-  tabs: TabDescriptor[]
+  tabs: string[]
   /**
    * Index of selected tab.
    */

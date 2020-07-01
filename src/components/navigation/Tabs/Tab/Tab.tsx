@@ -1,7 +1,7 @@
 import React from 'react'
-import { Touchable } from '../../../base'
+import { Touchable } from '../../../base/Touchable/Touchable'
 import { useStyles } from '../../../../theme'
-import { Box } from '../../../structure'
+import { Box } from '../../../structure/Box/Box'
 import { BodyText } from '../../../text'
 
 export interface TabProps {
