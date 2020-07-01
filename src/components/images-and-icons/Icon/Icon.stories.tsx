@@ -7,7 +7,7 @@ import { Centered } from '../../../storybook/decorators/Centered'
 import { DarkBackground } from '../../../storybook/decorators/DarkBackground'
 import { useStyles } from '../../../theme'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { Caption } from '../../text'
 import { Icon, IconProps, IconName } from './Icon'
 
