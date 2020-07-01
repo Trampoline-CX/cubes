@@ -97,5 +97,5 @@ There are 2 `tsconfig.json` files in this package:
 Deploy the package to NPM using:
 
 ```shell
-$ yarn publish --access public
+$ yarn version && yarn publish --access public
 ```
