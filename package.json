@@ -11,7 +11,9 @@
     "start": "start-storybook -c storybook/web -p 9009 -s public",
     "prestorybook": "yarn build",
     "chromatic": "chromatic --project-token=t00yilwkcv",
-    "prepublishOnly": "yarn clean && yarn build && yarn lint"
+    "prepublishOnly": "yarn clean && yarn build && yarn lint",
+    "release": "yarn version",
+    "version": "git checkout -b release/v$npm_package_version"
   },
   "files": [
     "dist/*"
