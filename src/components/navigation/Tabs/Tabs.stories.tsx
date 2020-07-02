@@ -26,7 +26,7 @@ export const Basic: StoryFn<TabsProps> = props => {
     ) : (
       <Card title="Designers" sectioned>
         <Box horizontal space="small">
-          <Icon name="theme" color="accent" />
+          <Icon name="palette" color="accent" />
           <BodyText>Designers like beautiful things!</BodyText>
         </Box>
       </Card>
