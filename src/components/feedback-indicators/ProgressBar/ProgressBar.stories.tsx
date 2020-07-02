@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
-import { Box } from '../../structure'
-import { Button } from '../../actions'
+import { Box } from '../../structure/Box/Box'
+import { Button } from '../../actions/Button/Button'
 import { ProgressBar, ProgressBarProps } from './ProgressBar'
 
 export default {

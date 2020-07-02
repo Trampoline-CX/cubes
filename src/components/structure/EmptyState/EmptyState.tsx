@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
-import { TextAction, Button } from '../../actions'
+import { TextAction } from '../../actions/actions'
+import { Button } from '../../actions/Button/Button'
 import { Box } from '../Box/Box'
 import { DisplayText, BodyText } from '../../text'
 import { useStyles } from '../../../theme'

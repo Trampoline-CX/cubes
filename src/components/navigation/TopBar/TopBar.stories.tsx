@@ -16,7 +16,7 @@ export default {
 
 export const Basic: React.FC = () => (
   <Screen>
-    <TopBar title="Bar Title" actions={[{ icon: 'action-edit', action: action('Edit Clicked') }]} />
+    <TopBar title="Bar Title" actions={[{ icon: 'create', action: action('Edit Clicked') }]} />
     <Screen.Content>
       <TextContainer>
         <DisplayText>Screen Title</DisplayText>
@@ -67,7 +67,7 @@ export const WithIconsRight: React.FC = () => (
     <TopBar
       title="Title"
       actions={[
-        { icon: 'action-edit', action: action('Edit clicked'), color: 'accent' },
+        { icon: 'create', action: action('Edit clicked'), color: 'accent' },
         { icon: 'note', action: action('Note clicked') },
         { icon: 'search', action: action('Search clicked') },
       ]}
@@ -83,7 +83,7 @@ export const WithIconsRight: React.FC = () => (
 
 export const Transparent: React.FC = () => (
   <Screen>
-    <TopBar title="TopBar Title" iconStart="close-modal" transparent />
+    <TopBar title="TopBar Title" iconStart="expand-more" transparent />
     <Screen.Content>
       <TextContainer>
         <DisplayText>Screen Title</DisplayText>

@@ -11,7 +11,7 @@ import { Pill } from '../actions/Pill/Pill'
 import { useStyles } from '../../theme'
 import { Touchable } from '../base/Touchable/Touchable'
 import { getStoryTitle } from '../../storybook/get-story-title'
-import { Screen } from '../structure'
+import { Screen } from '../structure/Screen/Screen'
 import { PhoneScreen } from '../../storybook/decorators/PhoneScreen'
 import { BottomNavigationBar } from '../navigation/BottomNavigationBar/BottomNavigationBar'
 
@@ -82,9 +82,9 @@ export const Explore: React.FC = () => {
         )}
       </Screen.Content>
       <BottomNavigationBar>
-        <BottomNavigationBar.Tab icon="money" onClick={action('Money Tab Clicked')} />
+        <BottomNavigationBar.Tab icon="dashboard" onClick={action('Money Tab Clicked')} />
         <BottomNavigationBar.Tab icon="search" selected onClick={action('Explore Tab Clicked')} />
-        <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Clicked')} />
+        <BottomNavigationBar.Tab icon="account-circle" onClick={action('Profile Tab Clicked')} />
       </BottomNavigationBar>
     </Screen>
   )

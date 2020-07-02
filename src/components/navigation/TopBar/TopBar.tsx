@@ -7,7 +7,7 @@ import { IconName } from '../../images-and-icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
-import { IconAction } from '../../actions'
+import { IconAction } from '../../actions/actions'
 import { useNav } from '../../../navigation'
 import { Icon } from './Icon/Icon'
 
@@ -46,7 +46,7 @@ const { height } = shameStyles.topBar
  */
 export const TopBar: React.FC<TopBarProps> = ({
   title,
-  iconStart = 'go-back',
+  iconStart = 'arrow-back',
   onIconStartClick: onIconStartClickRaw,
   transparent = false,
   actions,
