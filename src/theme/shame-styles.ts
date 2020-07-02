@@ -61,8 +61,7 @@ export const shameStyles = {
   },
   emptyState: {
     image: {
-      width: 200,
-      height: 200,
+      size: 200,
     },
   },
 }

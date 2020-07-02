@@ -16,5 +16,18 @@ Basic.args = {
   heading: 'Hello?',
   content: "It's so empty in here alone. Why don't you add some friends?",
   action: { label: 'Add friend', action: action('Add friend Clicked') },
-  image: 'https://publicdomainvectors.org/photos/walking2.png',
+  image: 'face',
 }
+
+Basic.argTypes = {
+  heading: { control: 'text' },
+  content: { control: 'text' },
+  image: { control: 'text' },
+}
+
+export const WithoutImageAndContent: React.FC = () => (
+  <EmptyState
+    heading="No events for now..."
+    action={{ label: 'Add Event', action: action('Add Event Clicked') }}
+  />
+)
