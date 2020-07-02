@@ -15,7 +15,7 @@
     "release": "yarn version",
     "preversion": "git diff --quiet",
     "version": "git checkout -b release/v$npm_package_version",
-    "postversion": "git tag -d v$npm_package_version"
+    "postversion": "git tag -d v$npm_package_version && echo \"🚀 You can push the new release branch now!\""
   },
   "files": [
     "dist/*"
