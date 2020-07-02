@@ -34,3 +34,6 @@ jobs:
         with:
           projectToken: t00yilwkcv
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Automatically Accept changes on first-level branches (develop, master), as they are protected
+          # See https://www.chromatic.com/docs/ci#maintain-a-clean-master-branch
+          autoAcceptChanges: '*'
