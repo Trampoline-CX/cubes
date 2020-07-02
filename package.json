@@ -12,7 +12,7 @@
     "prestorybook": "yarn build",
     "chromatic": "chromatic --project-token=t00yilwkcv",
     "prepublishOnly": "yarn clean && yarn build && yarn lint",
-    "release": "yarn version",
+    "release": "yarn version --no-git-tag-version",
     "version": "git checkout -b release/v$npm_package_version"
   },
   "files": [
