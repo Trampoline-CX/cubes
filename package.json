@@ -12,8 +12,10 @@
     "prestorybook": "yarn build",
     "chromatic": "chromatic --project-token=t00yilwkcv",
     "prepublishOnly": "yarn clean && yarn build && yarn lint",
-    "release": "yarn version --no-git-tag-version",
-    "version": "git checkout -b release/v$npm_package_version"
+    "release": "yarn version",
+    "preversion": "git diff --quiet",
+    "version": "git checkout -b release/v$npm_package_version",
+    "postversion": "git tag -d v$npm_package_version"
   },
   "files": [
     "dist/*"
