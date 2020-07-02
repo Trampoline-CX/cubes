@@ -1,0 +1,23 @@
+name: Create Release Pull Request
+
+on:
+  push:
+    branches:
+      - release/v*
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          destination_branch: 'master'
+          pr_title: '🚀 Release ${{ github.ref }}'
+          pr_label: 'release'
+          pr_reviewer: 'alexbchr,hansgx'
+          pr_body: 'Release ${{ github.ref }}.
+
+            Put the changes here...'
