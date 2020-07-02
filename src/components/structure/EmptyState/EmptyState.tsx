@@ -1,5 +1,4 @@
 import React from 'react'
-import { Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { TextAction } from '../../actions/actions'
 import { Button } from '../../actions/Button/Button'
