@@ -12,11 +12,11 @@ export interface EmptyStateProps {
   /**
    * Heading text.
    */
-  heading: React.ReactNode
+  heading?: React.ReactNode
   /**
    * Content text.
    */
-  content?: React.ReactNode
+  content: React.ReactNode
   /**
    * Image name (reusing Icon names for now).
    */

@@ -34,11 +34,11 @@ Basic.argTypes = {
   image: { control: 'text' },
 }
 
-export const WithoutImageAndContent: React.FC = () => (
+export const WithoutImageAndHeading: React.FC = () => (
   <Screen>
     <Screen.Content>
       <EmptyState
-        heading="No events for now..."
+        content="No events for now..."
         action={{ label: 'Add Event', action: action('Add Event Clicked') }}
       />
     </Screen.Content>
