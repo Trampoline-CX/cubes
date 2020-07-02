@@ -16,6 +16,5 @@ Basic.args = {
   heading: 'Hello?',
   content: "It's so empty in here alone. Why don't you add some friends?",
   action: { label: 'Add friend', action: action('Add friend Clicked') },
-  secondaryAction: { label: 'Learn more', action: action('Learn more clicked') },
   image: 'https://publicdomainvectors.org/photos/walking2.png',
 }

@@ -1,9 +1,8 @@
 import React from 'react'
-import { Image, ImageSourcePropType } from 'react-native'
+import { Image } from 'react-native'
 import { TextAction, Button } from '../../actions'
 import { Box } from '../Box/Box'
 import { DisplayText, BodyText } from '../../text'
-import { ButtonGroup } from '../ButtonGroup/ButtonGroup'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 
@@ -24,10 +23,6 @@ export interface EmptyStateProps {
    * Optional main action. In lists, should be used most of the time to add a new item.
    */
   action?: TextAction
-  /**
-   * Secondary action.
-   */
-  secondaryAction?: TextAction
 }
 
 const { image } = shameStyles.emptyState
@@ -41,7 +36,6 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   content,
   image: imageSource,
   action,
-  secondaryAction,
 }) => {
   const styles = useStyles(() => ({
     image: {
@@ -55,17 +49,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       <Image style={styles.image} source={{ uri: imageSource }} />
       <DisplayText textAlign="center">{heading}</DisplayText>
       <BodyText textAlign="center">{content}</BodyText>
-      {action || secondaryAction ? (
-        <ButtonGroup>
-          {action ? (
-            <Button primary onClick={action.action}>
-              {action.label}
-            </Button>
-          ) : null}
-          {secondaryAction ? (
-            <Button onClick={secondaryAction.action}>{secondaryAction.label}</Button>
-          ) : null}
-        </ButtonGroup>
+      {action ? (
+        <Button primary onClick={action.action}>
+          {action.label}
+        </Button>
       ) : null}
     </Box>
   )
