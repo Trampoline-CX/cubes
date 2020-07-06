@@ -51,3 +51,14 @@ export const WithActions: React.FC = () => {
     />
   )
 }
+
+export const WithoutDividers: React.FC = () => (
+  <ListView
+    values={[
+      { title: 'Cats' },
+      { title: 'Cheetahs' },
+      { title: 'Dogs' },
+      { title: 'Hummingbirds' },
+    ]}
+  />
+)
