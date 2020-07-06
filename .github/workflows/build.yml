@@ -8,9 +8,6 @@ on:
     types:
       - closed
 
-defaults:
-  runs-on: ubuntu-latest
-
 env:
   # Check if we are in a Release workflow
   IS_RELEASE: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged }}
@@ -18,6 +15,7 @@ env:
 jobs:
   build:
     name: Build and Lint
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       # Checks-out the Repository
