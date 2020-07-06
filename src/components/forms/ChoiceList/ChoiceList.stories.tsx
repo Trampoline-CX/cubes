@@ -113,3 +113,14 @@ export const WithDisabledItems: React.FC = () => {
     />
   )
 }
+
+export const Uncontrolled: React.FC = () => (
+  <ChoiceList
+    title="My to-do list"
+    choices={[
+      { label: 'Camping in the wilderness', value: 'camping' },
+      { label: 'Bungee jumping', value: 'bungee' },
+      { label: 'Drink a coca', value: 'coca' },
+    ]}
+  />
+)
