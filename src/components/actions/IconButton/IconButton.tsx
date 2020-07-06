@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Touchable, TouchableProps } from '../../base/Touchable/Touchable'
+import { Touchable } from '../../base/Touchable/Touchable'
 import { IconProps, Icon } from '../../images-and-icons/Icon/Icon'
 import { useStyles } from '../../../theme'
 
@@ -19,8 +19,11 @@ export interface IconButtonProps {
   disabled?: boolean
   /**
    * Called when the button is clicked.
+   *
+   * If this is not set, there will still be touch feedback, but no action will be performed.
+   * Optional mainly for mockup purposes.
    */
-  onClick: TouchableProps['onClick']
+  onClick?: () => void
   /**
    * Size of the button.
    */
@@ -34,7 +37,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   icon,
   color,
   disabled = false,
-  onClick,
+  onClick = () => {}, // Defaults to empty action, to keep touch feedback
   size = 'default',
 }) => {
   const styles = useStyles(theme => ({
