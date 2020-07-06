@@ -1,3 +1,4 @@
+# This workflow creates PRs from release/v* branches to master
 name: Create Release Pull Request
 
 on:
@@ -11,14 +12,18 @@ jobs:
     timeout-minutes: 1
     steps:
       - uses: actions/checkout@v2
+
+      # Step needed to extract release version from branch name
+      - name: Extract Release Version
+        id: extract_version
+        run: echo "##[set-output name=version;]$(echo ${GITHUB_REF#refs/heads/release/})"
+
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           destination_branch: 'master'
-          pr_title: '🚀 Release ${{ github.ref }}'
+          pr_title: '🚀 Release ${{ steps.extract_version.outputs.version }}'
           pr_label: 'release'
           pr_reviewer: 'alexbchr,hansgx'
-          pr_body: 'Release ${{ github.ref }}.
-
-            Put the changes here...'
+          pr_body: 'TODO: Put the changes here...'
