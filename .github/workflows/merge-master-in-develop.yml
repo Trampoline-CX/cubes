@@ -1,0 +1,17 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - feature/release-workflow
+
+jobs:
+  merge:
+    - uses: actions/checkout@v2
+      with:
+        ref: 'feature/release-workflow-dummy'
+
+    - name: 'Pull master branch'
+      run: |
+        git pull origin feature/release-workflow --commit
+        git push
