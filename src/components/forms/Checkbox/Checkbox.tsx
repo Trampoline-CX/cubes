@@ -5,12 +5,13 @@ import { Box } from '../../structure/Box/Box'
 import { BodyText } from '../../text'
 import { shameStyles } from '../../../theme/shame-styles'
 import { Icon } from '../../images-and-icons/Icon/Icon'
+import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 
 export interface CheckboxProps {
   /**
    * True if selected.
    */
-  checked: boolean
+  checked?: boolean
   /**
    * Label to display next to the Checkbox.
    */
@@ -25,8 +26,10 @@ export interface CheckboxProps {
   disabled?: boolean
   /**
    * Called when selection state changes. Should propagate change to `checked` prop.
+   *
+   * If not set, component will be an uncontrolled component. @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  onChange: (checked: boolean) => void
+  onChange?: (checked: boolean) => void
 }
 
 const { size } = shameStyles.checkbox
@@ -38,10 +41,10 @@ const { size } = shameStyles.checkbox
  */
 export const Checkbox: React.FC<CheckboxProps> = ({
   label,
-  checked,
+  checked: checkedRaw = false,
   helpText,
   disabled = false,
-  onChange,
+  onChange: onChangeRaw,
 }) => {
   const styles = useStyles(theme => ({
     background: {
@@ -63,7 +66,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     },
   }))
 
-  const onClick = useCallback(() => onChange(!checked), [checked, onChange])
+  const [checked, onChange] = useUncontrolledState(checkedRaw, onChangeRaw)
+  const onClick = useCallback(() => onChange?.(!checked), [checked, onChange])
 
   return (
     <TouchableWithoutFeedback onPress={onClick} disabled={disabled}>
