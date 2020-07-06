@@ -112,3 +112,5 @@ export const WithEndActionAndHiddenLabel: React.FC = () => {
     />
   )
 }
+
+export const Uncontrolled: React.FC = () => <TextField label="Uncontrolled" />
