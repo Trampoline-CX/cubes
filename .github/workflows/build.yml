@@ -1,11 +1,23 @@
 name: Build
 
-on: [push]
+on:
+  push:
+  pull_request: # For releasing only
+    branches:
+      - master
+    types:
+      - closed
+
+defaults:
+  runs-on: ubuntu-latest
+
+env:
+  # Check if we are in a Release workflow
+  IS_RELEASE: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged }}
 
 jobs:
   build:
     name: Build and Lint
-    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       # Checks-out the Repository
@@ -30,11 +42,40 @@ jobs:
         run: yarn build
       - name: Lint
         run: yarn lint
+        if: ${{ env.IS_RELEASE == false }} # Skip for releases, as linting has already been performed
       - name: Deploy to Chromatic
         uses: chromaui/action@v1
+        if: ${{ env.IS_RELEASE == false }} # Skip for releases, as Chromatic build was already performed
         with:
           projectToken: t00yilwkcv
           token: ${{ secrets.GITHUB_TOKEN }}
           # Automatically Accept changes on first-level branches (develop, master), as they are protected
           # See https://www.chromatic.com/docs/ci#maintain-a-clean-master-branch
           autoAcceptChanges: '*'
+
+      # Releasing Steps
+      # Step needed to extract release version from branch name
+      - name: Extract Release Version
+        id: extract_version
+        if: ${{ env.IS_RELEASE == true }}
+        env:
+          RELEASE_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: echo "##[set-output name=version;]$(echo ${RELEASE_BRANCH#release/})"
+
+      - name: Publish to NPM
+        run: yarn publish
+        if: ${{ env.IS_RELEASE == true }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        if: ${{ env.IS_RELEASE == true }}
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: ${{ github.event.pull_request.title }}
+          body: ${{github.event.pull_request.body}}
+          tag_name: ${{ steps.extract_version.outputs.version }}
+          prerelease: false
