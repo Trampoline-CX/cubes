@@ -1,4 +1,4 @@
-name: Merge master in Develop
+name: Merge master in develop
 
 on:
   push:
@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          fetch-depth: 0 # Required to retrieve git history (for merging)
           ref: 'feature/release-workflow-dummy'
 
       - name: 'Pull master branch'
