@@ -59,4 +59,9 @@ export const shameStyles = {
   progressBar: {
     height: 24,
   },
+  emptyState: {
+    image: {
+      size: 200,
+    },
+  },
 }
