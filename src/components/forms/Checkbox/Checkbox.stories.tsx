@@ -32,3 +32,5 @@ export const Disabled: React.FC = () => {
 
   return <Checkbox label="A pizza" checked={checked} onChange={setChecked} disabled />
 }
+
+export const Uncontrolled: React.FC = () => <Checkbox label="A pizza" />

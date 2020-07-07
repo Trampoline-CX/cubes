@@ -20,7 +20,7 @@ export default {
 
 export const Money: React.FC = () => (
   <Screen>
-    <TopBar iconStart="close-modal" transparent />
+    <TopBar iconStart="expand-more" transparent />
     <Screen.Content>
       <Box padding="medium">
         <DisplayText>Payment transfer to LN02</DisplayText>
@@ -30,8 +30,8 @@ export const Money: React.FC = () => (
       <Divider />
 
       <Box paddingY="medium">
-        <Slate icon="accounts" label="Wednesday, November 10" />
-        <Slate icon="accounts" label="PCA Personal chequing account (A)" />
+        <Slate icon="event" label="Wednesday, November 10" />
+        <Slate icon="account-balance" label="PCA Personal chequing account (A)" />
         <Slate icon="note" label="Add a personal note" />
       </Box>
 
@@ -46,9 +46,9 @@ export const Money: React.FC = () => (
     </Screen.Content>
 
     <BottomNavigationBar>
-      <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="dashboard" selected onClick={action('Money Tab Clicked')} />
       <BottomNavigationBar.Tab icon="search" onClick={action('Explore Tab Clicked')} />
-      <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="account-circle" onClick={action('Profile Tab Clicked')} />
     </BottomNavigationBar>
   </Screen>
 )

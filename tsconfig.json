@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     "noImplicitReturns": true,
     "sourceMap": true,
-    "lib": ["es6"],
+    "lib": ["es6", "DOM"],
     "moduleResolution": "node",
     "strict": true,
     "strictNullChecks": true,

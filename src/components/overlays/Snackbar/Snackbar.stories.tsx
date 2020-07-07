@@ -65,8 +65,8 @@ export const WithBottomNavigationBar: StoryFn<SnackbarProps> = () => {
         <ScreenContent />
       </Screen.Content>
       <BottomNavigationBar>
-        <BottomNavigationBar.Tab icon="money" onClick={action('Dashboard Tab Clicked')} />
-        <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Clicked')} />
+        <BottomNavigationBar.Tab icon="dashboard" onClick={action('Dashboard Tab Clicked')} />
+        <BottomNavigationBar.Tab icon="account-circle" onClick={action('Profile Tab Clicked')} />
       </BottomNavigationBar>
     </Screen>
   )

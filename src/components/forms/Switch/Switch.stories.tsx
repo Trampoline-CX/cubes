@@ -15,3 +15,5 @@ export const Default: React.FC = () => {
 
   return <Switch checked={checked} onChecked={setChecked} />
 }
+
+export const Uncontrolled: React.FC = () => <Switch />

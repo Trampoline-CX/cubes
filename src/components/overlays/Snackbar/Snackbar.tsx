@@ -69,7 +69,7 @@ export const Snackbar: React.FC<SnackbarProps> = ({
   }, [onDismiss, animation, showDuration])
 
   const onActionClick = useCallback(() => {
-    if (action) {
+    if (action && action.action) {
       action.action()
     }
     dismiss() // Dismiss when user clicks action
