@@ -27,6 +27,12 @@ TODO
 
 ## 🏃 Getting Started
 
+Using [`expo-cli`](https://www.npmjs.com/package/expo-cli) and `npx`, use `create-cubes` starter template:
+
+```shell
+npx expo init --template https://github.com/Trampoline-CX/create-cubes.git
+```
+
 TODO
 
 ### Installation
