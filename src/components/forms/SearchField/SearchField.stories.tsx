@@ -42,3 +42,5 @@ export const WithPills: React.FC = () => {
     />
   )
 }
+
+export const Uncontrolled: React.FC = () => <SearchField placeholder="Enter a search" />

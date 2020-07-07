@@ -1,9 +1,10 @@
 name: Build
 
-on: [push]
+on: push
 
 jobs:
   build:
+    name: Build and Lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -36,4 +37,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # Automatically Accept changes on first-level branches (develop, master), as they are protected
           # See https://www.chromatic.com/docs/ci#maintain-a-clean-master-branch
-          autoAcceptChanges: '*'
+          autoAcceptChanges: develop
