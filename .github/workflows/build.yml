@@ -1,9 +1,10 @@
 name: Build
 
-on: [push]
+on: push
 
 jobs:
   build:
+    name: Build and Lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
