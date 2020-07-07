@@ -42,6 +42,10 @@ export interface CardProps {
    * Main actions displayed as buttons at the bottom of the Card.
    */
   mainActions?: TextAction[]
+  /**
+   * Card content.
+   */
+  children: React.ReactNode
 }
 
 /**

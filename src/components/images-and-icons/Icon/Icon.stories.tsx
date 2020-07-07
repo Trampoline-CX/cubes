@@ -9,6 +9,7 @@ import { useStyles } from '../../../theme'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure/Box/Box'
 import { Caption } from '../../text'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { Icon, IconProps, IconName } from './Icon'
 
 const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
@@ -40,7 +41,11 @@ export default {
   decorators: [Centered],
 }
 
-export const Example: React.FC = () => <Icon name="fingerprint" />
+export const Example: StoryFn<IconProps> = props => <Icon {...props} />
+Example.args = {
+  name: 'fingerprint',
+}
+
 export const All: React.FC = () => <IconContainer />
 export const All_Inverse: React.FC & { story: unknown } = () => <IconContainer color="inverse" />
 All_Inverse.story = {

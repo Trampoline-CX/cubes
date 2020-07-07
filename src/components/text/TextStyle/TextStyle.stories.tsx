@@ -4,12 +4,28 @@ import { Centered } from '../../../storybook/decorators/Centered'
 import { BodyText } from '../BodyText/BodyText'
 import { TextContainer } from '../TextContainer/TextContainer'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { TextStyle } from './TextStyle'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { TextStyle, TextStyleProps } from './TextStyle'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: TextStyle,
   decorators: [Centered],
+}
+
+export const Basic: StoryFn<TextStyleProps> = props => (
+  <BodyText>
+    This is some <TextStyle {...props} /> text.
+  </BodyText>
+)
+
+Basic.args = {
+  children: 'cool',
+  variation: 'strong',
+}
+
+Basic.argTypes = {
+  children: { control: 'text' },
 }
 
 export const All: React.FC = () => (

@@ -9,7 +9,8 @@ import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { TopBar } from '../../navigation/TopBar/TopBar'
 import { BottomNavigationBar } from '../../navigation/BottomNavigationBar/BottomNavigationBar'
-import { Screen } from './Screen'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Screen, ScreenProps } from './Screen'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -18,8 +19,8 @@ export default {
   decorators: [PhoneScreen],
 }
 
-export const Default: React.FC = () => (
-  <Screen>
+export const Default: StoryFn<ScreenProps> = props => (
+  <Screen {...props}>
     <TopBar title="Bar Title" />
     <Screen.Content padding="medium">
       <TextContainer>
@@ -38,6 +39,10 @@ export const Default: React.FC = () => (
     </BottomNavigationBar>
   </Screen>
 )
+
+Default.argTypes = {
+  children: { control: null },
+}
 
 export const NotScrollable: React.FC = () => (
   <Screen>
