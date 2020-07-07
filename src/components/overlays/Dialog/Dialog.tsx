@@ -7,7 +7,7 @@ import { Header } from './Header/Header'
 import { FooterProps, Footer } from './Footer/Footer'
 import { Section, SectionProps } from './Section/Section'
 
-export interface DialogProps extends FooterProps {
+export type DialogProps = {
   /**
    * Dialog Title.
    */
@@ -32,7 +32,7 @@ export interface DialogProps extends FooterProps {
    * Set to true to hide the close modal button.
    */
   hideClose?: boolean
-}
+} & FooterProps
 
 const { backdropColor, defaultWidth, minWidth } = shameStyles.dialog
 
