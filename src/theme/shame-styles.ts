@@ -42,6 +42,17 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
+  popover: {
+    zIndex: 99999,
+    backdrop: {
+      color: 'rgba(0, 0, 0, 0.3)',
+    },
+  },
+  dialog: {
+    backdropColor: 'rgba(0, 0, 0, 0.33)',
+    defaultWidth: '70%',
+    minWidth: 280,
+  },
   radioButton: {
     size: 16,
     checkSize: 8,
@@ -57,4 +68,4 @@ export const shameStyles = {
       size: 200,
     },
   },
-}
+} as const
