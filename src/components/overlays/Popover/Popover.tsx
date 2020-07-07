@@ -31,9 +31,9 @@ export type PopoverProps = {
    */
   open: boolean
   /**
-   * The content to which the Popover will be anchored.
+   * The content which will trigger the Popover. The Popover will be anchored to this component.
    */
-  anchor: React.ReactNode
+  activator: React.ReactNode
   /**
    * Preferred placement of the Popover. The Popover will try to place itself according to this
    * property. However, if there is not enough space left there to show up, it will show itself
@@ -48,15 +48,15 @@ export type PopoverProps = {
    */
   hideBackdrop?: boolean
   /**
-   * If true, the popover width will match the width of the anchor View.
+   * If true, the popover width will match the width of the activator View.
    *
    * **IMPORTANT:** Must only be used with `top` or `bottom` placements.
    */
   matchWidth?: boolean
   /**
-   * If true, the popover will appear above the anchor view instead of next to it.
+   * If true, the popover will appear above the activator view instead of next to it.
    */
-  aboveAnchor?: boolean
+  aboveActivator?: boolean
   /**
    * Called when the Popover needs to be discarded. This should update `open` property accordingly.
    */
@@ -75,12 +75,12 @@ const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
  *     - Popover Backdrop View, which shows the backdrop + provides dismissal of Popover on touch.
  *     - PopoverView
  *       - Absolutely positioned container, where height = AppProvider.height and width = AppProvider.width.
- *         Position origin is equal to position of Anchor View.
+ *         Position origin is equal to position of Activator View.
  *         - Actual Popover View displayed to the user. Positioned relatively to its parent.
  *           - Popover children
  *   - ...Views, that can be nested X times
  *     - Popover
- *       - Anchor
+ *       - Activator
  */
 
 /**
@@ -88,23 +88,23 @@ const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
  */
 export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   open,
-  anchor,
+  activator,
   actions,
   children,
   placement = 'bottom',
   onRequestClose,
   hideBackdrop = false,
   matchWidth = false,
-  aboveAnchor = false,
+  aboveActivator = false,
 }) => {
   const content = useContent(actions, children)
 
   const ref = useRef<View>(null)
-  const anchorLayout = usePositionInAppProvider(ref.current) // Get position relative to AppProvider
+  const activatorLayout = usePositionInAppProvider(ref.current) // Get position relative to AppProvider
 
   return (
     <View ref={ref}>
-      {anchor}
+      {activator}
       <PopoverPortal popoverRef={ref}>
         <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
           <PopoverBackdrop open={open} invisible={hideBackdrop} />
@@ -112,8 +112,8 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
             open={open}
             placement={placement}
             matchWidth={matchWidth}
-            anchorLayout={anchorLayout ?? LAYOUT_ZERO}
-            aboveAnchor={aboveAnchor}
+            activatorLayout={activatorLayout ?? LAYOUT_ZERO}
+            aboveActivator={aboveActivator}
           >
             {content}
           </PopoverView>

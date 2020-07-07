@@ -21,9 +21,9 @@ export interface PopoverViewProps {
   open: boolean
   children: React.ReactNode
   placement: PopoverPlacement
-  anchorLayout: LayoutRectangle
+  activatorLayout: LayoutRectangle
   matchWidth: boolean
-  aboveAnchor: boolean
+  aboveActivator: boolean
 }
 
 /**
@@ -33,9 +33,9 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
   open,
   children,
   placement,
-  anchorLayout,
+  activatorLayout,
   matchWidth,
-  aboveAnchor,
+  aboveActivator,
 }) => {
   const styles = useStyles(theme => ({
     container: {
@@ -68,7 +68,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
   )
 
   // Calculate the offset of the Popover relative to parent according to placement
-  const placementOffset = usePlacementOffset(placement, aboveAnchor, layout, anchorLayout)
+  const placementOffset = usePlacementOffset(placement, aboveActivator, layout, activatorLayout)
 
   // Corrects the placement to be inside window bounds
   const correctedPlacementOffset = useOffsetsCorrectionToBeInWindow(
@@ -98,14 +98,14 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
           layout === null
             ? styles.popoverNotYetLayout // Hide Popover as long as we don't have its correct layout
             : {
-                // Offset Popover to display correctly according to anchor position and window bounds
+                // Offset Popover to display correctly according to activator position and window bounds
                 transform: [
                   { translateY: correctedPlacementOffset.y },
                   { translateX: correctedPlacementOffset.x },
                 ],
               },
           { maxWidth: windowWidth, maxHeight: windowHeight }, // Set max dimensions to prevent going out of Window
-          matchWidth ? { width: anchorLayout.width } : null,
+          matchWidth ? { width: activatorLayout.width } : null,
         ]}
         onLayout={onLayout}
         pointerEvents={open ? 'auto' : 'none'} // Make sure we can't click items if popover is closed
@@ -123,51 +123,51 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
  */
 const usePlacementOffset = (
   placement: PopoverPlacement,
-  aboveAnchor: boolean,
+  aboveActivator: boolean,
   popoverLayout: LayoutRectangle | null,
-  anchorLayout: LayoutRectangle,
+  activatorLayout: LayoutRectangle,
 ): Offset =>
   useMemo(() => {
     const offset = {
       x:
-        anchorLayout.x +
+        activatorLayout.x +
         (isLeft(placement)
           ? -(popoverLayout?.width ?? 0)
           : isRight(placement)
-          ? anchorLayout.width
+          ? activatorLayout.width
           : isStart(placement)
           ? 0
           : isEnd(placement)
-          ? -(popoverLayout?.width ?? 0) + anchorLayout.width
-          : (anchorLayout.width - (popoverLayout?.width ?? 0)) / 2), // Top or bottom centered
+          ? -(popoverLayout?.width ?? 0) + activatorLayout.width
+          : (activatorLayout.width - (popoverLayout?.width ?? 0)) / 2), // Top or bottom centered
       y:
-        anchorLayout.y +
+        activatorLayout.y +
         (isTop(placement)
           ? -(popoverLayout?.height ?? 0)
           : isBottom(placement)
-          ? anchorLayout?.height ?? 0
+          ? activatorLayout?.height ?? 0
           : isStart(placement)
           ? 0
           : isEnd(placement)
-          ? -(popoverLayout?.height ?? 0) + anchorLayout.height
-          : (anchorLayout.height - (popoverLayout?.height ?? 0)) / 2), // Left or right centered
+          ? -(popoverLayout?.height ?? 0) + activatorLayout.height
+          : (activatorLayout.height - (popoverLayout?.height ?? 0)) / 2), // Left or right centered
     }
 
-    if (aboveAnchor) {
-      // Offset to be above anchor
+    if (aboveActivator) {
+      // Offset to be above activator
       if (isTop(placement)) {
-        offset.y += anchorLayout.height
+        offset.y += activatorLayout.height
       } else if (isBottom(placement)) {
-        offset.y -= anchorLayout.height
+        offset.y -= activatorLayout.height
       } else if (isLeft(placement)) {
-        offset.x += anchorLayout.width
+        offset.x += activatorLayout.width
       } else {
-        offset.x -= anchorLayout.width
+        offset.x -= activatorLayout.width
       }
     }
 
     return offset
-  }, [placement, aboveAnchor, popoverLayout, anchorLayout])
+  }, [placement, aboveActivator, popoverLayout, activatorLayout])
 
 /**
  * Corrects the ideal Popover offset to prevent crossing View bounds.

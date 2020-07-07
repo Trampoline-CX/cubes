@@ -31,7 +31,7 @@ export const Basic: StoryFn<PopoverProps> = props => {
             {...props}
             open={visible}
             onRequestClose={() => setVisible(false)}
-            anchor={<IconButton icon="more" onClick={() => setVisible(true)} />}
+            activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
           />
         </Box>
       </Screen>
@@ -55,7 +55,7 @@ Basic.args = {
 Basic.argTypes = {
   open: { control: null },
   children: { control: null },
-  anchor: { control: null },
+  activator: { control: null },
 }
 
 export const UsingChildrenItems: StoryFn<PopoverProps> = () => {
@@ -68,7 +68,7 @@ export const UsingChildrenItems: StoryFn<PopoverProps> = () => {
           <Popover
             open={visible}
             onRequestClose={() => setVisible(false)}
-            anchor={<IconButton icon="more" onClick={() => setVisible(true)} />}
+            activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
           >
             <Popover.Item label="Edit" icon="edit" onSelect={action('Edit selected')} />
             <Popover.Item
@@ -95,7 +95,7 @@ export const MatchWidth: React.FC = () => {
             matchWidth
             open={visible}
             onRequestClose={() => setVisible(false)}
-            anchor={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+            activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
             actions={[
               { label: 'A pizza', action: action('Option selected: A pizza') },
               { label: 'A taco', action: action('Option selected: A taco') },
@@ -107,7 +107,7 @@ export const MatchWidth: React.FC = () => {
   )
 }
 
-export const AboveAnchorAndHideBackdrop: React.FC = () => {
+export const AboveActivatorAndHideBackdrop: React.FC = () => {
   const [visible, setVisible] = useState(false)
 
   return (
@@ -115,12 +115,12 @@ export const AboveAnchorAndHideBackdrop: React.FC = () => {
       <Screen>
         <Box fill distribution="center" align="center">
           <Popover
-            aboveAnchor
+            aboveActivator
             hideBackdrop
             placement="bottom-end"
             open={visible}
             onRequestClose={() => setVisible(false)}
-            anchor={<IconButton icon="more" onClick={() => setVisible(true)} />}
+            activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
             actions={[
               { label: 'A pizza', action: action('Option selected: A pizza') },
               { label: 'A taco', action: action('Option selected: A taco') },
@@ -142,7 +142,7 @@ export const AutomaticPlacementCorrection: StoryFn<PopoverProps> = () => {
           <Popover
             open={visible}
             onRequestClose={() => setVisible(false)}
-            anchor={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+            activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
             actions={[
               { label: 'A pizza', action: action('Option selected: A pizza') },
               { label: 'A taco', action: action('Option selected: A taco') },
@@ -173,7 +173,7 @@ export const CustomContent: StoryFn<PopoverProps> = () => {
           <Popover
             open={visible}
             onRequestClose={() => setVisible(false)}
-            anchor={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+            activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
           >
             <Box padding="medium" space="large">
               <TextContainer>
