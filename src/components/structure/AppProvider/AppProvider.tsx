@@ -3,6 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
+import { SnackbarProvider } from '../../overlays/Snackbar/SnackbarProvider'
 import { AppProviderSizeProvider } from '../../dev'
 import { PopoverPortalProvider } from '../../overlays/Popover/PopoverPortalProvider/PopoverPortalProvider'
 import { AppProviderContext } from './AppProviderContext'
@@ -45,7 +46,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({
     <AppProviderSizeProvider>
       <AppProviderContext.Provider value={{ theme }}>
         <PopoverPortalProvider>
-          <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+          <SnackbarProvider>
+            <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+          </SnackbarProvider>
         </PopoverPortalProvider>
       </AppProviderContext.Provider>
     </AppProviderSizeProvider>
