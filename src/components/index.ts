@@ -39,6 +39,8 @@ export * from './navigation/TopBar/TopBar'
 export * from './overlays/AlertDialog/AlertDialog'
 export * from './overlays/ConfirmDialog/ConfirmDialog'
 export * from './overlays/Dialog/Dialog'
+export * from './overlays/Popover/Popover'
+export { PopoverPlacement } from './overlays/Popover/popover-placement'
 
 export * from './structure/AppProvider/AppProvider'
 export * from './structure/Box/Box'
