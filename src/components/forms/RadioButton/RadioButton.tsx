@@ -4,12 +4,13 @@ import { useStyles } from '../../../theme'
 import { Box } from '../../structure/Box/Box'
 import { BodyText } from '../../text'
 import { shameStyles } from '../../../theme/shame-styles'
+import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 
 export interface RadioButtonProps {
   /**
    * True if selected.
    */
-  checked: boolean
+  checked?: boolean
   /**
    * Label to display next to the Radio Button.
    */
@@ -24,8 +25,10 @@ export interface RadioButtonProps {
   disabled?: boolean
   /**
    * Called when selection state changes. Should propagate change to `checked` prop.
+   *
+   * If not set, component will be an uncontrolled component. @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  onChange: (checked: boolean) => void
+  onChange?: (checked: boolean) => void
 }
 
 const { size, checkSize } = shameStyles.radioButton
@@ -35,10 +38,10 @@ const { size, checkSize } = shameStyles.radioButton
  */
 export const RadioButton: React.FC<RadioButtonProps> = ({
   label,
-  checked,
+  checked: checkedRaw = false,
   helpText,
   disabled = false,
-  onChange,
+  onChange: onChangeRaw,
 }) => {
   const styles = useStyles(theme => ({
     background: {
@@ -70,6 +73,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
     },
   }))
 
+  const [checked, onChange] = useUncontrolledState(checkedRaw, onChangeRaw)
   const onClick = useCallback(() => {
     // Only check if selected, unchecking should be performed by selecting a different option.
     if (!checked) {

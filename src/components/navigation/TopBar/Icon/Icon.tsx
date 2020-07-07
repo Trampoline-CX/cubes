@@ -13,13 +13,18 @@ export interface IconProps {
   color?: OriginalIconProps['color']
   /**
    * Called on click of the Icon.
+   *
+   * If this is not set, there will still be touch feedback, but no action will be performed.
+   * Optional mainly for mockup purposes.
    */
-  onClick: () => void
+  onClick?: () => void
 }
 
 /**
  * Set a right-aligned icon in the `TopBar` component.
  */
-export const Icon: React.FC<IconProps> = ({ name, color, onClick }) => (
-  <IconButton icon={name} onClick={onClick} color={color} />
-)
+export const Icon: React.FC<IconProps> = ({
+  name,
+  color,
+  onClick = () => {}, // Defaults to empty action, to keep touch feedback
+}) => <IconButton icon={name} onClick={onClick} color={color} />
