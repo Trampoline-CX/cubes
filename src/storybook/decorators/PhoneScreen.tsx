@@ -5,9 +5,9 @@ import { useStyles, themes } from '../../theme'
 import { AppProvider } from '../../components'
 
 export const PhoneScreen: StoryWrapper = (Story, context) => {
-  // context.globalArgs.theme here will be either 'light' or 'dark'
+  // context.globals.theme here will be either 'light' or 'dark'
   // getTheme being a function retrieving the actual theme object from that value
-  const themeName: 'light' | 'dark' = context.globalArgs.theme
+  const themeName: 'light' | 'dark' = context.globals.theme
 
   const styles = useStyles(theme => ({
     background: {
