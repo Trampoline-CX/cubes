@@ -32,3 +32,5 @@ export const Disabled: React.FC = () => {
 
   return <RadioButton label="Pizza" checked={checked} onChange={setChecked} disabled />
 }
+
+export const Uncontrolled: React.FC = () => <RadioButton label="Pizza" />

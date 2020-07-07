@@ -11,7 +11,7 @@ export interface TextAction {
   /**
    * Action to execute on click.
    */
-  action: () => void
+  action?: () => void
 }
 
 export interface IconAction {
@@ -26,7 +26,7 @@ export interface IconAction {
   /**
    * Action to execute on click.
    */
-  action: () => void
+  action?: () => void
 }
 
 export type TextWithOptionalIconAction = TextAction & Partial<IconAction>

@@ -42,11 +42,11 @@ export const Basic: StoryFn<PopoverProps> = props => {
 Basic.args = {
   placement: 'left-end',
   actions: [
-    { label: 'Edit', action: action('Option selected: Edit'), icon: 'action-edit' },
+    { label: 'Edit', action: action('Option selected: Edit'), icon: 'edit' },
     {
-      label: 'Unlink',
-      action: action('Option selected: Unlink'),
-      icon: 'broken-connection',
+      label: 'Link',
+      action: action('Option selected: Link'),
+      icon: 'link',
       color: 'accent',
     },
   ],
@@ -70,10 +70,10 @@ export const UsingChildrenItems: StoryFn<PopoverProps> = () => {
             onRequestClose={() => setVisible(false)}
             anchor={<IconButton icon="more" onClick={() => setVisible(true)} />}
           >
-            <Popover.Item label="Edit" icon="action-edit" onSelect={action('Edit selected')} />
+            <Popover.Item label="Edit" icon="edit" onSelect={action('Edit selected')} />
             <Popover.Item
               label="Unlink"
-              icon="broken-connection"
+              icon="link"
               iconColor="accent"
               onSelect={action('Unlink selected')}
             />

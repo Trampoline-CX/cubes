@@ -25,8 +25,11 @@ export interface ButtonBasePublicProps<T = string> extends TestProps {
   loading?: boolean
   /**
    * Called when the button is clicked.
+   *
+   * If this is not set, there will still be touch feedback, but no action will be performed.
+   * Optional mainly for mockup purposes.
    */
-  onClick: () => void
+  onClick?: () => void
 }
 
 export interface ButtonStyleProps {
@@ -48,7 +51,7 @@ export const ButtonBase: React.FC<ButtonBaseProps> = ({
   children,
   disabled,
   loading,
-  onClick,
+  onClick = () => {}, // Defaults to empty action, to keep touch feedback
   borderRadius: borderRadiusRaw = 'none',
   spinnerColor = 'primary',
   labelStyle = [],

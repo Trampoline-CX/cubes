@@ -35,7 +35,7 @@ export const UsingValues: React.FC = () => (
 
 export const WithActions: React.FC = () => {
   const actions: ListViewItemProps['actions'] = [
-    { icon: 'action-edit', action: action('Item Edit Clicked') },
+    { icon: 'create', action: action('Item Edit Clicked') },
     { icon: 'feedback', action: action('Item Favorite Clicked'), color: 'accent' },
   ]
 
@@ -51,3 +51,14 @@ export const WithActions: React.FC = () => {
     />
   )
 }
+
+export const WithoutDividers: React.FC = () => (
+  <ListView
+    values={[
+      { title: 'Cats' },
+      { title: 'Cheetahs' },
+      { title: 'Dogs' },
+      { title: 'Hummingbirds' },
+    ]}
+  />
+)

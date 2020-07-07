@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged }} # If merged only
+    timeout-minutes: 10
+    steps:
+      # Build steps (required to build dist/ directory)
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1 # Required for publishing to NPM Registry.
+        with:
+          registry-url: 'https://registry.npmjs.org'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache Yarn modules cache
+        uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install node_modules
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
+
+      # Releasing Steps
+      # Step needed to extract release version from branch name
+      - name: Extract Release Version
+        id: extract_version
+        if: ${{ env.IS_RELEASE == true }}
+        env:
+          RELEASE_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: echo "##[set-output name=version;]$(echo ${RELEASE_BRANCH#release/})"
+
+      - name: Publish to NPM
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: ${{ github.event.pull_request.title }}
+          body: ${{github.event.pull_request.body}}
+          tag_name: ${{ steps.extract_version.outputs.version }}
+          prerelease: false

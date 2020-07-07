@@ -21,13 +21,18 @@ export interface ItemProps {
   /**
    * Action to execute on click.
    */
-  onSelect: () => void
+  onSelect?: () => void
 }
 
 /**
  * Action to display in a `Popover`.
  */
-export const Item: React.FC<ItemProps> = ({ label, icon, iconColor, onSelect: onSelectRaw }) => {
+export const Item: React.FC<ItemProps> = ({
+  label,
+  icon,
+  iconColor,
+  onSelect: onSelectRaw = () => {},
+}) => {
   const { requestClose } = useContext(PopoverContext)
 
   // Make sure to close the Popover after calling onSelect
