@@ -5,7 +5,7 @@ import { shameStyles } from '../../../theme/shame-styles'
 import { SkeletonBodyText } from '../SkeletonBodyText/SkeletonBodyText'
 
 /**
- * Skeleton component acting as a placeholder for `Heading`.
+ * Gives a low fidelity representation of a `Heading`.
  */
 export const SkeletonHeading: React.FC = () => (
   <Box padding="medium">

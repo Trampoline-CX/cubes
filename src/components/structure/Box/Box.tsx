@@ -57,7 +57,7 @@ export interface BoxProps {
   /**
    * Defines how views are aligned (in same direction of the Box).
    */
-  distribution?: 'start' | 'end' | 'center'
+  distribution?: 'start' | 'end' | 'center' | 'space-between'
   /**
    * If true, children order will be reversed.
    */
@@ -65,7 +65,7 @@ export interface BoxProps {
 }
 
 /**
- * Box component, used as a basic building block to layout views. Layouting follow a flexbox like approach.
+ * Used as a basic building block to layout views. Layouting follow a flexbox like approach.
  *
  * > **Note:** Padding is applied from the more generic ones to the more specific.
  * >
@@ -97,7 +97,13 @@ export const Box: React.FC<BoxProps> = ({
       paddingRight: theme.spacing[paddingRight ?? paddingX ?? padding ?? 'none'],
       flex: fill ? 1 : undefined,
       justifyContent:
-        distribution === 'start' ? 'flex-start' : distribution === 'end' ? 'flex-end' : 'center',
+        distribution === 'start'
+          ? 'flex-start'
+          : distribution === 'end'
+          ? 'flex-end'
+          : distribution === 'center'
+          ? 'center'
+          : 'space-between',
       flexDirection: reverse
         ? horizontal
           ? 'row-reverse'

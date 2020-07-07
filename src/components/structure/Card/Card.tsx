@@ -7,10 +7,10 @@ import { Box } from '../Box/Box'
 import { Divider } from '../Divider/Divider'
 import { Touchable } from '../../base/Touchable/Touchable'
 import { TextStyle } from '../../text/TextStyle/TextStyle'
-import { Icon } from '../../icons/Icon/Icon'
+import { Icon } from '../../images-and-icons/Icon/Icon'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
-import { TextAction } from '../../actions'
+import { TextAction } from '../../actions/actions'
 import { Section } from './Section/Section'
 
 export interface CardProps {
@@ -45,7 +45,7 @@ export interface CardProps {
 }
 
 /**
- * Component displaying information in a Card.
+ * Group similar concepts and tasks together to simplify content representation for the user.
  */
 export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   children,
@@ -121,7 +121,7 @@ const CardMainAction: React.FC<{ action: TextAction }> = ({ action }) => (
               <TextStyle variation="accent">{action.label}</TextStyle>
             </Heading>
           </Box>
-          <Icon name="nav-disclosure" color="subdued" />
+          <Icon name="navigate-next" color="subdued" />
         </Box>
       </Box>
     </Touchable>

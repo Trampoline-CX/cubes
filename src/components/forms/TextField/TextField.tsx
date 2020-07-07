@@ -17,7 +17,8 @@ import { IconButton } from '../../actions/IconButton/IconButton'
 import { Box } from '../../structure/Box/Box'
 import { Caption } from '../../text/Caption/Caption'
 import { TestProps } from '../../../utils/TestProps'
-import { IconAction } from '../../actions'
+import { IconAction } from '../../actions/actions'
+import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 
 export interface TextFieldProps extends TestProps {
   /**
@@ -27,7 +28,7 @@ export interface TextFieldProps extends TestProps {
   /**
    * Text value in the input.
    */
-  value: string
+  value?: string
   /**
    * Type of the TextField.
    *
@@ -88,8 +89,10 @@ export interface TextFieldProps extends TestProps {
   autoCapitalize?: TextInputProps['autoCapitalize']
   /**
    * Called when the input value changes. `value` property should be changed to reflect this new value.
+   *
+   * If not set, component will be an uncontrolled component. @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  onChange: (value: string) => void
+  onChange?: (value: string) => void
   /**
    * Called when focused.
    */
@@ -113,14 +116,14 @@ export interface TextFieldProps extends TestProps {
 }
 
 /**
- * Let the user enter/edit text content.
+ * Input field that users can type into.
  */
 export const TextField = React.forwardRef<TextInput, TextFieldProps>(
   (
     {
       label,
-      value,
-      onChange,
+      value: valueRaw = '',
+      onChange: onChangeRaw,
       type = 'text',
       placeholder,
       helpText,
@@ -197,6 +200,8 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
         justifyContent: 'center',
       },
     }))
+
+    const [value, onChange] = useUncontrolledState(valueRaw, onChangeRaw)
 
     // Register the form field in the Form
     const inputRef = useRef<TextInput>(null)
@@ -320,7 +325,12 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
           </View>
           {endAction ? (
             <View style={styles.endActionContainer}>
-              <IconButton icon={endAction.icon} onClick={endAction.action} size="small" />
+              <IconButton
+                icon={endAction.icon}
+                onClick={endAction.action}
+                size="small"
+                color={endAction.color}
+              />
             </View>
           ) : null}
         </View>

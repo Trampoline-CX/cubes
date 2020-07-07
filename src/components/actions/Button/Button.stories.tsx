@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { Centered } from '../../../storybook/decorators/Centered'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Box } from '../../structure'
+import { Box } from '../../structure/Box/Box'
 import { Button, ButtonProps } from './Button'
 
 export default {
@@ -17,6 +17,9 @@ export const Basic: StoryFn<ButtonProps> = props => <Button {...props} />
 Basic.args = {
   children: 'Button',
   onClick: action('button clicked'),
+}
+Basic.argTypes = {
+  children: { control: 'text' },
 }
 
 export const Secondary: React.FC = () => (

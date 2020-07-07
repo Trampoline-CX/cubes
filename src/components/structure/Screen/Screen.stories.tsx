@@ -7,7 +7,7 @@ import { DisplayText } from '../../text/DisplayText/DisplayText'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
-import { TopBar } from '../../navigation'
+import { TopBar } from '../../navigation/TopBar/TopBar'
 import { BottomNavigationBar } from '../../navigation/BottomNavigationBar/BottomNavigationBar'
 import { Screen } from './Screen'
 
@@ -32,9 +32,9 @@ export const Default: React.FC = () => (
       </TextContainer>
     </Screen.Content>
     <BottomNavigationBar>
-      <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Click')} />
-      <BottomNavigationBar.Tab icon="accounts" onClick={action('Accounts Tab Click')} />
-      <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Click')} />
+      <BottomNavigationBar.Tab icon="dashboard" selected onClick={action('Money Tab Click')} />
+      <BottomNavigationBar.Tab icon="account-balance" onClick={action('Accounts Tab Click')} />
+      <BottomNavigationBar.Tab icon="person" onClick={action('Profile Tab Click')} />
     </BottomNavigationBar>
   </Screen>
 )
@@ -53,9 +53,9 @@ export const NotScrollable: React.FC = () => (
       </TextContainer>
     </Screen.Content>
     <BottomNavigationBar>
-      <BottomNavigationBar.Tab icon="money" selected onClick={action('Money Tab Click')} />
-      <BottomNavigationBar.Tab icon="accounts" onClick={action('Accounts Tab Click')} />
-      <BottomNavigationBar.Tab icon="profile" onClick={action('Profile Tab Click')} />
+      <BottomNavigationBar.Tab icon="dashboard" selected onClick={action('Money Tab Click')} />
+      <BottomNavigationBar.Tab icon="account-balance" onClick={action('Accounts Tab Click')} />
+      <BottomNavigationBar.Tab icon="person" onClick={action('Profile Tab Click')} />
     </BottomNavigationBar>
   </Screen>
 )

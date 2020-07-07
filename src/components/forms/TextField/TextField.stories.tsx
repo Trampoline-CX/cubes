@@ -108,7 +108,9 @@ export const WithEndActionAndHiddenLabel: React.FC = () => {
       value={value}
       onChange={setValue}
       hideLabel
-      endAction={{ icon: 'theme', action: action('EndAction Clicked') }}
+      endAction={{ icon: 'palette', action: action('EndAction Clicked'), color: 'accent' }}
     />
   )
 }
+
+export const Uncontrolled: React.FC = () => <TextField label="Uncontrolled" />

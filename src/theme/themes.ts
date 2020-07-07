@@ -25,6 +25,7 @@ const lightTheme: Theme = {
         default: '#FCF8F7',
         lighter: '#FFF',
         darker: '#EDE9E4',
+        inverse: '#5B6275',
       },
       divider: {
         default: 'rgba(0,0,0,0.10)',
@@ -131,9 +132,11 @@ const lightTheme: Theme = {
       xLarge: 64,
     },
     avatar: {
+      small: 32,
       default: 40,
     },
     divider: 1,
+    bullet: 8,
   },
 
   // SPACING
@@ -181,6 +184,7 @@ export const themes = {
         background: {
           lighter: '#000000',
           default: '#383838',
+          inverse: '#FCF8F7',
         },
         divider: {
           default: '#282828',

@@ -11,8 +11,11 @@ export interface PillProps {
   highlight?: boolean
   /**
    * Action triggered on click.
+   *
+   * If this is not set, there will still be touch feedback, but no action will be performed.
+   * Optional mainly for mockup purposes.
    */
-  onClick: () => void
+  onClick?: () => void
   /**
    * Text of the Pill.
    */
@@ -20,9 +23,13 @@ export interface PillProps {
 }
 
 /**
- * Small component displaying quick actions.
+ * Display quick actions such as data filters.
  */
-export const Pill: React.FC<PillProps> = ({ children, onClick, highlight = false }) => {
+export const Pill: React.FC<PillProps> = ({
+  children,
+  onClick = () => {}, // Defaults to empty action, to keep touch feedback
+  highlight = false,
+}) => {
   const styles = useStyles(theme => ({
     bounds: {
       borderRadius: theme.radius.circle,

@@ -11,7 +11,10 @@ export interface BottomNavigationBarProps {
 }
 
 /**
- * Bottom bar for tab navigation.
+ * Display the primary navigation as tabs appearing at the bottom of the Screen.
+ * Clicking a tab should change screens in the application.
+ *
+ * There should always be between 2 to 5 tabs. Never more or less than this.
  */
 export const BottomNavigationBar: React.FC<BottomNavigationBarProps> & {
   Tab: typeof Tab
@@ -20,7 +23,7 @@ export const BottomNavigationBar: React.FC<BottomNavigationBarProps> & {
     background: {
       flexDirection: 'row',
       alignItems: 'stretch',
-      background: theme.colors.fill.background.lighter,
+      backgroundColor: theme.colors.fill.background.lighter,
       ...theme.elevation.z8,
     },
   }))

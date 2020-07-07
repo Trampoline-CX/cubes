@@ -13,7 +13,7 @@ export interface SectionProps {
 }
 
 /**
- * Card Section. Used to display a section in a `Card` component.
+ * Used to display a section in a `Card` component using consitent spacing.
  */
 export const Section: React.FC<SectionProps> = ({ children, noPaddingX = false }) => (
   <Box padding="medium" paddingX={noPaddingX ? 'none' : undefined}>

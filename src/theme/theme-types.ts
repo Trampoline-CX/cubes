@@ -45,7 +45,7 @@ export interface Theme {
       primary: ComplexColor
       accent: ComplexColor
       accentSecondary: ComplexColor
-      background: ComplexColor
+      background: ComplexColor & { inverse: ColorHex }
       divider: ComplexColor
     }
     text: {
@@ -124,9 +124,11 @@ export interface Theme {
       xLarge: number
     }
     avatar: {
+      small: number
       default: number
     }
     divider: number
+    bullet: number
   }
 
   // RADIUS

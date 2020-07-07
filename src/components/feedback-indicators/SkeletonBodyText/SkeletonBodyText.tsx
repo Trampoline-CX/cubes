@@ -13,7 +13,7 @@ export interface SkeletonBodyTextProps {
 }
 
 /**
- * Skeleton component acting as a placeholder for `BodyText`.
+ * Gives a low fidelity representation of a `BodyText`.
  */
 export const SkeletonBodyText: React.FC<SkeletonBodyTextProps> = ({ lines = 1 }) => {
   const styles = useStyles(theme => ({

@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react'
 import { View } from 'react-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
-import { IconName } from '../../icons/Icon/Icon'
+import { IconName } from '../../images-and-icons/Icon/Icon'
 import { Heading } from '../../text/Heading/Heading'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
-import { useNav } from '../NavigationProvider/NavigationProvider'
-import { IconAction } from '../../actions'
+import { IconAction } from '../../actions/actions'
+import { useNav } from '../../../navigation'
 import { Icon } from './Icon/Icon'
 
 export interface TopBarProps {
@@ -39,20 +40,22 @@ export interface TopBarProps {
 const { height } = shameStyles.topBar
 
 /**
- * Top Bar used for navigation and title display. Acts as an App Bar for Android and Navigation Bar for iOS.
+ * Used for displaying title and back navigation. Can optionally include additional quick actions.
+ *
+ * Acts as an App Bar for Android and Navigation Bar for iOS.
  */
 export const TopBar: React.FC<TopBarProps> = ({
   title,
-  iconStart = 'go-back',
+  iconStart = 'arrow-back',
   onIconStartClick: onIconStartClickRaw,
   transparent = false,
   actions,
 }) => {
+  const insets = useSafeArea()
   const styles = useStyles(theme => ({
     root: {
       flexDirection: 'row',
       backgroundColor: theme.colors.fill.background.lighter,
-      height,
       alignItems: 'center',
       ...theme.elevation.z4,
     },
@@ -62,16 +65,24 @@ export const TopBar: React.FC<TopBarProps> = ({
     },
   }))
 
-  const { goBack } = useNav()
-  const onIconStartClick = onIconStartClickRaw || goBack
+  const { back } = useNav()
+  const onIconStartClick = onIconStartClickRaw || back
   const actionComponents = useMemo(
     () =>
-      actions?.map(({ icon, action }, index) => <Icon key={index} name={icon} onClick={action} />),
+      actions?.map(({ icon, action, color }, index) => (
+        <Icon key={index} name={icon} onClick={action} color={color} />
+      )),
     [actions],
   )
 
   return (
-    <View style={[styles.root, transparent ? styles.transparentRoot : null]}>
+    <View
+      style={[
+        styles.root,
+        transparent ? styles.transparentRoot : null,
+        { paddingTop: insets.top, height: insets.top + height },
+      ]}
+    >
       {iconStart !== 'none' ? (
         <Box paddingX="xSmall">
           <IconButton icon={iconStart} onClick={onIconStartClick} />
