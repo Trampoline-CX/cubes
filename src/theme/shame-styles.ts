@@ -42,6 +42,12 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
+  snackbar: {
+    duration: {
+      default: 2500,
+      longer: 4000,
+    },
+  },
   popover: {
     zIndex: 99999,
     backdrop: {
