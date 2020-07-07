@@ -28,3 +28,5 @@ export interface IconAction {
    */
   action?: () => void
 }
+
+export type TextWithOptionalIconAction = TextAction & Partial<IconAction>
