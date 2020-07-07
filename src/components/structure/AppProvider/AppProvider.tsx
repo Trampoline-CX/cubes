@@ -1,6 +1,5 @@
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Modal from 'modal-react-native-web'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
