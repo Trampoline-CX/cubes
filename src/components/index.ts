@@ -36,6 +36,10 @@ export * from './navigation/BottomNavigationBar/BottomNavigationBar'
 export * from './navigation/Tabs/Tabs'
 export * from './navigation/TopBar/TopBar'
 
+export * from './overlays/AlertDialog/AlertDialog'
+export * from './overlays/ConfirmDialog/ConfirmDialog'
+export * from './overlays/Dialog/Dialog'
+
 export * from './structure/AppProvider/AppProvider'
 export * from './structure/Box/Box'
 export * from './structure/ButtonGroup/ButtonGroup'
