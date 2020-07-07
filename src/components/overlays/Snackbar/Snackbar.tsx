@@ -5,8 +5,8 @@ import { useStyles, useTheme } from '../../../theme'
 import { BodyText } from '../../text'
 import { useTimeout } from '../../../utils/hooks/use-timeout'
 import { TextAction } from '../../actions/actions'
-import { Button } from '../../actions/Button/Button'
 import { Box } from '../../structure/Box/Box'
+import { SnackbarButton } from './SnackbarButton/SnackbarButton'
 
 export interface SnackbarProps {
   /**
@@ -105,14 +105,16 @@ export const Snackbar: React.FC<SnackbarProps> = ({
       >
         <Box
           horizontal
-          paddingY="small"
+          paddingY={action ? 'none' : 'small'}
           paddingX="medium"
+          paddingRight={action ? 'xSmall' : 'medium'}
           space="medium"
-          distribution="space-between"
           align="center"
         >
-          <BodyText variation="inverse">{message}</BodyText>
-          {action ? <Button onClick={onActionClick}>{action.label}</Button> : null}
+          <Box paddingY="xSmall" fill>
+            <BodyText variation="inverse">{message}</BodyText>
+          </Box>
+          {action ? <SnackbarButton onClick={onActionClick}>{action.label}</SnackbarButton> : null}
         </Box>
       </Animated.View>
     </View>
