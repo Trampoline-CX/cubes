@@ -4,31 +4,25 @@ import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure/Box/Box'
 import { Button } from '../../actions/Button/Button'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
-import { Confirm, ConfirmProps } from './Confirm'
+import { AlertDialog, AlertDialogProps } from './AlertDialog'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  component: Confirm,
+  component: AlertDialog,
 }
 
-export const Basic: StoryFn<ConfirmProps> = ({
-  title,
-  message,
-  positiveActionText,
-  negativeActionText,
-}) => {
+export const Basic: StoryFn<AlertDialogProps> = ({ title, message, buttonText }) => {
   const [visible, setVisible] = useState(false)
 
   return (
     <Box padding="medium" align="start">
       <Button onClick={() => setVisible(true)}>Alert me!</Button>
-      <Confirm
+      <AlertDialog
         title={title}
         message={message}
         open={visible}
         onClose={() => setVisible(false)}
-        positiveActionText={positiveActionText}
-        negativeActionText={negativeActionText}
+        buttonText={buttonText}
       />
     </Box>
   )
@@ -36,9 +30,8 @@ export const Basic: StoryFn<ConfirmProps> = ({
 
 Basic.args = {
   title: 'This is very important!',
-  message: 'Are you a cute unicorn? 🦄',
-  positiveActionText: 'Yes',
-  negativeActionText: 'Probably',
+  message: "Damn you're cute! 😊",
+  buttonText: 'Wow thanks!',
 }
 
 Basic.argTypes = {
@@ -52,12 +45,11 @@ export const WithoutTitle: React.FC = () => {
   return (
     <Box padding="medium" align="start">
       <Button onClick={() => setVisible(true)}>Alert me!</Button>
-      <Confirm
-        message="Do you want to have peace in the world?"
+      <AlertDialog
         open={visible}
         onClose={() => setVisible(false)}
-        positiveActionText="Yes"
-        negativeActionText="No"
+        buttonText="Close"
+        message="This is some important content!"
       />
     </Box>
   )

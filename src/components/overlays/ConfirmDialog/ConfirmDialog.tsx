@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { Dialog } from '../Dialog/Dialog'
 import { BodyText } from '../../text'
 
-export interface ConfirmProps {
+export interface ConfirmDialogProps {
   /**
    * Optional Confirm Title.
    */
@@ -33,7 +33,7 @@ export interface ConfirmProps {
  * Ask the user a yes/no question. Should be used sparingly, as this interrupts the
  * user flow.
  */
-export const Confirm: React.FC<ConfirmProps> = ({
+export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   title,
   message,
   open,

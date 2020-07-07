@@ -2,7 +2,7 @@ import React from 'react'
 import { Dialog } from '../Dialog/Dialog'
 import { BodyText } from '../../text'
 
-export interface AlertProps {
+export interface AlertDialogProps {
   /**
    * Optional Alert Title.
    */
@@ -29,7 +29,13 @@ export interface AlertProps {
  * Alert the user of something important. Should be used sparingly, as this interrupts the
  * user flow.
  */
-export const Alert: React.FC<AlertProps> = ({ title, message, open, onClose, buttonText }) => (
+export const AlertDialog: React.FC<AlertDialogProps> = ({
+  title,
+  message,
+  open,
+  onClose,
+  buttonText,
+}) => (
   <Dialog
     sectioned
     hideClose
