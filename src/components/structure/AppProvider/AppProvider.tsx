@@ -4,7 +4,6 @@ import Modal from 'modal-react-native-web'
 import { Theme, themes } from '../../../theme'
 import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
-import { ToastProvider } from '../../overlays/Toast/ToastProvider'
 import { AppProviderContext } from './AppProviderContext'
 
 export interface WithNavigationSchema {
@@ -46,9 +45,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({
 }) => (
   <SafeAreaProvider>
     <AppProviderContext.Provider value={{ theme }}>
-      <ToastProvider>
-        <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
-      </ToastProvider>
+      <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
     </AppProviderContext.Provider>
   </SafeAreaProvider>
 )

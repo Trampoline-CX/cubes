@@ -46,7 +46,7 @@ const { height } = shameStyles.topBar
  */
 export const TopBar: React.FC<TopBarProps> = ({
   title,
-  iconStart = 'go-back',
+  iconStart = 'arrow-back',
   onIconStartClick: onIconStartClickRaw,
   transparent = false,
   actions,

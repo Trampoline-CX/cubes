@@ -4,6 +4,7 @@ import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox'
 import { RadioButton, RadioButtonProps } from '../RadioButton/RadioButton'
 import { BodyText } from '../../text'
 import { InlineError } from '../InlineError/InlineError'
+import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 
 export interface Choice {
   /**
@@ -32,7 +33,7 @@ export interface ChoiceListProps {
   /**
    * List of selected choices.
    */
-  selected: string[]
+  selected?: string[]
   /**
    * Label for the list of choices.
    */
@@ -51,8 +52,10 @@ export interface ChoiceListProps {
   error?: string
   /**
    * Callback when the selected choices change.
+   *
+   * If not set, component will be an uncontrolled component. @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  onChange: (selected: string[]) => void
+  onChange?: (selected: string[]) => void
 }
 
 /**
@@ -61,13 +64,14 @@ export interface ChoiceListProps {
  */
 export const ChoiceList: React.FC<ChoiceListProps> = ({
   choices,
-  selected,
+  selected: selectedRaw = [],
   title,
   allowMultiple = false,
   error,
   disabled = false,
-  onChange,
+  onChange: onChangeRaw,
 }) => {
+  const [selected, onChange] = useUncontrolledState(selectedRaw, onChangeRaw)
   const itemProps: ItemsProps[] = choices.map(
     ({ label, value, disabled: disabledItem, helpText }) => ({
       key: value,

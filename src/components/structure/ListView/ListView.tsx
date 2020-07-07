@@ -22,7 +22,7 @@ export type ListViewProps = {
   /**
    * Divider placed between each item. If none is provided, no separator is shown.
    */
-  divider: React.ReactNode
+  divider?: React.ReactNode
 } & (ListViewWithChildren | ListViewWithValues)
 
 /**
@@ -70,12 +70,14 @@ const useListItems = (
     const count = React.Children.count(dataItems)
     return {
       count,
-      items: React.Children.map(dataItems, (child, i) => (
-        <>
-          {i > 0 ? divider : null}
-          {child}
-        </>
-      )),
+      items: divider
+        ? React.Children.map(dataItems, (child, i) => (
+            <>
+              {i > 0 ? divider : null}
+              {child}
+            </>
+          ))
+        : dataItems,
     }
   }, [values, children, divider])
 
