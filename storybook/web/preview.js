@@ -3,6 +3,7 @@ import { Background } from '../../src/storybook/decorators/Background'
 import { WithAppProvider } from '../../src/storybook/decorators/WithAppProvider'
 
 addParameters({
+  viewMode: 'docs',
   options: {
     // Sort stories based on name
     storySort: (a, b) =>
