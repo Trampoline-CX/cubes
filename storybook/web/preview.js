@@ -20,7 +20,7 @@ addParameters({
 })
 
 // Add control for toggling components theme
-export const globalArgTypes = {
+export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Global theme for components',
