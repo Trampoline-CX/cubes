@@ -36,6 +36,9 @@ export type DialogProps = {
 
 const { backdropColor, defaultWidth, minWidth } = shameStyles.dialog
 
+// Set App Element of Modal (for React Native Web)
+Modal.setAppElement('body')
+
 /**
  * Show interactive content on top of an existing screen.
  * It should be used thoughtfully and sparingly, as it stops the user in its current flow.

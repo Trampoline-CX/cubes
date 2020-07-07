@@ -29,9 +29,6 @@ export type AppProviderProps = {
   theme?: Theme
 } & (WithNavigationSchema | WithoutNavigationSchema)
 
-// Set App Element of Modal
-Modal.setAppElement('body')
-
 /**
  * Required component that should be defined at the root of the App and controls many elements, like
  * theming, navigation and so on.
