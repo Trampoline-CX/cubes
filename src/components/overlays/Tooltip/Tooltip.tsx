@@ -42,7 +42,8 @@ export interface TooltipProps {
 const { hideAfterDelay } = shameStyles.tooltip
 
 /**
- * Floating label that briefly explain the function of a user interface element.
+ * Floating label that briefly explain the function of a user interface element. If wrapping a "Touchable" element,
+ * clicking the "Touchable" element will display the Toast.
  *
  * Behavior is slightly different on one platform to another:
  * - On Web, when using a Mouse, it will open when mouse hovers the `children` and will dismiss when
