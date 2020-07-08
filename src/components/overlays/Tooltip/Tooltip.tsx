@@ -9,6 +9,7 @@ import {
   NativeSyntheticEvent,
   GestureResponderEvent,
   NativeTouchEvent,
+  Platform,
 } from 'react-native'
 import _ from 'lodash'
 import { Popover } from '../Popover/Popover'
@@ -17,6 +18,7 @@ import { useStyles } from '../../../theme'
 import { IconButton, IconButtonProps } from '../../actions/IconButton/IconButton'
 import { Button, ButtonProps } from '../../actions/Button/Button'
 import { Touchable, TouchableProps } from '../../base/Touchable/Touchable'
+import { shameStyles } from '../../../theme/shame-styles'
 
 export interface TooltipProps {
   /**
@@ -36,6 +38,8 @@ export interface TooltipProps {
    */
   preferredPlacement?: 'above' | 'below'
 }
+
+const { hideAfterDelay } = shameStyles.tooltip
 
 /**
  * Floating label that briefly explain the function of a user interface element.
@@ -68,6 +72,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   // Forward `active` property changes to open state
   useEffect(() => setOpen(active), [active])
+
+  useHideAfterDelayOnNative(open, hide)
 
   const children = useMemo(
     () =>
@@ -130,4 +136,19 @@ export const Tooltip: React.FC<TooltipProps> = ({
       <Caption variation="inverse">{content}</Caption>
     </Popover>
   )
+}
+
+/**
+ * Hide the tooltip after a certain delay on Native (Android and iOS).
+ */
+const useHideAfterDelayOnNative = (open: boolean, hide: () => void): void => {
+  useEffect(() => {
+    if (open && (Platform.OS === 'android' || Platform.OS === 'ios')) {
+      const timeoutRef = setTimeout(hide, hideAfterDelay)
+
+      return () => clearTimeout(timeoutRef)
+    }
+
+    return // Return necessary for ESLint
+  }, [open])
 }
