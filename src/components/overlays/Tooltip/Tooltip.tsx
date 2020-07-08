@@ -1,18 +1,26 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import {
   View,
   TouchableWithoutFeedback,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableOpacity,
   TouchableWithoutFeedbackProps,
-  Platform,
+  NativeSyntheticEvent,
+  GestureResponderEvent,
+  NativeTouchEvent,
 } from 'react-native'
+import _ from 'lodash'
 import { Popover } from '../Popover/Popover'
 import { Caption } from '../../text'
 import { useStyles } from '../../../theme'
-import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
+import { IconButton, IconButtonProps } from '../../actions/IconButton/IconButton'
+import { Button, ButtonProps } from '../../actions/Button/Button'
+import { Touchable, TouchableProps } from '../../base/Touchable/Touchable'
 
 export interface TooltipProps {
   /**
-   * Toggle tooltip visibility. Should be provided if `children` contains a clickable element.
+   * Toggle tooltip visibility. Should be used mainly for debugging purpose, as visibility should be automatically handled.
    */
   active?: boolean
   /**
@@ -24,12 +32,9 @@ export interface TooltipProps {
    */
   children: React.ReactNode
   /**
-   * Called when the tooltip should dismiss. Should not be provided unless `children`
-   * contains a clickable element.
-   *
-   * If provided, tooltip visibility is delegated to component's user.
+   * Preferred placement of the tooltip.
    */
-  onRequestClose?: () => void
+  preferredPlacement?: 'above' | 'below'
 }
 
 /**
@@ -44,8 +49,8 @@ export interface TooltipProps {
 export const Tooltip: React.FC<TooltipProps> = ({
   active = false,
   content,
-  children,
-  onRequestClose,
+  children: childrenRaw,
+  preferredPlacement = 'above',
 }) => {
   const styles = useStyles(theme => ({
     tooltip: {
@@ -58,36 +63,66 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   const [open, setOpen] = useState(active)
 
-  const onEnter = useCallback(() => {
-    if (!onRequestClose) {
-      setOpen(true)
-    }
-  }, [onRequestClose])
-  const onLeave = useCallback(() => {
-    if (onRequestClose) {
-      onRequestClose()
-    } else {
-      setOpen(false)
-    }
-  }, [onRequestClose])
+  const show = useCallback(() => setOpen(true), [])
+  const hide = useCallback(() => setOpen(false), [])
 
   // Forward `active` property changes to open state
   useEffect(() => setOpen(active), [active])
+
+  const children = useMemo(
+    () =>
+      React.Children.map(childrenRaw, child => {
+        if (React.isValidElement(child)) {
+          if (child.type === IconButton || child.type === Button || child.type === Touchable) {
+            const props: IconButtonProps | ButtonProps | TouchableProps = child.props
+
+            return React.cloneElement(child, {
+              onClick: _.wrap(
+                props.onClick,
+                (origOnClick, event: NativeSyntheticEvent<NativeTouchEvent>) => {
+                  event.persist()
+                  origOnClick?.(event)
+                  show()
+                },
+              ),
+            })
+          } else if (
+            child.type === TouchableWithoutFeedback ||
+            child.type === TouchableNativeFeedback ||
+            child.type === TouchableOpacity ||
+            child.type === TouchableHighlight
+          ) {
+            const props: TouchableWithoutFeedbackProps = child.props
+
+            return React.cloneElement(child, {
+              onPress: _.wrap(props.onPress, (origOnPress, event: GestureResponderEvent) => {
+                event.persist()
+                origOnPress?.(event)
+                show()
+              }),
+            })
+          }
+        }
+
+        return child
+      }),
+    [show, childrenRaw],
+  )
 
   return (
     <Popover
       open={open}
       activator={
         // Touchable present for Native Apps and Touch Screens without any mouse pointer
-        <TouchableWithoutFeedback onPress={onEnter}>
+        <TouchableWithoutFeedback onPress={show}>
           {/* View needed for touchable + handling tooltip visibility on mouse hover */}
-          <View onMouseEnter={onEnter} onMouseLeave={onLeave}>
+          <View onMouseEnter={show} onMouseLeave={hide}>
             {children}
           </View>
         </TouchableWithoutFeedback>
       }
-      onRequestClose={onLeave}
-      placement="top"
+      onRequestClose={hide}
+      placement={preferredPlacement === 'above' ? 'top' : 'bottom'}
       hideBackdrop
       clickThrough
       popoverStyle={styles.tooltip}

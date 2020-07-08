@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
 import { getStoryTitle } from '../../../storybook/get-story-title'
@@ -34,16 +34,12 @@ Basic.argTypes = {
   children: { control: null },
 }
 
-export const WithClickableChildren: React.FC = () => {
-  const [active, setActive] = useState(false)
-
-  return (
-    <Screen>
-      <Box fill distribution="center" align="start">
-        <Tooltip active={active} content="Navigate to link" onRequestClose={() => setActive(false)}>
-          <IconButton icon="web" onClick={() => setActive(true)} />
-        </Tooltip>
-      </Box>
-    </Screen>
-  )
-}
+export const WithClickableChildren: React.FC = () => (
+  <Screen>
+    <Box fill distribution="center" align="start">
+      <Tooltip content="Navigate to link" preferredPlacement="below">
+        <IconButton icon="web" onClick={action('Icon clicked')} />
+      </Tooltip>
+    </Box>
+  </Screen>
+)
