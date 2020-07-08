@@ -341,9 +341,7 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
         )}
         {helpText && (
           <Box paddingTop="xSmall">
-            <Caption>
-              <TextStyle variation="subdued">{helpText}</TextStyle>
-            </Caption>
+            <Caption variation="subdued">{helpText}</Caption>
           </Box>
         )}
       </View>
