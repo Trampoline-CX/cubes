@@ -1,0 +1,25 @@
+# This workflow creates merges master in develop every time a new commit
+# arrives on master
+name: Merge master in develop
+
+on:
+  push:
+    branches:
+      - feature/merge-master-in-develop-automatically-dummy
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: feature/merge-master-in-develop-automatically
+          fetch-depth: 0
+
+      - name: Merge into develop
+        run: |
+          git config --local user.email "github-action@users.noreply.github.com"
+          git config --local user.name "GitHub Action"
+          git pull origin feature/merge-master-in-develop-automatically-dummy --no-ff
+          git push
