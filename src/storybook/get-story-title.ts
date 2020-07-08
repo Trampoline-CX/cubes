@@ -6,7 +6,7 @@ import { fileAbsolute } from 'paths.macro'
 const componentsFolder = path.resolve(fileAbsolute, '../../components')
 
 export const getStoryTitle = (dirName: string): string => {
-  const storyName = path.basename(dirName, 'stories.tsx')
+  const storyName = path.basename(dirName, '.stories.tsx')
 
   // Get directory path relative to the components folder
   const dirs = path.relative(componentsFolder, dirName).split(path.sep)
