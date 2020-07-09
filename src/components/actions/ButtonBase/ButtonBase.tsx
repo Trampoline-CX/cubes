@@ -30,6 +30,10 @@ export interface ButtonBasePublicProps<T = string> extends TestProps {
    * Optional mainly for mockup purposes.
    */
   onClick?: () => void
+  /**
+   * Called when the button is long-clicked.
+   */
+  onLongClick?: () => void
 }
 
 export interface ButtonStyleProps {
@@ -52,6 +56,7 @@ export const ButtonBase: React.FC<ButtonBaseProps> = ({
   disabled,
   loading,
   onClick = () => {}, // Defaults to empty action, to keep touch feedback
+  onLongClick,
   borderRadius: borderRadiusRaw = 'none',
   spinnerColor = 'primary',
   labelStyle = [],
@@ -124,6 +129,7 @@ export const ButtonBase: React.FC<ButtonBaseProps> = ({
     <Touchable
       disabled={isDisabled}
       onClick={onClick}
+      onLongClick={onLongClick}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
       hitSlop={hitSlop}

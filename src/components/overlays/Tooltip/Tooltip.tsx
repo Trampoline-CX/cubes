@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedbackProps,
   NativeSyntheticEvent,
-  GestureResponderEvent,
   NativeTouchEvent,
   Platform,
 } from 'react-native'
 import _ from 'lodash'
+import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
 import { Popover } from '../Popover/Popover'
 import { Caption } from '../../text'
 import { useStyles } from '../../../theme'
@@ -41,6 +41,8 @@ export interface TooltipProps {
 
 const { hideAfterDelay } = shameStyles.tooltip
 
+const isNative = Platform.OS === 'android' || Platform.OS === 'ios'
+
 /**
  * Floating label that briefly explain the function of a user interface element. If wrapping a "Touchable" element,
  * clicking the "Touchable" element will display the Toast.
@@ -49,7 +51,8 @@ const { hideAfterDelay } = shameStyles.tooltip
  * - On Web, when using a Mouse, it will open when mouse hovers the `children` and will dismiss when
  * the mouse leaves the `children`.
  * - On Web, when using touches, it will open on click and dismiss itself when clicking somewhere else on screen.
- * - On Android and iOS, it will open on click and will dismiss itself after a short delay.
+ * - On Android and iOS, it will open on long click of Touchable elements and will appear on click of non-Touchable
+ * elements. It will dismiss itself after a short delay.
  */
 export const Tooltip: React.FC<TooltipProps> = ({
   active = false,
@@ -68,7 +71,12 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   const [open, setOpen] = useState(active)
 
-  const show = useCallback(() => setOpen(true), [])
+  const show = useCallback((hapticFeedback = false) => {
+    if (hapticFeedback) {
+      impactAsync(ImpactFeedbackStyle.Light).catch(() => {}) // Ignore errors
+    }
+    setOpen(true)
+  }, [])
   const hide = useCallback(() => setOpen(false), [])
 
   // Forward `active` property changes to open state
@@ -82,14 +90,15 @@ export const Tooltip: React.FC<TooltipProps> = ({
         if (React.isValidElement(child)) {
           if (child.type === IconButton || child.type === Button || child.type === Touchable) {
             const props: IconButtonProps | ButtonProps | TouchableProps = child.props
+            const clickProp: keyof typeof props = isNative ? 'onLongClick' : 'onClick'
 
             return React.cloneElement(child, {
-              onClick: _.wrap(
-                props.onClick,
+              [clickProp]: _.wrap(
+                props[clickProp],
                 (origOnClick, event: NativeSyntheticEvent<NativeTouchEvent>) => {
                   event.persist()
                   origOnClick?.(event)
-                  show()
+                  show(isNative)
                 },
               ),
             })
@@ -100,18 +109,27 @@ export const Tooltip: React.FC<TooltipProps> = ({
             child.type === TouchableHighlight
           ) {
             const props: TouchableWithoutFeedbackProps = child.props
+            const clickProp: keyof typeof props = isNative ? 'onLongPress' : 'onPress'
 
             return React.cloneElement(child, {
-              onPress: _.wrap(props.onPress, (origOnPress, event: GestureResponderEvent) => {
-                event.persist()
-                origOnPress?.(event)
-                show()
-              }),
+              [clickProp]: _.wrap(
+                props[clickProp],
+                (origOnPress, event: NativeSyntheticEvent<NativeTouchEvent>) => {
+                  event.persist()
+                  origOnPress?.(event)
+                  show(isNative)
+                },
+              ),
             })
           }
         }
 
-        return child
+        // Touchable present for Native Apps and Touch Screens without any mouse pointer on Web
+        return (
+          <TouchableWithoutFeedback onPress={show}>
+            <View>{child}</View>
+          </TouchableWithoutFeedback>
+        )
       }),
     [show, childrenRaw],
   )
@@ -120,13 +138,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
     <Popover
       open={open}
       activator={
-        // Touchable present for Native Apps and Touch Screens without any mouse pointer
-        <TouchableWithoutFeedback onPress={show}>
-          {/* View needed for touchable + handling tooltip visibility on mouse hover */}
-          <View onMouseEnter={show} onMouseLeave={hide}>
-            {children}
-          </View>
-        </TouchableWithoutFeedback>
+        // View needed for handling tooltip visibility on mouse hover
+        <View onMouseEnter={show} onMouseLeave={hide}>
+          {children}
+        </View>
       }
       onRequestClose={hide}
       placement={preferredPlacement === 'above' ? 'top' : 'bottom'}
@@ -144,7 +159,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
  */
 const useHideAfterDelayOnNative = (open: boolean, hide: () => void): void => {
   useEffect(() => {
-    if (open && (Platform.OS === 'android' || Platform.OS === 'ios')) {
+    if (open && isNative) {
       const timeoutRef = setTimeout(hide, hideAfterDelay)
 
       return () => clearTimeout(timeoutRef)
