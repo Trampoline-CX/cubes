@@ -34,4 +34,22 @@ export const Disabled: React.FC = () => {
   return <Slider label="Percentage of happiness" value={value} onChange={setValue} disabled />
 }
 
+export const CustomRangeAndStep: React.FC = () => {
+  const [value, setValue] = useState(2)
+
+  return (
+    <Box>
+      <Slider
+        label="Happy with your purchase?"
+        value={value}
+        onChange={setValue}
+        min={1}
+        max={5}
+        step={0.5}
+      />
+      <BodyText>{value}</BodyText>
+    </Box>
+  )
+}
+
 export const Uncontrolled: React.FC = () => <Slider label="Percentage of happiness" />
