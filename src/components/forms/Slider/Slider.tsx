@@ -1,17 +1,21 @@
-import React from 'react'
-import RNSlider from '@react-native-community/slider'
-import { Platform } from 'react-native'
+import React, { useCallback } from 'react'
+import MultiSlider from '@ptomasroos/react-native-multi-slider'
+import { View } from 'react-native'
 import { Box } from '../../structure/Box/Box'
 import { Heading, Caption } from '../../text'
-import { useTheme } from '../../../theme'
+import { useStyles } from '../../../theme'
+import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
+import { shameStyles } from '../../../theme/shame-styles'
+import { useOnLayout } from '../../../utils/hooks/use-on-layout'
+import { Knob } from './Knob/Knob'
 
 export interface SliderProps {
   /**
-   * Initial value. This is a controlled component, do not update this each time `onChange` is called.
+   * Value of the Slider.
    */
   value?: number
   /**
-   * Callback called when value changes
+   * Callback called when value changes.
    */
   onChange?: (value: number) => void
   /**
@@ -40,14 +44,14 @@ export interface SliderProps {
   disabled?: boolean
 }
 
+const { track, knob } = shameStyles.slider
+
 /**
  * Let the user select a numeric value in a given range.
- *
- * Note that this is a controlled component. You should not update initialValue when `onChange` is called.
  */
 export const Slider: React.FC<SliderProps> = ({
-  value = 0,
-  onChange,
+  value: valueRaw = 0,
+  onChange: onChangeRaw,
   label,
   helpText,
   min = 0,
@@ -55,25 +59,66 @@ export const Slider: React.FC<SliderProps> = ({
   step = 1,
   disabled = false,
 }) => {
-  const { colors } = useTheme()
+  const styles = useStyles(theme => ({
+    container: {},
+    containerNoRender: {
+      opacity: 0,
+    },
+    disabled: {
+      opacity: theme.opacity.disabled,
+    },
+    track: {
+      height: track.height,
+      backgroundColor: theme.colors.fill.background.darker,
+      borderRadius: theme.radius.circle,
+    },
+    selectedTrack: {
+      height: track.height,
+      backgroundColor: theme.colors.fill.accent.default,
+      borderRadius: theme.radius.circle,
+    },
+  }))
+  const [value, onChange] = useUncontrolledState(valueRaw, onChangeRaw)
+  const [layout, setLayout] = useOnLayout()
+
+  const onValuesChange = useCallback(
+    (values: number[]) => {
+      onChange(values[0])
+    },
+    [onChange],
+  )
+
+  const valuePosition = layout ? ((value - min) * layout.width) / (max - min) : 0
 
   return (
     <Box space="small">
       <Heading>{label}</Heading>
-      <RNSlider
-        minimumValue={min}
-        maximumValue={max}
-        step={step}
-        value={value}
-        thumbTintColor={
-          // Thumb color is different for iOS only
-          Platform.OS === 'ios' ? colors.fill.background.lighter : colors.fill.accent.default
-        }
-        minimumTrackTintColor={colors.fill.accent.default}
-        maximumTrackTintColor={colors.fill.background.darker}
-        disabled={disabled}
-        onValueChange={onChange}
-      />
+      <View
+        style={[styles.container, layout ? null : styles.containerNoRender]}
+        onLayout={setLayout}
+      >
+        {/* Wait for parent view to have layout before rendering, as otherwise Slider will have incorrect width */}
+        {layout ? (
+          <MultiSlider
+            min={min}
+            max={max}
+            step={step}
+            sliderLength={layout.width}
+            values={[value]}
+            customMarker={Knob}
+            markerOffsetY={track.height / 2}
+            // Offset marker to start / end at right place on track
+            markerOffsetX={(valuePosition * -knob.size) / layout.width + knob.size / 2}
+            containerStyle={disabled ? styles.disabled : undefined}
+            trackStyle={styles.track}
+            selectedStyle={styles.selectedTrack}
+            enabledOne={!disabled}
+            enabledTwo={!disabled}
+            onValuesChange={onValuesChange}
+          />
+        ) : null}
+      </View>
+
       {helpText ? <Caption variation="subdued">{helpText}</Caption> : null}
     </Box>
   )

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { action } from '@storybook/addon-actions'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { Box } from '../../structure/Box/Box'
@@ -17,7 +16,7 @@ export const Basic: StoryFn<SliderProps> = props => {
 
   return (
     <Box space="medium">
-      <Slider {...props} onChange={setValue} />
+      <Slider {...props} value={value} onChange={setValue} />
       <BodyText>Current Value: {value}</BodyText>
     </Box>
   )
@@ -29,6 +28,10 @@ Basic.args = {
   value: 50,
 }
 
-export const Disabled: React.FC = () => (
-  <Slider label="Percentage of happiness" value={50} disabled />
-)
+export const Disabled: React.FC = () => {
+  const [value, setValue] = useState(50)
+
+  return <Slider label="Percentage of happiness" value={value} onChange={setValue} disabled />
+}
+
+export const Uncontrolled: React.FC = () => <Slider label="Percentage of happiness" />
