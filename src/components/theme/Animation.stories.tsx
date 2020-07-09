@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { View, Animated } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Centered } from '../../storybook/decorators/Centered'
 import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
@@ -9,7 +8,6 @@ import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const Example: React.FC = () => <AnimatedSquare duration="shorter" easing="move" />
