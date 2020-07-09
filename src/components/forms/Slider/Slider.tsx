@@ -44,7 +44,7 @@ export interface SliderProps {
   disabled?: boolean
 }
 
-const { track, knob } = shameStyles.slider
+const { track } = shameStyles.slider
 
 /**
  * Let the user select a numeric value in a given range.
@@ -88,8 +88,6 @@ export const Slider: React.FC<SliderProps> = ({
     [onChange],
   )
 
-  const valuePosition = layout ? ((value - min) * layout.width) / (max - min) : 0
-
   return (
     <Box space="small">
       <Heading>{label}</Heading>
@@ -105,10 +103,12 @@ export const Slider: React.FC<SliderProps> = ({
             step={step}
             sliderLength={layout.width}
             values={[value]}
-            customMarker={Knob}
+            // We can't skip this ESLint warning, so we just ignore it
+            // eslint-disable-next-line react/jsx-no-bind
+            customMarker={props => (
+              <Knob {...props} trackLength={layout.width} min={min} max={max} />
+            )}
             markerOffsetY={track.height / 2}
-            // Offset marker to start / end at right place on track
-            markerOffsetX={(valuePosition * -knob.size) / layout.width + knob.size / 2}
             containerStyle={disabled ? styles.disabled : undefined}
             trackStyle={styles.track}
             selectedStyle={styles.selectedTrack}

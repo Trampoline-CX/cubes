@@ -4,11 +4,15 @@ import { MarkerProps } from '@ptomasroos/react-native-multi-slider'
 import { useStyles } from '../../../../theme'
 import { shameStyles } from '../../../../theme/shame-styles'
 
-export type KnobProps = MarkerProps
+export type KnobProps = {
+  trackLength: number
+  min: number
+  max: number
+} & MarkerProps
 
 const { size, borderColor } = shameStyles.slider.knob
 
-export const Knob: React.FC<KnobProps> = () => {
+export const Knob: React.FC<KnobProps> = ({ trackLength, currentValue, min, max }) => {
   const styles = useStyles(theme => ({
     knobContainer: {
       height: size,
@@ -30,8 +34,18 @@ export const Knob: React.FC<KnobProps> = () => {
     },
   }))
 
+  const valuePosition = trackLength ? ((currentValue - min) * trackLength) / (max - min) : 0
+
   return (
-    <View style={styles.knobContainer}>
+    <View
+      style={[
+        styles.knobContainer,
+        {
+          // Offset marker to start / end at right place on track
+          transform: [{ translateX: (valuePosition * -size) / trackLength + size / 2 }],
+        },
+      ]}
+    >
       <View style={[styles.knob, styles.knobOuter]} />
       <View style={styles.knob} />
     </View>
