@@ -80,6 +80,8 @@ const storybookConfig: StorybookConfig = {
       ),
       // Mock @expo/vector-icons with react-native-vector-icons
       '@expo/vector-icons$': path.resolve(__dirname, '../../src/storybook/utils/expo-vector-icons'),
+      './RNCSliderNativeComponent$':
+        '@react-native-community/slider/dist/RNCSliderNativeComponent.web',
     }
 
     return config
