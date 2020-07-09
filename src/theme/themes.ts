@@ -120,6 +120,13 @@ const lightTheme: Theme = {
       shadowColor: '#000',
       elevation: 8,
     },
+    z16: {
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.22,
+      shadowRadius: 15.5,
+      shadowColor: '#000',
+      elevation: 16,
+    },
   },
 
   // SIZING

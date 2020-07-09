@@ -112,6 +112,8 @@ export interface Theme {
     z4: Elevation
     // Sheets, dialogs, Bottom Navigation Bar
     z8: Elevation
+    // Modal Sheets
+    z16: Elevation
   }
 
   // SIZING

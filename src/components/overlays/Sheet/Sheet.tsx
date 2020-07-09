@@ -1,7 +1,7 @@
-import React from 'react'
-import Modal from 'modal-react-native-web'
-import { View, TouchableWithoutFeedback, Platform } from 'react-native'
+import React, { useState, useEffect, useCallback } from 'react'
+import { View, TouchableWithoutFeedback } from 'react-native'
 import { useStyles } from '../../../theme'
+import { Modal } from '../../base/Modal/Modal'
 import { SwipeableSheet } from './SwipeableSheet/SwipeableSheet'
 
 export interface SheetProps {
@@ -19,18 +19,14 @@ export interface SheetProps {
   children: React.ReactNode
 }
 
-// Set App Element of Modal (for React Native Web)
-if (Platform.OS === 'web') {
-  Modal.setAppElement('body')
-}
-
 /**
  * Large container entering from the edge of the screen. Can provide
  * contextual actions, information or filters. Does not interrupt the
  * flow as a Dialog would do.
  */
 export const Sheet: React.FC<SheetProps> = ({ open, onClose, children }) => {
-  const styles = useStyles(theme => ({
+  const [isAnimating, setAnimating] = useState(false)
+  const styles = useStyles(() => ({
     container: {
       flex: 1,
     },
@@ -40,26 +36,35 @@ export const Sheet: React.FC<SheetProps> = ({ open, onClose, children }) => {
     },
   }))
 
+  useEffect(() => {
+    if (open) {
+      setAnimating(true)
+    }
+  }, [open])
+
+  const hide = useCallback(() => {
+    setAnimating(true)
+    onClose()
+  }, [onClose])
+
+  const onHidden = useCallback(() => {
+    setAnimating(false)
+
+    if (open) {
+      onClose()
+    }
+  }, [open])
+
   return (
-    <Modal
-      visible={open}
-      onDismiss={onClose}
-      onRequestClose={onClose}
-      animationType="none"
-      transparent
-    >
+    <Modal visible={open || isAnimating} onRequestClose={hide} animationType="none" transparent>
       <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={onClose}>
+        <TouchableWithoutFeedback onPress={hide}>
           <View style={styles.backdrop} />
         </TouchableWithoutFeedback>
 
-        {open && (
-          <SwipeableSheet onSwiped={onClose}>
-            {/* <Header title={title} onClose={onClose} hideClose={hideClose} /> */}
-            {children}
-            {/* <Footer primaryAction={primaryAction} secondaryActions={secondaryActions} /> */}
-          </SwipeableSheet>
-        )}
+        <SwipeableSheet open={open} onHidden={onHidden}>
+          {children}
+        </SwipeableSheet>
       </View>
     </Modal>
   )
