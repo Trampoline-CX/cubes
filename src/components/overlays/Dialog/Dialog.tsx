@@ -1,8 +1,8 @@
 import React from 'react'
-import Modal from 'modal-react-native-web'
 import { View } from 'react-native'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
+import { Modal } from '../../base/Modal/Modal'
 import { Header } from './Header/Header'
 import { FooterProps, Footer } from './Footer/Footer'
 import { Section, SectionProps } from './Section/Section'
@@ -35,9 +35,6 @@ export type DialogProps = {
 } & FooterProps
 
 const { backdropColor, defaultWidth, minWidth } = shameStyles.dialog
-
-// Set App Element of Modal (for React Native Web)
-Modal.setAppElement('body')
 
 /**
  * Show interactive content on top of an existing screen.
