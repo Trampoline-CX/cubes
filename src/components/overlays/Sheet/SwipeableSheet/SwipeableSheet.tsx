@@ -16,6 +16,9 @@ const springAnimationConfig: Partial<Animated.SpringAnimationConfig> = {
   friction: 8,
   overshootClamping: true,
   useNativeDriver: true,
+  // Customize rest thresholds so animation ends more swiftly
+  restSpeedThreshold: 1,
+  restDisplacementThreshold: 0.1,
 }
 
 /**
