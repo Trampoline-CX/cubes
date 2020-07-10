@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
 import { BodyText } from '../../text/BodyText/BodyText'
@@ -64,3 +64,15 @@ export const CardWithoutHorizontalPadding: React.FC = () => (
     </Card.Section>
   </Card>
 )
+
+export const WithSwipeToDismiss: React.FC = () => {
+  const [visible, setVisible] = useState(true)
+
+  return visible ? (
+    <Card title="Dismiss me" sectioned onDismiss={() => setVisible(false)}>
+      <BodyText>Everything will be alright...</BodyText>
+    </Card>
+  ) : (
+    <></>
+  )
+}

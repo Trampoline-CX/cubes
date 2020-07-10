@@ -11,6 +11,7 @@ import { Icon } from '../../images-and-icons/Icon/Icon'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
 import { TextAction } from '../../actions/actions'
+import { Swipeable } from '../../base/Swipeable/Swipeable'
 import { Section } from './Section/Section'
 
 export interface CardProps {
@@ -42,6 +43,11 @@ export interface CardProps {
    * Main actions displayed as buttons at the bottom of the Card.
    */
   mainActions?: TextAction[]
+  /**
+   * Callback called when the Card is dismissed. When set, let the user dismiss the Card
+   * using a Swipe gesture.
+   */
+  onDismiss?: () => void
 }
 
 /**
@@ -56,6 +62,7 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   subdued = false,
   warning = false,
   mainActions = [],
+  onDismiss,
 }) => {
   const styles = useStyles(theme => ({
     card: {
@@ -83,7 +90,7 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
     </>
   ))
 
-  return (
+  const card = (
     <View style={[styles.card, subdued && styles.cardSubdued, warning && styles.cardWarning]}>
       {title ? <CardHeader title={title} action={headerAction} /> : null}
       {items}
@@ -92,6 +99,8 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
       ))}
     </View>
   )
+
+  return onDismiss ? <Swipeable onSwiped={onDismiss}>{card}</Swipeable> : card
 }
 
 const CardHeader: React.FC<{ title: string; action?: TextAction }> = ({ title, action }) => (
