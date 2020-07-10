@@ -1,7 +1,7 @@
-import React from 'react'
-import { View } from 'react-native'
+import React, { useCallback, useState } from 'react'
+import { Animated } from 'react-native'
 import { Heading } from '../../text/Heading/Heading'
-import { useStyles } from '../../../theme'
+import { useStyles, useTheme } from '../../../theme'
 import { Link } from '../../actions/Link/Link'
 import { Box } from '../Box/Box'
 import { Divider } from '../Divider/Divider'
@@ -11,7 +11,7 @@ import { Icon } from '../../images-and-icons/Icon/Icon'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
 import { TextAction } from '../../actions/actions'
-import { Swipeable } from '../../base/Swipeable/Swipeable'
+import { SwipeToDismiss, SwipeToDismissProps } from '../../base/SwipeToDismiss/SwipeToDismiss'
 import { Section } from './Section/Section'
 
 export interface CardProps {
@@ -79,6 +79,9 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
       backgroundColor: theme.colors.status.warning,
     },
   }))
+  const { animation } = useTheme()
+  const [shrink] = useState(new Animated.Value(0))
+  const [wasSwiped, setSwiped] = useState(false)
 
   const content = sectioned ? <Section>{children}</Section> : children
 
@@ -91,16 +94,37 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   ))
 
   const card = (
-    <View style={[styles.card, subdued && styles.cardSubdued, warning && styles.cardWarning]}>
+    <Animated.View
+      style={[
+        styles.card,
+        subdued && styles.cardSubdued,
+        warning && styles.cardWarning,
+        wasSwiped ? { height: shrink } : undefined,
+      ]}
+    >
       {title ? <CardHeader title={title} action={headerAction} /> : null}
       {items}
       {mainActions.map((action, index) => (
         <CardMainAction key={index} action={action} />
       ))}
-    </View>
+    </Animated.View>
   )
 
-  return onDismiss ? <Swipeable onSwiped={onDismiss}>{card}</Swipeable> : card
+  const collapse = useCallback<SwipeToDismissProps['onSwiped']>(
+    layout => {
+      setSwiped(true)
+      shrink.setValue(layout.height)
+      Animated.timing(shrink, {
+        toValue: 0,
+        duration: animation.duration.default,
+        easing: animation.easing.exit,
+        useNativeDriver: false,
+      }).start(onDismiss)
+    },
+    [onDismiss],
+  )
+
+  return onDismiss ? <SwipeToDismiss onSwiped={collapse}>{card}</SwipeToDismiss> : card
 }
 
 const CardHeader: React.FC<{ title: string; action?: TextAction }> = ({ title, action }) => (
