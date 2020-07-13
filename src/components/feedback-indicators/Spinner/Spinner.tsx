@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { ActivityIndicator, View, StyleSheet } from 'react-native'
-import { ThemeContext } from '../../../theme'
+import { useTheme } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { TestProps } from '../../../utils/TestProps'
 
@@ -12,14 +12,16 @@ export interface SpinnerProps extends TestProps {
 }
 
 /**
- * Spinner component displaying an indefinite loading indicator.
+ * Used to notify the user that their action is being processed.
+ * Spinners should be used only for loading content that can't be
+ * represented with Skeleton loading components.
  */
 export const Spinner: React.FC<SpinnerProps> = ({
   color = 'primary',
   accessibilityLabel,
   testID,
 }) => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   const indicatorColor =
     color === 'inverse'
       ? theme.colors.text.inverse

@@ -1,34 +1,25 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { useTextStyles } from '../use-text-styles'
-import { TestProps } from '../../../utils/TestProps'
+import { TextProps } from '../TextProps'
+import { TextStyle } from '../TextStyle/TextStyle'
 
-export interface DisplayTextProps extends TestProps {
-  /**
-   * Text or Text components (like `TextStyle`)
-   */
-  children: React.ReactNode
+export interface DisplayTextProps extends TextProps {
   /**
    * Element to use for HTML rendering **(Web only)**
    */
   element?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
-  /**
-   * Set a maximum number of lines. If text doesn't fit on these lines, the end of the text is ellipsized.
-   */
-  maxLines?: number
-  /**
-   * Alignment of the text.
-   */
-  textAlign?: 'left' | 'right' | 'center'
 }
 
 /**
- * Text that has a strong emphasis. Should be used for titles.
+ * Make a bold visual statement. Use to create impact when the main goal is
+ * visual storytelling.
  */
 export const DisplayText: React.FC<DisplayTextProps> = ({
   children,
   element = 'p',
   maxLines,
+  variation,
   textAlign,
   testID,
   accessibilityLabel,
@@ -47,7 +38,7 @@ export const DisplayText: React.FC<DisplayTextProps> = ({
       testID={testID}
       accessibilityLabel={accessibilityLabel}
     >
-      {children}
+      {variation ? <TextStyle variation={variation}>{children}</TextStyle> : children}
     </Text>
   )
 }

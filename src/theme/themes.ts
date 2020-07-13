@@ -1,21 +1,19 @@
+import { EasingFunction, Easing } from 'react-native'
 import lightTheme from './light-theme.json'
 import darkTheme from './dark-theme.json'
 import { ThemeJson, Theme, Easing as EasingEnum } from './theme-types'
-import { EasingFunction, Easing } from 'react-native'
 
-const _buildTheme = (theme: ThemeJson): Theme => {
-  return {
-    ...theme,
-    animation: {
-      ...theme.animation,
-      easing: {
-        enter: _getEasing(theme.animation.easing.enter),
-        exit: _getEasing(theme.animation.easing.exit),
-        move: _getEasing(theme.animation.easing.move),
-      },
+const _buildTheme = (theme: ThemeJson): Theme => ({
+  ...theme,
+  animation: {
+    ...theme.animation,
+    easing: {
+      enter: _getEasing(theme.animation.easing.enter),
+      exit: _getEasing(theme.animation.easing.exit),
+      move: _getEasing(theme.animation.easing.move),
     },
-  }
-}
+  },
+})
 
 const _getEasing = (easing: EasingEnum): EasingFunction => {
   switch (easing) {

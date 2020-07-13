@@ -1,85 +1,83 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
-import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ColorHex, ThemeContext } from '../../theme'
+import { useStyles, ColorHex, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const All: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
 
   return (
-    <Stack space="medium">
+    <Box space="medium">
       <Heading>Accent</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.fill.accent.lighter} />
         <Swatch color={theme.colors.fill.accent.default} />
         <Swatch color={theme.colors.fill.accent.darker} />
-      </Stack>
+      </Box>
 
       <Heading>Accent Secondary</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.fill.accentSecondary.lighter} />
         <Swatch color={theme.colors.fill.accentSecondary.default} />
         <Swatch color={theme.colors.fill.accentSecondary.darker} />
-      </Stack>
+      </Box>
 
       <Heading>Primary</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.fill.primary.lighter} />
         <Swatch color={theme.colors.fill.primary.default} />
         <Swatch color={theme.colors.fill.primary.darker} />
-      </Stack>
+      </Box>
 
       <Heading>Background</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.fill.background.lighter} />
         <Swatch color={theme.colors.fill.background.default} />
         <Swatch color={theme.colors.fill.background.darker} />
-      </Stack>
+      </Box>
 
       <Heading>Text</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.text.primary} />
         <Swatch color={theme.colors.text.subdued} />
         <Swatch color={theme.colors.text.accent} />
         <Swatch color={theme.colors.text.inverse} />
-      </Stack>
+      </Box>
 
       <Heading>Divider</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.fill.divider.lighter} />
         <Swatch color={theme.colors.fill.divider.default} />
         <Swatch color={theme.colors.fill.divider.darker} />
-      </Stack>
+      </Box>
 
       <Heading>Positive / Negative / Destructive</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.positive} />
         <Swatch color={theme.colors.negative} />
         <Swatch color={theme.colors.destructive} />
-      </Stack>
+      </Box>
 
       <Heading>Success</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.status.success.lighter} />
         <Swatch color={theme.colors.status.success.default} />
         <Swatch color={theme.colors.status.success.darker} />
-      </Stack>
+      </Box>
 
       <Heading>Warning / Error</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Swatch color={theme.colors.status.warning} />
         <Swatch color={theme.colors.status.error} />
-      </Stack>
-    </Stack>
+      </Box>
+    </Box>
   )
 }
 

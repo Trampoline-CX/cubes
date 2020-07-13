@@ -1,8 +1,9 @@
 import { addParameters } from '@storybook/react'
 import { Background } from '../../src/storybook/decorators/Background'
-import { WithThemeProvider } from './decorators/WithThemeProvider'
+import { WithAppProvider } from '../../src/storybook/decorators/WithAppProvider'
 
 addParameters({
+  viewMode: 'docs',
   options: {
     // Sort stories based on name
     storySort: (a, b) =>
@@ -11,7 +12,7 @@ addParameters({
 })
 
 // Add control for toggling components theme
-export const globalArgTypes = {
+export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Global theme for components',
@@ -26,4 +27,4 @@ export const globalArgTypes = {
   },
 }
 
-export const decorators = [Background, WithThemeProvider]
+export const decorators = [Background, WithAppProvider]

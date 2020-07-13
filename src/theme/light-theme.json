@@ -20,7 +20,8 @@
       "background": {
         "default": "#FCF8F7",
         "lighter": "#FFFFFF",
-        "darker": "#EDE9E4"
+        "darker": "#EDE9E4",
+        "inverse": "#5B6275"
       },
       "divider": {
         "default": "rgba(0,0,0,0.10)",
@@ -101,6 +102,13 @@
       "shadowRadius": 2.5,
       "shadowColor": "#000",
       "elevation": 4
+    },
+    "z8": {
+      "shadowOffset": { "width": 0, "height": 3 },
+      "shadowOpacity": 0.22,
+      "shadowRadius": 4.5,
+      "shadowColor": "#000",
+      "elevation": 8
     }
   },
 
@@ -113,9 +121,11 @@
       "xLarge": 64
     },
     "avatar": {
-      "default": 40
+      "default": 40,
+      "small": 32
     },
-    "divider": 1
+    "divider": 1,
+    "bullet": 8
   },
 
   "spacing": {

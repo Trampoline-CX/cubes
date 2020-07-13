@@ -1,23 +1,21 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View, Animated } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
-import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const Example: React.FC = () => <AnimatedSquare duration="shorter" easing="move" />
 
 export const Duration: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   return (
-    <Stack space="medium">
+    <Box space="medium">
       <Heading>Shorter Duration ({theme.animation.duration.shorter}ms)</Heading>
       <AnimatedSquare duration="shorter" easing="move" />
 
@@ -26,12 +24,12 @@ export const Duration: React.FC = () => {
 
       <Heading>Longer Duration ({theme.animation.duration.longer}ms)</Heading>
       <AnimatedSquare duration="longer" easing="move" />
-    </Stack>
+    </Box>
   )
 }
 
 export const Easing: React.FC = () => (
-  <Stack space="medium">
+  <Box space="medium">
     <Heading>Move Easing</Heading>
     <AnimatedSquare duration="longer" easing="move" />
 
@@ -40,7 +38,7 @@ export const Easing: React.FC = () => (
 
     <Heading>Exit Easing</Heading>
     <AnimatedSquare duration="longer" easing="exit" />
-  </Stack>
+  </Box>
 )
 
 // ---
@@ -63,7 +61,7 @@ const AnimatedSquare: React.FC<SquareProps> = ({ duration, easing }) => {
       backgroundColor: theme.colors.fill.primary.default,
     },
   }))
-  const { animation } = useContext(ThemeContext)
+  const { animation } = useTheme()
 
   // Reset animation every second
   useInterval(

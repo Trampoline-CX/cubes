@@ -22,6 +22,7 @@
           "type": "string"
         }
       },
+      "required": ["darker", "default", "lighter"],
       "type": "object"
     },
     "Easing": {
@@ -38,7 +39,13 @@
           "type": "number"
         }
       },
+      "required": ["height", "size"],
       "type": "object"
+    },
+    "FontWeight": {
+      "description": "Type for a font-weight.",
+      "enum": ["100", "200", "300", "400", "500", "600", "700", "800", "900", "bold", "normal"],
+      "type": "string"
     }
   },
   "description": "Structure of a Theme.",
@@ -62,6 +69,7 @@
               "type": "number"
             }
           },
+          "required": ["default", "longer", "shorter"],
           "type": "object"
         },
         "easing": {
@@ -77,9 +85,11 @@
               "$ref": "#/definitions/Easing"
             }
           },
+          "required": ["enter", "exit", "move"],
           "type": "object"
         }
       },
+      "required": ["duration", "easing"],
       "type": "object"
     },
     "border": {
@@ -95,6 +105,7 @@
           "type": "number"
         }
       },
+      "required": ["none", "small", "thinner"],
       "type": "object"
     },
     "colors": {
@@ -115,7 +126,31 @@
               "$ref": "#/definitions/ComplexColor"
             },
             "background": {
-              "$ref": "#/definitions/ComplexColor"
+              "additionalProperties": false,
+              "properties": {
+                "darker": {
+                  "description": "Type for a color. Used for readability purpose.",
+                  "pattern": "^(#[A-Fa-f0-9]{6}|transparent|rgba\\((\\d+(\\.\\d+)?,){3}(\\d+(\\.\\d+)?)\\))$",
+                  "type": "string"
+                },
+                "default": {
+                  "description": "Type for a color. Used for readability purpose.",
+                  "pattern": "^(#[A-Fa-f0-9]{6}|transparent|rgba\\((\\d+(\\.\\d+)?,){3}(\\d+(\\.\\d+)?)\\))$",
+                  "type": "string"
+                },
+                "inverse": {
+                  "description": "Type for a color. Used for readability purpose.",
+                  "pattern": "^(#[A-Fa-f0-9]{6}|transparent|rgba\\((\\d+(\\.\\d+)?,){3}(\\d+(\\.\\d+)?)\\))$",
+                  "type": "string"
+                },
+                "lighter": {
+                  "description": "Type for a color. Used for readability purpose.",
+                  "pattern": "^(#[A-Fa-f0-9]{6}|transparent|rgba\\((\\d+(\\.\\d+)?,){3}(\\d+(\\.\\d+)?)\\))$",
+                  "type": "string"
+                }
+              },
+              "required": ["darker", "default", "inverse", "lighter"],
+              "type": "object"
             },
             "divider": {
               "$ref": "#/definitions/ComplexColor"
@@ -124,6 +159,7 @@
               "$ref": "#/definitions/ComplexColor"
             }
           },
+          "required": ["accent", "accentSecondary", "background", "divider", "primary"],
           "type": "object"
         },
         "negative": {
@@ -153,6 +189,7 @@
               "type": "string"
             }
           },
+          "required": ["error", "success", "warning"],
           "type": "object"
         },
         "text": {
@@ -179,6 +216,7 @@
               "type": "string"
             }
           },
+          "required": ["accent", "inverse", "primary", "subdued"],
           "type": "object"
         },
         "transparent": {
@@ -187,6 +225,7 @@
           "type": "string"
         }
       },
+      "required": ["destructive", "fill", "negative", "positive", "status", "text", "transparent"],
       "type": "object"
     },
     "elevation": {
@@ -213,6 +252,7 @@
                   "type": "number"
                 }
               },
+              "required": ["height", "width"],
               "type": "object"
             },
             "shadowOpacity": {
@@ -222,6 +262,7 @@
               "type": "number"
             }
           },
+          "required": ["elevation"],
           "type": "object"
         },
         "z2": {
@@ -245,6 +286,7 @@
                   "type": "number"
                 }
               },
+              "required": ["height", "width"],
               "type": "object"
             },
             "shadowOpacity": {
@@ -254,6 +296,7 @@
               "type": "number"
             }
           },
+          "required": ["elevation"],
           "type": "object"
         },
         "z4": {
@@ -277,6 +320,7 @@
                   "type": "number"
                 }
               },
+              "required": ["height", "width"],
               "type": "object"
             },
             "shadowOpacity": {
@@ -286,9 +330,45 @@
               "type": "number"
             }
           },
+          "required": ["elevation"],
+          "type": "object"
+        },
+        "z8": {
+          "additionalProperties": false,
+          "description": "Type representing an Elevation.",
+          "properties": {
+            "elevation": {
+              "description": "Sets the elevation of a view, using Android's underlying\n[elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation).\nThis adds a drop shadow to the item and affects z-order for overlapping views.\nOnly supported on Android 5.0+, has no effect on earlier versions.",
+              "type": "number"
+            },
+            "shadowColor": {
+              "type": "string"
+            },
+            "shadowOffset": {
+              "additionalProperties": false,
+              "properties": {
+                "height": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                }
+              },
+              "required": ["height", "width"],
+              "type": "object"
+            },
+            "shadowOpacity": {
+              "type": "number"
+            },
+            "shadowRadius": {
+              "type": "number"
+            }
+          },
+          "required": ["elevation"],
           "type": "object"
         }
       },
+      "required": ["z0", "z2", "z4", "z8"],
       "type": "object"
     },
     "font": {
@@ -311,49 +391,24 @@
               "$ref": "#/definitions/FontSize"
             }
           },
+          "required": ["large", "regular", "small"],
           "type": "object"
         },
         "weights": {
           "additionalProperties": false,
           "properties": {
             "regular": {
-              "description": "Type for a font-weight.",
-              "enum": [
-                "100",
-                "200",
-                "300",
-                "400",
-                "500",
-                "600",
-                "700",
-                "800",
-                "900",
-                "bold",
-                "normal"
-              ],
-              "type": "string"
+              "$ref": "#/definitions/FontWeight"
             },
             "strong": {
-              "description": "Type for a font-weight.",
-              "enum": [
-                "100",
-                "200",
-                "300",
-                "400",
-                "500",
-                "600",
-                "700",
-                "800",
-                "900",
-                "bold",
-                "normal"
-              ],
-              "type": "string"
+              "$ref": "#/definitions/FontWeight"
             }
           },
+          "required": ["regular", "strong"],
           "type": "object"
         }
       },
+      "required": ["family", "size", "weights"],
       "type": "object"
     },
     "opacity": {
@@ -363,6 +418,7 @@
           "type": "number"
         }
       },
+      "required": ["disabled"],
       "type": "object"
     },
     "radius": {
@@ -384,6 +440,7 @@
           "type": "number"
         }
       },
+      "required": ["circle", "large", "medium", "none", "small"],
       "type": "object"
     },
     "size": {
@@ -394,9 +451,16 @@
           "properties": {
             "default": {
               "type": "number"
+            },
+            "small": {
+              "type": "number"
             }
           },
+          "required": ["default", "small"],
           "type": "object"
+        },
+        "bullet": {
+          "type": "number"
         },
         "divider": {
           "type": "number"
@@ -417,12 +481,14 @@
               "type": "number"
             }
           },
+          "required": ["default", "large", "small", "xLarge"],
           "type": "object"
         },
         "minTouchArea": {
           "type": "number"
         }
       },
+      "required": ["avatar", "bullet", "divider", "icon", "minTouchArea"],
       "type": "object"
     },
     "spacing": {
@@ -450,8 +516,21 @@
           "type": "number"
         }
       },
+      "required": ["large", "medium", "none", "small", "xLarge", "xSmall", "xxLarge"],
       "type": "object"
     }
   },
+  "required": [
+    "$schema",
+    "animation",
+    "border",
+    "colors",
+    "elevation",
+    "font",
+    "opacity",
+    "radius",
+    "size",
+    "spacing"
+  ],
   "type": "object"
 }

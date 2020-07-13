@@ -1,6 +1,5 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { Centered } from '../../../storybook/decorators/Centered'
 import { BodyText } from '../BodyText/BodyText'
 import { TextContainer } from '../TextContainer/TextContainer'
 import { getStoryTitle } from '../../../storybook/get-story-title'
@@ -9,7 +8,6 @@ import { TextStyle } from './TextStyle'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: TextStyle,
-  decorators: [Centered],
 }
 
 export const All: React.FC = () => (

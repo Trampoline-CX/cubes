@@ -4,25 +4,14 @@ import { Heading } from '../../text/Heading/Heading'
 import { useStyles } from '../../../theme'
 import { Link } from '../../actions/Link/Link'
 import { Box } from '../Box/Box'
-import { Stack } from '../Stack/Stack'
 import { Divider } from '../Divider/Divider'
 import { Touchable } from '../../base/Touchable/Touchable'
 import { TextStyle } from '../../text/TextStyle/TextStyle'
-import { Icon } from '../../icons/Icon/Icon'
+import { Icon } from '../../images-and-icons/Icon/Icon'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
+import { TextAction } from '../../actions/actions'
 import { Section } from './Section/Section'
-
-interface Action {
-  /**
-   * Text of the action.
-   */
-  label: string
-  /**
-   * Action triggered on click.
-   */
-  onClick: () => void
-}
 
 export interface CardProps {
   /**
@@ -32,7 +21,7 @@ export interface CardProps {
   /**
    * Header action displayed as a `Button`.
    */
-  headerAction?: Action
+  headerAction?: TextAction
   /**
    * Set to `true` to have the card have a single `Card.Section` by default.
    */
@@ -52,11 +41,11 @@ export interface CardProps {
   /**
    * Main actions displayed as buttons at the bottom of the Card.
    */
-  mainActions?: Action[]
+  mainActions?: TextAction[]
 }
 
 /**
- * Component displaying information in a Card.
+ * Group similar concepts and tasks together to simplify content representation for the user.
  */
 export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   children,
@@ -105,35 +94,35 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   )
 }
 
-const CardHeader: React.FC<{ title: string; action?: Action }> = ({ title, action }) => (
+const CardHeader: React.FC<{ title: string; action?: TextAction }> = ({ title, action }) => (
   <Box padding="medium" paddingBottom="none">
-    <Stack horizontal align="center">
+    <Box horizontal align="center">
       <Box fill>
         <Heading>{title}</Heading>
       </Box>
 
       {action && (
         <BodyText>
-          <Link onClick={action.onClick}>{action.label}</Link>
+          <Link onClick={action.action}>{action.label}</Link>
         </BodyText>
       )}
-    </Stack>
+    </Box>
   </Box>
 )
 
-const CardMainAction: React.FC<{ action: Action }> = ({ action }) => (
+const CardMainAction: React.FC<{ action: TextAction }> = ({ action }) => (
   <>
     <Divider />
-    <Touchable onClick={action.onClick}>
+    <Touchable onClick={action.action}>
       <Box padding="medium">
-        <Stack horizontal>
-          <Box fill paddingRight="medium">
+        <Box horizontal space="medium">
+          <Box fill>
             <Heading>
               <TextStyle variation="accent">{action.label}</TextStyle>
             </Heading>
           </Box>
-          <Icon name="nav-disclosure" color="subdued" />
-        </Stack>
+          <Icon name="navigate-next" color="subdued" />
+        </Box>
       </Box>
     </Touchable>
   </>

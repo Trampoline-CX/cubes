@@ -1,10 +1,11 @@
-import React, { useContext, useCallback, DependencyList, useEffect, useRef } from 'react'
+import React, { useCallback, DependencyList, useEffect, useRef } from 'react'
 import { TextInput, View, Keyboard, Platform } from 'react-native'
-import { useStyles, ThemeContext } from '../../../theme'
+import { useStyles, useTheme } from '../../../theme'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { useTextStyles } from '../../text/use-text-styles'
 import { Pill } from '../../actions/Pill/Pill'
+import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 
 /**
  * Pill options.
@@ -24,15 +25,17 @@ export interface SearchFieldProps {
   /**
    * Text value.
    */
-  value: string
+  value?: string
   /**
    * Placeholder to display when `value` is empty.
    */
   placeholder: string
   /**
    * Triggered when `value` is changed. Should update `value` accordingly.
+   *
+   * If not set, component will be an uncontrolled component. @see https://reactjs.org/docs/uncontrolled-components.html
    */
-  onChange: (value: string) => void
+  onChange?: (value: string) => void
   /**
    * Called when search is submitted via the keyboard submit button.
    */
@@ -59,11 +62,11 @@ const useOnKeyboardHide = (callback: () => void, deps: DependencyList): void => 
 }
 
 /**
- * Component used to enter a search query.
+ * Let the user search content in a List using free-form text.
  */
 export const SearchField: React.FC<SearchFieldProps> = ({
-  value,
-  onChange,
+  value: valueRaw = '',
+  onChange: onChangeRaw,
   placeholder,
   onSubmit,
   onFocus,
@@ -73,7 +76,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
   const inputRef = useRef<TextInput>(null)
   const hasFocus = inputRef.current?.isFocused()
 
-  const currentTheme = useContext(ThemeContext)
+  const currentTheme = useTheme()
   const { textStyles } = useTextStyles()
   const styles = useStyles(theme => ({
     container: {
@@ -98,6 +101,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
       paddingTop: 14, // Compensate center alignment a bit on iOS
     },
   }))
+  const [value, onChange] = useUncontrolledState(valueRaw, onChangeRaw)
 
   const removeFocus = useCallback(() => inputRef.current?.blur(), [inputRef.current])
   const clearSearch = useCallback(() => {
@@ -129,7 +133,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
     <View style={styles.container}>
       <Box paddingX="xSmall">
         <IconButton
-          icon={showBackAction ? 'go-back' : 'search'}
+          icon={showBackAction ? 'arrow-back' : 'search'}
           onClick={showBackAction ? goBack : focusSearch}
         />
       </Box>

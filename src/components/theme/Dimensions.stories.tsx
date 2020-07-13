@@ -1,63 +1,61 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
-import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext } from '../../theme'
+import { useStyles, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const All: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   return (
-    <Stack space="medium">
+    <Box space="medium">
       <Heading>xSmall ({theme.spacing.xSmall}dp)</Heading>
-      <Stack horizontal space="xSmall">
+      <Box horizontal space="xSmall">
         <Square />
         <Square />
         <Square />
-      </Stack>
+      </Box>
 
       <Heading>small ({theme.spacing.small}dp)</Heading>
-      <Stack horizontal space="small">
+      <Box horizontal space="small">
         <Square />
         <Square />
         <Square />
-      </Stack>
+      </Box>
 
       <Heading>medium ({theme.spacing.medium}dp)</Heading>
-      <Stack horizontal space="medium">
+      <Box horizontal space="medium">
         <Square />
         <Square />
         <Square />
-      </Stack>
+      </Box>
 
       <Heading>large ({theme.spacing.large}dp)</Heading>
-      <Stack horizontal space="large">
+      <Box horizontal space="large">
         <Square />
         <Square />
         <Square />
-      </Stack>
+      </Box>
 
       <Heading>xLarge ({theme.spacing.xLarge}dp)</Heading>
-      <Stack horizontal space="xLarge">
+      <Box horizontal space="xLarge">
         <Square />
         <Square />
         <Square />
-      </Stack>
+      </Box>
 
       <Heading>xxLarge ({theme.spacing.xxLarge}dp)</Heading>
-      <Stack horizontal space="xxLarge">
+      <Box horizontal space="xxLarge">
         <Square />
         <Square />
         <Square />
-      </Stack>
-    </Stack>
+      </Box>
+    </Box>
   )
 }
 

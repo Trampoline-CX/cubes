@@ -1,29 +1,24 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
-import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Box } from '../structure/Box/Box'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const All: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
   return (
-    <Box padding="medium">
-      <Stack space="medium">
-        <Heading>thinner ({theme.border.thinner}dp)</Heading>
-        <Square border="thinner" />
+    <Box padding="medium" space="medium">
+      <Heading>thinner ({theme.border.thinner}dp)</Heading>
+      <Square border="thinner" />
 
-        <Heading>small ({theme.border.small}dp)</Heading>
-        <Square border="small" />
-      </Stack>
+      <Heading>small ({theme.border.small}dp)</Heading>
+      <Square border="small" />
     </Box>
   )
 }
@@ -49,7 +44,7 @@ const Square: React.FC<SquareProps> = ({ border }) => {
       borderColor: theme.colors.fill.primary.default,
     },
   }))
-  const { border: borders } = useContext(ThemeContext)
+  const { border: borders } = useTheme()
 
   return <View style={[styles.container, { borderWidth: borders[border] }]} />
 }

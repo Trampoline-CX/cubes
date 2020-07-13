@@ -1,0 +1,111 @@
+import { Meta, Props } from '@storybook/addon-docs/blocks'
+import { StackOptionsProps, SwitchOptionsProps } from './components'
+
+<Meta title="Documentation/Navigation" />
+
+# Navigation
+
+Do you need some Navigation in your prototype? Here is how you can handle it!
+
+```tsx
+// Define your screens (not including each screen code for brevity)
+const ScreenA = () => <Screen />
+const ScreenB = () => <Screen />
+
+export const App = () => (
+  <AppProvider
+    navigationSchema={{
+      stack: [{ ScreenA }, { ScreenB }],
+    }}
+  />
+)
+
+// Now in each screen component (need to be function components), you can now do this to navigate.
+const navigate = useNav()
+navigate.to('ScreenB', { id: 'abc' }) // Navigate to ScreenB with the defined props
+navigate.back() // Navigate back to ScreenA
+```
+
+## Navigation Schema
+
+Navigation structure is provided by a `NavigationSchema`, provided to the `AppProvider` component. Navigation schemas are composed of 2 elements, Navigators and Screens.
+
+A **Screen** structure is very straightforward:
+
+```tsx
+{
+  screenName: MyScreenComponentName
+}
+
+// We recommend using JS object short syntax to reuse Component name as Screen Name, like so:
+{
+  MyScreenComponentName
+}
+```
+
+As for the Navigators, Cubes supports 2 right now (`stack` and `switch`). Navigators can contain Screens and other Navigators. You can nest as many as you want!
+
+Here is an example of a Navigation Schema for a Prototype App displaying 3 tabs:
+
+1. Posts tabs, displaying blog posts. When clicking a Blog Post, we want to navigate on a Screen displaying the post details.
+2. A Search Tab, for searching blog posts.
+3. A Profile Tab, so the user can edit his profile and disconnect.
+
+```tsx
+const schema = {
+  // The Switch navigator will contains tabs.
+  switch: [
+    {
+      // Stack for having a nested PostDetail screen when clicking a Post.
+      stack: [{ BlogPostsTab }, { PostDetail }],
+    },
+    { SearchTab },
+    { ProfileTab },
+  ],
+  options: { backBehavior: 'tabs' },
+}
+```
+
+> **Remark:** Options can be provided to Navigators via the `options` prop.
+
+### Stack Navigator
+
+As its name says, this Navigator stacks screens on top of each other. Very practical to handle hierarchical flows.
+
+#### Options
+
+<StackOptionsProps />
+
+### Switch Navigator
+
+This Navigator makes screens at the same hierarchical level. An example of this is a screen with a `BottomNavigationBar` with tabs to navigate between different screens.
+
+<SwitchOptionsProps />
+
+## For Typescript Users
+
+When defining your Navigation Schema in Typescript, define it in a separate variable and don't forget to use `as const` after the object declaration. Here is the same example as on top written in Typescript:
+
+```tsx
+const schema = {
+  // The Switch navigator will contains tabs.
+  switch: [
+    {
+      // Stack for having a nested PostDetail screen when clicking a Post.
+      stack: [{ BlogPostsTab }, { PostDetail }],
+    },
+    { SearchTab },
+    { ProfileTab },
+  ],
+  options: { backBehavior: 'tabs' },
+} as const
+```
+
+This way, you'll be able to have Screen Names and Props validation at compile time when using `useNav()` hook.
+
+## Limitations
+
+For now, the Navigation feature has several limitations:
+
+- URLs are not cute right now, especially when nesting Navigators 🤭 This could be improved in the future!
+- You can't navigate to screens nested deeply in another Navigator. Could be later improved.

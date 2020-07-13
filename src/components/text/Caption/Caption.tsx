@@ -1,24 +1,34 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { useTextStyles } from '../use-text-styles'
-import { TestProps } from '../../../utils/TestProps'
+import { TextProps } from '../TextProps'
+import { TextStyle } from '../TextStyle/TextStyle'
 
-export interface CaptionProps extends TestProps {
-  /**
-   * Text or text components (like `TextStyle`).
-   */
-  children: React.ReactNode
-}
+export type CaptionProps = TextProps
 
 /**
- * Display a caption, less important text than `BodyText`.
+ * Text size is smaller than the recommended size for general reading.
+ * Can be used as help text or for secondary information.
  */
-export const Caption: React.FC<CaptionProps> = ({ children, testID, accessibilityLabel }) => {
+export const Caption: React.FC<CaptionProps> = ({
+  maxLines,
+  textAlign,
+  variation,
+  children,
+  testID,
+  accessibilityLabel,
+}) => {
   const { textStyles } = useTextStyles()
 
   return (
-    <Text style={textStyles.caption} testID={testID} accessibilityLabel={accessibilityLabel}>
-      {children}
+    <Text
+      style={[textStyles.caption, { textAlign }]}
+      ellipsizeMode="tail"
+      testID={testID}
+      numberOfLines={maxLines}
+      accessibilityLabel={accessibilityLabel}
+    >
+      {variation ? <TextStyle variation={variation}>{children}</TextStyle> : children}
     </Text>
   )
 }

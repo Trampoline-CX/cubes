@@ -1,19 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
-import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const All: React.FC = () => (
-  <Stack space="medium">
+  <Box space="medium">
     <Heading>z0</Heading>
     <Square z="z0" />
 
@@ -22,7 +20,7 @@ export const All: React.FC = () => (
 
     <Heading>z4</Heading>
     <Square z="z4" />
-  </Stack>
+  </Box>
 )
 
 // ---
@@ -39,7 +37,7 @@ const Square: React.FC<SquareProps> = ({ z }) => {
       backgroundColor: theme.colors.fill.background.lighter,
     },
   }))
-  const { elevation } = useContext(ThemeContext)
+  const { elevation } = useTheme()
 
   return <View style={[styles.container, elevation[z]]} />
 }

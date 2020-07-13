@@ -18,7 +18,7 @@ export type Easing = 'ease-in' | 'ease-out' | 'ease-in-out'
 /**
  * Type for a font-weight.
  */
-export type FontWeight = TextStyle['fontWeight']
+export type FontWeight = Required<TextStyle>['fontWeight']
 
 export interface FontSize {
   size: number
@@ -51,7 +51,7 @@ export interface ThemeJson {
       primary: ComplexColor
       accent: ComplexColor
       accentSecondary: ComplexColor
-      background: ComplexColor
+      background: ComplexColor & { inverse: ColorHex }
       divider: ComplexColor
     }
     text: {
@@ -116,8 +116,8 @@ export interface ThemeJson {
     z2: Elevation
     // For Navbar, elements above cards
     z4: Elevation
-    // Sheets, dialogs
-    // z8: Elevation
+    // Sheets, dialogs, Bottom Navigation Bar
+    z8: Elevation
   }
 
   // SIZING
@@ -130,9 +130,11 @@ export interface ThemeJson {
       xLarge: number
     }
     avatar: {
+      small: number
       default: number
     }
     divider: number
+    bullet: number
   }
 
   // RADIUS

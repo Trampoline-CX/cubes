@@ -2,10 +2,10 @@ import React from 'react'
 import { Skeleton } from '../Skeleton/Skeleton'
 import { useStyles } from '../../../theme'
 
-export type SkeletonIconProps = {}
+export type SkeletonIconProps = Record<string, never>
 
 /**
- * Skeleton acting as a placeholder for `Icon`.
+ * Gives a low fidelity representation of an `Icon`.
  */
 export const SkeletonIcon: React.FC<SkeletonIconProps> = () => {
   const styles = useStyles(theme => ({

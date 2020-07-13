@@ -1,21 +1,20 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Stack } from '../structure/Stack/Stack'
-import { Centered } from '../../storybook/decorators/Centered'
-import { useStyles, ThemeContext, Theme } from '../../theme'
+import { useStyles, Theme, useTheme } from '../../theme'
 import { Heading } from '../text/Heading/Heading'
 import { getStoryTitle } from '../../storybook/get-story-title'
+import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const All: React.FC = () => {
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
+
   return (
-    <Stack space="medium">
+    <Box space="medium">
       <Heading>Small ({theme.radius.small}dp)</Heading>
       <Square radius="small" />
 
@@ -27,7 +26,7 @@ export const All: React.FC = () => {
 
       <Heading>Circle ({theme.radius.circle}dp)</Heading>
       <Square radius="circle" />
-    </Stack>
+    </Box>
   )
 }
 
@@ -45,7 +44,7 @@ const Square: React.FC<SquareProps> = ({ radius }) => {
       backgroundColor: theme.colors.fill.primary.default,
     },
   }))
-  const { radius: themeRadius } = useContext(ThemeContext)
+  const { radius: themeRadius } = useTheme()
 
   return <View style={[styles.container, { borderRadius: themeRadius[radius] }]} />
 }

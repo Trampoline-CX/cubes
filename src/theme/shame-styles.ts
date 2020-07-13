@@ -39,4 +39,39 @@ export const shameStyles = {
       backgroundColor: '#F5F1F0',
     },
   },
-}
+  topBar: {
+    height: 56,
+  },
+  snackbar: {
+    duration: {
+      default: 2500,
+      longer: 4000,
+    },
+  },
+  popover: {
+    zIndex: 99999,
+    backdrop: {
+      color: 'rgba(0, 0, 0, 0.3)',
+    },
+  },
+  dialog: {
+    backdropColor: 'rgba(0, 0, 0, 0.33)',
+    defaultWidth: '70%',
+    minWidth: 280,
+  },
+  radioButton: {
+    size: 16,
+    checkSize: 8,
+  },
+  checkbox: {
+    size: 16,
+  },
+  progressBar: {
+    height: 24,
+  },
+  emptyState: {
+    image: {
+      size: 200,
+    },
+  },
+} as const
