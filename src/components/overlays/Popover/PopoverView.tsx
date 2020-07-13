@@ -1,10 +1,11 @@
 import _ from 'lodash'
-import React, { useCallback, useState, useMemo, useEffect } from 'react'
+import React, { useCallback, useState, useMemo } from 'react'
 import { LayoutRectangle, ViewProps, View, Animated } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles, useTheme } from '../../../theme'
 import { useAppProviderDimensions } from '../../dev'
 import { shameStyles } from '../../../theme/shame-styles'
+import { useAnimation } from '../../../utils/hooks/use-animation'
 import {
   PopoverPlacement,
   isLeft,
@@ -57,8 +58,15 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
       right: 0,
     },
   }))
-  const [anim] = useState(new Animated.Value(0))
+
   const { animation } = useTheme()
+  const anim = useAnimation({
+    toValue: open ? 1 : 0,
+    type: 'timing',
+    easing: animation.easing.move,
+    duration: animation.duration.shorter,
+    useNativeDriver: true,
+  })
   const { width: windowWidth, height: windowHeight } = useAppProviderDimensions()
 
   const [layout, setLayout] = useState<LayoutRectangle | null>(null)
@@ -77,15 +85,6 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
     windowWidth,
     windowHeight,
   )
-
-  useEffect(() => {
-    Animated.timing(anim, {
-      easing: animation.easing.move,
-      toValue: open ? 1 : 0,
-      duration: animation.duration.shorter,
-      useNativeDriver: true,
-    }).start()
-  }, [open])
 
   return (
     <Animated.View

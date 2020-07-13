@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { Animated, View } from 'react-native'
 import { useStyles, useTheme } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
+import { useAnimation } from '../../../utils/hooks/use-animation'
 
 export interface ProgressBarProps {
   /**
@@ -36,17 +37,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ progress: progressRaw 
   }))
 
   const progress = _.clamp(progressRaw, 0, 100)
-  const [anim] = useState(new Animated.Value(0))
   const { animation } = useTheme()
-
-  useEffect(() => {
-    Animated.timing(anim, {
-      easing: animation.easing.move,
-      toValue: progress,
-      duration: animation.duration.shorter,
-      useNativeDriver: true,
-    }).start()
-  }, [progress])
+  const anim = useAnimation({
+    initialValue: 0,
+    toValue: progress,
+    type: 'timing',
+    easing: animation.easing.move,
+    duration: animation.duration.shorter,
+    useNativeDriver: true,
+  })
 
   return (
     <View style={styles.container}>
