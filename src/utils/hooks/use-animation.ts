@@ -26,6 +26,13 @@ const getInitialValue = (config: UseAnimationConfig): number => {
   }
 }
 
+/**
+ * Returns an `Animated.Value` object initialized with the specified config.
+ * Its initial value is either `initialValue` or if this is not provided, initial
+ * `toValue` is used.
+ *
+ * When `toValue` value changes, an animation will run with the specified config.
+ */
 export const useAnimation = (config: UseAnimationConfig): Animated.Value => {
   const animatedValue = useAnimatedValue(getInitialValue(config))
 
