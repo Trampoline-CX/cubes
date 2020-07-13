@@ -1,7 +1,6 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { TextContainer } from '../TextContainer/TextContainer'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Heading } from './Heading'
@@ -9,7 +8,6 @@ import { Heading } from './Heading'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Heading,
-  decorators: [CenteredVertical],
 }
 
 export const All: React.FC = () => (

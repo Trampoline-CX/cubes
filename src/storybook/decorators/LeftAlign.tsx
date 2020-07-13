@@ -4,13 +4,10 @@ import { DecoratorFunction } from '@storybook/addons'
 
 const style = StyleSheet.create({
   root: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
+    alignItems: 'flex-start',
   },
 })
 
-export const Centered: DecoratorFunction<React.ReactNode> = storyFn => (
+export const LeftAlign: DecoratorFunction<React.ReactNode> = storyFn => (
   <View style={style.root}>{storyFn()}</View>
 )

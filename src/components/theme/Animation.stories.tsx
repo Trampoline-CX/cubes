@@ -9,7 +9,7 @@ import { Box } from '../structure/Box/Box'
 export default {
   title: getStoryTitle(fileAbsolute),
   parameters: {
-    chromatic: { disable: true }, // We don,t
+    chromatic: { disable: true },
   },
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
-import { Centered } from '../../storybook/decorators/Centered'
 import { useStyles, Theme, useTheme } from '../../theme'
 import { Box } from '../structure/Box/Box'
 import { Heading } from '../text/Heading/Heading'
@@ -9,7 +8,6 @@ import { getStoryTitle } from '../../storybook/get-story-title'
 
 export default {
   title: getStoryTitle(fileAbsolute),
-  decorators: [Centered],
 }
 
 export const All: React.FC = () => {
