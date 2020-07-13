@@ -1,7 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Heading } from '../../text/Heading/Heading'
-import { useStyles } from '../../../theme'
 import { Link } from '../../actions/Link/Link'
 import { Box } from '../Box/Box'
 import { Divider } from '../Divider/Divider'
@@ -11,6 +10,7 @@ import { Icon } from '../../images-and-icons/Icon/Icon'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
 import { TextAction } from '../../actions/actions'
+import { useStylesBuilder, createStyles } from '../../../theme/styles-builder'
 import { Section } from './Section/Section'
 
 export interface CardProps {
@@ -57,21 +57,7 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   warning = false,
   mainActions = [],
 }) => {
-  const styles = useStyles(theme => ({
-    card: {
-      ...theme.elevation.z2,
-
-      backgroundColor: theme.colors.fill.background.lighter,
-      borderRadius: fullWidth ? 0 : theme.radius.medium,
-    },
-    cardSubdued: {
-      backgroundColor: shameStyles.card.subdued.backgroundColor,
-    },
-    cardWarning: {
-      ...theme.elevation.z0,
-      backgroundColor: theme.colors.status.warning,
-    },
-  }))
+  const styles = useStylesBuilder(stylesBuilder)
 
   const content = sectioned ? <Section>{children}</Section> : children
 
@@ -84,7 +70,14 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   ))
 
   return (
-    <View style={[styles.card, subdued && styles.cardSubdued, warning && styles.cardWarning]}>
+    <View
+      style={[
+        styles.card,
+        subdued && styles.cardSubdued,
+        warning && styles.cardWarning,
+        fullWidth && styles.cardFullWidth,
+      ]}
+    >
       {title ? <CardHeader title={title} action={headerAction} /> : null}
       {items}
       {mainActions.map((action, index) => (
@@ -93,6 +86,24 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
     </View>
   )
 }
+
+const stylesBuilder = createStyles(({ colors, radius, elevation }) => ({
+  card: {
+    backgroundColor: colors.fill.background.lighter,
+    borderRadius: radius.medium,
+    ...elevation.z2,
+  },
+  cardFullWidth: {
+    borderRadius: 0,
+  },
+  cardSubdued: {
+    backgroundColor: shameStyles.card.subdued.backgroundColor,
+  },
+  cardWarning: {
+    ...elevation.z0,
+    backgroundColor: colors.status.warning,
+  },
+}))
 
 const CardHeader: React.FC<{ title: string; action?: TextAction }> = ({ title, action }) => (
   <Box padding="medium" paddingBottom="none">
