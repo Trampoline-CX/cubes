@@ -25,10 +25,51 @@ export const Basic: StoryFn<TimePickerProps> = props => {
 Basic.args = {
   label: 'Select a time',
   value: null,
+  placeholder: 'No time selected',
 }
 
 Basic.argTypes = {
   value: { control: 'date' },
   error: { control: 'text' },
   helpText: { control: 'text' },
+}
+
+export const Disabled: React.FC = () => {
+  const [date, setDate] = useState<Date | null>()
+
+  return (
+    <Screen>
+      <TimePicker label="Select a time" value={date} onChange={setDate} disabled />
+    </Screen>
+  )
+}
+
+export const WithError: React.FC = () => {
+  const [date, setDate] = useState<Date | null>(new Date())
+
+  return (
+    <Screen>
+      <TimePicker
+        label="Select an arrival time"
+        value={date}
+        onChange={setDate}
+        error="You're not arrived yet, choose something else"
+      />
+    </Screen>
+  )
+}
+
+export const WithCustomFormat: React.FC = () => {
+  const [date, setDate] = useState<Date | null>(new Date())
+
+  return (
+    <Screen>
+      <TimePicker
+        label="Select a time"
+        value={date}
+        onChange={setDate}
+        format="'Hour:' H, 'Minute:' m"
+      />
+    </Screen>
+  )
 }

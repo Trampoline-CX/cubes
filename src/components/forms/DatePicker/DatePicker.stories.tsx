@@ -25,6 +25,7 @@ export const Basic: StoryFn<DatePickerProps> = props => {
 Basic.args = {
   label: 'Select a date',
   value: null,
+  placeholder: 'No date selected',
 }
 
 Basic.argTypes = {
