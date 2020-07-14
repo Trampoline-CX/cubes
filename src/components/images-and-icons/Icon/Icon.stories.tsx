@@ -3,7 +3,6 @@ import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import MaterialGlyphs from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialIcons.json'
-import { Centered } from '../../../storybook/decorators/Centered'
 import { DarkBackground } from '../../../storybook/decorators/DarkBackground'
 import { useStyles } from '../../../theme'
 import { getStoryTitle } from '../../../storybook/get-story-title'
@@ -37,7 +36,6 @@ const IconContainer: React.FC<Omit<IconProps, 'name'>> = props => {
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Icon,
-  decorators: [Centered],
 }
 
 export const Example: React.FC = () => <Icon name="fingerprint" />

@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { TextField } from './TextField'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: TextField,
-  decorators: [CenteredVertical],
 }
 
 export const Default: React.FC = () => {
