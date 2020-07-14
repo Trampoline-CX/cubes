@@ -22,7 +22,7 @@ export * from './feedback-indicators/Spinner/Spinner'
 
 export * from './forms/Checkbox/Checkbox'
 export * from './forms/ChoiceList/ChoiceList'
-export * from './forms/DatePicker/DatePickerView/DatePickerView'
+export * from './forms/DatePicker/DatePicker'
 export * from './forms/FormLayout/FormLayout'
 export * from './forms/InlineError/InlineError'
 export * from './forms/RadioButton/RadioButton'
