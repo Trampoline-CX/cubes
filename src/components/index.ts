@@ -29,6 +29,7 @@ export * from './forms/RadioButton/RadioButton'
 export * from './forms/TextField/TextField'
 export * from './forms/SearchField/SearchField'
 export * from './forms/Switch/Switch'
+export * from './forms/TimePicker/TimePicker'
 
 export * from './images-and-icons/Avatar/Avatar'
 export * from './images-and-icons/Icon/Icon'

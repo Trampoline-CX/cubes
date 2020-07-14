@@ -3,15 +3,15 @@ import { format as formatDate } from 'date-fns'
 import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 import { BaseInputContainer } from '../../base/BaseInput/BaseInputContainer'
 import { BaseInput } from '../../base/BaseInput/BaseInput'
-import { DatePickerView } from './DatePickerView/DatePickerView'
+import { TimePickerView } from './TimePickerView/TimePickerView'
 
-export interface DatePickerProps {
+export interface TimePickerProps {
   /**
-   * Currently selected Date. If `null`, no date will be selected.
+   * Currently selected Date. If `null`, no time will be selected.
    */
   value?: Date | null
   /**
-   * Callback called when Date value changes.
+   * Callback called when time value changes.
    */
   onChange?: (date: Date | null) => void
   /**
@@ -40,14 +40,6 @@ export interface DatePickerProps {
    * @see https://date-fns.org/docs/format
    */
   format?: string
-  /**
-   * Minimum selectable date.
-   */
-  minDate?: Date
-  /**
-   * Maximum selectable date.
-   */
-  maxDate?: Date
 }
 
 /**
@@ -60,7 +52,7 @@ export interface DatePickerProps {
  * - On Android, it will display the native Android DatePicker (in a Dialog).
  * - On iOS, it will display the native iOS DatePicker (in a dialog).
  */
-export const DatePicker: React.FC<DatePickerProps> = ({
+export const TimePicker: React.FC<TimePickerProps> = ({
   value: valueRaw = null,
   onChange: onChangeRaw,
   label,
@@ -68,9 +60,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   helpText,
   error = false,
   disabled = false,
-  format = 'MM/dd/Y',
-  minDate,
-  maxDate,
+  format = 'h:mm a',
 }) => {
   const [value, onChange] = useUncontrolledState(valueRaw, onChangeRaw)
 
@@ -86,7 +76,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       error={error}
       onLabelClick={showDatePicker}
     >
-      <DatePickerView
+      <TimePickerView
         open={visible}
         activator={
           <BaseInput
@@ -99,8 +89,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         value={value ?? new Date()}
         onChange={onChange}
         onRequestClose={hideDatePicker}
-        minDate={minDate}
-        maxDate={maxDate}
       />
     </BaseInputContainer>
   )

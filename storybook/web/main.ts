@@ -84,6 +84,10 @@ const storybookConfig: StorybookConfig = {
         __dirname,
         '../../src/components/forms/DatePicker/DatePickerView/DatePickerView.web',
       ),
+      './TimePickerView/TimePickerView': path.resolve(
+        __dirname,
+        '../../src/components/forms/TimePicker/TimePickerView/TimePickerView.web',
+      ),
     }
 
     return config
