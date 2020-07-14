@@ -11,9 +11,6 @@ export interface SwipeableSheetProps {
 const hiddenTranslate = 9999999
 
 const springAnimationConfig: Partial<Animated.SpringAnimationConfig> = {
-  velocity: 4,
-  tension: 8,
-  friction: 8,
   overshootClamping: true,
   useNativeDriver: true,
   // Customize rest thresholds so animation ends more swiftly
