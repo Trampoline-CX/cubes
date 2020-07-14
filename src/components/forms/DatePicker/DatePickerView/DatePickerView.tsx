@@ -1,24 +1,41 @@
 import React, { useCallback } from 'react'
-import NativeDatePicker from '@react-native-community/datetimepicker'
+import NativeDatePicker from 'react-native-modal-datetime-picker'
 import { DatePickerViewProps } from './types'
 
 /**
  * Let the user chooses a date and/or time from a visual calendar/clock.
  *
- * **Note:** This component is highly different depending on which version you're on.
+ * Sadly, on Android, this is styled via native project XML, so it does not support styling (◞‸◟；)
  */
 export const DatePickerView: React.FC<DatePickerViewProps> = ({
-  value = null,
+  open,
+  value,
   onChange: onChangeRaw,
+  activator,
+  onRequestClose,
+  minDate,
+  maxDate,
 }) => {
   const onChange = useCallback(
-    (_, newDate: Date | undefined) => {
-      if (newDate) {
-        onChangeRaw(newDate)
-      }
+    (date: Date) => {
+      onRequestClose()
+      onChangeRaw(date)
     },
-    [onChangeRaw],
+    [onChangeRaw, onRequestClose],
   )
 
-  return <NativeDatePicker value={value ?? new Date()} onChange={onChange} mode="date" />
+  return (
+    <>
+      {activator}
+      <NativeDatePicker
+        isVisible={open}
+        date={value}
+        mode="date"
+        onConfirm={onChange}
+        onCancel={onRequestClose}
+        minimumDate={minDate}
+        maximumDate={maxDate}
+      />
+    </>
+  )
 }

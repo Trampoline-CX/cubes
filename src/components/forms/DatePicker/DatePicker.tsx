@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react'
 import { View, TouchableWithoutFeedback } from 'react-native'
 import { format as formatDate } from 'date-fns'
 import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
-import { Popover } from '../../overlays/Popover/Popover'
 import { useStyles } from '../../../theme'
 import { Touchable } from '../../base/Touchable/Touchable'
 import { Box } from '../../structure/Box/Box'
@@ -45,8 +44,26 @@ export interface DatePickerProps {
    * @see https://date-fns.org/docs/format
    */
   format?: string
+  /**
+   * Minimum selectable date.
+   */
+  minDate?: Date
+  /**
+   * Maximum selectable date.
+   */
+  maxDate?: Date
 }
 
+/**
+ * Let the user chooses a date and/or time from a visual calendar/clock.
+ *
+ * Sadly, this component does not support theming for the DatePicker shown once the input is clicked. (◞‸◟；)
+ *
+ * **Note:** This component is highly different depending on which version you're on.
+ * - On Web, it will display a Web DatePicker.
+ * - On Android, it will display the native Android DatePicker (in a Dialog).
+ * - On iOS, it will display the native iOS DatePicker (in a dialog).
+ */
 export const DatePicker: React.FC<DatePickerProps> = ({
   value: valueRaw = null,
   onChange: onChangeRaw,
@@ -56,6 +73,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   error,
   disabled = false,
   format = 'MM/dd/Y',
+  minDate,
+  maxDate,
 }) => {
   const styles = useStyles(theme => ({
     // Base Styles
@@ -88,14 +107,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   const showDatePicker = useCallback(() => setVisible(true), [])
   const hideDatePicker = useCallback(() => setVisible(false), [])
 
-  const onDatePicked = useCallback(
-    (date: Date) => {
-      setVisible(false)
-      onChange(date)
-    },
-    [onChange],
-  )
-
   return (
     <Box>
       <TouchableWithoutFeedback onPress={showDatePicker} disabled={disabled}>
@@ -105,7 +116,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           </Box>
         </View>
       </TouchableWithoutFeedback>
-      <Popover
+      <DatePickerView
         open={visible}
         activator={
           <Touchable
@@ -122,12 +133,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             </BodyText>
           </Touchable>
         }
+        value={value ?? new Date()}
+        onChange={onChange}
         onRequestClose={hideDatePicker}
-        hideBackdrop
-        placement="bottom-start"
-      >
-        <DatePickerView value={value ?? new Date()} onChange={onDatePicked} />
-      </Popover>
+        minDate={minDate}
+        maxDate={maxDate}
+      />
+
       {error && (
         <Box paddingTop="xSmall">
           <InlineError message={typeof error === 'string' ? error : ''} />
