@@ -111,7 +111,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           <Touchable
             viewStyle={[
               styles.inputContainer,
-              open && styles.inputContainerFocused,
+              visible && styles.inputContainerFocused,
               disabled && styles.inputContainerDisabled,
             ]}
             onClick={showDatePicker}
