@@ -45,6 +45,7 @@ module.exports = {
     'jsdoc/require-param': 'off',
     'jsdoc/require-returns-type': 'off',
     'jsdoc/require-jsdoc': 'off',
+    'jsdoc/check-tag-names': ['warn', { definedTags: ['pattern'] }],
     'jest/expect-expect': ['warn', { assertFunctionNames: ['expect', 'expectObservable'] }],
     'import/order': [
       'error',

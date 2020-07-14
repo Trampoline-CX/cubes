@@ -3,13 +3,17 @@ import { TextStyle, ShadowStyleIOS, ViewStyle, EasingFunction } from 'react-nati
 
 /**
  * Type for a color. Used for readability purpose.
+ *
+ * @pattern ^(#[A-Fa-f0-9]{6}|transparent|rgba\((\d+(\.\d+)?,){3}(\d+(\.\d+)?)\))$
  */
 export type ColorHex = string
 
 /**
  * Type for a font-family. Used for readability purpose.
  */
-export type FontFamily = string | undefined
+export type FontFamily = string
+
+export type Easing = 'ease-in' | 'ease-out' | 'ease-in-out'
 
 /**
  * Type for a font-weight.
@@ -38,7 +42,9 @@ export interface ComplexColor {
 /**
  * Structure of a Theme.
  */
-export interface Theme {
+export interface ThemeJson {
+  $schema: string
+
   // COLORS
   colors: {
     fill: {
@@ -148,10 +154,16 @@ export interface Theme {
       longer: number
     }
     easing: {
-      enter: EasingFunction
-      exit: EasingFunction
-      move: EasingFunction
+      enter: Easing
+      exit: Easing
+      move: Easing
     }
+  }
+}
+
+export type Theme = Omit<ThemeJson, 'animation'> & {
+  animation: Omit<ThemeJson['animation'], 'easing'> & {
+    easing: Record<keyof ThemeJson['animation']['easing'], EasingFunction>
   }
 }
 
