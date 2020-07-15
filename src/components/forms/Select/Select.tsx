@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useMemo } from 'react'
-import { View, TouchableWithoutFeedback } from 'react-native'
+import { View, TouchableWithoutFeedback, ScrollView } from 'react-native'
 import { Popover } from '../../overlays/Popover/Popover'
 import { useStyles } from '../../../theme'
 import { BodyText, Heading, Caption } from '../../text'
 import { Box } from '../../structure/Box/Box'
 import { Touchable } from '../../base/Touchable/Touchable'
 import { InlineError } from '../InlineError/InlineError'
+import { shameStyles } from '../../../theme/shame-styles'
 
 export interface SelectChoice {
   /**
@@ -57,6 +58,8 @@ export interface SelectProps {
   disabled?: boolean
 }
 
+const { maxHeight } = shameStyles.select
+
 /**
  * Let the user choose one option from multiple ones.
  */
@@ -93,6 +96,10 @@ export const Select: React.FC<SelectProps> = ({
     inputContainerDisabled: {
       opacity: theme.opacity.disabled,
     },
+
+    popover: {
+      maxHeight,
+    },
   }))
 
   const [open, setOpen] = useState(false)
@@ -107,6 +114,7 @@ export const Select: React.FC<SelectProps> = ({
         <Popover.Item
           key={choice.value}
           label={choice.label}
+          disabled={choice.disabled}
           // eslint-disable-next-line react/jsx-no-bind
           onSelect={() => onChange(choice.value)}
         />
@@ -139,10 +147,11 @@ export const Select: React.FC<SelectProps> = ({
           </Touchable>
         }
         onRequestClose={hidePopover}
+        popoverStyle={styles.popover}
         hideBackdrop
         matchWidth
       >
-        {choiceComponents}
+        <ScrollView>{choiceComponents}</ScrollView>
       </Popover>
       {error && (
         <Box paddingTop="xSmall">

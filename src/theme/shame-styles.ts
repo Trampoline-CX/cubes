@@ -77,4 +77,7 @@ export const shameStyles = {
       size: 200,
     },
   },
+  select: {
+    maxHeight: 300,
+  },
 } as const

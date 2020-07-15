@@ -36,10 +36,10 @@ Basic.args = {
 
 export const WithManyChoices: React.FC = () => {
   const [selected, setSelected] = useState<string | null>(null)
-  const choices: string[] = []
+  const choices: number[] = []
 
   for (let i = 0; i < 100; i++) {
-    choices.push(i.toString())
+    choices.push(i)
   }
 
   return (
@@ -47,8 +47,9 @@ export const WithManyChoices: React.FC = () => {
       <Select
         label="Choose a number"
         selected={selected}
-        choices={choices.map(x => ({ label: x, value: x }))}
+        choices={choices.map(x => ({ label: x.toString(), value: x.toString(), disabled: x < 10 }))}
         onChange={setSelected}
+        helpText="Numbers which are below 10 are disabled."
       />
     </Screen>
   )
