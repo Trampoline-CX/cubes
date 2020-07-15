@@ -25,6 +25,10 @@ export interface IconButtonProps {
    */
   onClick?: () => void
   /**
+   * Called when the button is long-clicked.
+   */
+  onLongClick?: () => void
+  /**
    * Size of the button.
    */
   size?: Extract<IconProps['size'], 'default' | 'small'>
@@ -38,6 +42,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   color,
   disabled = false,
   onClick = () => {}, // Defaults to empty action, to keep touch feedback
+  onLongClick,
   size = 'default',
 }) => {
   const styles = useStyles(theme => ({
@@ -55,7 +60,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
 
   return (
     <View style={styles.bounds}>
-      <Touchable onClick={onClick} disabled={disabled}>
+      <Touchable onClick={onClick} onLongClick={onLongClick} disabled={disabled}>
         <View style={styles.container}>
           <Icon name={icon} color={color} size={size} />
         </View>
