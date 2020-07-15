@@ -26,20 +26,18 @@ export const SwipeToDismiss: React.FC<SwipeToDismissProps> = ({ children, onSwip
     () =>
       PanResponder.create({
         onStartShouldSetPanResponder: () => true,
-        onPanResponderMove: (event, gestureState) => {
-          translate.setValue(Math.max(0, gestureState.dx))
+        onPanResponderMove: (_, gestureState) => {
+          translate.setValue(gestureState.dx)
         },
-        onPanResponderRelease: (event, gestureState) => {
-          const shouldDismiss = gestureState.vx >= 0.5
+        onPanResponderRelease: (_, gestureState) => {
+          const shouldDismiss = Math.abs(gestureState.vx) >= 0.5
 
           // Replace to original position or dismiss
           Animated.spring(translate, {
-            tension: 8,
-            friction: 8,
             overshootClamping: true,
             useNativeDriver: true,
-            toValue: shouldDismiss ? layout?.width ?? 0 : 0,
-            velocity: gestureState.vx,
+            toValue: shouldDismiss ? (gestureState.vx > 0 ? 1 : -1) * (layout?.width ?? 0) : 0,
+            velocity: Math.abs(gestureState.vx),
             // Customize rest thresholds so animation ends more swiftly
             restSpeedThreshold: 10,
             restDisplacementThreshold: 10,
