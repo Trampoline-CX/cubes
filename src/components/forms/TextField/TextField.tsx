@@ -8,7 +8,6 @@ import React, {
 } from 'react'
 import { TextInput, View, TextInputProps, TouchableWithoutFeedback, Platform } from 'react-native'
 import { BodyText } from '../../text/BodyText/BodyText'
-import { TextStyle } from '../../text/TextStyle/TextStyle'
 import { InlineError } from '../InlineError/InlineError'
 import { useStyles, useTheme } from '../../../theme'
 import { useTextStyles } from '../../text/use-text-styles'
