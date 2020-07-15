@@ -5,7 +5,7 @@ import { NavigationSchema } from '../../../navigation'
 import { NavigationContainer } from '../../../navigation/NavigationContainer'
 import { SnackbarProvider } from '../../overlays/Snackbar/SnackbarProvider'
 import { AppProviderSizeProvider } from '../../dev'
-import { PopoverPortalProvider } from '../../overlays/Popover/PopoverPortalProvider/PopoverPortalProvider'
+import { PopoverPortals } from '../../overlays/Popover/PopoverPortalProvider/PopoverPortals'
 import { AppProviderContext } from './AppProviderContext'
 
 export interface WithNavigationSchema {
@@ -45,11 +45,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({
   <SafeAreaProvider>
     <AppProviderSizeProvider>
       <AppProviderContext.Provider value={{ theme }}>
-        <PopoverPortalProvider>
+        <PopoverPortals.Provider>
           <SnackbarProvider>
             <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
           </SnackbarProvider>
-        </PopoverPortalProvider>
+          <PopoverPortals.DestinationPortal />
+        </PopoverPortals.Provider>
       </AppProviderContext.Provider>
     </AppProviderSizeProvider>
   </SafeAreaProvider>
