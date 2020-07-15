@@ -1,6 +1,7 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
+import isChromatic from 'chromatic/isChromatic'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { BodyText } from '../../text'
@@ -9,7 +10,6 @@ import { Screen } from '../../structure/Screen/Screen'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { Tooltip, TooltipProps } from './Tooltip'
-import isChromatic from 'chromatic/isChromatic'
 
 export default {
   title: getStoryTitle(fileAbsolute),
