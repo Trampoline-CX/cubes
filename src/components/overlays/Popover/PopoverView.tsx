@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { useCallback, useState, useMemo, useEffect } from 'react'
-import { LayoutRectangle, ViewProps, View, Animated } from 'react-native'
+import { LayoutRectangle, ViewProps, View, Animated, StyleProp, ViewStyle } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles, useTheme } from '../../../theme'
 import { useAppProviderDimensions } from '../../dev'
@@ -24,6 +24,8 @@ export interface PopoverViewProps {
   activatorLayout: LayoutRectangle
   matchWidth: boolean
   aboveActivator: boolean
+  clickThrough: boolean
+  style?: StyleProp<ViewStyle>
 }
 
 /**
@@ -36,6 +38,8 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
   activatorLayout,
   matchWidth,
   aboveActivator,
+  clickThrough,
+  style,
 }) => {
   const styles = useStyles(theme => ({
     container: {
@@ -95,6 +99,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
       <View
         style={[
           styles.popover,
+          style,
           layout === null
             ? styles.popoverNotYetLayout // Hide Popover as long as we don't have its correct layout
             : {
@@ -108,7 +113,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
           matchWidth ? { width: activatorLayout.width } : null,
         ]}
         onLayout={onLayout}
-        pointerEvents={open ? 'auto' : 'none'} // Make sure we can't click items if popover is closed
+        pointerEvents={open && !clickThrough ? 'auto' : 'none'} // Make sure we can't click items if popover is closed or if clickthrough === true
       >
         {children}
       </View>

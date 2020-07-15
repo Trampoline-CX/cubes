@@ -20,6 +20,10 @@ export interface TouchableProps extends TestProps {
    */
   onClick?: ButtonProps['onPress']
   /**
+   * Action to trigger on long click.
+   */
+  onLongClick?: TouchableWithoutFeedbackProps['onLongPress']
+  /**
    * Set to `true` to disable click.
    */
   disabled?: boolean
@@ -52,6 +56,7 @@ export interface TouchableProps extends TestProps {
 export const Touchable: React.FunctionComponent<TouchableProps> = ({
   children,
   onClick,
+  onLongClick,
   disabled: disabledRaw,
   onPressIn,
   onPressOut,
@@ -66,6 +71,7 @@ export const Touchable: React.FunctionComponent<TouchableProps> = ({
     <TouchableNativeFeedback
       useForeground
       onPress={onClick}
+      onLongPress={onLongClick}
       disabled={disabled}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
@@ -78,6 +84,7 @@ export const Touchable: React.FunctionComponent<TouchableProps> = ({
   ) : (
     <TouchableOpacity
       onPress={onClick}
+      onLongPress={onLongClick}
       disabled={disabled}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
