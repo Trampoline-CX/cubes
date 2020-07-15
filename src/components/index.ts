@@ -44,6 +44,7 @@ export { PopoverPlacement } from './overlays/Popover/popover-placement'
 export * from './overlays/Sheet/Sheet'
 export { SnackbarOptions } from './overlays/Snackbar/SnackbarProvider'
 export * from './overlays/Snackbar/use-snackbar'
+export * from './overlays/Tooltip/Tooltip'
 
 export * from './structure/AppProvider/AppProvider'
 export * from './structure/Box/Box'

@@ -20,7 +20,7 @@ export default {
   subcomponents: { 'Popover.Item': Popover.Item },
   decorators: [PhoneScreen],
   parameters: {
-    chromatic: { pauseAnimationAtEnd: true },
+    chromatic: { pauseAnimationAtEnd: true, delay: 100 },
   },
 }
 
