@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { getStoryTitle } from '../../../storybook/get-story-title'
-import { DrawerMenu, DrawerMenuProps } from './DrawerMenu'
-import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { action } from '@storybook/addon-actions'
+import { getStoryTitle } from '../../../storybook/get-story-title'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Screen } from '../../structure/Screen/Screen'
+import { TextContainer, Heading, BodyText } from '../../text'
+import { LOREM_IPSUM } from '../../../storybook/utils/constants'
+import { DrawerMenu, DrawerMenuProps } from './DrawerMenu'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: DrawerMenu,
 }
 
-export const Basic: StoryFn<DrawerMenuProps> = props => <DrawerMenu {...props} />
+export const Basic: StoryFn<DrawerMenuProps> = props => {
+  const [open, setOpen] = useState(props.open ?? false)
+
+  return (
+    <Screen>
+      <DrawerMenu {...props} open={open} onClose={() => setOpen(false)} />
+      <Screen.Content padding="medium">
+        <TextContainer>
+          <Heading>Title</Heading>
+          <BodyText>{LOREM_IPSUM}</BodyText>
+        </TextContainer>
+      </Screen.Content>
+    </Screen>
+  )
+}
 
 Basic.args = {
   items: [

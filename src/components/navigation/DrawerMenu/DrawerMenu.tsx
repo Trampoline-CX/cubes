@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
-import { TextWithIconAction } from '../../actions/actions'
-import { ItemProps, Item } from './Item/Item'
-import { Box } from '../../structure/Box/Box'
+import { View } from 'react-native'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
-import { View } from 'react-native'
+import { useResponsive } from '../../../utils/hooks/use-responsive'
+import { Sheet } from '../../overlays/Sheet/Sheet'
+import { ItemProps, Item } from './Item/Item'
 
 export interface DrawerMenuPropsWithChildren {
   /**
@@ -22,11 +22,30 @@ export interface DrawerMenuPropsWithItems {
   children?: never
 }
 
-export type DrawerMenuProps = DrawerMenuPropsWithChildren | DrawerMenuPropsWithItems
+export type DrawerMenuProps = {
+  /**
+   * Determines if menu is opened or not (only when in modal mode, does noting in standard mode).
+   */
+  open: boolean
+  /**
+   * Callback called when menu was closed (when in modal mode). Should
+   * update `open` prop accordingly (set it to `false`).
+   */
+  onClose: () => void
+} & (DrawerMenuPropsWithChildren | DrawerMenuPropsWithItems)
 
 const { width } = shameStyles.drawerMenu
 
+/**
+ * Display the primary navigation on the side of the App.
+ *
+ * On small devices, this will appear in "Modal" mode and will need to be
+ * manually displayed. With devices of larger size, it will appear in "Standard"
+ * mode, which means that it will be sticky on the side of the page.
+ */
 export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
+  open,
+  onClose,
   items,
   children: childrenRaw,
 }) => {
@@ -34,12 +53,24 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
     container: {
       width,
       backgroundColor: theme.colors.fill.background.lighter,
-      ...theme.elevation.z16,
     },
   }))
   const children = useDrawerMenuItems(items, childrenRaw)
+  const isModal = useResponsive({
+    small: true,
+    medium: false,
+    large: false,
+  })
 
-  return <View style={styles.container}>{children}</View>
+  const drawer = <View style={styles.container}>{children}</View>
+
+  return isModal ? (
+    <Sheet open={open} onClose={onClose}>
+      {drawer}
+    </Sheet>
+  ) : (
+    drawer
+  )
 }
 DrawerMenu.Item = Item
 
