@@ -8,6 +8,9 @@ import { Box } from '../structure/Box/Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
+  parameters: {
+    chromatic: { disable: true },
+  },
 }
 
 export const Example: React.FC = () => <AnimatedSquare duration="shorter" easing="move" />

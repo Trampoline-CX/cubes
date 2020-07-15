@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
+import isChromatic from 'chromatic/isChromatic'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
@@ -8,13 +9,29 @@ import { Button } from '../../actions/Button/Button'
 import { Screen } from '../../structure/Screen/Screen'
 import { BottomNavigationBar } from '../../navigation/BottomNavigationBar/BottomNavigationBar'
 import { TopBar } from '../../navigation/TopBar/TopBar'
-import { useSnackbar } from './use-snackbar'
+import { useSnackbar as useSnackbarOriginal } from './use-snackbar'
 import { Snackbar, SnackbarProps } from './Snackbar'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Snackbar,
   decorators: [PhoneScreen],
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true },
+  },
+}
+
+const useSnackbar: typeof useSnackbarOriginal = (...args) => {
+  const dispatch = useSnackbarOriginal(...args)
+
+  // Call dispatch as soon as we mount the component on Chromatic, so we can review the UI showing the Snackbar.
+  useEffect(() => {
+    if (isChromatic()) {
+      dispatch()
+    }
+  }, [])
+
+  return dispatch
 }
 
 export const Basic: StoryFn<SnackbarProps> = props => {
