@@ -46,7 +46,7 @@ export const useAnimation = (config: UseAnimationConfig): Animated.Value => {
         Animated.spring(animatedValue, config).start()
         break
       default:
-        throw new Error('Unsupported animation type. Should be timing or spring.')
+        console.warn('Unsupported animation type. Should be timing or spring.')
     }
   }, [config.toValue])
 
