@@ -9,11 +9,17 @@ import { Heading } from '../../text'
 import { ListView } from '../../structure/ListView/ListView'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { Sheet, SheetProps } from './Sheet'
+import isChromatic from 'chromatic/isChromatic'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Sheet,
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true },
+  },
 }
+
+const isInitiallyVisible = isChromatic()
 
 export const Basic: StoryFn<SheetProps> = props => {
   const [open, setOpen] = useState(props.open)
@@ -65,7 +71,7 @@ export const Basic: StoryFn<SheetProps> = props => {
 }
 
 Basic.args = {
-  open: false,
+  open: isInitiallyVisible,
 }
 
 Basic.argTypes = {
