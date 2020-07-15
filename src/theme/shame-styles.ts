@@ -59,6 +59,9 @@ export const shameStyles = {
     defaultWidth: '70%',
     minWidth: 280,
   },
+  tooltip: {
+    hideAfterDelay: 2500,
+  },
   radioButton: {
     size: 16,
     checkSize: 8,
