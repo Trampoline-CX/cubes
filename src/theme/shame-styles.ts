@@ -77,4 +77,7 @@ export const shameStyles = {
       size: 200,
     },
   },
+  drawerMenu: {
+    width: 256,
+  },
 } as const
