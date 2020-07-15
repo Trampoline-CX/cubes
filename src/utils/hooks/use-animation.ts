@@ -8,13 +8,14 @@ export const useAnimatedValue = (initialValue: number): Animated.Value => {
 
 interface BaseAnimationConfig {
   initialValue?: number
+  toValue: number
 }
 
 export type TimingAnimationConfig = BaseAnimationConfig &
-  ({ type: 'timing' } & Animated.TimingAnimationConfig)
+  ({ type: 'timing' } & Omit<Animated.TimingAnimationConfig, 'toValue'>)
 
 export type SpringAnimationConfig = BaseAnimationConfig &
-  ({ type: 'spring' } & Animated.SpringAnimationConfig)
+  ({ type: 'spring' } & Omit<Animated.SpringAnimationConfig, 'toValue'>)
 
 export type UseAnimationConfig = TimingAnimationConfig | SpringAnimationConfig
 
@@ -22,7 +23,7 @@ const getInitialValue = (config: UseAnimationConfig): number => {
   if (typeof config.initialValue !== 'undefined') {
     return config.initialValue
   } else {
-    return config.toValue as number // TODO deal with other types possibilities here
+    return config.toValue
   }
 }
 

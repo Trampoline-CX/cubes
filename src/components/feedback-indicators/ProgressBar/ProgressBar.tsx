@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import _ from 'lodash'
 import { Animated, View } from 'react-native'
 import { useStyles, useTheme } from '../../../theme'
