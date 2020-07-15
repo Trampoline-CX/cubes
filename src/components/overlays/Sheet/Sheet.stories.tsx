@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
+import isChromatic from 'chromatic/isChromatic'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { Box } from '../../structure/Box/Box'
@@ -9,7 +10,6 @@ import { Heading } from '../../text'
 import { ListView } from '../../structure/ListView/ListView'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { Sheet, SheetProps } from './Sheet'
-import isChromatic from 'chromatic/isChromatic'
 
 export default {
   title: getStoryTitle(fileAbsolute),
