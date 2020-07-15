@@ -9,12 +9,18 @@ import { Screen } from '../../structure/Screen/Screen'
 import { Box } from '../../structure/Box/Box'
 import { IconButton } from '../../actions/IconButton/IconButton'
 import { Tooltip, TooltipProps } from './Tooltip'
+import isChromatic from 'chromatic/isChromatic'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Tooltip,
   decorators: [PhoneScreen],
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true },
+  },
 }
+
+const isInitiallyVisible = isChromatic()
 
 export const Basic: StoryFn<TooltipProps> = props => (
   <Screen>
@@ -27,6 +33,7 @@ export const Basic: StoryFn<TooltipProps> = props => (
 )
 
 Basic.args = {
+  active: isInitiallyVisible,
   content: 'Here is some very important clarification!',
 }
 
@@ -37,8 +44,8 @@ Basic.argTypes = {
 export const WithClickableChildren: React.FC = () => (
   <Screen>
     <Box fill distribution="center" align="start">
-      <Tooltip content="Navigate to link" preferredPlacement="below">
-        <IconButton icon="web" onClick={action('Icon clicked')} />
+      <Tooltip active={isInitiallyVisible} content="Edit" preferredPlacement="below">
+        <IconButton icon="edit" onClick={action('Icon clicked')} />
       </Tooltip>
     </Box>
   </Screen>
