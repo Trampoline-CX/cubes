@@ -12,13 +12,13 @@ export default {
 }
 
 export const Default: React.FC = () => (
-  <IconButton icon="more" onClick={action('IconButton clicked')} />
+  <IconButton icon="edit" onClick={action('IconButton clicked')} />
 )
 
 export const Disabled: React.FC = () => (
-  <IconButton icon="more" disabled onClick={action('IconButton clicked')} />
+  <IconButton icon="edit" disabled onClick={action('IconButton clicked')} />
 )
 
 export const WithAccentColor: React.FC = () => (
-  <IconButton icon="feedback" color="accent" onClick={action('IconButton clicked')} />
+  <IconButton icon="favorite" color="accent" onClick={action('IconButton clicked')} />
 )
