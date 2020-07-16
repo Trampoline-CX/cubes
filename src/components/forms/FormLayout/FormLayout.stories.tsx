@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { TextField, TextFieldProps } from '../TextField/TextField'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { FormLayout } from './FormLayout'
@@ -19,7 +18,6 @@ const TextFieldWrapper: React.FC<Omit<TextFieldProps, 'onChange' | 'value'>> = p
 export default {
   title: getStoryTitle(fileAbsolute),
   component: FormLayout,
-  decorators: [CenteredVertical],
 }
 
 export const Default: React.FC = () => (

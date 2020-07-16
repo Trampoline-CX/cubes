@@ -1,7 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Card } from './Card'
@@ -10,7 +9,6 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: Card,
   subcomponents: { 'Card.Section': Card.Section },
-  decorators: [CenteredVertical],
 }
 
 export const DefaultSectioned: React.FC = () => (

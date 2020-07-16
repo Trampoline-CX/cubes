@@ -83,6 +83,8 @@ const storybookConfig: StorybookConfig = {
       ),
       // Mock @expo/vector-icons with react-native-vector-icons
       '@expo/vector-icons$': path.resolve(__dirname, '../../src/storybook/utils/expo-vector-icons'),
+      // Mock expo-haptics
+      'expo-haptics$': path.resolve(__dirname, '../../src/storybook/utils/expo-haptics'),
     }
 
     return config

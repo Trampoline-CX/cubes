@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
+import isChromatic from 'chromatic/isChromatic'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure/Box/Box'
 import { Button } from '../../actions/Button/Button'
@@ -12,10 +13,15 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: Dialog,
   subcomponents: { 'Dialog.Section': Dialog.Section },
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true },
+  },
 }
 
+const isInitiallyVisible = isChromatic()
+
 export const Basic: React.FC = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <Box padding="medium" align="start">
@@ -38,7 +44,7 @@ export const Basic: React.FC = () => {
 }
 
 export const Advanced: React.FC = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <Box padding="medium" align="start">
