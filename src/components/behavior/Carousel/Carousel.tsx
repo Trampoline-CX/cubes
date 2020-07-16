@@ -24,7 +24,7 @@
  * @see https://github.com/akveo/react-native-ui-kitten/blob/master/src/components/ui/viewPager/viewPager.component.tsx
  */
 import React, { useMemo, useRef, useEffect, useCallback } from 'react'
-import { Animated, PanResponder, StyleSheet, Easing, StyleProp, ViewStyle } from 'react-native'
+import { Animated, PanResponder, StyleSheet, StyleProp, ViewStyle } from 'react-native'
 import _ from 'lodash'
 import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 import { useOnLayout } from '../../../utils/hooks/use-on-layout'
@@ -75,14 +75,29 @@ export const Carousel: React.FC<CarouselProps> & { Slide: typeof Slide } = ({
     })
   }, [])
 
+  /**
+   * Scroll to an offset. Velocity can be set to use a spring animation, useful when swiping.
+   */
   const scrollToOffset = useCallback(
-    (offset: number, animated = false) => {
-      Animated.timing(contentOffset, {
-        toValue: offset,
-        easing: Easing.linear,
-        duration: animated ? animation.duration.default : 0,
-        useNativeDriver: true,
-      }).start(() => {
+    (offset: number, animated = false, velocity = 0) => {
+      const anim =
+        velocity > 0 && animated
+          ? Animated.spring(contentOffset, {
+              toValue: offset,
+              velocity,
+              useNativeDriver: true,
+              overshootClamping: true,
+              restDisplacementThreshold: 10,
+              restSpeedThreshold: 10,
+            })
+          : Animated.timing(contentOffset, {
+              toValue: offset,
+              easing: animation.easing.move,
+              duration: animated ? animation.duration.default : 0,
+              useNativeDriver: true,
+            })
+
+      anim.start(() => {
         const index = Math.round(-contentOffsetValue.current / contentWidth)
 
         if (contentWidth > 0 && index !== selectedIndex) {
@@ -93,9 +108,9 @@ export const Carousel: React.FC<CarouselProps> & { Slide: typeof Slide } = ({
     [selectedIndex, onSelect, contentOffsetValue.current, contentWidth],
   )
   const scrollToIndex = useCallback(
-    (index: number, animated = false) => {
+    (index: number, animated = false, velocity = 0) => {
       const offset = -contentWidth * _.clamp(index, 0, childCount - 1)
-      scrollToOffset(offset, animated)
+      scrollToOffset(offset, animated, velocity)
     },
     [contentWidth, childCount, scrollToOffset],
   )
@@ -129,10 +144,10 @@ export const Carousel: React.FC<CarouselProps> & { Slide: typeof Slide } = ({
           // If velocity or current move is large enough to go to left or right index
           if (Math.abs(state.vx) >= 0.5 || Math.abs(state.dx) >= 0.5 * contentWidth) {
             const index = state.dx > 0 ? selectedIndex - 1 : selectedIndex + 1
-            scrollToIndex(index, true)
+            scrollToIndex(index, true, Math.abs(state.vx))
           } else {
             // Velocity or movement is not enough, come back to current index
-            scrollToIndex(selectedIndex, true)
+            scrollToIndex(selectedIndex, true, Math.abs(state.vx))
           }
         },
       }),
