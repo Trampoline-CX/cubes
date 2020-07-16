@@ -7,11 +7,16 @@ import { PopoverContext } from './PopoverContext'
 export interface PopoverBackdropProps {
   open: boolean
   invisible: boolean
+  clickThrough: boolean
 }
 
 const { zIndex, backdrop } = shameStyles.popover
 
-export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ open, invisible }) => {
+export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({
+  open,
+  invisible,
+  clickThrough,
+}) => {
   const styles = useStyles(() => ({
     backdrop: {
       backgroundColor: backdrop.color,
@@ -34,12 +39,16 @@ export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ open, invisibl
     }).start()
   }, [open, invisible])
 
-  return (
-    <TouchableWithoutFeedback onPress={requestClose}>
-      <Animated.View
-        style={[styles.backdrop, !invisible && { opacity: anim }]}
-        pointerEvents={open ? 'auto' : 'none'}
-      />
-    </TouchableWithoutFeedback>
+  const contentView = (
+    <Animated.View
+      style={[styles.backdrop, !invisible && { opacity: anim }]}
+      pointerEvents={open && !clickThrough ? 'auto' : 'none'}
+    />
+  )
+
+  return clickThrough ? (
+    contentView
+  ) : (
+    <TouchableWithoutFeedback onPress={requestClose}>{contentView}</TouchableWithoutFeedback>
   )
 }
