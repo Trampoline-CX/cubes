@@ -115,6 +115,7 @@ export const Slider: React.FC<SliderProps> = ({
             enabledOne={!disabled}
             enabledTwo={!disabled}
             onValuesChange={onValuesChange}
+            snapped
           />
         ) : null}
       </View>
