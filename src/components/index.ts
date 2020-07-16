@@ -8,6 +8,8 @@ export * from './actions/actions'
 
 export * from './base/Touchable/Touchable'
 
+export * from './behavior/Carousel/Carousel'
+
 export * from './feedback-indicators/ProgressBar/ProgressBar'
 export * from './feedback-indicators/SkeletonAvatar/SkeletonAvatar'
 export * from './feedback-indicators/SkeletonIcon/SkeletonIcon'
