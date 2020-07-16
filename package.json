@@ -16,7 +16,7 @@
     "preversion": "git diff --quiet",
     "version": "git checkout -b release/v$npm_package_version && yarn changelog && git add CHANGELOG.md",
     "postversion": "git tag -d v$npm_package_version && echo \"🚀 You can push the new release branch now!\"",
-    "changelog": "yarn conventional-changelog -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -i CHANGELOG.md -s"
   },
   "files": [
     "dist/*"
