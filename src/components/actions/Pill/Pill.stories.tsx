@@ -1,15 +1,15 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
-import { Centered } from '../../../storybook/decorators/Centered'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { LeftAlign } from '../../../storybook/decorators/LeftAlign'
 import { Pill, PillProps } from './Pill'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Pill,
-  decorators: [Centered],
+  decorators: [LeftAlign],
 }
 
 export const Default: StoryFn<PillProps> = props => <Pill {...props} />

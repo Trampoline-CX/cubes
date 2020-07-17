@@ -2,7 +2,6 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
 import { Button } from '../../actions/Button/Button'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { ButtonGroup, ButtonGroupProps } from './ButtonGroup'
@@ -10,7 +9,6 @@ import { ButtonGroup, ButtonGroupProps } from './ButtonGroup'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: ButtonGroup,
-  decorators: [CenteredVertical],
 }
 
 export const DefaultFill: StoryFn<ButtonGroupProps> = props => (

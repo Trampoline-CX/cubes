@@ -6,6 +6,7 @@ import { Box } from '../../structure/Box/Box'
 import { SkeletonDisplayText } from '../SkeletonDisplayText/SkeletonDisplayText'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Layout } from '../../structure/Layout/Layout'
 import { SkeletonLoading, SkeletonLoadingProps } from './SkeletonLoading'
 
 export default {
@@ -14,22 +15,24 @@ export default {
 }
 
 export const Default: StoryFn<SkeletonLoadingProps> = props => (
-  <SkeletonLoading {...props}>
-    <Box horizontal space="medium">
-      <SkeletonAvatar />
-      <SkeletonDisplayText />
-    </Box>
+  <Layout>
+    <SkeletonLoading {...props}>
+      <Box horizontal space="medium">
+        <SkeletonAvatar />
+        <SkeletonDisplayText />
+      </Box>
 
-    <SkeletonBodyText lines={3} />
+      <SkeletonBodyText lines={3} />
 
-    <Box horizontal space="medium">
-      <Box fill>{}</Box>
-      <SkeletonAvatar />
-      <SkeletonAvatar />
-    </Box>
+      <Box horizontal space="medium">
+        <Box fill>{}</Box>
+        <SkeletonAvatar />
+        <SkeletonAvatar />
+      </Box>
 
-    <SkeletonBodyText lines={1} />
-  </SkeletonLoading>
+      <SkeletonBodyText lines={1} />
+    </SkeletonLoading>
+  </Layout>
 )
 
 Default.args = {

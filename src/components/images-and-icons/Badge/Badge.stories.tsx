@@ -1,14 +1,14 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { Centered } from '../../../storybook/decorators/Centered'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { LeftAlign } from '../../../storybook/decorators/LeftAlign'
 import { Badge, BadgeProps } from './Badge'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Badge,
-  decorators: [Centered],
+  decorators: [LeftAlign],
 }
 
 export const Default: StoryFn<BadgeProps> = props => <Badge {...props} />

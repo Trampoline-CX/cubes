@@ -1,6 +1,5 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { Heading } from '../../text/Heading/Heading'
 import { Card } from '../Card/Card'
@@ -12,7 +11,6 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: Layout,
   subcomponents: { 'Layout.Section': Layout.Section },
-  decorators: [CenteredVertical],
 }
 
 export const MultipleSections: StoryFn<LayoutProps> = props => (

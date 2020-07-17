@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { TextField, TextFieldProps } from './TextField'
@@ -9,7 +8,6 @@ import { TextField, TextFieldProps } from './TextField'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: TextField,
-  decorators: [CenteredVertical],
 }
 
 export const Default: StoryFn<TextFieldProps> = props => {

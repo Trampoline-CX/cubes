@@ -1,6 +1,5 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { Centered } from '../../../storybook/decorators/Centered'
 import { DarkBackground } from '../../../storybook/decorators/DarkBackground'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
@@ -9,7 +8,6 @@ import { Spinner, SpinnerProps } from './Spinner'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Spinner,
-  decorators: [Centered],
 }
 
 export const Default: StoryFn<SpinnerProps> = props => <Spinner {...props} />

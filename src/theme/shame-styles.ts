@@ -11,9 +11,6 @@ export const shameStyles = {
   skeletonBodyText: {
     height: 8,
   },
-  skeletonAvatar: {
-    size: 32,
-  },
   skeletonLoading: {
     animationDuration: 800,
   },
@@ -42,6 +39,26 @@ export const shameStyles = {
   topBar: {
     height: 56,
   },
+  snackbar: {
+    duration: {
+      default: 2500,
+      longer: 4000,
+    },
+  },
+  popover: {
+    zIndex: 99999,
+    backdrop: {
+      color: 'rgba(0, 0, 0, 0.3)',
+    },
+  },
+  dialog: {
+    backdropColor: 'rgba(0, 0, 0, 0.33)',
+    defaultWidth: '70%',
+    minWidth: 280,
+  },
+  tooltip: {
+    hideAfterDelay: 2500,
+  },
   radioButton: {
     size: 16,
     checkSize: 8,
@@ -57,4 +74,13 @@ export const shameStyles = {
       size: 200,
     },
   },
-}
+  slider: {
+    track: {
+      height: 6,
+    },
+    knob: {
+      size: 24,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+  },
+} as const
