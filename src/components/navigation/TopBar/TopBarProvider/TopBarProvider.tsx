@@ -16,10 +16,8 @@ export interface TopBarProviderProps {
  */
 export const TopBarProvider: React.FC<TopBarProviderProps> = ({ children }) => (
   <TopBarPortals.Provider>
-    <Box fill reverse>
-      <Box fill>{children}</Box>
-      <TopBarPortals.DestinationPortal />
-    </Box>
+    <TopBarPortals.DestinationPortal />
+    <Box fill>{children}</Box>
   </TopBarPortals.Provider>
 )
 

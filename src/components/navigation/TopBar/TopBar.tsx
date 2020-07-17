@@ -58,6 +58,7 @@ export const TopBar: React.FC<TopBarProps> = ({
       flexDirection: 'row',
       backgroundColor: theme.colors.fill.background.lighter,
       alignItems: 'center',
+      zIndex: 1,
       ...theme.elevation.z4,
     },
     transparentRoot: {
