@@ -11,9 +11,6 @@ export const shameStyles = {
   skeletonBodyText: {
     height: 8,
   },
-  skeletonAvatar: {
-    size: 32,
-  },
   skeletonLoading: {
     animationDuration: 800,
   },
@@ -79,5 +76,14 @@ export const shameStyles = {
   },
   drawerMenu: {
     width: 256,
+  },
+  slider: {
+    track: {
+      height: 6,
+    },
+    knob: {
+      size: 24,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
   },
 } as const
