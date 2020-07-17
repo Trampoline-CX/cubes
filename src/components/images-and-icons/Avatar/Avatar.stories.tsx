@@ -27,6 +27,7 @@ export const Generated: React.FC = () => (
     <Avatar source={{ hash: 'Random Text' }} />
   </Box>
 )
+
 export const Size: React.FC = () => {
   const { size } = useTheme()
 
