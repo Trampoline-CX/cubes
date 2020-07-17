@@ -98,8 +98,12 @@ There are 2 `tsconfig.json` files in this package:
 
 ## 🚀 Publish
 
-Deploy the package to NPM using:
+When ready to deploy changes, the whole publish workflow is implemented using GitHub Actions. All you need to do is checkout the latest version of `develop` and then run:
 
 ```shell
-$ yarn version && yarn publish --access public
+yarn release
 ```
+
+This will ask you for the new version number and create a new release branch for you. Once you validated that this new version is valid, simply push this new Release branch. GitHub Actions will take care of opening a PR for you to merge this branch on `master`.
+
+Once the PR is approved ✔️ and merged, `master` will get tagged with the new version and a GitHub Release will be created with the name and description of the merged PR. `master` should automatically be merged back into `develop` afterwards.
