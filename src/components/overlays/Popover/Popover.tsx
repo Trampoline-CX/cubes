@@ -7,7 +7,7 @@ import { PopoverPlacement } from './popover-placement'
 import { PopoverView } from './PopoverView'
 import { PopoverContext } from './PopoverContext'
 import { PopoverBackdrop } from './PopoverBackdrop'
-import { PopoverPortal } from './PopoverPortalProvider/PopoverPortalProvider'
+import { PopoverPortals } from './PopoverPortalProvider/PopoverPortals'
 
 export interface PopoverWithActions {
   /**
@@ -118,7 +118,7 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   return (
     <View ref={ref}>
       {activator}
-      <PopoverPortal popoverRef={ref}>
+      <PopoverPortals.SourcePortal componentRef={ref}>
         <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
           <PopoverBackdrop open={open} invisible={hideBackdrop} clickThrough={clickThrough} />
           <PopoverView
@@ -133,7 +133,7 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
             {content}
           </PopoverView>
         </PopoverContext.Provider>
-      </PopoverPortal>
+      </PopoverPortals.SourcePortal>
     </View>
   )
 }
