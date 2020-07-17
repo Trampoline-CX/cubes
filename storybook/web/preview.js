@@ -1,5 +1,4 @@
 import { addParameters } from '@storybook/react'
-import isChromatic from 'chromatic/isChromatic'
 import { Background } from '../../src/storybook/decorators/Background'
 import { WithAppProvider } from '../../src/storybook/decorators/WithAppProvider'
 
@@ -17,7 +16,7 @@ export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Global theme for components',
-    defaultValue: isChromatic() ? 'stacked' : 'light',
+    defaultValue: 'light',
     toolbar: {
       icon: 'circlehollow',
       items: [
