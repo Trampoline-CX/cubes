@@ -1,37 +1,35 @@
 import React from 'react'
-import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import { BodyText } from '../../text/BodyText/BodyText'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { getStoryTitle } from '../../../storybook/get-story-title'
+import { Box } from '../Box/Box'
 import { Space } from './Space'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Space,
-  decorators: [CenteredVertical],
 }
 
 export const Small: React.FC = () => (
-  <View>
+  <Box horizontal>
     <BodyText>Test1</BodyText>
     <Space value="small" />
     <BodyText>Test2</BodyText>
-  </View>
+  </Box>
 )
 
 export const Medium: React.FC = () => (
-  <View>
+  <Box horizontal>
     <BodyText>Test1</BodyText>
     <Space value="medium" />
     <BodyText>Test2</BodyText>
-  </View>
+  </Box>
 )
 
 export const Large: React.FC = () => (
-  <View>
+  <Box horizontal>
     <BodyText>Test1</BodyText>
     <Space value="large" />
     <BodyText>Test2</BodyText>
-  </View>
+  </Box>
 )

@@ -9,8 +9,9 @@ Delightfully simple building blocks for quick prototyping ⚡
 [![Storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://storybook.js.org/)
 
 - [👨‍🔬 Experiment Now!](#-experiment-now)
+  - [CodeSandbox](#codesandbox)
+  - [Expo Snack](#expo-snack)
 - [🏃 Getting Started](#-getting-started)
-  - [Installation](#installation)
   - [Usage](#usage)
     - [Expo](#expo)
     - [Start Project](#start-project)
@@ -23,7 +24,15 @@ Delightfully simple building blocks for quick prototyping ⚡
 
 ## 👨‍🔬 Experiment Now!
 
-TODO
+Start swiftly ⚡ using [CodeSandbox](https://codesandbox.io/s/github/alexbchr/cubes-basic-sandbox) or [Expo Snacks](https://snack.expo.io/@git/github.com/alexbchr/cubes-basic-sandbox).
+
+### CodeSandbox
+
+We recommend you to use CodeSandbox, as previewing is much faster and reliable than Expo Snacks. First time startup may take some time, but testing is fast afterwards.
+
+### Expo Snack
+
+Use Expo Snacks if you want to test on Web, Android and iOS. You can even test the native results directly in your browser using embedded [Appetize.io](https://appetize.io/).
 
 ## 🏃 Getting Started
 
@@ -32,12 +41,6 @@ Using [`expo-cli`](https://www.npmjs.com/package/expo-cli) and `npx`, use `creat
 ```shell
 npx expo init --template https://github.com/Trampoline-CX/create-cubes.git
 ```
-
-TODO
-
-### Installation
-
-TODO
 
 ### Usage
 
