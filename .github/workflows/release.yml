@@ -40,7 +40,6 @@ jobs:
       # Step needed to extract release version from branch name
       - name: Extract Release Version
         id: extract_version
-        if: ${{ env.IS_RELEASE == true }}
         env:
           RELEASE_BRANCH: ${{ github.event.pull_request.head.ref }}
         run: echo "##[set-output name=version;]$(echo ${RELEASE_BRANCH#release/})"
