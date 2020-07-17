@@ -49,9 +49,10 @@ Let's say we want to develop a new Cube, named `MyCube`.
 
 ```tsx
 import React from 'react'
-import { MyCube } from './MyCube'
 import { fileAbsolute } from 'paths.macro'
 import { getStoryTitle } from '../../../storybook/get-story-title'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { MyCube, MyCubeProps } from './MyCube'
 
 // Declaration of the Stories configuration for this Cube
 export default {
@@ -62,7 +63,7 @@ export default {
 // Declare stories using `export const`
 // The first story is shown differently in "Docs" Tab.
 // If the first story receives a props parameter, it will show controls in the Props Table to dynamically change props.
-export const MyFirstStory: React.FC = props => <MyCube {...props} />
+export const MyFirstStory: StoryFn<MyCubeProps> = props => <MyCube {...props} />
 export const MySecondStory: React.FC = () => <MyCube loading />
 
 // DON'T ENCAPSULATE CUBE USAGE IN FUNCTION LIKE SO:
