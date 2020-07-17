@@ -11,7 +11,7 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: ConfirmDialog,
   parameters: {
-    chromatic: { pauseAnimationAtEnd: true },
+    chromatic: { pauseAnimationAtEnd: true, delay: 100 },
   },
 }
 

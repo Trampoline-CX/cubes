@@ -16,7 +16,7 @@ export default {
   component: Tooltip,
   decorators: [PhoneScreen],
   parameters: {
-    chromatic: { pauseAnimationAtEnd: true },
+    chromatic: { pauseAnimationAtEnd: true, delay: 100 },
   },
 }
 
