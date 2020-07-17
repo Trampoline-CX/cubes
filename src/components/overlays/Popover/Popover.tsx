@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from 'react'
-import { View, LayoutRectangle } from 'react-native'
+import { View, LayoutRectangle, StyleProp, ViewStyle } from 'react-native'
 import { TextWithOptionalIconAction } from '../../actions/actions'
 import { usePositionInAppProvider } from '../../dev'
 import { Item, ItemProps } from './Item/Item'
@@ -7,7 +7,7 @@ import { PopoverPlacement } from './popover-placement'
 import { PopoverView } from './PopoverView'
 import { PopoverContext } from './PopoverContext'
 import { PopoverBackdrop } from './PopoverBackdrop'
-import { PopoverPortal } from './PopoverPortalProvider/PopoverPortalProvider'
+import { PopoverPortals } from './PopoverPortalProvider/PopoverPortals'
 
 export interface PopoverWithActions {
   /**
@@ -61,6 +61,17 @@ export type PopoverProps = {
    * Called when the Popover needs to be discarded. This should update `open` property accordingly.
    */
   onRequestClose: () => void
+  /**
+   * If true, the popover and its backdrop won't be clickable and won't receive mouse events.
+   *
+   * For example, this is used by the `Tooltip` component. Prefer using the `Tooltip` component instead
+   * of this property.
+   */
+  clickThrough?: boolean
+  /**
+   * Optional custom style for the Popover View (overlay view).
+   */
+  popoverStyle?: StyleProp<ViewStyle>
 } & (PopoverWithActions | PopoverWithChildren)
 
 const LAYOUT_ZERO: LayoutRectangle = { x: 0, y: 0, width: 0, height: 0 }
@@ -96,6 +107,8 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   hideBackdrop = false,
   matchWidth = false,
   aboveActivator = false,
+  clickThrough = false,
+  popoverStyle,
 }) => {
   const content = useContent(actions, children)
 
@@ -105,20 +118,22 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   return (
     <View ref={ref}>
       {activator}
-      <PopoverPortal popoverRef={ref}>
+      <PopoverPortals.SourcePortal componentRef={ref}>
         <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
-          <PopoverBackdrop open={open} invisible={hideBackdrop} />
+          <PopoverBackdrop open={open} invisible={hideBackdrop} clickThrough={clickThrough} />
           <PopoverView
+            style={popoverStyle}
             open={open}
             placement={placement}
             matchWidth={matchWidth}
             activatorLayout={activatorLayout ?? LAYOUT_ZERO}
             aboveActivator={aboveActivator}
+            clickThrough={clickThrough}
           >
             {content}
           </PopoverView>
         </PopoverContext.Provider>
-      </PopoverPortal>
+      </PopoverPortals.SourcePortal>
     </View>
   )
 }
