@@ -22,6 +22,8 @@ export const globalTypes = {
       items: [
         { value: 'light', icon: 'circlehollow', title: 'Light' },
         { value: 'dark', icon: 'circle', title: 'Dark' },
+        { value: 'side-by-side', icon: 'sidebar', title: 'side by side' },
+        { value: 'stacked', icon: 'bottombar', title: 'stacked' },
       ],
     },
   },
