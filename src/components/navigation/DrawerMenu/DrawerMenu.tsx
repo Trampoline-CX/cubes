@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import { View } from 'react-native'
+import React, { useMemo, useCallback } from 'react'
+import { View, ScrollView } from 'react-native'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { useResponsive } from '../../../utils/hooks/use-responsive'
@@ -66,12 +66,18 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
     large: false,
   })
 
-  const drawer = <View style={styles.container}>{children}</View>
+  const close = useCallback(() => onClose(), [onClose])
+
+  const drawer = (
+    <View style={styles.container}>
+      <ScrollView>{children}</ScrollView>
+    </View>
+  )
 
   return (
     <LeftSidebar>
       {isModal ? (
-        <Sheet open={open} onClose={onClose}>
+        <Sheet from="left" open={open} onClose={close}>
           {drawer}
         </Sheet>
       ) : (

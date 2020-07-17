@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { View, TouchableWithoutFeedback } from 'react-native'
 import { useStyles } from '../../../theme'
 import { Modal } from '../../base/Modal/Modal'
-import { SwipeableSheet } from './SwipeableSheet/SwipeableSheet'
+import { SwipeableSheet, SwipeableSheetFromProp } from './SwipeableSheet/SwipeableSheet'
 
 export interface SheetProps {
   /**
@@ -14,6 +14,10 @@ export interface SheetProps {
    */
   onClose: () => void
   /**
+   * Direction from which the Sheet arrives from.
+   */
+  from?: SwipeableSheetFromProp
+  /**
    * Children elements to render in the Sheet.
    */
   children: React.ReactNode
@@ -24,11 +28,17 @@ export interface SheetProps {
  * contextual actions, information or filters. Does not interrupt the
  * flow as a Dialog would do.
  */
-export const Sheet: React.FC<SheetProps> = ({ open, onClose, children }) => {
+export const Sheet: React.FC<SheetProps> = ({ open, onClose, from = 'bottom', children }) => {
   const [isAnimating, setAnimating] = useState(false)
   const styles = useStyles(() => ({
     container: {
       flex: 1,
+    },
+    containerFromLeft: {
+      flexDirection: 'row-reverse',
+    },
+    containerFromRight: {
+      flexDirection: 'row',
     },
     backdrop: {
       flex: 1,
@@ -57,12 +67,18 @@ export const Sheet: React.FC<SheetProps> = ({ open, onClose, children }) => {
 
   return (
     <Modal visible={open || isAnimating} onRequestClose={hide} animationType="none" transparent>
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          from === 'left' && styles.containerFromLeft,
+          from === 'right' && styles.containerFromRight,
+        ]}
+      >
         <TouchableWithoutFeedback onPress={hide}>
           <View style={styles.backdrop} />
         </TouchableWithoutFeedback>
 
-        <SwipeableSheet open={open} onHidden={onHidden}>
+        <SwipeableSheet from={from} open={open} onHidden={onHidden}>
           {children}
         </SwipeableSheet>
       </View>

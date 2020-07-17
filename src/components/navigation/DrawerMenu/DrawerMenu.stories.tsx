@@ -7,6 +7,7 @@ import { Screen } from '../../structure/Screen/Screen'
 import { TextContainer, Heading, BodyText } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { TopBar } from '../TopBar/TopBar'
+import { Button } from '../../actions/Button/Button'
 import { DrawerMenu, DrawerMenuProps } from './DrawerMenu'
 
 export default {
@@ -26,6 +27,7 @@ export const Basic: StoryFn<DrawerMenuProps> = props => {
           <Heading>Title</Heading>
           <BodyText>{LOREM_IPSUM}</BodyText>
         </TextContainer>
+        <Button onClick={() => setOpen(true)}>Open Drawer</Button>
       </Screen.Content>
     </Screen>
   )
