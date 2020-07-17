@@ -4,12 +4,10 @@ import { Box } from '../../structure/Box/Box'
 import { shameStyles } from '../../../theme/shame-styles'
 import { SkeletonBodyText } from '../SkeletonBodyText/SkeletonBodyText'
 
-export type SkeletonHeadingProps = Record<string, never>
-
 /**
  * Gives a low fidelity representation of a `Heading`.
  */
-export const SkeletonHeading: React.FC<SkeletonHeadingProps> = () => (
+export const SkeletonHeading: React.FC = () => (
   <Box padding="medium">
     <View style={styles.bodyTextContainer}>
       <SkeletonBodyText />
