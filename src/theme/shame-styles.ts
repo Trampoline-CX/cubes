@@ -74,4 +74,13 @@ export const shameStyles = {
       size: 200,
     },
   },
+  slider: {
+    track: {
+      height: 6,
+    },
+    knob: {
+      size: 24,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+  },
 } as const
