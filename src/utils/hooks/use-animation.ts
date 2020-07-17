@@ -1,11 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { Animated } from 'react-native'
 
-export const useAnimatedValue = (initialValue: number): Animated.Value => {
-  const ref = useRef(new Animated.Value(initialValue))
-  return ref.current
-}
-
 interface BaseAnimationConfig {
   initialValue?: number
   toValue: number
@@ -35,7 +30,7 @@ const getInitialValue = (config: UseAnimationConfig): number => {
  * When `toValue` value changes, an animation will run with the specified config.
  */
 export const useAnimation = (config: UseAnimationConfig): Animated.Value => {
-  const animatedValue = useAnimatedValue(getInitialValue(config))
+  const animatedValue = useRef(new Animated.Value(getInitialValue(config))).current
 
   useEffect(() => {
     switch (config.type) {
