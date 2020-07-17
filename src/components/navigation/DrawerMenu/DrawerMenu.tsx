@@ -54,6 +54,9 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
     container: {
       width,
       backgroundColor: theme.colors.fill.background.lighter,
+      borderRightWidth: theme.border.thinner,
+      borderRightColor: theme.colors.fill.divider.default,
+      paddingTop: theme.spacing.medium,
     },
   }))
   const children = useDrawerMenuItems(items, childrenRaw)

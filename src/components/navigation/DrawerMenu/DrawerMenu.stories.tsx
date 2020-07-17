@@ -19,8 +19,8 @@ export const Basic: StoryFn<DrawerMenuProps> = props => {
 
   return (
     <Screen>
+      <TopBar iconStart="none" title="My Screen" />
       <DrawerMenu {...props} open={open} onClose={() => setOpen(false)} />
-      <TopBar iconStart="none" />
       <Screen.Content padding="medium">
         <TextContainer>
           <Heading>Title</Heading>
