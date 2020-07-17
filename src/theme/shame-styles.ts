@@ -11,9 +11,6 @@ export const shameStyles = {
   skeletonBodyText: {
     height: 8,
   },
-  skeletonAvatar: {
-    size: 32,
-  },
   skeletonLoading: {
     animationDuration: 800,
   },

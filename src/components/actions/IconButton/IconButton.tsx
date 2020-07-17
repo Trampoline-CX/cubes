@@ -56,14 +56,20 @@ export const IconButton: React.FC<IconButtonProps> = ({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    containerDisabled: {
+      opacity: theme.opacity.disabled,
+    },
   }))
 
   return (
     <View style={styles.bounds}>
-      <Touchable onClick={onClick} onLongClick={onLongClick} disabled={disabled}>
-        <View style={styles.container}>
-          <Icon name={icon} color={color} size={size} />
-        </View>
+      <Touchable
+        onClick={onClick}
+        onLongClick={onLongClick}
+        disabled={disabled}
+        viewStyle={[styles.container, disabled && styles.containerDisabled]}
+      >
+        <Icon name={icon} color={color} size={size} />
       </Touchable>
     </View>
   )

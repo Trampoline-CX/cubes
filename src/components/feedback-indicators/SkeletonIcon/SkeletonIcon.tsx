@@ -1,20 +1,26 @@
 import React from 'react'
 import { Skeleton } from '../Skeleton/Skeleton'
-import { useStyles } from '../../../theme'
+import { useStyles, useTheme } from '../../../theme'
+import { IconSize } from '../../images-and-icons/Icon/Icon'
 
-export type SkeletonIconProps = Record<string, never>
+export interface SkeletonIconProps {
+  /**
+   * Icon size.
+   */
+  size?: IconSize
+}
 
 /**
  * Gives a low fidelity representation of an `Icon`.
  */
-export const SkeletonIcon: React.FC<SkeletonIconProps> = () => {
+export const SkeletonIcon: React.FC<SkeletonIconProps> = ({ size: sizeRaw = 'default' }) => {
   const styles = useStyles(theme => ({
     skeleton: {
       borderRadius: theme.radius.medium,
-      width: theme.size.icon.default,
-      height: theme.size.icon.default,
     },
   }))
+  const currentTheme = useTheme()
+  const size = currentTheme.size.icon[sizeRaw]
 
-  return <Skeleton style={styles.skeleton} />
+  return <Skeleton style={[styles.skeleton, { width: size, height: size }]} />
 }
