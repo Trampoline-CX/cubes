@@ -10,6 +10,7 @@ import { IconButton } from '../../actions/IconButton/IconButton'
 import { IconAction } from '../../actions/actions'
 import { useNav } from '../../../navigation'
 import { Icon } from './Icon/Icon'
+import { TopBarSource } from './TopBarProvider/TopBarProvider'
 
 export interface TopBarProps {
   /**
@@ -76,24 +77,26 @@ export const TopBar: React.FC<TopBarProps> = ({
   )
 
   return (
-    <View
-      style={[
-        styles.root,
-        transparent ? styles.transparentRoot : null,
-        { paddingTop: insets.top, height: insets.top + height },
-      ]}
-    >
-      {iconStart !== 'none' ? (
-        <Box paddingX="xSmall">
-          <IconButton icon={iconStart} onClick={onIconStartClick} />
+    <TopBarSource>
+      <View
+        style={[
+          styles.root,
+          transparent ? styles.transparentRoot : null,
+          { paddingTop: insets.top, height: insets.top + height },
+        ]}
+      >
+        {iconStart !== 'none' ? (
+          <Box paddingX="xSmall">
+            <IconButton icon={iconStart} onClick={onIconStartClick} />
+          </Box>
+        ) : null}
+        <Box paddingX="medium" fill>
+          <Heading maxLines={1}>{title}</Heading>
         </Box>
-      ) : null}
-      <Box paddingX="medium" fill>
-        <Heading maxLines={1}>{title}</Heading>
-      </Box>
-      <Box horizontal reverse>
-        {actionComponents}
-      </Box>
-    </View>
+        <Box horizontal reverse>
+          {actionComponents}
+        </Box>
+      </View>
+    </TopBarSource>
   )
 }

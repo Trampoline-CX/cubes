@@ -118,7 +118,7 @@ export const Popover: React.FC<PopoverProps> & { Item: typeof Item } = ({
   return (
     <View ref={ref}>
       {activator}
-      <PopoverPortals.SourcePortal componentRef={ref}>
+      <PopoverPortals.SourcePortal>
         <PopoverContext.Provider value={{ requestClose: onRequestClose }}>
           <PopoverBackdrop open={open} invisible={hideBackdrop} clickThrough={clickThrough} />
           <PopoverView

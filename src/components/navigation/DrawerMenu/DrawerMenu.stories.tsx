@@ -6,6 +6,7 @@ import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { Screen } from '../../structure/Screen/Screen'
 import { TextContainer, Heading, BodyText } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
+import { TopBar } from '../TopBar/TopBar'
 import { DrawerMenu, DrawerMenuProps } from './DrawerMenu'
 
 export default {
@@ -19,6 +20,7 @@ export const Basic: StoryFn<DrawerMenuProps> = props => {
   return (
     <Screen>
       <DrawerMenu {...props} open={open} onClose={() => setOpen(false)} />
+      <TopBar iconStart="none" />
       <Screen.Content padding="medium">
         <TextContainer>
           <Heading>Title</Heading>

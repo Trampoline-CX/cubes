@@ -4,6 +4,7 @@ import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { useResponsive } from '../../../utils/hooks/use-responsive'
 import { Sheet } from '../../overlays/Sheet/Sheet'
+import { LeftSidebar } from '../../structure/AppProvider/LeftSidebar/LeftSidebar'
 import { ItemProps, Item } from './Item/Item'
 
 export interface DrawerMenuPropsWithChildren {
@@ -64,12 +65,16 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
 
   const drawer = <View style={styles.container}>{children}</View>
 
-  return isModal ? (
-    <Sheet open={open} onClose={onClose}>
-      {drawer}
-    </Sheet>
-  ) : (
-    drawer
+  return (
+    <LeftSidebar>
+      {isModal ? (
+        <Sheet open={open} onClose={onClose}>
+          {drawer}
+        </Sheet>
+      ) : (
+        drawer
+      )}
+    </LeftSidebar>
   )
 }
 DrawerMenu.Item = Item
