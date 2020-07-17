@@ -1,4 +1,4 @@
-export * from './actions/Badge/Badge'
+export * from './images-and-icons/Badge/Badge'
 export * from './actions/Button/Button'
 export * from './actions/ButtonBase/ButtonBase'
 export * from './actions/IconButton/IconButton'
