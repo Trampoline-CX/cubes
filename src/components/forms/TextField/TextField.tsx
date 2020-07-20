@@ -334,18 +334,18 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
             </View>
           ) : null}
         </View>
-        {error && (
+        {error ? (
           <Box paddingTop="xSmall">
             <InlineError message={typeof error === 'string' ? error : ''} />
           </Box>
-        )}
-        {helpText && (
+        ) : null}
+        {helpText ? (
           <Box paddingTop="xSmall">
             <Caption>
               <TextStyle variation="subdued">{helpText}</TextStyle>
             </Caption>
           </Box>
-        )}
+        ) : null}
       </View>
     )
   },
