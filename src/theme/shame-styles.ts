@@ -77,6 +77,9 @@ export const shameStyles = {
   drawerMenu: {
     width: 256,
   },
+  sheet: {
+    backdropColor: 'rgba(0, 0, 0, 0.33)',
+  },
   slider: {
     track: {
       height: 6,

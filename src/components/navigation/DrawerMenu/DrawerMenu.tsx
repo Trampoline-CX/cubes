@@ -77,7 +77,7 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
   return (
     <LeftSidebar>
       {isModal ? (
-        <Sheet from="left" open={open} onClose={close}>
+        <Sheet from="left" open={open} onClose={close} showBackdrop>
           {drawer}
         </Sheet>
       ) : (

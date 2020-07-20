@@ -77,3 +77,52 @@ Basic.args = {
 Basic.argTypes = {
   children: { control: null },
 }
+
+export const WithBackdrop: React.FC = () => {
+  const [open, setOpen] = useState(isInitiallyVisible)
+
+  return (
+    <Box>
+      <Button onClick={() => setOpen(true)}>Show Sheet</Button>
+      <Sheet open={open} onClose={() => setOpen(false)} showBackdrop>
+        <Box
+          horizontal
+          paddingX="medium"
+          paddingY="small"
+          space="medium"
+          align="center"
+          distribution="space-between"
+        >
+          <Heading>What do you want?</Heading>
+          <IconButton icon="close" onClick={() => setOpen(false)} />
+        </Box>
+        <ListView>
+          <ListView.Item
+            title="Pizza"
+            description="With toppings and everything!"
+            onClick={() => {
+              action('Pizza')()
+              setOpen(false)
+            }}
+          />
+          <ListView.Item
+            title="Tacos"
+            description="Hola!"
+            onClick={() => {
+              action('Tacos')()
+              setOpen(false)
+            }}
+          />
+          <ListView.Item
+            title="Sushis"
+            description="Paradise on earth!"
+            onClick={() => {
+              action('Sushis')()
+              setOpen(false)
+            }}
+          />
+        </ListView>
+      </Sheet>
+    </Box>
+  )
+}

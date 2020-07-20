@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { View, TouchableWithoutFeedback } from 'react-native'
-import { useStyles } from '../../../theme'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { View, TouchableWithoutFeedback, StyleSheet, Animated } from 'react-native'
+import { useStyles, useTheme } from '../../../theme'
 import { Modal } from '../../base/Modal/Modal'
+import { shameStyles } from '../../../theme/shame-styles'
 import { SwipeableSheet, SwipeableSheetFromProp } from './SwipeableSheet/SwipeableSheet'
 
 export interface SheetProps {
@@ -21,15 +22,30 @@ export interface SheetProps {
    * Children elements to render in the Sheet.
    */
   children: React.ReactNode
+  /**
+   * Show backdrop (which by default is invisible).
+   */
+  showBackdrop?: boolean
 }
+
+const { backdropColor } = shameStyles.sheet
 
 /**
  * Large container entering from the edge of the screen. Can provide
  * contextual actions, information or filters. Does not interrupt the
  * flow as a Dialog would do.
  */
-export const Sheet: React.FC<SheetProps> = ({ open, onClose, from = 'bottom', children }) => {
+export const Sheet: React.FC<SheetProps> = ({
+  open,
+  onClose,
+  from = 'bottom',
+  children,
+  showBackdrop = false,
+}) => {
   const [isAnimating, setAnimating] = useState(false)
+  const anim = useRef(new Animated.Value(open ? 1 : 0)).current
+  const { animation } = useTheme()
+
   const styles = useStyles(() => ({
     container: {
       flex: 1,
@@ -43,6 +59,10 @@ export const Sheet: React.FC<SheetProps> = ({ open, onClose, from = 'bottom', ch
     backdrop: {
       flex: 1,
       justifyContent: 'flex-end',
+      ...StyleSheet.absoluteFillObject,
+    },
+    backdropVisible: {
+      backgroundColor: backdropColor,
     },
   }))
 
@@ -50,6 +70,13 @@ export const Sheet: React.FC<SheetProps> = ({ open, onClose, from = 'bottom', ch
     if (open) {
       setAnimating(true)
     }
+
+    Animated.timing(anim, {
+      toValue: open ? 1 : 0,
+      easing: animation.easing.move,
+      duration: animation.duration.default,
+      useNativeDriver: true,
+    }).start()
   }, [open])
 
   const hide = useCallback(() => {
@@ -75,7 +102,9 @@ export const Sheet: React.FC<SheetProps> = ({ open, onClose, from = 'bottom', ch
         ]}
       >
         <TouchableWithoutFeedback onPress={hide}>
-          <View style={styles.backdrop} />
+          <Animated.View
+            style={[styles.backdrop, showBackdrop && styles.backdropVisible, { opacity: anim }]}
+          />
         </TouchableWithoutFeedback>
 
         <SwipeableSheet from={from} open={open} onHidden={onHidden}>
