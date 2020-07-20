@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
 import { getStoryTitle } from '../../../storybook/get-story-title'
@@ -8,6 +8,7 @@ import { TextContainer, Heading, BodyText } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { TopBar } from '../TopBar/TopBar'
 import { Button } from '../../actions/Button/Button'
+import { useNav } from '../../../navigation'
 import { DrawerMenu, DrawerMenuProps } from './DrawerMenu'
 
 export default {
@@ -16,18 +17,18 @@ export default {
 }
 
 export const Basic: StoryFn<DrawerMenuProps> = props => {
-  const [open, setOpen] = useState(props.open ?? false)
+  const navigate = useNav()
 
   return (
     <Screen>
       <TopBar iconStart="none" title="My Screen" />
-      <DrawerMenu {...props} open={open} onClose={() => setOpen(false)} />
+      <DrawerMenu {...props} />
       <Screen.Content padding="medium">
         <TextContainer>
           <Heading>Title</Heading>
           <BodyText>{LOREM_IPSUM}</BodyText>
         </TextContainer>
-        <Button onClick={() => setOpen(true)}>Open Drawer</Button>
+        <Button onClick={navigate.drawer.open}>Open Drawer</Button>
       </Screen.Content>
     </Screen>
   )

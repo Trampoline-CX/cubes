@@ -7,6 +7,7 @@ import { SnackbarProvider } from '../../overlays/Snackbar/SnackbarProvider'
 import { AppProviderSizeProvider } from '../../dev'
 import { PopoverPortals } from '../../overlays/Popover/PopoverPortalProvider/PopoverPortals'
 import { TopBarProvider } from '../../navigation/TopBar/TopBarProvider/TopBarProvider'
+import { DrawerMenuProvider } from '../../navigation/DrawerMenu/Context/DrawerMenuContext'
 import { AppProviderContext } from './AppProviderContext'
 import { LeftSidebarProvider } from './LeftSidebar/LeftSidebar'
 
@@ -51,7 +52,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({
           <PopoverPortals.Provider>
             <TopBarProvider>
               <LeftSidebarProvider>
-                <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+                <DrawerMenuProvider>
+                  <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
+                </DrawerMenuProvider>
               </LeftSidebarProvider>
             </TopBarProvider>
             <PopoverPortals.DestinationPortal />

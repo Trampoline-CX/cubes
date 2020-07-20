@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { Animated, LayoutRectangle, ViewProps, PanResponder } from 'react-native'
-import { useStyles, useTheme } from '../../../../theme'
+import { useStyles, useTheme, Theme } from '../../../../theme'
 import { DirectionHelper, SheetFromProp } from '../direction-helpers'
 
 export interface SwipeableSheetProps {
@@ -121,10 +121,9 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
         from === 'bottom' && styles.sheetBottom,
         {
           transform: [{ [directionHelper.animatedProp]: translate }],
-          elevation: translate.interpolate({
-            inputRange: [0, layout ? directionHelper.getTranslationClosedValue(layout) : 0].sort(),
-            outputRange: [currentTheme.elevation.z16.elevation, 0],
-          }),
+          elevation: translate.interpolate(
+            getElevationInterpolationConfig(currentTheme, layout, directionHelper),
+          ),
         },
       ]}
       {...panResponder.panHandlers}
@@ -133,4 +132,23 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
       {children}
     </Animated.View>
   )
+}
+
+const getElevationInterpolationConfig = (
+  theme: Theme,
+  layout: LayoutRectangle | null,
+  directionHelper: DirectionHelper,
+): Animated.InterpolationConfigType => {
+  const closedValue = layout ? directionHelper.getTranslationClosedValue(layout) : 0
+
+  // Input range must be sorted and outputRange need to be sorted according to it
+  return closedValue >= 0
+    ? {
+        inputRange: [0, closedValue],
+        outputRange: [theme.elevation.z16.elevation, 0],
+      }
+    : {
+        inputRange: [closedValue, 0],
+        outputRange: [0, theme.elevation.z16.elevation],
+      }
 }

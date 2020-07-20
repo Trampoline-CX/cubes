@@ -1,11 +1,11 @@
-import React, { useMemo, useCallback } from 'react'
+import React, { useMemo } from 'react'
 import { View, ScrollView } from 'react-native'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
-import { useResponsive } from '../../../utils/hooks/use-responsive'
 import { Sheet } from '../../overlays/Sheet/Sheet'
 import { LeftSidebar } from '../../structure/AppProvider/LeftSidebar/LeftSidebar'
 import { ItemProps, Item } from './Item/Item'
+import { useDrawerMenuContext } from './Context/DrawerMenuContext'
 
 export interface DrawerMenuPropsWithChildren {
   /**
@@ -23,17 +23,7 @@ export interface DrawerMenuPropsWithItems {
   children?: never
 }
 
-export type DrawerMenuProps = {
-  /**
-   * Determines if menu is opened or not (only when in modal mode, does noting in standard mode).
-   */
-  open: boolean
-  /**
-   * Callback called when menu was closed (when in modal mode). Should
-   * update `open` prop accordingly (set it to `false`).
-   */
-  onClose: () => void
-} & (DrawerMenuPropsWithChildren | DrawerMenuPropsWithItems)
+export type DrawerMenuProps = DrawerMenuPropsWithChildren | DrawerMenuPropsWithItems
 
 const { width } = shameStyles.drawerMenu
 
@@ -45,8 +35,6 @@ const { width } = shameStyles.drawerMenu
  * mode, which means that it will be sticky on the side of the page.
  */
 export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
-  open,
-  onClose,
   items,
   children: childrenRaw,
 }) => {
@@ -59,14 +47,8 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
       paddingTop: theme.spacing.medium,
     },
   }))
+  const { isModal, opened, close } = useDrawerMenuContext()
   const children = useDrawerMenuItems(items, childrenRaw)
-  const isModal = useResponsive({
-    small: true,
-    medium: false,
-    large: false,
-  })
-
-  const close = useCallback(() => onClose(), [onClose])
 
   const drawer = (
     <View style={styles.container}>
@@ -77,7 +59,7 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
   return (
     <LeftSidebar>
       {isModal ? (
-        <Sheet from="left" open={open} onClose={close} showBackdrop>
+        <Sheet from="left" open={opened} onClose={close} showBackdrop>
           {drawer}
         </Sheet>
       ) : (
