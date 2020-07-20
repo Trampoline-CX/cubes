@@ -9,6 +9,8 @@ export interface SwipeableSheetProps {
   from: SheetFromProp
   directionHelper: DirectionHelper
   onHidden: () => void
+  onTouchMove: (openedRatio: number) => void
+  onTouchRelease: (dismiss: boolean) => void
 }
 
 const springAnimationConfig: Partial<Animated.SpringAnimationConfig> = {
@@ -25,6 +27,8 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
   from,
   directionHelper,
   onHidden: onHiddenRaw,
+  onTouchMove,
+  onTouchRelease,
 }) => {
   const styles = useStyles(theme => ({
     sheet: {
@@ -59,11 +63,19 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
         },
         onPanResponderMove: (event, gestureState) => {
           translate.setValue(directionHelper.getTranslateValue(gestureState))
+
+          const closedValue = layout ? directionHelper.getTranslationClosedValue(layout) : 0
+
+          if (closedValue !== 0) {
+            onTouchMove(1 - Math.abs(directionHelper.getTranslateValue(gestureState) / closedValue))
+          }
         },
         onPanResponderRelease: (event, gestureState) => {
           const shouldDismiss = directionHelper.shouldDismiss(
             gestureState[directionHelper.velocityProp],
           )
+
+          onTouchRelease(shouldDismiss)
 
           // Replace to original position or dismiss
           Animated.spring(translate, {
@@ -74,7 +86,7 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
           }).start(({ finished }) => (finished && shouldDismiss ? onHidden() : undefined))
         },
       }),
-    [layout, directionHelper],
+    [layout, directionHelper, onTouchMove, onTouchRelease],
   )
 
   // Wait to be layouted to bring view into view.

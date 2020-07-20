@@ -95,6 +95,16 @@ export const Sheet: React.FC<SheetProps> = ({
     }
   }, [open])
 
+  const onTouchMove = useCallback((openedRatio: number) => anim.setValue(openedRatio), [])
+  const onTouchRelease = useCallback((dismiss: boolean) => {
+    Animated.timing(anim, {
+      toValue: dismiss ? 0 : 1,
+      easing: animation.easing.move,
+      duration: animation.duration.default,
+      useNativeDriver: true,
+    }).start()
+  }, [])
+
   return (
     <Modal visible={open || isAnimating} onRequestClose={hide} animationType="none" transparent>
       <View
@@ -118,6 +128,8 @@ export const Sheet: React.FC<SheetProps> = ({
           directionHelper={directionHelper}
           open={open}
           onHidden={onHidden}
+          onTouchMove={onTouchMove}
+          onTouchRelease={onTouchRelease}
         >
           {children}
         </SwipeableSheet>
