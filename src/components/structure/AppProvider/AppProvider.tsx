@@ -43,16 +43,16 @@ export const AppProvider: React.FC<AppProviderProps> = ({
     <AppProviderSizeProvider>
       <AppProviderContext.Provider value={{ theme }}>
         <SnackbarProvider>
-          <PopoverPortals.Provider>
-            <TopBarProvider>
-              <LeftSidebarProvider>
-                <DrawerMenuProvider>
+          <DrawerMenuProvider>
+            <PopoverPortals.Provider>
+              <TopBarProvider>
+                <LeftSidebarProvider>
                   <NavigationContainer schema={navigationSchema}>{children}</NavigationContainer>
-                </DrawerMenuProvider>
-              </LeftSidebarProvider>
-            </TopBarProvider>
-            <PopoverPortals.DestinationPortal />
-          </PopoverPortals.Provider>
+                </LeftSidebarProvider>
+              </TopBarProvider>
+              <PopoverPortals.DestinationPortal />
+            </PopoverPortals.Provider>
+          </DrawerMenuProvider>
         </SnackbarProvider>
       </AppProviderContext.Provider>
     </AppProviderSizeProvider>
