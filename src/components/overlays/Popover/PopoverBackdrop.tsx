@@ -26,7 +26,7 @@ export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({
     },
   }))
   const { animation } = useTheme()
-  const [anim] = useState(new Animated.Value(0))
+  const [anim] = useState(new Animated.Value(open ? 1 : 0))
 
   const { requestClose } = useContext(PopoverContext)
 

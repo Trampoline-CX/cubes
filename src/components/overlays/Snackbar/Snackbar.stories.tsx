@@ -17,7 +17,7 @@ export default {
   component: Snackbar,
   decorators: [PhoneScreen],
   parameters: {
-    chromatic: { pauseAnimationAtEnd: true },
+    chromatic: { pauseAnimationAtEnd: true, delay: 300 },
   },
 }
 
