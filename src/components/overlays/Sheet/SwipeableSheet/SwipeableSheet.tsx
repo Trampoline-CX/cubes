@@ -122,7 +122,7 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
         {
           transform: [{ [directionHelper.animatedProp]: translate }],
           elevation: translate.interpolate({
-            inputRange: [0, layout ? directionHelper.getTranslationClosedValue(layout) : 0],
+            inputRange: [0, layout ? directionHelper.getTranslationClosedValue(layout) : 0].sort(),
             outputRange: [currentTheme.elevation.z16.elevation, 0],
           }),
         },
