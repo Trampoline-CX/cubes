@@ -11,7 +11,7 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: AlertDialog,
   parameters: {
-    chromatic: { pauseAnimationAtEnd: true, delay: 100 },
+    chromatic: { pauseAnimationAtEnd: true, delay: 300 },
   },
 }
 
