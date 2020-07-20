@@ -78,7 +78,7 @@ export const TopBar: React.FC<TopBarProps> = ({
     },
   }))
 
-  const { back, drawer } = useNav()
+  const { back, drawer, isFocused } = useNav()
   const onIconStartClick = onIconStartClickRaw || (withDrawerMenu ? drawer.open : back)
   const actionComponents = useMemo(
     () =>
@@ -90,7 +90,7 @@ export const TopBar: React.FC<TopBarProps> = ({
 
   const showIconStart = iconStart !== 'none' && (!withDrawerMenu || drawer.isModal)
 
-  return (
+  return isFocused ? (
     <TopBarSource>
       <View
         style={[
@@ -112,5 +112,5 @@ export const TopBar: React.FC<TopBarProps> = ({
         </Box>
       </View>
     </TopBarSource>
-  )
+  ) : null
 }

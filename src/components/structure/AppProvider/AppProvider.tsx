@@ -11,28 +11,22 @@ import { DrawerMenuProvider } from '../../navigation/DrawerMenu/Context/DrawerMe
 import { AppProviderContext } from './AppProviderContext'
 import { LeftSidebarProvider } from './LeftSidebar/LeftSidebar'
 
-export interface WithNavigationSchema {
-  /**
-   * Navigation Schema used to configure Navigation tree.
-   */
-  navigationSchema: NavigationSchema
-  children?: never
-}
-
-export interface WithoutNavigationSchema {
-  /**
-   * Navigation Schema used to configure Navigation tree.
-   */
-  children: React.ReactNode
-  navigationSchema?: never
-}
-
-export type AppProviderProps = {
+export interface AppProviderProps {
   /**
    * Theme to use (will use light theme if none is provided).
    */
   theme?: Theme
-} & (WithNavigationSchema | WithoutNavigationSchema)
+  /**
+   * Navigation Schema used to configure Navigation tree.
+   */
+  navigationSchema?: NavigationSchema
+  /**
+   * Children to show (prototype). If `navigationSchema` is provided, these views will be rendered
+   * below prototype content. Useful to display absolutely positioned views or special Cubes such
+   * as `DrawerMenu`.
+   */
+  children?: React.ReactNode
+}
 
 /**
  * Required component that should be defined at the root of the App and controls many elements, like
