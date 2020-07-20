@@ -1,22 +1,19 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { Animated, LayoutRectangle, ViewProps, PanResponder } from 'react-native'
 import { useStyles, useTheme } from '../../../../theme'
-
-export type SwipeableSheetFromProp = 'bottom' | 'left' | 'right'
+import { DirectionHelper, SheetFromProp } from '../direction-helpers'
 
 export interface SwipeableSheetProps {
   open: boolean
   children: React.ReactNode
-  from: SwipeableSheetFromProp
+  from: SheetFromProp
+  directionHelper: DirectionHelper
   onHidden: () => void
 }
 
 const springAnimationConfig: Partial<Animated.SpringAnimationConfig> = {
   overshootClamping: true,
   useNativeDriver: true,
-  // Customize rest thresholds so animation ends more swiftly
-  restSpeedThreshold: 1,
-  restDisplacementThreshold: 0.1,
 }
 
 /**
@@ -26,6 +23,7 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
   open,
   children,
   from,
+  directionHelper,
   onHidden: onHiddenRaw,
 }) => {
   const styles = useStyles(theme => ({
@@ -39,14 +37,7 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
     },
   }))
 
-  const hiddenTranslate = getHiddenTranslate(from)
-  const animatedProp = getAnimatedProp(from)
-  const dimensionProp = getDimensionProp(from)
-  const moveProp = getMoveProp(from)
-  const velocityProp = getVelocityProp(from)
-  const reverse = isReverse(from)
-
-  const [translate] = useState(new Animated.Value(hiddenTranslate))
+  const [translate] = useState(new Animated.Value(directionHelper.offScreenTranslationValue))
   const [layout, setLayout] = useState<null | LayoutRectangle>(null)
   const onLayout = useCallback<Required<ViewProps>['onLayout']>(
     event => setLayout(event.nativeEvent.layout),
@@ -55,9 +46,9 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
   const currentTheme = useTheme()
 
   const onHidden = useCallback(() => {
-    translate.setValue(hiddenTranslate) // Make sure Sheet won't be briefly visible if we show it again
+    translate.setValue(directionHelper.offScreenTranslationValue) // Make sure Sheet won't be briefly visible if we show it again
     onHiddenRaw()
-  }, [onHiddenRaw])
+  }, [onHiddenRaw, directionHelper])
 
   const panResponder = useMemo(
     () =>
@@ -67,29 +58,30 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
           return true
         },
         onPanResponderMove: (event, gestureState) => {
-          translate.setValue(Math[reverse ? 'min' : 'max'](0, gestureState[moveProp]))
+          translate.setValue(directionHelper.getTranslateValue(gestureState))
         },
         onPanResponderRelease: (event, gestureState) => {
-          const shouldDismiss = reverse
-            ? gestureState[velocityProp] <= -0.5
-            : gestureState[velocityProp] >= 0.5
+          const shouldDismiss = directionHelper.shouldDismiss(
+            gestureState[directionHelper.velocityProp],
+          )
 
           // Replace to original position or dismiss
           Animated.spring(translate, {
             ...springAnimationConfig,
-            toValue: shouldDismiss ? (layout?.[dimensionProp] ?? 0) * (reverse ? -1 : 1) : 0,
-            velocity: gestureState[velocityProp],
+            toValue:
+              shouldDismiss && layout ? directionHelper.getTranslationClosedValue(layout) : 0,
+            velocity: gestureState[directionHelper.velocityProp],
           }).start(({ finished }) => (finished && shouldDismiss ? onHidden() : undefined))
         },
       }),
-    [layout, moveProp, velocityProp, dimensionProp],
+    [layout, directionHelper],
   )
 
   // Wait to be layouted to bring view into view.
   useEffect(() => {
     // We check layout height and width as they become 0 when modal gets hidden
     if (layout && layout.width > 0 && layout.height > 0) {
-      const closedTranslateValue = layout[dimensionProp] * (reverse ? -1 : 1)
+      const closedTranslateValue = directionHelper.getTranslationClosedValue(layout)
 
       if (open) {
         // When showing view, if we have layout set, animate, otherwise, just make sure view is hidden.
@@ -108,7 +100,7 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
         }).start(({ finished }) => (finished ? onHidden() : undefined))
       }
     }
-  }, [open, layout, dimensionProp])
+  }, [open, layout, directionHelper])
 
   return (
     <Animated.View
@@ -116,9 +108,9 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
         styles.sheet,
         from === 'bottom' && styles.sheetBottom,
         {
-          transform: [{ [animatedProp]: translate }],
+          transform: [{ [directionHelper.animatedProp]: translate }],
           elevation: translate.interpolate({
-            inputRange: [0, layout?.[dimensionProp] ?? 0],
+            inputRange: [0, layout ? directionHelper.getTranslationClosedValue(layout) : 0],
             outputRange: [currentTheme.elevation.z16.elevation, 0],
           }),
         },
@@ -130,20 +122,3 @@ export const SwipeableSheet: React.FC<SwipeableSheetProps> = ({
     </Animated.View>
   )
 }
-
-const getHiddenTranslate = (from: SwipeableSheetFromProp): number =>
-  9999999 * (from === 'bottom' || from === 'right' ? 1 : -1)
-
-const getVelocityProp = (from: SwipeableSheetFromProp): 'vx' | 'vy' =>
-  from === 'left' || from === 'right' ? 'vx' : 'vy'
-
-const getMoveProp = (from: SwipeableSheetFromProp): 'dx' | 'dy' =>
-  from === 'left' || from === 'right' ? 'dx' : 'dy'
-
-const getDimensionProp = (from: SwipeableSheetFromProp): 'width' | 'height' =>
-  from === 'left' || from === 'right' ? 'width' : 'height'
-
-const getAnimatedProp = (from: SwipeableSheetFromProp): 'translateX' | 'translateY' =>
-  from === 'left' || from === 'right' ? 'translateX' : 'translateY'
-
-const isReverse = (from: SwipeableSheetFromProp): boolean => from === 'left'

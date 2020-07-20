@@ -78,13 +78,13 @@ Basic.argTypes = {
   children: { control: null },
 }
 
-export const WithBackdrop: React.FC = () => {
+export const FromRightWithBackdrop: React.FC = () => {
   const [open, setOpen] = useState(isInitiallyVisible)
 
   return (
     <Box>
       <Button onClick={() => setOpen(true)}>Show Sheet</Button>
-      <Sheet open={open} onClose={() => setOpen(false)} showBackdrop>
+      <Sheet from="right" open={open} onClose={() => setOpen(false)} showBackdrop>
         <Box
           horizontal
           paddingX="medium"

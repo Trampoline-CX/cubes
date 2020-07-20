@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { View, TouchableWithoutFeedback, StyleSheet, Animated } from 'react-native'
 import { useStyles, useTheme } from '../../../theme'
 import { Modal } from '../../base/Modal/Modal'
 import { shameStyles } from '../../../theme/shame-styles'
-import { SwipeableSheet, SwipeableSheetFromProp } from './SwipeableSheet/SwipeableSheet'
+import { SwipeableSheet } from './SwipeableSheet/SwipeableSheet'
+import { getDirectionHelper, SheetFromProp } from './direction-helpers'
 
 export interface SheetProps {
   /**
@@ -17,7 +18,7 @@ export interface SheetProps {
   /**
    * Direction from which the Sheet arrives from.
    */
-  from?: SwipeableSheetFromProp
+  from?: SheetFromProp
   /**
    * Children elements to render in the Sheet.
    */
@@ -45,6 +46,7 @@ export const Sheet: React.FC<SheetProps> = ({
   const [isAnimating, setAnimating] = useState(false)
   const anim = useRef(new Animated.Value(open ? 1 : 0)).current
   const { animation } = useTheme()
+  const directionHelper = useMemo(() => getDirectionHelper(from), [from])
 
   const styles = useStyles(() => ({
     container: {
@@ -57,9 +59,10 @@ export const Sheet: React.FC<SheetProps> = ({
       flexDirection: 'row',
     },
     backdrop: {
-      flex: 1,
-      justifyContent: 'flex-end',
       ...StyleSheet.absoluteFillObject,
+    },
+    pusherView: {
+      flex: 1,
     },
     backdropVisible: {
       backgroundColor: backdropColor,
@@ -101,13 +104,21 @@ export const Sheet: React.FC<SheetProps> = ({
           from === 'right' && styles.containerFromRight,
         ]}
       >
+        {/* View that is there just to push SwipableSheet to an extremity */}
+        <View style={styles.pusherView} />
+
         <TouchableWithoutFeedback onPress={hide}>
           <Animated.View
             style={[styles.backdrop, showBackdrop && styles.backdropVisible, { opacity: anim }]}
           />
         </TouchableWithoutFeedback>
 
-        <SwipeableSheet from={from} open={open} onHidden={onHidden}>
+        <SwipeableSheet
+          from={from}
+          directionHelper={directionHelper}
+          open={open}
+          onHidden={onHidden}
+        >
           {children}
         </SwipeableSheet>
       </View>
