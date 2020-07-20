@@ -61,7 +61,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
       right: 0,
     },
   }))
-  const [anim] = useState(new Animated.Value(0))
+  const [anim] = useState(new Animated.Value(open ? 1 : 0))
   const { animation } = useTheme()
   const { width: windowWidth, height: windowHeight } = useAppProviderDimensions()
 
