@@ -19,10 +19,6 @@ Default.args = {
   onClick: action('Pill Clicked'),
 }
 
-Default.argTypes = {
-  children: { control: 'text' },
-}
-
 export const Highlighted: React.FC = () => (
   <Pill highlight onClick={action('Pill Clicked')}>
     Tim Hortons

@@ -17,8 +17,4 @@ Default.args = {
   children: 'Default',
 }
 
-Default.argTypes = {
-  children: { control: 'text' },
-}
-
 export const Warning: React.FC = () => <Badge variation="warning">Warning</Badge>

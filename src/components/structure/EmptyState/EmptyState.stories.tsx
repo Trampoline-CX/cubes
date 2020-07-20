@@ -28,12 +28,6 @@ Basic.args = {
   image: 'face',
 }
 
-Basic.argTypes = {
-  heading: { control: 'text' },
-  content: { control: 'text' },
-  image: { control: 'text' },
-}
-
 export const WithoutImageAndHeading: React.FC = () => (
   <Screen>
     <Screen.Content>

@@ -14,7 +14,3 @@ export const Default: StoryFn<CaptionProps> = props => <Caption {...props} />
 Default.args = {
   children: 'This text is a caption.',
 }
-
-Default.argTypes = {
-  children: { control: 'text' },
-}

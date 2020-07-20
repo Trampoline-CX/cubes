@@ -22,10 +22,6 @@ Basic.args = {
   variation: 'strong',
 }
 
-Basic.argTypes = {
-  children: { control: 'text' },
-}
-
 export const All: React.FC = () => (
   <TextContainer>
     <BodyText>

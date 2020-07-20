@@ -41,7 +41,6 @@ Basic.args = {
 }
 
 Basic.argTypes = {
-  message: { control: 'text' },
   open: { control: null },
 }
 

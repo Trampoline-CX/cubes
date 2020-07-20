@@ -17,10 +17,6 @@ Basic.args = {
   children: 'This is some text.',
 }
 
-Basic.argTypes = {
-  children: { control: 'text' },
-}
-
 export const All: React.FC = () => (
   <TextContainer>
     <BodyText>Default BodyText</BodyText>
