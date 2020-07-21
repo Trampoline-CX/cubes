@@ -44,6 +44,10 @@ export interface CardProps {
    */
   mainActions?: TextAction[]
   /**
+   * Card content.
+   */
+  children: React.ReactNode
+  /**
    * Callback called when the Card is dismissed. When set, let the user dismiss the Card
    * using a Swipe gesture.
    */

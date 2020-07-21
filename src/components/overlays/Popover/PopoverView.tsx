@@ -62,7 +62,6 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
       right: 0,
     },
   }))
-
   const { animation } = useTheme()
   const anim = useAnimation({
     toValue: open ? 1 : 0,
