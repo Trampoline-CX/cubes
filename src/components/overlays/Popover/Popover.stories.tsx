@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
+import isChromatic from 'chromatic/isChromatic'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { AppProvider } from '../../structure/AppProvider/AppProvider'
@@ -20,8 +21,10 @@ export default {
   decorators: [PhoneScreen],
 }
 
+const isInitiallyVisible = isChromatic()
+
 export const Basic: StoryFn<PopoverProps> = props => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <AppProvider>
@@ -59,7 +62,7 @@ Basic.argTypes = {
 }
 
 export const UsingChildrenItems: StoryFn<PopoverProps> = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <AppProvider>
@@ -85,7 +88,7 @@ export const UsingChildrenItems: StoryFn<PopoverProps> = () => {
 }
 
 export const MatchWidth: React.FC = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <AppProvider>
@@ -108,7 +111,7 @@ export const MatchWidth: React.FC = () => {
 }
 
 export const AboveActivatorAndHideBackdrop: React.FC = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <AppProvider>
@@ -133,7 +136,7 @@ export const AboveActivatorAndHideBackdrop: React.FC = () => {
 }
 
 export const AutomaticPlacementCorrection: StoryFn<PopoverProps> = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <AppProvider>
@@ -164,7 +167,7 @@ AutomaticPlacementCorrection.story = {
 }
 
 export const CustomContent: StoryFn<PopoverProps> = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <AppProvider>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { fileAbsolute } from 'paths.macro'
+import isChromatic from 'chromatic/isChromatic'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure/Box/Box'
 import { Button } from '../../actions/Button/Button'
@@ -9,7 +10,12 @@ import { ConfirmDialog, ConfirmDialogProps } from './ConfirmDialog'
 export default {
   title: getStoryTitle(fileAbsolute),
   component: ConfirmDialog,
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true, delay: 300 },
+  },
 }
+
+const isInitiallyVisible = isChromatic()
 
 export const Basic: StoryFn<ConfirmDialogProps> = ({
   title,
@@ -17,7 +23,7 @@ export const Basic: StoryFn<ConfirmDialogProps> = ({
   positiveActionText,
   negativeActionText,
 }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <Box padding="medium" align="start">
@@ -47,7 +53,7 @@ Basic.argTypes = {
 }
 
 export const WithoutTitle: React.FC = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
     <Box padding="medium" align="start">

@@ -5,22 +5,29 @@ import { View } from 'react-native'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Pill } from '../../actions/Pill/Pill'
-import { Box } from './Box'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Box, BoxProps } from './Box'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Box,
 }
 
-export const Basic: React.FC = () => (
-  <Box horizontal>
+export const Basic: StoryFn<BoxProps> = props => (
+  <Box {...props}>
     <BodyText>A</BodyText>
-    <Box fill paddingX="large">
-      <BodyText>B</BodyText>
-    </Box>
+    <BodyText>B</BodyText>
     <BodyText>C</BodyText>
   </Box>
 )
+
+Basic.args = {
+  horizontal: true,
+}
+
+Basic.argTypes = {
+  children: { control: null },
+}
 
 export const MediumPadding: React.FC = () => (
   <Box padding="medium">

@@ -6,7 +6,8 @@ import { getStoryTitle } from '../../../storybook/get-story-title'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { TextContainer, DisplayText, BodyText } from '../../text'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
-import { TopBar } from './TopBar'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { TopBar, TopBarProps } from './TopBar'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -14,9 +15,9 @@ export default {
   decorators: [PhoneScreen],
 }
 
-export const Basic: React.FC = () => (
+export const Basic: StoryFn<TopBarProps> = props => (
   <Screen>
-    <TopBar title="Bar Title" actions={[{ icon: 'create', action: action('Edit Clicked') }]} />
+    <TopBar {...props} />
     <Screen.Content>
       <TextContainer>
         <DisplayText>Screen Title</DisplayText>
@@ -25,6 +26,11 @@ export const Basic: React.FC = () => (
     </Screen.Content>
   </Screen>
 )
+
+Basic.args = {
+  title: 'Bar Title',
+  actions: [{ icon: 'create', action: action('Edit Clicked') }],
+}
 
 export const WithoutIcon: React.FC = () => (
   <Screen>

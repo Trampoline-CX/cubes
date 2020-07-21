@@ -18,7 +18,7 @@ const storybookConfig: StorybookConfig = {
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       tsconfigPath: tsconfig,
-      propFilter: (prop: { name: string }): boolean => !/^(testID)$/.test(prop.name),
+      propFilter: (prop: { name: string }): boolean => !/^(testID|ref|key)$/.test(prop.name),
       compilerOptions: {
         allowSyntheticDefaultImports: true,
         esModuleInterop: true,
@@ -47,7 +47,10 @@ const storybookConfig: StorybookConfig = {
        */
       config.module.rules.push({
         test: /\.js$/,
-        include: [path.resolve(__dirname, '../../node_modules/react-native-vector-icons/')],
+        include: [
+          path.resolve(__dirname, '../../node_modules/react-native-vector-icons/'),
+          path.resolve(__dirname, '../../node_modules/@ptomasroos/react-native-multi-slider/'),
+        ],
         use: {
           loader: 'babel-loader',
           options: {
@@ -80,6 +83,8 @@ const storybookConfig: StorybookConfig = {
       ),
       // Mock @expo/vector-icons with react-native-vector-icons
       '@expo/vector-icons$': path.resolve(__dirname, '../../src/storybook/utils/expo-vector-icons'),
+      // Mock expo-haptics
+      'expo-haptics$': path.resolve(__dirname, '../../src/storybook/utils/expo-haptics'),
     }
 
     return config

@@ -2,34 +2,33 @@ import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { TextField } from './TextField'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { TextField, TextFieldProps } from './TextField'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: TextField,
 }
 
-export const Default: React.FC = () => {
-  const [value, setValue] = useState('')
+export const Default: StoryFn<TextFieldProps> = props => {
+  const [value, setValue] = useState(props.value)
   const onTextChanged = (newText: string): void => {
     setValue(newText)
     action('Text changed')(newText)
   }
 
-  return (
-    <TextField
-      label="Label"
-      value={value}
-      placeholder="Placeholder Text"
-      helpText="Help Text meant to help you"
-      returnKeyType="done"
-      onChange={onTextChanged}
-      onFocus={action('Focused')}
-      onBlur={action('Blurred')}
-      onSubmit={action('Submitted')}
-      onKeyPress={action('Key Pressed')}
-    />
-  )
+  return <TextField value={value} onChange={onTextChanged} {...props} />
+}
+
+Default.args = {
+  label: 'Label',
+  placeholder: 'Placeholder Text',
+  returnKeyType: 'done',
+  helpText: 'Help Text meant to help you',
+  onFocus: action('Focused'),
+  onBlur: action('Blurred'),
+  onSubmit: action('Submitted'),
+  onKeyPress: action('Key Pressed'),
 }
 
 export const Password: React.FC = () => {

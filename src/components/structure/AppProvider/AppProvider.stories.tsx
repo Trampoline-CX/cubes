@@ -11,7 +11,8 @@ import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
 import { themes } from '../../../theme'
 import { useNav } from '../../../navigation'
 import { Button } from '../../actions/Button/Button'
-import { AppProvider } from './AppProvider'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { AppProvider, AppProviderProps } from './AppProvider'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -19,8 +20,9 @@ export default {
   decorators: [PhoneScreen],
 }
 
-export const Basic: React.FC = () => (
-  <AppProvider>
+export const Basic: StoryFn<AppProviderProps> = props => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <AppProvider {...(props as any)}>
     <Screen>
       <TopBar title="App title" />
       <Screen.Content padding="medium">
@@ -32,6 +34,16 @@ export const Basic: React.FC = () => (
     </Screen>
   </AppProvider>
 )
+
+Basic.args = {
+  theme: undefined,
+}
+
+Basic.argTypes = {
+  navigationSchema: { control: null },
+  children: { control: null },
+  theme: { control: null },
+}
 
 export const DarkTheme: React.FC = () => (
   <AppProvider theme={themes.dark}>
