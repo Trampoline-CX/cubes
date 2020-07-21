@@ -21,6 +21,11 @@ Basic.args = {
   helpText: 'With onions, mushrooms and green peppers 🍕',
 }
 
+Basic.argTypes = {
+  label: { control: 'text' },
+  helpText: { control: 'text' },
+}
+
 export const WithoutHelpText: React.FC = () => {
   const [checked, setChecked] = useState(false)
 
