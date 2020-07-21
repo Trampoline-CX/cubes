@@ -1,7 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { TouchableWithoutFeedback, Animated, StyleSheet } from 'react-native'
 import { shameStyles } from '../../../theme/shame-styles'
 import { useStyles, useTheme } from '../../../theme'
+import { useAnimation } from '../../../utils/hooks/use-animation'
 import { PopoverContext } from './PopoverContext'
 
 export interface PopoverBackdropProps {
@@ -26,18 +27,15 @@ export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({
     },
   }))
   const { animation } = useTheme()
-  const [anim] = useState(new Animated.Value(open ? 1 : 0))
+  const anim = useAnimation({
+    toValue: open ? 1 : 0,
+    type: 'timing',
+    easing: animation.easing.move,
+    duration: animation.duration.shorter,
+    useNativeDriver: true,
+  })
 
   const { requestClose } = useContext(PopoverContext)
-
-  useEffect(() => {
-    Animated.timing(anim, {
-      easing: animation.easing.move,
-      toValue: open ? 1 : 0,
-      duration: animation.duration.shorter,
-      useNativeDriver: true,
-    }).start()
-  }, [open, invisible])
 
   const contentView = (
     <Animated.View
