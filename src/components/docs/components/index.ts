@@ -1,1 +1,2 @@
-export * from './OptionsProps'
+export * from './NavigationProps'
+export * from './SampleDataProps'
