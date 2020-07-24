@@ -16,19 +16,25 @@ export default {
   subcomponents: { 'Card.Section': Card.Section },
 }
 
-export const DefaultSectioned: React.FC = () => (
-  <Card
-    title="Card Title"
-    sectioned
-    headerAction={{ label: 'Header Action', action: action('Header Action Clicked') }}
-    mainActions={[
-      { label: 'Action 1', action: action('Action 1 Clicked') },
-      { label: 'Action 2', action: action('Action 2 Clicked') },
-    ]}
-  >
+export const DefaultSectioned: StoryFn<CardProps> = props => (
+  <Card {...props}>
     <BodyText>This is the text of the card.</BodyText>
   </Card>
 )
+
+DefaultSectioned.args = {
+  title: 'Card title',
+  sectioned: true,
+  headerAction: { label: 'Header Action', action: action('Header Action Clicked') },
+  mainActions: [
+    { label: 'Action 1', action: action('Action 1 Clicked') },
+    { label: 'Action 2', action: action('Action 2 Clicked') },
+  ],
+}
+
+DefaultSectioned.argTypes = {
+  children: { control: null },
+}
 
 export const MultipleSections: React.FC = () => (
   <Card title="Card Title">
