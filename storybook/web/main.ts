@@ -18,7 +18,7 @@ const storybookConfig: StorybookConfig = {
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       tsconfigPath: tsconfig,
-      propFilter: (prop: { name: string }): boolean => !/^(testID)$/.test(prop.name),
+      propFilter: (prop: { name: string }): boolean => !/^(testID|ref|key)$/.test(prop.name),
       compilerOptions: {
         allowSyntheticDefaultImports: true,
         esModuleInterop: true,

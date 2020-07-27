@@ -1,0 +1,74 @@
+import { Meta, Story, Props } from '@storybook/addon-docs/blocks'
+import * as Stories from './Hooks.stories'
+import { UseSampleDataComponent } from '../docs/components'
+
+<Meta title="Sample Data/Hooks" component={UseSampleDataComponent} />
+
+# Sample Data Hooks
+
+There is a `useSampleData` hook you can use to generate fake data using [Faker.js](https://github.com/marak/Faker.js/).
+
+Faker.js is a powerful library that can generate all sort of fake data (e.g. people names, job titles, addresses, dates, lorem ipsum, etc.).
+
+Here is how you would use Faker.js in **Cubes** to populate a `ListView` with fake users:
+
+```tsx
+import React, { useCallback } from 'react'
+import { ListView, useSampleData } from '@trampoline/cubes'
+
+const MyComponent = () => {
+  const data = useSampleData({
+    count: 3, // Number of users to generate
+    // Function called to generate each user (could be taken out of component to prevent `useCallback` usage)
+    generator: useCallback(
+      faker => ({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        occupation: faker.name.jobTitle(),
+        children: faker.random.number({ min: 2, max: 6, precision: 1 }),
+      }),
+      [],
+    ),
+  })
+
+  return (
+    <ListView
+      values={data.map(x => ({
+        title: `${x.firstName} ${x.lastName}`,
+        description: `${x.occupation} with ${x.children} children`,
+      }))}
+    />
+  )
+}
+```
+
+<Story name="Basic">{args => Stories.Basic(args)}</Story>
+
+<Props story="Basic" />
+
+For better readability in your prototypes, we recommend you wrap your sample data generators in custom React Hooks.
+For example, take this `useSampleUsers` custom hook to generate Sample Users.
+
+```tsx
+export interface User {
+  firstName: string
+  lastName: string
+  email: string
+}
+
+const generator = (faker: Faker.FakerStatic): User => ({
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  email: faker.internet.email(),
+})
+
+export const useSampleUsers = (count = 10): User[] => useSampleData<User>({ count, generator })
+
+// Then in your component, simply do:
+const users = useSampleUsers()
+```
+
+## Generate Sample Images
+
+To generate sample Avatars, we recommend you use the "hash" `source` for the `Avatar` component.
+This will generate an image from the passed hash and will prevent any remote dependency in your app (like an image URL).

@@ -14,7 +14,7 @@ export default {
   component: Dialog,
   subcomponents: { 'Dialog.Section': Dialog.Section },
   parameters: {
-    chromatic: { pauseAnimationAtEnd: true },
+    chromatic: { pauseAnimationAtEnd: true, delay: 300 },
   },
 }
 

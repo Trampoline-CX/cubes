@@ -23,14 +23,15 @@
       "import React from 'react'",
       "import { fileAbsolute } from 'paths.macro'",
       "import { getStoryTitle } from '../../../storybook/get-story-title'",
-      "import { ${TM_FILENAME_BASE/\\..+//} } from './${TM_FILENAME_BASE/\\..+//}'",
+      "import { StoryFn } from '../../../storybook/utils/storybook-types'",
+      "import { ${TM_FILENAME_BASE/\\..+//}, ${TM_FILENAME_BASE/\\..+//}Props } from './${TM_FILENAME_BASE/\\..+//}'",
       "",
       "export default {",
       "  title: getStoryTitle(fileAbsolute),",
       "  component: ${TM_FILENAME_BASE/\\..+//},",
       "}",
       "",
-      "export const $0: React.FC = () => <${TM_FILENAME_BASE/\\..+//} />"
+      "export const $0: StoryFn<${TM_FILENAME_BASE/\\..+//}Props> = props => <${TM_FILENAME_BASE/\\..+//} {...props} />"
     ]
   }
 }
