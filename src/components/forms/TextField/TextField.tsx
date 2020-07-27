@@ -317,17 +317,18 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
             testID={testID}
             accessibilityLabel={accessibilityLabel}
           />
+
+          {endAction ? (
+            <View style={styles.endActionContainer}>
+              <IconButton
+                icon={endAction.icon}
+                onClick={endAction.action}
+                size="small"
+                color={endAction.color}
+              />
+            </View>
+          ) : null}
         </View>
-        {endAction ? (
-          <View style={styles.endActionContainer}>
-            <IconButton
-              icon={endAction.icon}
-              onClick={endAction.action}
-              size="small"
-              color={endAction.color}
-            />
-          </View>
-        ) : null}
       </BaseInputContainer>
     )
   },
