@@ -48,7 +48,7 @@ export const Disabled: React.FC = () => {
 
 export const WithMinAndMaxDates: React.FC = () => {
   const [date, setDate] = useState<Date | null>()
-  const aMonth = 1000 * 60 * 60 * 24 * 30
+  const aWeek = 1000 * 60 * 60 * 24 * 7
 
   return (
     <Screen>
@@ -56,8 +56,8 @@ export const WithMinAndMaxDates: React.FC = () => {
         label="Select a date"
         value={date}
         onChange={setDate}
-        minDate={new Date(Date.now() - aMonth)}
-        maxDate={new Date(Date.now() + aMonth)}
+        minDate={new Date(Date.now() - aWeek)}
+        maxDate={new Date(Date.now() + aWeek)}
       />
     </Screen>
   )
