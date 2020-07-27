@@ -1,4 +1,4 @@
-export * from './actions/Badge/Badge'
+export * from './images-and-icons/Badge/Badge'
 export * from './actions/Button/Button'
 export * from './actions/ButtonBase/ButtonBase'
 export * from './actions/IconButton/IconButton'
@@ -7,6 +7,8 @@ export * from './actions/Pill/Pill'
 export * from './actions/actions'
 
 export * from './base/Touchable/Touchable'
+
+export * from './behavior/Collapsible/Collapsible'
 
 export * from './feedback-indicators/ProgressBar/ProgressBar'
 export * from './feedback-indicators/SkeletonAvatar/SkeletonAvatar'
@@ -25,9 +27,10 @@ export * from './forms/ChoiceList/ChoiceList'
 export * from './forms/FormLayout/FormLayout'
 export * from './forms/InlineError/InlineError'
 export * from './forms/RadioButton/RadioButton'
-export * from './forms/TextField/TextField'
 export * from './forms/SearchField/SearchField'
+export * from './forms/Slider/Slider'
 export * from './forms/Switch/Switch'
+export * from './forms/TextField/TextField'
 
 export * from './images-and-icons/Avatar/Avatar'
 export * from './images-and-icons/Icon/Icon'

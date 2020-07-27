@@ -5,17 +5,18 @@ import { SkeletonAvatar } from '../SkeletonAvatar/SkeletonAvatar'
 import { Box } from '../../structure/Box/Box'
 import { SkeletonDisplayText } from '../SkeletonDisplayText/SkeletonDisplayText'
 import { getStoryTitle } from '../../../storybook/get-story-title'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
 import { Layout } from '../../structure/Layout/Layout'
-import { SkeletonLoading } from './SkeletonLoading'
+import { SkeletonLoading, SkeletonLoadingProps } from './SkeletonLoading'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: SkeletonLoading,
 }
 
-export const Default: React.FC = () => (
+export const Default: StoryFn<SkeletonLoadingProps> = props => (
   <Layout>
-    <SkeletonLoading loading>
+    <SkeletonLoading {...props}>
       <Box horizontal space="medium">
         <SkeletonAvatar />
         <SkeletonDisplayText />
@@ -33,3 +34,11 @@ export const Default: React.FC = () => (
     </SkeletonLoading>
   </Layout>
 )
+
+Default.args = {
+  loading: true,
+}
+
+Default.argTypes = {
+  children: { control: null },
+}
