@@ -15,9 +15,6 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: Tooltip,
   decorators: [PhoneScreen],
-  parameters: {
-    chromatic: { pauseAnimationAtEnd: true },
-  },
 }
 
 const isInitiallyVisible = isChromatic()

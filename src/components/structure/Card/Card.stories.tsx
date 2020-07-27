@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Card } from './Card'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
+import { Screen } from '../Screen/Screen'
+import { Divider } from '../Divider/Divider'
+import { Box } from '../Box/Box'
+import { Card, CardProps } from './Card'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -11,19 +16,25 @@ export default {
   subcomponents: { 'Card.Section': Card.Section },
 }
 
-export const DefaultSectioned: React.FC = () => (
-  <Card
-    title="Card Title"
-    sectioned
-    headerAction={{ label: 'Header Action', action: action('Header Action Clicked') }}
-    mainActions={[
-      { label: 'Action 1', action: action('Action 1 Clicked') },
-      { label: 'Action 2', action: action('Action 2 Clicked') },
-    ]}
-  >
+export const DefaultSectioned: StoryFn<CardProps> = props => (
+  <Card {...props}>
     <BodyText>This is the text of the card.</BodyText>
   </Card>
 )
+
+DefaultSectioned.args = {
+  title: 'Card title',
+  sectioned: true,
+  headerAction: { label: 'Header Action', action: action('Header Action Clicked') },
+  mainActions: [
+    { label: 'Action 1', action: action('Action 1 Clicked') },
+    { label: 'Action 2', action: action('Action 2 Clicked') },
+  ],
+}
+
+DefaultSectioned.argTypes = {
+  children: { control: null },
+}
 
 export const MultipleSections: React.FC = () => (
   <Card title="Card Title">
@@ -64,3 +75,32 @@ export const CardWithoutHorizontalPadding: React.FC = () => (
     </Card.Section>
   </Card>
 )
+
+const SwipeableCard: React.FC = () => {
+  const [visible, setVisible] = useState(true)
+
+  return visible ? (
+    <>
+      <Divider />
+      <Card title="Dismiss me" fullWidth sectioned onDismiss={() => setVisible(false)}>
+        <BodyText>Everything will be alright...</BodyText>
+      </Card>
+    </>
+  ) : null
+}
+
+export const WithSwipeToDismiss: StoryFn<CardProps> = () => (
+  <Screen>
+    <SwipeableCard />
+    <SwipeableCard />
+    <SwipeableCard />
+    <SwipeableCard />
+    <SwipeableCard />
+    <SwipeableCard />
+    <Box padding="medium">
+      <BodyText textAlign="center">You can dismiss these cards!</BodyText>
+    </Box>
+  </Screen>
+)
+
+WithSwipeToDismiss.decorators = [PhoneScreen]
