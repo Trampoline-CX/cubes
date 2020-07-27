@@ -24,7 +24,7 @@
  * @see https://github.com/akveo/react-native-ui-kitten/blob/master/src/components/ui/viewPager/viewPager.component.tsx
  */
 import React, { useMemo, useRef, useEffect, useCallback } from 'react'
-import { Animated, PanResponder, StyleSheet, StyleProp, ViewStyle } from 'react-native'
+import { Animated, PanResponder, StyleSheet, StyleProp, ViewStyle, View } from 'react-native'
 import _ from 'lodash'
 import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 import { useOnLayout } from '../../../utils/hooks/use-on-layout'
@@ -155,21 +155,26 @@ export const Carousel: React.FC<CarouselProps> & { Slide: typeof Slide } = ({
   )
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        style,
-        { width: `${100 * childCount}%`, transform: [{ translateX: contentOffset }] },
-      ]}
-      onLayout={onLayout}
-      {...panResponder.panHandlers}
-    >
-      {children}
-    </Animated.View>
+    <View style={styles.hideOverflow}>
+      <Animated.View
+        style={[
+          styles.container,
+          style,
+          { width: `${100 * childCount}%`, transform: [{ translateX: contentOffset }] },
+        ]}
+        onLayout={onLayout}
+        {...panResponder.panHandlers}
+      >
+        {children}
+      </Animated.View>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  hideOverflow: {
+    overflow: 'hidden',
+  },
   container: {
     flexDirection: 'row',
   },

@@ -4,13 +4,11 @@ import { Image, ImageStyle } from 'react-native'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { DisplayText } from '../../text'
 import { StoryFn } from '../../../storybook/utils/storybook-types'
-import { PreventOverflow } from '../../../storybook/decorators/PreventOverflow'
 import { Carousel, CarouselProps } from './Carousel'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Carousel,
-  decorators: [PreventOverflow],
 }
 
 export const Basic: StoryFn<CarouselProps> = props => {
