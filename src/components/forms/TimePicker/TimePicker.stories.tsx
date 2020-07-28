@@ -45,7 +45,7 @@ export const Disabled: React.FC = () => {
 }
 
 export const WithError: React.FC = () => {
-  const [date, setDate] = useState<Date | null>(new Date())
+  const [date, setDate] = useState<Date | null>(new Date(1608912252000))
 
   return (
     <Screen>
@@ -60,7 +60,7 @@ export const WithError: React.FC = () => {
 }
 
 export const WithCustomFormat: React.FC = () => {
-  const [date, setDate] = useState<Date | null>(new Date())
+  const [date, setDate] = useState<Date | null>(new Date(1608912252000))
 
   return (
     <Screen>
