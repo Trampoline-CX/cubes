@@ -19,6 +19,9 @@ export default {
   component: Popover,
   subcomponents: { 'Popover.Item': Popover.Item },
   decorators: [PhoneScreen],
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true, delay: 300 },
+  },
 }
 
 const isInitiallyVisible = isChromatic()
