@@ -20,7 +20,15 @@ export interface IconProps {
   /**
    * Icon color.
    */
-  color?: 'primary' | 'accent' | 'inverse' | 'positive' | 'negative' | 'subdued' | 'success'
+  color?:
+    | 'primary'
+    | 'accent'
+    | 'inverse'
+    | 'positive'
+    | 'negative'
+    | 'subdued'
+    | 'success'
+    | 'error'
 }
 
 /**
@@ -44,6 +52,8 @@ export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'pri
         return theme.colors.text.subdued
       case 'success':
         return theme.colors.status.success.default
+      case 'error':
+        return theme.colors.status.error
     }
   }, [color, theme])
 

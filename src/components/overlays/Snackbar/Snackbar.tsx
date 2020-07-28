@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { View, Animated } from 'react-native'
 import { shameStyles } from '../../../theme/shame-styles'
 import { useStyles, useTheme } from '../../../theme'
@@ -6,6 +6,7 @@ import { BodyText } from '../../text'
 import { useTimeout } from '../../../utils/hooks/use-timeout'
 import { TextAction } from '../../actions/actions'
 import { Box } from '../../structure/Box/Box'
+import { useAnimation } from '../../../utils/hooks/use-animation'
 import { SnackbarButton } from './SnackbarButton/SnackbarButton'
 
 export interface SnackbarProps {
@@ -57,7 +58,14 @@ export const Snackbar: React.FC<SnackbarProps> = ({
   const { animation } = useTheme()
   const showDuration = animation.duration.shorter
   const durationValue = durationValues[duration]
-  const [anim] = useState(new Animated.Value(0))
+  const anim = useAnimation({
+    initialValue: 0,
+    toValue: 1,
+    type: 'timing',
+    easing: animation.easing.enter,
+    duration: showDuration,
+    useNativeDriver: true,
+  })
 
   const dismiss = useCallback(() => {
     Animated.timing(anim, {
@@ -74,15 +82,6 @@ export const Snackbar: React.FC<SnackbarProps> = ({
     }
     dismiss() // Dismiss when user clicks action
   }, [action?.action, dismiss])
-
-  useEffect(() => {
-    Animated.timing(anim, {
-      easing: animation.easing.enter,
-      toValue: 1,
-      duration: showDuration,
-      useNativeDriver: true,
-    }).start()
-  }, [])
 
   useTimeout(dismiss, durationValue + showDuration)
 

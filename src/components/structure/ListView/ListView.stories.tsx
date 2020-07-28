@@ -3,7 +3,8 @@ import { fileAbsolute } from 'paths.macro'
 import { action } from '@storybook/addon-actions'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Divider } from '../Divider/Divider'
-import { ListView, ListViewItemProps } from './ListView'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { ListView, ListViewItemProps, ListViewProps } from './ListView'
 
 export default {
   title: getStoryTitle(fileAbsolute),
@@ -11,8 +12,9 @@ export default {
   subcomponents: { 'ListView.Item': ListView.Item },
 }
 
-export const Basic: React.FC = () => (
-  <ListView divider={<Divider />}>
+export const Basic: StoryFn<ListViewProps> = props => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <ListView {...(props as any)}>
     <ListView.Item title="Francis Morin" description="Engineer" />
     <ListView.Item title="Jonas Chase" description="Salesman" />
     <ListView.Item title="Caldwell Christensen" description="Engineer" />
@@ -20,6 +22,15 @@ export const Basic: React.FC = () => (
     <ListView.Item title="Walker James" description="Engineer" />
   </ListView>
 )
+
+Basic.args = {
+  divider: <Divider />,
+}
+
+Basic.argTypes = {
+  divider: { control: null },
+  children: { control: null },
+}
 
 export const UsingValues: React.FC = () => (
   <ListView
