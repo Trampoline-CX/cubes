@@ -15,25 +15,25 @@ export const All: React.FC = () => {
 
   return (
     <Box space="medium">
-      <Heading>Accent</Heading>
-      <Box horizontal space="medium">
-        <Swatch color={theme.colors.fill.accent.lighter} />
-        <Swatch color={theme.colors.fill.accent.default} />
-        <Swatch color={theme.colors.fill.accent.darker} />
-      </Box>
-
-      <Heading>Accent Secondary</Heading>
-      <Box horizontal space="medium">
-        <Swatch color={theme.colors.fill.accentSecondary.lighter} />
-        <Swatch color={theme.colors.fill.accentSecondary.default} />
-        <Swatch color={theme.colors.fill.accentSecondary.darker} />
-      </Box>
-
       <Heading>Primary</Heading>
       <Box horizontal space="medium">
         <Swatch color={theme.colors.fill.primary.lighter} />
         <Swatch color={theme.colors.fill.primary.default} />
         <Swatch color={theme.colors.fill.primary.darker} />
+      </Box>
+
+      <Heading>Secondary</Heading>
+      <Box horizontal space="medium">
+        <Swatch color={theme.colors.fill.secondary.lighter} />
+        <Swatch color={theme.colors.fill.secondary.default} />
+        <Swatch color={theme.colors.fill.secondary.darker} />
+      </Box>
+
+      <Heading>Accent</Heading>
+      <Box horizontal space="medium">
+        <Swatch color={theme.colors.fill.accent.lighter} />
+        <Swatch color={theme.colors.fill.accent.default} />
+        <Swatch color={theme.colors.fill.accent.darker} />
       </Box>
 
       <Heading>Background</Heading>
@@ -53,27 +53,18 @@ export const All: React.FC = () => {
 
       <Heading>Divider</Heading>
       <Box horizontal space="medium">
-        <Swatch color={theme.colors.fill.divider.lighter} />
-        <Swatch color={theme.colors.fill.divider.default} />
-        <Swatch color={theme.colors.fill.divider.darker} />
+        <Swatch color={theme.colors.fill.divider} />
       </Box>
 
-      <Heading>Positive / Negative / Destructive</Heading>
+      <Heading>Positive / Negative</Heading>
       <Box horizontal space="medium">
         <Swatch color={theme.colors.positive} />
         <Swatch color={theme.colors.negative} />
-        <Swatch color={theme.colors.destructive} />
       </Box>
 
-      <Heading>Success</Heading>
+      <Heading>Success / Warning / Error</Heading>
       <Box horizontal space="medium">
-        <Swatch color={theme.colors.status.success.lighter} />
-        <Swatch color={theme.colors.status.success.default} />
-        <Swatch color={theme.colors.status.success.darker} />
-      </Box>
-
-      <Heading>Warning / Error</Heading>
-      <Box horizontal space="medium">
+        <Swatch color={theme.colors.status.success} />
         <Swatch color={theme.colors.status.warning} />
         <Swatch color={theme.colors.status.error} />
       </Box>

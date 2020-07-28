@@ -8,7 +8,7 @@ import { useStyles } from '../../../theme'
 export const Divider: React.FC = () => {
   const styles = useStyles(theme => ({
     divider: {
-      backgroundColor: theme.colors.fill.divider.default,
+      backgroundColor: theme.colors.fill.divider,
       height: theme.size.divider,
     },
   }))

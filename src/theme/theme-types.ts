@@ -38,15 +38,15 @@ export interface ComplexColor {
 /**
  * Structure of a Theme.
  */
-export interface Theme {
+export interface ThemeBase {
   // COLORS
   colors: {
     fill: {
-      primary: ComplexColor
-      accent: ComplexColor
-      accentSecondary: ComplexColor
+      primary: ColorHex
+      secondary: ColorHex
+      accent: ColorHex
       background: ComplexColor & { inverse: ColorHex }
-      divider: ComplexColor
+      divider: ColorHex
     }
     text: {
       primary: ColorHex
@@ -55,11 +55,10 @@ export interface Theme {
       subdued: ColorHex
     }
     transparent: ColorHex
-    destructive: ColorHex
     positive: ColorHex
     negative: ColorHex
     status: {
-      success: ComplexColor
+      success: ColorHex
       warning: ColorHex
       error: ColorHex
     }
@@ -153,6 +152,21 @@ export interface Theme {
       enter: EasingFunction
       exit: EasingFunction
       move: EasingFunction
+    }
+  }
+}
+
+/**
+ * ThemeBase with correct typings once colors are generated.
+ */
+export interface Theme extends Omit<ThemeBase, 'colors'> {
+  colors: Omit<ThemeBase['colors'], 'fill'> & {
+    fill: {
+      primary: ComplexColor
+      secondary: ComplexColor
+      accent: ComplexColor
+      background: ComplexColor & { inverse: ColorHex }
+      divider: ColorHex
     }
   }
 }
