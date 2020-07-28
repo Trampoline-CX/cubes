@@ -1,8 +1,7 @@
 import React from 'react'
-import { Text } from 'react-native'
 import { BodyText } from '../../text/BodyText/BodyText'
-import { useStyles } from '../../../theme'
 import { Box } from '../../structure/Box/Box'
+import { Icon } from '../../images-and-icons/Icon/Icon'
 
 export interface InlineErrorProps {
   /**
@@ -19,19 +18,9 @@ export interface InlineErrorProps {
  *
  * > Used in `TextField` component to display error message.
  */
-export const InlineError: React.FC<InlineErrorProps> = ({ message }) => {
-  const styles = useStyles(theme => ({
-    text: {
-      color: theme.colors.status.error,
-    },
-  }))
-
-  return (
-    <Box horizontal>
-      {/* TODO Put error Icon */}
-      <BodyText>
-        <Text style={styles.text}>{message}</Text>
-      </BodyText>
-    </Box>
-  )
-}
+export const InlineError: React.FC<InlineErrorProps> = ({ message }) => (
+  <Box horizontal space="small">
+    <Icon name="error" color="error" />
+    <BodyText variation="error">{message}</BodyText>
+  </Box>
+)
