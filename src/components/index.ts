@@ -9,6 +9,7 @@ export * from './actions/actions'
 export * from './base/Touchable/Touchable'
 
 export * from './behavior/Carousel/Carousel'
+export * from './behavior/Collapsible/Collapsible'
 
 export * from './feedback-indicators/ProgressBar/ProgressBar'
 export * from './feedback-indicators/SkeletonAvatar/SkeletonAvatar'
@@ -24,6 +25,7 @@ export * from './feedback-indicators/Spinner/Spinner'
 
 export * from './forms/Checkbox/Checkbox'
 export * from './forms/ChoiceList/ChoiceList'
+export * from './forms/DatePicker/DatePicker'
 export * from './forms/FormLayout/FormLayout'
 export * from './forms/InlineError/InlineError'
 export * from './forms/RadioButton/RadioButton'
@@ -31,6 +33,7 @@ export * from './forms/SearchField/SearchField'
 export * from './forms/Slider/Slider'
 export * from './forms/Switch/Switch'
 export * from './forms/TextField/TextField'
+export * from './forms/TimePicker/TimePicker'
 
 export * from './images-and-icons/Avatar/Avatar'
 export * from './images-and-icons/Icon/Icon'
