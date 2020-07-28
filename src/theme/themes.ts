@@ -193,6 +193,7 @@ export const themes = {
         background: {
           lighter: '#000000',
           default: '#383838',
+          darker: '#454545',
           inverse: '#FCF8F7',
         },
         divider: '#282828',

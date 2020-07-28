@@ -36,11 +36,12 @@ export const All: React.FC = () => {
         <Swatch color={theme.colors.fill.accent.darker} />
       </Box>
 
-      <Heading>Background</Heading>
+      <Heading>Background (lighter, default, darker and inverse)</Heading>
       <Box horizontal space="medium">
         <Swatch color={theme.colors.fill.background.lighter} />
         <Swatch color={theme.colors.fill.background.default} />
         <Swatch color={theme.colors.fill.background.darker} />
+        <Swatch color={theme.colors.fill.background.inverse} />
       </Box>
 
       <Heading>Text</Heading>
