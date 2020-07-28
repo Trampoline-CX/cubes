@@ -1,12 +1,9 @@
 import React, { useState, useCallback, useMemo } from 'react'
-import { View, TouchableWithoutFeedback, ScrollView } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import { Popover } from '../../overlays/Popover/Popover'
-import { useStyles } from '../../../theme'
-import { BodyText, Heading, Caption } from '../../text'
-import { Box } from '../../structure/Box/Box'
-import { Touchable } from '../../base/Touchable/Touchable'
-import { InlineError } from '../InlineError/InlineError'
 import { shameStyles } from '../../../theme/shame-styles'
+import { BaseInputContainer } from '../../base/BaseInput/BaseInputContainer'
+import { BaseInput } from '../../base/BaseInput/BaseInput'
 
 export interface SelectChoice {
   /**
@@ -70,38 +67,9 @@ export const Select: React.FC<SelectProps> = ({
   onChange,
   placeholder,
   helpText,
-  error,
+  error = false,
   disabled = false,
 }) => {
-  const styles = useStyles(theme => ({
-    // Base Styles
-    inputContainer: {
-      flexDirection: 'row',
-      backgroundColor: theme.colors.fill.background.lighter,
-      borderColor: theme.colors.fill.primary.default,
-      borderWidth: theme.border.small,
-      borderRadius: theme.radius.medium,
-      height: 40, // Need to enforce height for iOS.
-      paddingHorizontal: theme.spacing.medium,
-      paddingVertical: theme.spacing.small - theme.border.small,
-      alignItems: 'center',
-    },
-
-    // Focused Styles
-    inputContainerFocused: {
-      borderColor: theme.colors.fill.primary.default,
-    },
-
-    // Disabled Styles
-    inputContainerDisabled: {
-      opacity: theme.opacity.disabled,
-    },
-
-    popover: {
-      maxHeight,
-    },
-  }))
-
   const [open, setOpen] = useState(false)
   const showPopover = useCallback(() => setOpen(true), [])
   const hidePopover = useCallback(() => setOpen(false), [])
@@ -123,28 +91,23 @@ export const Select: React.FC<SelectProps> = ({
   )
 
   return (
-    <Box>
-      <TouchableWithoutFeedback onPress={showPopover} disabled={disabled}>
-        <View>
-          <Box paddingBottom="small">
-            <Heading>{label}</Heading>
-          </Box>
-        </View>
-      </TouchableWithoutFeedback>
+    <BaseInputContainer
+      label={label}
+      disabled={disabled}
+      helpText={helpText}
+      error={error}
+      onLabelClick={showPopover}
+    >
       <Popover
         open={open}
         activator={
-          <Touchable
-            viewStyle={[
-              styles.inputContainer,
-              open && styles.inputContainerFocused,
-              disabled && styles.inputContainerDisabled,
-            ]}
-            onClick={showPopover}
+          <BaseInput
+            value={selectedChoice?.label ?? ''}
+            placeholder={placeholder}
             disabled={disabled}
-          >
-            <BodyText maxLines={1}>{selectedChoice?.label ?? placeholder}</BodyText>
-          </Touchable>
+            focused={open}
+            onClick={showPopover}
+          />
         }
         onRequestClose={hidePopover}
         popoverStyle={styles.popover}
@@ -153,16 +116,12 @@ export const Select: React.FC<SelectProps> = ({
       >
         <ScrollView>{choiceComponents}</ScrollView>
       </Popover>
-      {error && (
-        <Box paddingTop="xSmall">
-          <InlineError message={typeof error === 'string' ? error : ''} />
-        </Box>
-      )}
-      {helpText && (
-        <Box paddingTop="xSmall">
-          <Caption variation="subdued">{helpText}</Caption>
-        </Box>
-      )}
-    </Box>
+    </BaseInputContainer>
   )
 }
+
+const styles = StyleSheet.create({
+  popover: {
+    maxHeight,
+  },
+})

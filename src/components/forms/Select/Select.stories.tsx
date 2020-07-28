@@ -25,6 +25,7 @@ export const Basic: StoryFn<SelectProps> = props => {
 Basic.args = {
   label: 'Select your favorite color',
   selected: null,
+  placeholder: 'Should be a color',
   helpText: 'Colors are displayed in neutral color, in case you are color blind.',
   choices: [
     { label: 'Blue', value: 'blue' },
