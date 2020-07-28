@@ -82,3 +82,7 @@ node_modules/
 .env
 
 dist/
+
+# Backstop config
+backstop_data/html_report
+backstop_data/bitmaps_test
