@@ -7,9 +7,11 @@
     "clean": "rm -rf dist/ && rm -rf web-build/",
     "build": "yarn build:css && tsc --p tsconfig.build.json && tsc",
     "build:css": "copyfiles -u 1 src/**/*.css dist",
+    "build:playroom": "playroom build",
     "build-storybook": "yarn build && build-storybook -c storybook/web -o web-build",
     "test": "jest",
     "start": "start-storybook -c storybook/web -p 9009 -s public",
+    "start:playroom": "playroom start",
     "prestorybook": "yarn build",
     "chromatic": "chromatic --project-token=t00yilwkcv",
     "prepublishOnly": "yarn clean && yarn build && yarn lint",
@@ -85,6 +87,7 @@
     "jest": "^25.5.1",
     "metro-react-native-babel-preset": "^0.60.0",
     "paths.macro": "^3.0.0",
+    "playroom": "^0.21.2",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "~16.11.0",
@@ -103,7 +106,8 @@
     "react-test-renderer": "16.9.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.2",
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
   },
   "license": "MIT",
   "repository": {
