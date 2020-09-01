@@ -3,6 +3,8 @@ const path = require('path')
 module.exports = {
   components: './src/playroom/components.ts',
   outputPath: './playroom',
+  frameComponent: './src/playroom/FrameComponent.tsx',
+  snippets: './src/playroom/snippets.ts',
 
   // Optional:
   title: 'Cubes',
@@ -10,13 +12,34 @@ module.exports = {
   port: 9000,
   openBrowser: true,
   exampleCode: `
-      <Button>
-        Hello World!
-      </Button>
+  <Screen>
+    <Screen.Content>
+      <Box padding="medium">
+        <DisplayText>Profile</DisplayText>
+      </Box>
+
+      <Divider />
+
+      <Box paddingY="medium">
+        <Slate icon="person" label="My account" />
+        <Slate icon="account-balance" label="Linked bank connections" />
+        <Slate icon="security" label="Security" />
+        <Slate icon="exit-to-app" label="Sign out" onClick={action('Sign out Clicked')} />
+      </Box>
+    </Screen.Content>
+    <BottomNavigationBar>
+      <BottomNavigationBar.Tab icon="dashboard" onClick={action('Money Tab Clicked')} />
+      <BottomNavigationBar.Tab icon="search" onClick={action('Explore Tab Clicked')} />
+      <BottomNavigationBar.Tab
+        icon="account-circle"
+        selected
+        onClick={action('Profile Tab Clicked')}
+      />
+    </BottomNavigationBar>
+  </Screen>
     `,
   baseUrl: '/cubes/',
   typeScriptFiles: ['src/**/*.{ts,tsx}', '!src/storybook'],
-  frameComponent: './src/playroom/FrameComponent.tsx',
   webpackConfig: () => ({
     module: {
       rules: [
