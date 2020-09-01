@@ -1,26 +1,30 @@
 # Cubes
 
-This package contains the Cubes library, for quick prototyping. It also contains a Storybook Web app.
+Delightfully simple building blocks for quick prototyping ⚡
+
+![Build](https://github.com/Trampoline-CX/Cubes/workflows/Build/badge.svg)
+[![Latest NPM Version](https://img.shields.io/npm/v/@trampoline/cubes)](https://www.npmjs.com/package/@trampoline/cubes)
+[![MIT License](https://img.shields.io/npm/l/@trampoline/cubes)](https://tldrlegal.com/license/mit-license)
+
+[![Storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://storybook.js.org/)
+
+- [👨‍🔬 Experiment Now!](#-experiment-now)
+  - [CodeSandbox](#codesandbox)
+  - [Expo Snack](#expo-snack)
+- [🏃 Getting Started](#-getting-started)
+  - [Usage](#usage)
+    - [Expo](#expo)
+    - [Start Project](#start-project)
+    - [AppProvider](#appprovider)
+- [📚 Documentation (Storybook)](#-documentation-storybook)
+- [👨‍🎓 Examples](#-examples)
+- [👏 Contributing](#-contributing)
 
 ---
 
-- [Cubes](#cubes)
-  - [Experiment Now!](#experiment-now)
-    - [CodeSandbox](#codesandbox)
-    - [Expo Snack](#expo-snack)
-  - [Or Install Locally](#or-install-locally)
-  - [Development Workflow](#development-workflow)
-    - [Create a New Component Guidelines](#create-a-new-component-guidelines)
-    - [Write Efficient Storybook Stories](#write-efficient-storybook-stories)
-  - [Directory Structure](#directory-structure)
-  - [Typescript Structure](#typescript-structure)
-  - [Publish :rocket:](#publish-)
-
-## Experiment Now!
+## 👨‍🔬 Experiment Now!
 
 Start swiftly ⚡ using [CodeSandbox](https://codesandbox.io/s/github/alexbchr/cubes-basic-sandbox) or [Expo Snacks](https://snack.expo.io/@git/github.com/alexbchr/cubes-basic-sandbox).
-
-> First time launch can take a few seconds to a minute using these services because of the packages install time.
 
 ### CodeSandbox
 
@@ -30,104 +34,59 @@ We recommend you to use CodeSandbox, as previewing is much faster and reliable t
 
 Use Expo Snacks if you want to test on Web, Android and iOS. You can even test the native results directly in your browser using embedded [Appetize.io](https://appetize.io/).
 
-## Or Install Locally
+## 🏃 Getting Started
 
-Install the module from NPM:
-
-```shell
-yarn add @trampoline/cubes
-```
-
-Or using npm:
+Using [`expo-cli`](https://www.npmjs.com/package/expo-cli) and `npx`, use `create-cubes` starter template:
 
 ```shell
-npm install @trampoline/cubes
+npx expo init --template https://github.com/Trampoline-CX/create-cubes.git
 ```
 
-## Development Workflow
+### Usage
 
-Simply start the Web Storybook and then develop components!
+After your project creation, there are some things worth mentioning to help you get started.
 
-```shell
-$ yarn start
-```
+#### Expo
 
-### Create a New Component Guidelines
+A Cubes project uses [Expo](https://expo.io/) (React Native), to prototype Apps on Web, Android and iOS with a unique code base. For Android and iOS, you can install the Expo App on the [Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_CA) or [App Store](https://apps.apple.com/ca/app/expo-client/id982107779) and then scan the barcode when starting the project with a Phone.
 
-Let's say we want to develop a new component, named `MyComponent`.
+#### Start Project
 
-1. Decide in which category your component should be (see `/src/components` subfolders).
-2. Create a subfolder with your component's name, with a file in it with the same name. Following our example: `src/components/<category>/MyComponent/MyComponent.tsx`. The component **must** be exported using `export const MyComponent`. **NO** `export default`. Using `export default` would break Typescript Documentation generation.
-3. Along with our new file, create a Storybook stories file: `MyComponent.stories.tsx`.
-4. Reference your component in `src/components/index.ts`
-5. Develop your component and look at it using Storybook. :rocket:
+Start the project using `yarn start`. You can also use `yarn web`, `yarn android` or `yarn ios` to directly start the project on the platform of your choice (make sure to connect a device first 😉).
 
-For additional guidelines on how to develop a component, see [Develop a New Component](/docs/mobile-app/Develop-a-New-Component).
+After being started, saving changes in your code base will update the experience directly ⚡
 
-### Write Efficient Storybook Stories
+#### AppProvider
 
-> **Disclaimer:** This section needs to be expanded after upgrading to Storybook 6. These guidelines are for Storybook 5 but will stay similar for the next major Storybook version.
+This must be the Root component (or Cube 😉) of your App (see it in `App` file). By default, when creating a project, your `AppProvider` provides a very basic Navigation Schema (read more about Navigation [here](https://develop--5eebb872a669600022881133.chromatic.com/?path=/story/documentation-navigation--page)).
 
-[Storybook "Writing Stories" Documentation](https://storybook.js.org/docs/basics/writing-stories/) is a good starting point in case you don't know how to write stories, but here we expand on some guidelines we want to follow.
-
-- Stories file name should have the name of the component, followed with `.stories.tsx`.
-- Make sure to pass the concerned component in the `component` stories definition.
-- The name of the story should have the same name as their component too, in order for Typescript Docgen parser to work correctly.
-- Good component documentation starts with the JSDoc. Make sure to comment correctly every component along with all of their properties.
-- The first story appears differently in Storybook "Docs" tab (only in Storybook Web). The first story should be the one representing what the component should do (its primary purpose). The first story could have a different format than the other ones to show more capabilities of the component, if needed.
-- Stories should show usage of every component prop. Usage of multiple props could be shown in a single story, especially if the component has a lot of properties.
-- If pertinent, some stories may not necessarily show a component but could instead show a composite component made of basic components, to better illustrate possible usages.
-- Each story code should be "standalone". It should not be encapsulated in a function, as this would be irrelevant when looking at the source code of the story (see example below).
-
-**Example Story:**
+However, you can prototype a single screen if you want by not providing a Navigation Schema and embedding your Screen content directly in `AppProvider`.
 
 ```tsx
-import React from 'react'
-import { MyComponent } from './MyComponent'
-import { fileAbsolute } from 'paths.macro'
-import { getStoryTitle } from '../../../storybook/get-story-title'
-
-// Declaration of the Stories configuration for this component
-export default {
-  title: getStoryTitle(fileAbsolute), // Component Name (automatically generated from file name)
-  component: MyComponent, // Component instance
-}
-
-// Declare stories using `export const`
-// The first story is shown differently in "Docs" Tab.
-// If the first story receives a props parameter, it will show controls in the Props Table to dynamically change props.
-export const MyFirstStory: React.FC = props => <MyComponent {...props} />
-export const MySecondStory: React.FC = () => <MyComponent loading />
-
-// DON'T ENCAPSULATE COMPONENT USAGE IN FUNCTION LIKE SO:
-const funcReturningMyComponent = () => <MyComponent prop="value">
-export const MyNotSoCoolStory = funcReturningMyComponent()
+const MyScreen = () => (
+  <AppProvider>
+    <Screen>
+      <TopBar />
+      <Screen.Content>
+        <DisplayText>See, No Navigation!</DisplayText>
+      </Screen.Content>
+    </Screen>
+  </AppProvider>
+)
 ```
 
-> **Additional Notes**
->
-> - There should be stories for every component of the DS, for documentation purpose.
-> - For now, we only have stories written in Typescript, but later on, we could expand them further using MDX.
+## 📚 Documentation (Storybook)
 
-## Directory Structure
+All Cubes (components), along with their properties and usage, are documented in our [Storybook](https://develop--5eebb872a669600022881133.chromatic.com). There is also [extra documentation](https://develop--5eebb872a669600022881133.chromatic.com/?path=/story/documentation) there 🤫
 
-- `src/` contains sources for the package. Output does not contain the `src/storybook/` folder and the `*.stories.tsx` files.
-- `storybook/` contains the storybook related code. `web/` subdirectory is for the Web Storybook.
-- `public/` directory contains the basic React App assets for Storybook to work with.
+If you don't know Storybook, it's a cool place where you can document your components and design guidelines. Learn more on [their website](https://storybook.js.org/)!
 
-## Typescript Structure
+## 👨‍🎓 Examples
 
-**VERY IMPORTANT NOTES**
+Here is a basic Example of an App Prototype using Cubes:
 
-There are 2 `tsconfig.json` files in this package:
+- [Basic Sandbox](https://github.com/alexbchr/cubes-basic-sandbox)
 
-- `tsconfig.json`: Used by VS Code for code completion and stuff and when building Storybook (doesn't emit anything).
-- `tsconfig.build.json`: Used when building the package (output code to `dist/` folder).
+## 👏 Contributing
 
-## Publish :rocket:
-
-Deploy the package to NPM using:
-
-```shell
-$ yarn version && yarn publish --access public
-```
+If you like Cubes but think it could benefit from some improvements, feel free to consult our [contributing guide](CONTRIBUTING.md) or [open an issue](https://github.com/Trampoline-CX/Cubes/issues/new/choose).
