@@ -14,7 +14,7 @@ module.exports = {
         Hello World!
       </Button>
     `,
-  baseUrl: '/',
+  baseUrl: '/cubes/',
   typeScriptFiles: ['src/**/*.{ts,tsx}', '!src/storybook'],
   frameComponent: './src/playroom/FrameComponent.tsx',
   webpackConfig: () => ({
