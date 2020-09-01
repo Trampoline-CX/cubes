@@ -82,3 +82,5 @@ node_modules/
 .env
 
 dist/
+
+playroom/
