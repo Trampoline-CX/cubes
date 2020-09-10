@@ -30,6 +30,7 @@ export const Basic: StoryFn<TopBarProps> = props => (
 Basic.args = {
   title: 'Bar Title',
   actions: [{ icon: 'create', action: action('Edit Clicked') }],
+  iconStart: undefined,
 }
 
 export const WithoutIcon: React.FC = () => (

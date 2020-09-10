@@ -124,6 +124,10 @@ const lightTheme: ThemeBase = {
     },
     divider: 1,
     bullet: 8,
+    breakpoints: {
+      small: 576,
+      large: 1700,
+    },
   },
 
   // SPACING

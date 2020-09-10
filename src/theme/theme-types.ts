@@ -130,6 +130,10 @@ export interface ThemeBase {
     }
     divider: number
     bullet: number
+    breakpoints: {
+      small: number
+      large: number
+    }
   }
 
   // RADIUS

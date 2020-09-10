@@ -10,7 +10,7 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: Slider,
   parameters: {
-    chromatic: { delay: 100 }, // Add small delay as Slider takes some time to render sometimes...
+    chromatic: { delay: 300 }, // Add small delay as Slider takes some time to render sometimes...
   },
 }
 

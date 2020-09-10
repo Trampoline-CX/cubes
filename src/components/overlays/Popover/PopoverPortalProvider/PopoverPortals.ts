@@ -1,3 +1,3 @@
 import { portals } from '../../../dev'
 
-export const PopoverPortals = portals.create()
+export const PopoverPortals = portals.create('Popover')
