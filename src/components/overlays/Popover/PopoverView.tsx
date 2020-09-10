@@ -97,7 +97,6 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
       <View
         style={[
           styles.popover,
-          style,
           layout === null
             ? styles.popoverNotYetLayout // Hide Popover as long as we don't have its correct layout
             : {
@@ -109,6 +108,7 @@ export const PopoverView: React.FC<PopoverViewProps> = ({
               },
           { maxWidth: windowWidth, maxHeight: windowHeight }, // Set max dimensions to prevent going out of Window
           matchWidth ? { width: activatorLayout.width } : null,
+          style,
         ]}
         onLayout={onLayout}
         pointerEvents={open && !clickThrough ? 'auto' : 'none'} // Make sure we can't click items if popover is closed or if clickthrough === true
