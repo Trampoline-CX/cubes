@@ -3,7 +3,7 @@ name: Build and Deploy Playroom
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   build:
