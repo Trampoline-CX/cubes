@@ -49,6 +49,14 @@ export type ScreenArguments<T> = {
     : never
 }[Extract<keyof UnionToIntersection<T>, string>]
 
+export type ScreenNames<T> = {
+  [P in Extract<keyof UnionToIntersection<T>, string>]: UnionToIntersection<
+    T
+  >[P] extends React.ComponentType<any>
+    ? P
+    : never
+}[Extract<keyof UnionToIntersection<T>, string>]
+
 /**
  * Infer the Props type from a React Component.
  */

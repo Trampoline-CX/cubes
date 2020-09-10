@@ -74,6 +74,12 @@ export const shameStyles = {
       size: 200,
     },
   },
+  drawerMenu: {
+    width: 256,
+  },
+  sheet: {
+    backdropColor: 'rgba(0, 0, 0, 0.33)',
+  },
   select: {
     maxHeight: 300,
   },

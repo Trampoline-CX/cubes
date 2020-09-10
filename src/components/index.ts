@@ -39,6 +39,7 @@ export * from './images-and-icons/Avatar/Avatar'
 export * from './images-and-icons/Icon/Icon'
 
 export * from './navigation/BottomNavigationBar/BottomNavigationBar'
+export * from './navigation/DrawerMenu/DrawerMenu'
 export * from './navigation/Tabs/Tabs'
 export * from './navigation/TopBar/TopBar'
 
