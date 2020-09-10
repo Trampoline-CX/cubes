@@ -22,6 +22,10 @@ Default.args = {
   onClick: action('Link clicked'),
 }
 
+Default.argTypes = {
+  children: { control: 'text' },
+}
+
 export const Subdued: React.FC = () => (
   <BodyText>
     This is a text containing a maybe not{' '}

@@ -19,6 +19,10 @@ Basic.args = {
   onClick: action('button clicked'),
 }
 
+Basic.argTypes = {
+  children: { control: 'text' },
+}
+
 export const Secondary: React.FC = () => (
   <Box horizontal space="medium">
     <Button onClick={action('button clicked')}>Normal</Button>

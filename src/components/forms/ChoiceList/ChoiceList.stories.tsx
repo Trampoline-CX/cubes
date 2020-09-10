@@ -43,6 +43,7 @@ Basic.args = {
 }
 
 Basic.argTypes = {
+  title: { control: 'text' },
   selected: { control: 'array' },
 }
 

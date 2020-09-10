@@ -17,6 +17,10 @@ Basic.args = {
   children: 'Wow, so big!',
 }
 
+Basic.argTypes = {
+  children: { control: 'text' },
+}
+
 export const All: React.FC = () => (
   <TextContainer>
     <DisplayText>Default Display Text</DisplayText>
