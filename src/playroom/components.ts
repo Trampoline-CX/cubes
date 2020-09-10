@@ -7,6 +7,7 @@ export { Pill } from '../components/actions/Pill/Pill'
 
 export { Touchable } from '../components/base/Touchable/Touchable'
 
+export { Carousel } from '../components/behavior/Carousel/Carousel'
 export { Collapsible } from '../components/behavior/Collapsible/Collapsible'
 
 export { ProgressBar } from '../components/feedback-indicators/ProgressBar/ProgressBar'
@@ -34,6 +35,7 @@ export { Avatar } from '../components/images-and-icons/Avatar/Avatar'
 export { Icon } from '../components/images-and-icons/Icon/Icon'
 
 export { BottomNavigationBar } from '../components/navigation/BottomNavigationBar/BottomNavigationBar'
+export { DrawerMenu } from '../components/navigation/DrawerMenu/DrawerMenu'
 export { Tabs } from '../components/navigation/Tabs/Tabs'
 export { TopBar } from '../components/navigation/TopBar/TopBar'
 
@@ -42,7 +44,6 @@ export { ConfirmDialog } from '../components/overlays/ConfirmDialog/ConfirmDialo
 export { Dialog } from '../components/overlays/Dialog/Dialog'
 export { Popover } from '../components/overlays/Popover/Popover'
 export { Sheet } from '../components/overlays/Sheet/Sheet'
-export { useSnackbar } from '../components/overlays/Snackbar/use-snackbar'
 export { Tooltip } from '../components/overlays/Tooltip/Tooltip'
 
 export { AppProvider } from '../components/structure/AppProvider/AppProvider'
@@ -64,4 +65,3 @@ export { Heading } from '../components/text/Heading/Heading'
 export { List } from '../components/text/List/List'
 export { TextContainer } from '../components/text/TextContainer/TextContainer'
 export { TextStyle } from '../components/text/TextStyle/TextStyle'
-export { useTextStyles } from '../components/text/use-text-styles'

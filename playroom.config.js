@@ -5,6 +5,7 @@ module.exports = {
   outputPath: './playroom',
   frameComponent: './src/playroom/FrameComponent.tsx',
   snippets: './src/playroom/snippets.ts',
+  themes: './src/playroom/themes.ts',
 
   // Optional:
   title: 'Cubes',
