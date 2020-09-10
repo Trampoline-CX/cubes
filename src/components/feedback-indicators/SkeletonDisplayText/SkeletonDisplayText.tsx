@@ -4,12 +4,10 @@ import { useStyles } from '../../../theme'
 import { useTextStyles } from '../../text/use-text-styles'
 import { shameStyles } from '../../../theme/shame-styles'
 
-export type SkeletonDisplayTextProps = Record<string, never>
-
 /**
  * Gives a low fidelity representation of a `DisplayText`.
  */
-export const SkeletonDisplayText: React.FC<SkeletonDisplayTextProps> = () => {
+export const SkeletonDisplayText: React.FC = () => {
   const styles = useStyles(theme => ({
     skeleton: {
       borderRadius: theme.radius.small,

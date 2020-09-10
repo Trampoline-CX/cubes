@@ -80,6 +80,9 @@ export const shameStyles = {
   sheet: {
     backdropColor: 'rgba(0, 0, 0, 0.33)',
   },
+  select: {
+    maxHeight: 300,
+  },
   slider: {
     track: {
       height: 6,

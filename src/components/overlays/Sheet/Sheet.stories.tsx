@@ -15,7 +15,7 @@ export default {
   title: getStoryTitle(fileAbsolute),
   component: Sheet,
   parameters: {
-    chromatic: { pauseAnimationAtEnd: true },
+    chromatic: { pauseAnimationAtEnd: true, delay: 100 },
   },
 }
 

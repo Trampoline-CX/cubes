@@ -18,7 +18,7 @@ const storybookConfig: StorybookConfig = {
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       tsconfigPath: tsconfig,
-      propFilter: (prop: { name: string }): boolean => !/^(testID)$/.test(prop.name),
+      propFilter: (prop: { name: string }): boolean => !/^(testID|ref|key)$/.test(prop.name),
       compilerOptions: {
         allowSyntheticDefaultImports: true,
         esModuleInterop: true,
@@ -81,10 +81,20 @@ const storybookConfig: StorybookConfig = {
         __dirname,
         '../../src/storybook/utils/react-native-screens',
       ),
-      // Mock @expo/vector-icons with react-native-vector-icons
-      '@expo/vector-icons$': path.resolve(__dirname, '../../src/storybook/utils/expo-vector-icons'),
       // Mock expo-haptics
       'expo-haptics$': path.resolve(__dirname, '../../src/storybook/utils/expo-haptics'),
+      // Mock @expo/vector-icons with react-native-vector-icons
+      '@expo/vector-icons$': path.resolve(__dirname, '../../src/storybook/utils/expo-vector-icons'),
+
+      // Correctly use `.web.js` files in our own code.
+      './DatePickerView/DatePickerView': path.resolve(
+        __dirname,
+        '../../src/components/forms/DatePicker/DatePickerView/DatePickerView.web',
+      ),
+      './TimePickerView/TimePickerView': path.resolve(
+        __dirname,
+        '../../src/components/forms/TimePicker/TimePickerView/TimePickerView.web',
+      ),
     }
 
     return config
