@@ -4,6 +4,7 @@ import { Box } from '../../../structure/Box/Box'
 import { Touchable } from '../../../base/Touchable/Touchable'
 import { IconName, IconProps, Icon } from '../../../images-and-icons/Icon/Icon'
 import { PopoverContext } from '../PopoverContext'
+import { useStyles } from '../../../../theme'
 
 export interface ItemProps {
   /**
@@ -22,6 +23,10 @@ export interface ItemProps {
    * Action to execute on click.
    */
   onSelect?: () => void
+  /**
+   * Set to `true` to disable the option.
+   */
+  disabled?: boolean
 }
 
 /**
@@ -32,7 +37,14 @@ export const Item: React.FC<ItemProps> = ({
   icon,
   iconColor,
   onSelect: onSelectRaw = () => {},
+  disabled = false,
 }) => {
+  const styles = useStyles(theme => ({
+    disabled: {
+      opacity: theme.opacity.disabled,
+    },
+  }))
+
   const { requestClose } = useContext(PopoverContext)
 
   // Make sure to close the Popover after calling onSelect
@@ -42,7 +54,7 @@ export const Item: React.FC<ItemProps> = ({
   }, [requestClose, onSelectRaw])
 
   return (
-    <Touchable onClick={onSelect}>
+    <Touchable onClick={onSelect} disabled={disabled} viewStyle={disabled && styles.disabled}>
       <Box horizontal space="small" paddingX="medium" paddingY="small" align="center">
         {icon ? <Icon name={icon} color={iconColor} /> : null}
         <BodyText>{label}</BodyText>

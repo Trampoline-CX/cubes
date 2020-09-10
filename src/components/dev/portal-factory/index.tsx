@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import React, { useContext, useState, useEffect, useMemo, useCallback } from 'react'
-import { View, findNodeHandle } from 'react-native'
 
 export interface Portals {
   Provider: React.FC<PortalProviderProps>
@@ -25,13 +24,16 @@ export const portals = {
    *
    * *Remember, the cake is a lie...*
    *
+   * @param keyPrefix Prefix to use for generated Portal keys. Keys are generated to provide each component with
+   * a unique ID.
+   *
    * @returns An object containing 3 components:
    * - `Provider`, which needs to wrap both `DestinationPortal` and `SourcePortal`. This is in fact a
    * React Context providing the portals.
    * - `DestinationPortal`, renders components passed in a `SourcePortal`.
    * - `SourcePortal`, makes `children` render in `DestinationPortal`.
    */
-  create: (): Portals => {
+  create: (keyPrefix: string): Portals => {
     // Context providing ability to place multiple portals somewhere else in Component tree.
     const PortalContext = React.createContext<PortalContext>({
       components: {},
@@ -42,7 +44,7 @@ export const portals = {
      * Provides a place for Components to appear in the component tree.
      */
     const Provider: React.FC<PortalProviderProps> = ({ children }) => {
-      const [components, setComponents] = useState<{ [key: number]: React.ReactNode }>({})
+      const [components, setComponents] = useState<{ [key: string]: React.ReactNode }>({})
 
       const setComponent = useCallback<PortalContext['setComponent']>(
         (key, component) => {
@@ -61,25 +63,17 @@ export const portals = {
     /**
      * Wraps a Component to render them in a different spot in the Component tree.
      */
-    const SourcePortal: React.FC<SourcePortalProps> = ({ componentRef, children }) => {
+    const SourcePortal: React.FC<SourcePortalProps> = ({ children }) => {
+      const uniqueId = useMemo(() => _.uniqueId(keyPrefix), [])
       const { setComponent } = useContext(PortalContext)
 
-      // Retrieves a Native handle on the component to identify it.
-      const handle = useMemo(() => findNodeHandle(componentRef.current), [componentRef.current])
-
       // When content of Component is updated, update it in the Context too
-      useEffect(() => {
-        if (handle) {
-          setComponent(handle, children)
-        }
-      }, [handle, children])
+      useEffect(() => setComponent(uniqueId, children), [children])
 
       // Removes the Component from the DOM once it is unmounted
       useEffect(
         () => () => {
-          if (handle) {
-            setComponent(handle, null)
-          }
+          setComponent(uniqueId, null)
         },
         [],
       )
@@ -101,8 +95,8 @@ export const portals = {
 }
 
 interface PortalContext {
-  components: { [key: number]: React.ReactNode }
-  setComponent: (key: number, component: null | React.ReactNode) => void
+  components: { [key: string]: React.ReactNode }
+  setComponent: (key: string, component: null | React.ReactNode) => void
 }
 
 export interface PortalProviderProps {
@@ -110,7 +104,6 @@ export interface PortalProviderProps {
 }
 
 export interface SourcePortalProps {
-  componentRef: React.RefObject<View>
   children: React.ReactNode
 }
 

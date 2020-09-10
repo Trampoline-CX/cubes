@@ -5,6 +5,7 @@ import { BodyText } from '../../text'
 
 export interface BaseInputProps {
   value: string
+  placeholder?: string
   onClick: () => void
   focused: boolean
   disabled: boolean
@@ -13,7 +14,13 @@ export interface BaseInputProps {
 /**
  * Gives the look of a basic Input component. Use for components that look like a `TextField` but are not.
  */
-export const BaseInput: React.FC<BaseInputProps> = ({ value, onClick, focused, disabled }) => {
+export const BaseInput: React.FC<BaseInputProps> = ({
+  value,
+  placeholder,
+  onClick,
+  focused,
+  disabled,
+}) => {
   const styles = useStyles(theme => ({
     // Base Styles
     inputContainer: {
@@ -39,6 +46,8 @@ export const BaseInput: React.FC<BaseInputProps> = ({ value, onClick, focused, d
     },
   }))
 
+  const showPlaceholder = value.length === 0
+
   return (
     <Touchable
       viewStyle={[
@@ -49,7 +58,9 @@ export const BaseInput: React.FC<BaseInputProps> = ({ value, onClick, focused, d
       onClick={onClick}
       disabled={disabled}
     >
-      <BodyText maxLines={1}>{value}</BodyText>
+      <BodyText maxLines={1} variation={showPlaceholder ? 'subdued' : undefined}>
+        {showPlaceholder ? placeholder : value}
+      </BodyText>
     </Touchable>
   )
 }

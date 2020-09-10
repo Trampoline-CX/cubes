@@ -51,7 +51,7 @@ export const Icon: React.FC<IconProps> = ({ name, size = 'default', color = 'pri
       case 'subdued':
         return theme.colors.text.subdued
       case 'success':
-        return theme.colors.status.success.default
+        return theme.colors.status.success
       case 'error':
         return theme.colors.status.error
     }
