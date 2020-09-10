@@ -8,6 +8,7 @@ export * from './actions/actions'
 
 export * from './base/Touchable/Touchable'
 
+export * from './behavior/Carousel/Carousel'
 export * from './behavior/Collapsible/Collapsible'
 
 export * from './feedback-indicators/ProgressBar/ProgressBar'
