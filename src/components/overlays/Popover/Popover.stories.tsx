@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions'
 import isChromatic from 'chromatic/isChromatic'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { PhoneScreen } from '../../../storybook/decorators/PhoneScreen'
-import { AppProvider } from '../../structure/AppProvider/AppProvider'
 import { Screen } from '../../structure/Screen/Screen'
 import { Box } from '../../structure/Box/Box'
 import { Button } from '../../actions/Button/Button'
@@ -30,18 +29,16 @@ export const Basic: StoryFn<PopoverProps> = props => {
   const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
-    <AppProvider>
-      <Screen>
-        <Box fill align="center" distribution="center">
-          <Popover
-            {...props}
-            open={visible}
-            onRequestClose={() => setVisible(false)}
-            activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
-          />
-        </Box>
-      </Screen>
-    </AppProvider>
+    <Screen>
+      <Box fill align="center" distribution="center">
+        <Popover
+          {...props}
+          open={visible}
+          onRequestClose={() => setVisible(false)}
+          activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
+        />
+      </Box>
+    </Screen>
   )
 }
 
@@ -68,25 +65,23 @@ export const UsingChildrenItems: StoryFn<PopoverProps> = () => {
   const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
-    <AppProvider>
-      <Screen>
-        <Box fill align="center" distribution="center">
-          <Popover
-            open={visible}
-            onRequestClose={() => setVisible(false)}
-            activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
-          >
-            <Popover.Item label="Edit" icon="edit" onSelect={action('Edit selected')} />
-            <Popover.Item
-              label="Unlink"
-              icon="link"
-              iconColor="accent"
-              onSelect={action('Unlink selected')}
-            />
-          </Popover>
-        </Box>
-      </Screen>
-    </AppProvider>
+    <Screen>
+      <Box fill align="center" distribution="center">
+        <Popover
+          open={visible}
+          onRequestClose={() => setVisible(false)}
+          activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
+        >
+          <Popover.Item label="Edit" icon="edit" onSelect={action('Edit selected')} />
+          <Popover.Item
+            label="Unlink"
+            icon="link"
+            iconColor="accent"
+            onSelect={action('Unlink selected')}
+          />
+        </Popover>
+      </Box>
+    </Screen>
   )
 }
 
@@ -94,22 +89,20 @@ export const MatchWidth: React.FC = () => {
   const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
-    <AppProvider>
-      <Screen>
-        <Box fill distribution="center" align="center">
-          <Popover
-            matchWidth
-            open={visible}
-            onRequestClose={() => setVisible(false)}
-            activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
-            actions={[
-              { label: 'A pizza', action: action('Option selected: A pizza') },
-              { label: 'A taco', action: action('Option selected: A taco') },
-            ]}
-          />
-        </Box>
-      </Screen>
-    </AppProvider>
+    <Screen>
+      <Box fill distribution="center" align="center">
+        <Popover
+          matchWidth
+          open={visible}
+          onRequestClose={() => setVisible(false)}
+          activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+          actions={[
+            { label: 'A pizza', action: action('Option selected: A pizza') },
+            { label: 'A taco', action: action('Option selected: A taco') },
+          ]}
+        />
+      </Box>
+    </Screen>
   )
 }
 
@@ -117,24 +110,22 @@ export const AboveActivatorAndHideBackdrop: React.FC = () => {
   const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
-    <AppProvider>
-      <Screen>
-        <Box fill distribution="center" align="center">
-          <Popover
-            aboveActivator
-            hideBackdrop
-            placement="bottom-end"
-            open={visible}
-            onRequestClose={() => setVisible(false)}
-            activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
-            actions={[
-              { label: 'A pizza', action: action('Option selected: A pizza') },
-              { label: 'A taco', action: action('Option selected: A taco') },
-            ]}
-          />
-        </Box>
-      </Screen>
-    </AppProvider>
+    <Screen>
+      <Box fill distribution="center" align="center">
+        <Popover
+          aboveActivator
+          hideBackdrop
+          placement="bottom-end"
+          open={visible}
+          onRequestClose={() => setVisible(false)}
+          activator={<IconButton icon="more" onClick={() => setVisible(true)} />}
+          actions={[
+            { label: 'A pizza', action: action('Option selected: A pizza') },
+            { label: 'A taco', action: action('Option selected: A taco') },
+          ]}
+        />
+      </Box>
+    </Screen>
   )
 }
 
@@ -142,21 +133,19 @@ export const AutomaticPlacementCorrection: StoryFn<PopoverProps> = () => {
   const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
-    <AppProvider>
-      <Screen>
-        <Box fill distribution="end">
-          <Popover
-            open={visible}
-            onRequestClose={() => setVisible(false)}
-            activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
-            actions={[
-              { label: 'A pizza', action: action('Option selected: A pizza') },
-              { label: 'A taco', action: action('Option selected: A taco') },
-            ]}
-          />
-        </Box>
-      </Screen>
-    </AppProvider>
+    <Screen>
+      <Box fill distribution="end">
+        <Popover
+          open={visible}
+          onRequestClose={() => setVisible(false)}
+          activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+          actions={[
+            { label: 'A pizza', action: action('Option selected: A pizza') },
+            { label: 'A taco', action: action('Option selected: A taco') },
+          ]}
+        />
+      </Box>
+    </Screen>
   )
 }
 
@@ -173,24 +162,22 @@ export const CustomContent: StoryFn<PopoverProps> = () => {
   const [visible, setVisible] = useState(isInitiallyVisible)
 
   return (
-    <AppProvider>
-      <Screen>
-        <Box fill distribution="center">
-          <Popover
-            open={visible}
-            onRequestClose={() => setVisible(false)}
-            activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
-          >
-            <Box padding="medium" space="large">
-              <TextContainer>
-                <DisplayText>Custom content</DisplayText>
-                <BodyText>{LOREM_IPSUM}</BodyText>
-              </TextContainer>
-              <Button onClick={action('Button clicked')}>Click me!</Button>
-            </Box>
-          </Popover>
-        </Box>
-      </Screen>
-    </AppProvider>
+    <Screen>
+      <Box fill distribution="center">
+        <Popover
+          open={visible}
+          onRequestClose={() => setVisible(false)}
+          activator={<Button onClick={() => setVisible(true)}>Show Popover</Button>}
+        >
+          <Box padding="medium" space="large">
+            <TextContainer>
+              <DisplayText>Custom content</DisplayText>
+              <BodyText>{LOREM_IPSUM}</BodyText>
+            </TextContainer>
+            <Button onClick={action('Button clicked')}>Click me!</Button>
+          </Box>
+        </Popover>
+      </Box>
+    </Screen>
   )
 }

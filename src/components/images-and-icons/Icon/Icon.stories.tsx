@@ -3,7 +3,6 @@ import React from 'react'
 import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import MaterialGlyphs from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialIcons.json'
-import { DarkBackground } from '../../../storybook/decorators/DarkBackground'
 import { useStyles } from '../../../theme'
 import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure/Box/Box'
@@ -45,9 +44,5 @@ Example.args = {
 }
 
 export const All: React.FC = () => <IconContainer />
-export const All_Inverse: React.FC & { story: unknown } = () => <IconContainer color="inverse" />
-All_Inverse.story = {
-  decorators: [DarkBackground],
-}
 
 export const LargeAccent: React.FC = () => <Icon name="home" size="large" color="accent" />
