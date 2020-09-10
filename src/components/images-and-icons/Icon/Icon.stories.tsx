@@ -45,9 +45,5 @@ Example.args = {
 }
 
 export const All: React.FC = () => <IconContainer />
-export const All_Inverse: React.FC & { story: unknown } = () => <IconContainer color="inverse" />
-All_Inverse.story = {
-  decorators: [DarkBackground],
-}
 
 export const LargeAccent: React.FC = () => <Icon name="home" size="large" color="accent" />

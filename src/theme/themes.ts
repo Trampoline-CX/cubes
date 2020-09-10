@@ -30,7 +30,7 @@ const lightTheme: ThemeBase = {
     status: {
       success: '#A5DBCA',
       warning: '#FAD1A2',
-      error: '#F00',
+      error: '#ef5350',
     },
   },
 
@@ -164,7 +164,10 @@ const lightTheme: ThemeBase = {
   },
 }
 
-export const buildTheme: (theme: DeepPartial<ThemeBase>) => Theme = theme => {
+export const buildTheme: (theme: DeepPartial<ThemeBase>, inverse?: boolean) => Theme = (
+  theme,
+  inverse = false,
+) => {
   // Create new ThemeBase using lightTheme as defaults
   const newBase: ThemeBase = _.defaultsDeep(theme, lightTheme)
 
@@ -175,37 +178,52 @@ export const buildTheme: (theme: DeepPartial<ThemeBase>) => Theme = theme => {
       ...newBase.colors,
       fill: {
         ...newBase.colors.fill,
-        primary: _deriveColors(newBase.colors.fill.primary),
-        secondary: _deriveColors(newBase.colors.fill.secondary),
-        accent: _deriveColors(newBase.colors.fill.accent),
+        primary: _deriveColors(newBase.colors.fill.primary, inverse),
+        secondary: _deriveColors(newBase.colors.fill.secondary, inverse),
+        accent: _deriveColors(newBase.colors.fill.accent, inverse),
       },
     },
   }
 }
 
-const _deriveColors = (color: ColorHex): ComplexColor => ({
+const _deriveColors = (color: ColorHex, inverse: boolean): ComplexColor => ({
   default: color,
-  lighter: tinycolor(color).lighten(10).toString(),
-  darker: tinycolor(color).darken(10).toString(),
+  lighter: tinycolor(color)[inverse ? 'darken' : 'lighten'](10).toString(),
+  darker: tinycolor(color)[inverse ? 'lighten' : 'darken'](10).toString(),
 })
 
 export const themes = {
   light: buildTheme(lightTheme),
-  dark: buildTheme({
-    colors: {
-      fill: {
-        background: {
-          lighter: '#000000',
-          default: '#383838',
-          darker: '#454545',
-          inverse: '#FCF8F7',
+  dark: buildTheme(
+    {
+      colors: {
+        fill: {
+          primary: '#7a849e',
+          secondary: '#ffccbc',
+          accent: '#EE5D71',
+          background: {
+            lighter: '#030d1e',
+            default: '#2c3445',
+            darker: '#565d70',
+            inverse: '#b8c4e4',
+          },
+          divider: 'rgba(255,255,255,0.30)',
         },
-        divider: '#282828',
-      },
-      text: {
-        primary: '#EEEEEE',
-        inverse: '#383838',
+        text: {
+          primary: '#FAFAFA',
+          accent: '#EE5D71',
+          subdued: '#8a90a6',
+          inverse: '#2c3142',
+        },
+        positive: '#63A84C',
+        negative: '#D32F2F',
+        status: {
+          success: '#A5DBCA',
+          warning: '#ffb74d',
+          error: '#ef5350',
+        },
       },
     },
-  }),
+    true,
+  ),
 }

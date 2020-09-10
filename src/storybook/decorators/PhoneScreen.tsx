@@ -1,13 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
 import { StoryWrapper } from '@storybook/addons'
-import { useStyles, themes } from '../../theme'
+import { useStyles, themes, useTheme } from '../../theme'
 import { AppProvider } from '../../components'
 
 export const PhoneScreen: StoryWrapper = (Story, context) => {
   // context.globals.theme here will be either 'light' or 'dark'
   // getTheme being a function retrieving the actual theme object from that value
-  const themeName: 'light' | 'dark' = context.globals.theme
+  const initialTheme = useTheme()
 
   const styles = useStyles(theme => ({
     background: {
@@ -26,7 +26,7 @@ export const PhoneScreen: StoryWrapper = (Story, context) => {
   return (
     <View style={styles.background}>
       <View style={styles.phone}>
-        <AppProvider theme={themes[themeName]}>
+        <AppProvider theme={initialTheme}>
           <Story {...context} />
         </AppProvider>
       </View>
