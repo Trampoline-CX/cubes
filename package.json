@@ -47,7 +47,8 @@
     "lodash": "^4.17.19",
     "modal-react-native-web": "^0.2.0",
     "react-datepicker": "^3.1.3",
-    "react-native-modal-datetime-picker": "^8.7.1"
+    "react-native-modal-datetime-picker": "^8.7.1",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.0",
@@ -66,6 +67,7 @@
     "@types/react-native": "^0.61.23",
     "@types/react-native-vector-icons": "^6.4.5",
     "@types/react-test-renderer": "^16.9.2",
+    "@types/tinycolor2": "^1.4.2",
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.3.0",
     "babel-loader": "^8.1.0",

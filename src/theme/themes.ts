@@ -1,37 +1,22 @@
 import _ from 'lodash'
+import tinycolor from 'tinycolor2'
 import { Easing } from 'react-native'
-import { DeepPartial, Theme } from './theme-types'
+import { DeepPartial, Theme, ThemeBase, ColorHex, ComplexColor } from './theme-types'
 
-const lightTheme: Theme = {
+const lightTheme: ThemeBase = {
   // COLORS
   colors: {
     fill: {
-      primary: {
-        default: '#5B6275',
-        lighter: '#FFFFFF',
-        darker: '#FFFFFF',
-      },
-      accent: {
-        default: '#EE5D71',
-        lighter: '#FFFFFF',
-        darker: '#FFFFFF',
-      },
-      accentSecondary: {
-        default: '#F7B5A1',
-        lighter: '#FFE6DE',
-        darker: '#EA947A',
-      },
+      primary: '#5B6275',
+      secondary: '#F7B5A1',
+      accent: '#EE5D71',
       background: {
         default: '#FCF8F7',
         lighter: '#FFF',
         darker: '#EDE9E4',
         inverse: '#5B6275',
       },
-      divider: {
-        default: 'rgba(0,0,0,0.10)',
-        lighter: 'rgba(0,0,0,0.05)',
-        darker: '#303131',
-      },
+      divider: 'rgba(0,0,0,0.10)',
     },
     text: {
       primary: '#454B59',
@@ -40,15 +25,10 @@ const lightTheme: Theme = {
       inverse: '#FFFFFF',
     },
     transparent: 'transparent',
-    destructive: '#FF0000',
     positive: '#63A84C',
     negative: '#D32F2F',
     status: {
-      success: {
-        default: '#A5DBCA',
-        lighter: '#D3E3DE',
-        darker: '#6BBFA5',
-      },
+      success: '#A5DBCA',
       warning: '#FAD1A2',
       error: '#F00',
     },
@@ -184,24 +164,43 @@ const lightTheme: Theme = {
   },
 }
 
-export const buildTheme: (theme: DeepPartial<Theme>) => Theme = theme =>
-  _.defaultsDeep(theme, lightTheme)
+export const buildTheme: (theme: DeepPartial<ThemeBase>) => Theme = theme => {
+  // Create new ThemeBase using lightTheme as defaults
+  const newBase: ThemeBase = _.defaultsDeep(theme, lightTheme)
+
+  // Derive light and dark colors...
+  return {
+    ...newBase,
+    colors: {
+      ...newBase.colors,
+      fill: {
+        ...newBase.colors.fill,
+        primary: _deriveColors(newBase.colors.fill.primary),
+        secondary: _deriveColors(newBase.colors.fill.secondary),
+        accent: _deriveColors(newBase.colors.fill.accent),
+      },
+    },
+  }
+}
+
+const _deriveColors = (color: ColorHex): ComplexColor => ({
+  default: color,
+  lighter: tinycolor(color).lighten(10).toString(),
+  darker: tinycolor(color).darken(10).toString(),
+})
 
 export const themes = {
-  light: lightTheme,
+  light: buildTheme(lightTheme),
   dark: buildTheme({
     colors: {
       fill: {
         background: {
           lighter: '#000000',
           default: '#383838',
+          darker: '#454545',
           inverse: '#FCF8F7',
         },
-        divider: {
-          default: '#282828',
-          lighter: '#282828',
-          darker: '#282828',
-        },
+        divider: '#282828',
       },
       text: {
         primary: '#EEEEEE',

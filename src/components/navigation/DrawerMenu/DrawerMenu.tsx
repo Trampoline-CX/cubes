@@ -43,7 +43,7 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
       width,
       backgroundColor: theme.colors.fill.background.lighter,
       borderRightWidth: theme.border.thinner,
-      borderRightColor: theme.colors.fill.divider.default,
+      borderRightColor: theme.colors.fill.divider,
       paddingTop: theme.spacing.medium,
     },
   }))

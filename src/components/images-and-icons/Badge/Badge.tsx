@@ -22,7 +22,7 @@ export const Badge: React.FC<BadgeProps> = ({ children, variation = 'default' })
   const styles = useStyles(theme => ({
     container: {
       backgroundColor: theme.colors.fill.background.darker,
-      borderColor: theme.colors.fill.divider.default,
+      borderColor: theme.colors.fill.divider,
       borderWidth: theme.border.small,
       borderRadius: theme.radius.circle,
 
