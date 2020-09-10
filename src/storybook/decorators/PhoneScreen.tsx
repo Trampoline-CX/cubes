@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { StoryWrapper } from '@storybook/addons'
-import { useStyles, themes, useTheme } from '../../theme'
+import { useStyles, useTheme } from '../../theme'
 import { AppProvider } from '../../components'
 
 export const PhoneScreen: StoryWrapper = (Story, context) => {
