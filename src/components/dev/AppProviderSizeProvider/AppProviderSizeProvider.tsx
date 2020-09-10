@@ -6,6 +6,7 @@ import {
   StyleSheet,
   findNodeHandle,
   MeasureLayoutOnSuccessCallback,
+  Dimensions,
 } from 'react-native'
 
 interface SizeProvider {
@@ -34,7 +35,8 @@ export interface AppProviderSizeProviderProps {
   children: React.ReactNode
 }
 
-const LAYOUT_DEFAULT: LayoutRectangle = { width: 0, height: 0, x: 0, y: 0 }
+// Default layout, use window size by default...
+const LAYOUT_DEFAULT: LayoutRectangle = { ...Dimensions.get('window'), x: 0, y: 0 }
 
 const SizeContext = React.createContext<SizeProvider>({ layout: LAYOUT_DEFAULT, measure: () => {} })
 

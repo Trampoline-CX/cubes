@@ -90,7 +90,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         open={visible}
         activator={
           <BaseInput
-            value={value ? formatDate(value, format) : placeholder ?? ''}
+            value={value ? formatDate(value, format) : ''}
+            placeholder={placeholder}
             onClick={showDatePicker}
             focused={visible}
             disabled={disabled}

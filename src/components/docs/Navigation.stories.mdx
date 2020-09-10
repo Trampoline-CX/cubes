@@ -103,6 +103,32 @@ const schema = {
 
 This way, you'll be able to have Screen Names and Props validation at compile time when using `useNav()` hook.
 
+## Display a `DrawerMenu`
+
+You can display a `DrawerMenu` using a Navigation Schema by providing the `DrawerMenu` as a child to `AppProvider`:
+
+```tsx
+<AppProvider schema={navigationSchema}>
+  <DrawerMenu>{/* Display Items here... */}</DrawerMenu>
+</AppProvider>
+```
+
+**Important Note:** If you want to use `useNav` hook to get current screen name or provide navigation to `DrawerMenu`, make sure you create a custom component which will be referenced in `AppProvider`.
+
+```tsx
+const App: React.FC = () => (
+  <AppProvider schema={navigationSchema}>
+    <MyDrawerMenu />
+  </AppProvider>
+)
+
+const MyDrawerMenu: React.FC = () => {
+  const navigate = useNav() // Use hook in custom component, to correctly use AppProvider's Context
+
+  return <DrawerMenu>{/* Display Items here... */}</DrawerMenu>
+}
+```
+
 ## Limitations
 
 For now, the Navigation feature has several limitations:
