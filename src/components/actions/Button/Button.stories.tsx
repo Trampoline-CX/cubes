@@ -18,6 +18,7 @@ Basic.args = {
   children: 'Button',
   onClick: action('button clicked'),
 }
+
 Basic.argTypes = {
   children: { control: 'text' },
 }
