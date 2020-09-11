@@ -147,10 +147,12 @@ const CardHeader: React.FC<{ title: string; action?: TextAction }> = ({ title, a
   </Box>
 )
 
+const noop = (): void => {}
+
 const CardMainAction: React.FC<{ action: TextAction }> = ({ action }) => (
   <>
     <Divider />
-    <Touchable onClick={action.action}>
+    <Touchable onClick={action.action ?? noop}>
       <Box padding="medium">
         <Box horizontal space="medium">
           <Box fill>

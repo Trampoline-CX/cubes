@@ -8,11 +8,9 @@ import { SkeletonBodyText } from '../SkeletonBodyText/SkeletonBodyText'
  * Gives a low fidelity representation of a `Heading`.
  */
 export const SkeletonHeading: React.FC = () => (
-  <Box padding="medium">
-    <View style={styles.bodyTextContainer}>
-      <SkeletonBodyText />
-    </View>
-  </Box>
+  <View style={styles.bodyTextContainer}>
+    <SkeletonBodyText />
+  </View>
 )
 
 const styles = StyleSheet.create({

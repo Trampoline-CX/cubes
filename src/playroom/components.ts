@@ -1,4 +1,8 @@
 // This file is necessary until this issue is fixed: https://github.com/seek-oss/playroom/issues/138
+
+// React Native exports
+export { Image } from 'react-native'
+
 export { Badge } from '../components/images-and-icons/Badge/Badge'
 export { Button } from '../components/actions/Button/Button'
 export { IconButton } from '../components/actions/IconButton/IconButton'
