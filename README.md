@@ -9,6 +9,7 @@ Delightfully simple building blocks for quick prototyping ⚡
 [![Storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://storybook.js.org/)
 
 - [👨‍🔬 Experiment Now!](#-experiment-now)
+  - [Playroom](#playroom)
   - [CodeSandbox](#codesandbox)
   - [Expo Snack](#expo-snack)
 - [🏃 Getting Started](#-getting-started)
@@ -24,7 +25,11 @@ Delightfully simple building blocks for quick prototyping ⚡
 
 ## 👨‍🔬 Experiment Now!
 
-Start swiftly ⚡ using [CodeSandbox](https://codesandbox.io/s/github/alexbchr/cubes-basic-sandbox) or [Expo Snacks](https://snack.expo.io/@git/github.com/alexbchr/cubes-basic-sandbox).
+Start swiftly ⚡ using [Playroom](https://cubes.trampoline.cx), [CodeSandbox](https://codesandbox.io/s/github/alexbchr/cubes-basic-sandbox) or [Expo Snacks](https://snack.expo.io/@git/github.com/alexbchr/cubes-basic-sandbox).
+
+### Playroom
+
+Let you experiment quickly and easily using [Playroom](https://github.com/seek-oss/playroom). You can build prototypes easily and share them with the URL, without hassle or account creation.
 
 ### CodeSandbox
 

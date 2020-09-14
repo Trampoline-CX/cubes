@@ -16,13 +16,13 @@ export interface TabProps {
   /**
    * Called onClick of the tab.
    */
-  onClick: () => void
+  onClick?: () => void
 }
 
 /**
  * Tab component to display in `BottomNavigationBar`.
  */
-export const Tab: React.FC<TabProps> = ({ icon, onClick, selected = false }) => {
+export const Tab: React.FC<TabProps> = ({ icon, onClick = () => {}, selected = false }) => {
   const styles = useStyles(theme => ({
     touchable: {
       alignItems: 'center',
