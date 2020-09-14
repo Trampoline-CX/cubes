@@ -13,7 +13,7 @@ export default {
 }
 
 export const Basic: StoryFn<SelectProps> = props => {
-  const [selected, setSelected] = useState<string | null>(props.selected)
+  const [selected, setSelected] = useState(props.selected)
 
   return (
     <Screen>

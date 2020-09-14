@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Platform } from 'react-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 import { useStyles } from '../../../theme'
 import { shameStyles } from '../../../theme/shame-styles'
 import { Sheet } from '../../overlays/Sheet/Sheet'
@@ -38,13 +39,15 @@ export const DrawerMenu: React.FC<DrawerMenuProps> & { Item: typeof Item } = ({
   items,
   children: childrenRaw,
 }) => {
+  const { top } = useSafeArea()
   const styles = useStyles(theme => ({
     container: {
       width,
       backgroundColor: theme.colors.fill.background.lighter,
       borderRightWidth: theme.border.thinner,
       borderRightColor: theme.colors.fill.divider,
-      paddingTop: theme.spacing.medium,
+      // On iOS, make sure to use top inset, as modal is fullscreen, but not on Android.
+      paddingTop: theme.spacing.medium + (Platform.OS === 'ios' ? top : 0),
     },
   }))
   const { isModal, opened, close } = useDrawerMenuContext()

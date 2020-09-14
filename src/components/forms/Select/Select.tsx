@@ -4,6 +4,7 @@ import { Popover } from '../../overlays/Popover/Popover'
 import { shameStyles } from '../../../theme/shame-styles'
 import { BaseInputContainer } from '../../base/BaseInput/BaseInputContainer'
 import { BaseInput } from '../../base/BaseInput/BaseInput'
+import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
 
 export interface SelectChoice {
   /**
@@ -32,11 +33,11 @@ export interface SelectProps {
   /**
    * Currently selected value. If null, no value is selected.
    */
-  selected: string | null
+  selected?: string | null
   /**
    * Callback called when selection is changed.
    */
-  onChange: (selected: string) => void
+  onChange?: (selected: string) => void
   /**
    * Text to display as a placeholder.
    */
@@ -63,8 +64,8 @@ const { maxHeight } = shameStyles.select
 export const Select: React.FC<SelectProps> = ({
   label,
   choices,
-  selected,
-  onChange,
+  selected: selectedRaw = null,
+  onChange: onChangeRaw,
   placeholder,
   helpText,
   error = false,
@@ -73,6 +74,10 @@ export const Select: React.FC<SelectProps> = ({
   const [open, setOpen] = useState(false)
   const showPopover = useCallback(() => setOpen(true), [])
   const hidePopover = useCallback(() => setOpen(false), [])
+  const [selected, onChange] = useUncontrolledState(
+    selectedRaw,
+    onChangeRaw as ((value: string | null) => string) | undefined, // This will never be called with a null parameter
+  )
 
   const selectedChoice = useMemo(() => choices.find(x => x.value === selected), [choices, selected])
 
