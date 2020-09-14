@@ -12452,10 +12452,8 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-playroom@^0.21.6:
-  version "0.21.6"
-  resolved "https://registry.yarnpkg.com/playroom/-/playroom-0.21.6.tgz#351d33fb5d51e8cbfa07eb309d999bd9be86e5a3"
-  integrity sha512-iE0LyyedOFtBDbPABEk/56wOTOv9xn+VPbU76PzAmOKckoD6tIfSyJHVS1c9QuPrX17F7jfjV7xdqXGioPeeXQ==
+"playroom@file:.yalc/playroom":
+  version "0.0.0-semantically-released"
   dependencies:
     "@babel/cli" "^7.8.3"
     "@babel/core" "^7.8.3"

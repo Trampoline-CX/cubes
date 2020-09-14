@@ -6,6 +6,8 @@ module.exports = {
   frameComponent: './src/playroom/FrameComponent.tsx',
   snippets: './src/playroom/snippets.ts',
   themes: './src/playroom/themes.ts',
+  htmlTemplate: './src/playroom/playroom.html',
+  previewHtmlTemplate: './src/playroom/preview.html',
 
   // Optional:
   title: 'Cubes',
