@@ -25,11 +25,11 @@ Delightfully simple building blocks for quick prototyping ⚡
 
 ## 👨‍🔬 Experiment Now!
 
-Start swiftly ⚡ using [Playroom](https://trampoline-cx.github.io/cubes/), [CodeSandbox](https://codesandbox.io/s/github/alexbchr/cubes-basic-sandbox) or [Expo Snacks](https://snack.expo.io/@git/github.com/alexbchr/cubes-basic-sandbox).
+Start swiftly ⚡ using [Playroom](https://cubes.trampoline.cx), [CodeSandbox](https://codesandbox.io/s/github/alexbchr/cubes-basic-sandbox) or [Expo Snacks](https://snack.expo.io/@git/github.com/alexbchr/cubes-basic-sandbox).
 
 ### Playroom
 
-Let you experiment easily and fast using [Playroom](https://github.com/seek-oss/playroom). You can build prototypes easily and share them with the URL, without hassle or account creation.
+Let you experiment quickly and easily using [Playroom](https://github.com/seek-oss/playroom). You can build prototypes easily and share them with the URL, without hassle or account creation.
 
 ### CodeSandbox
 

@@ -28,7 +28,7 @@ module.exports = {
       </BottomNavigationBar>
     </Screen>
     `,
-  baseUrl: '/cubes/',
+  baseUrl: '/',
   typeScriptFiles: ['src/**/*.{ts,tsx}', '!src/storybook'],
   webpackConfig: () => ({
     module: {
