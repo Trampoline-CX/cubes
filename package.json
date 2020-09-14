@@ -6,7 +6,7 @@
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx}\" \"storybook/**/*.{ts,tsx}\"",
     "clean": "rm -rf dist/ && rm -rf web-build/",
     "build": "yarn build:css && tsc --p tsconfig.build.json && tsc",
-    "build:css": "copyfiles -u 1 src/**/*.css dist",
+    "build:css": "copyfiles -u 1 src/components/**/*.css dist",
     "build:playroom": "playroom build",
     "build-storybook": "yarn build && build-storybook -c storybook/web -o web-build",
     "test": "jest",
