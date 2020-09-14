@@ -223,6 +223,23 @@ export const themes = {
           error: '#ef5350',
         },
       },
+      elevation: {
+        z0: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z2: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z4: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z8: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z16: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+      },
     },
     true,
   ),
