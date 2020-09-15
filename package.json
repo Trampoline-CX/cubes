@@ -89,7 +89,7 @@
     "jest": "^25.5.1",
     "metro-react-native-babel-preset": "^0.60.0",
     "paths.macro": "^3.0.0",
-    "playroom": "file:.yalc/playroom",
+    "playroom": "^0.21.6",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "~16.11.0",
@@ -116,6 +116,7 @@
     "type": "git",
     "url": "https://github.com/Trampoline-CX/Cubes"
   },
+  "homepage": "https://cubes.trampoline.cx/",
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
