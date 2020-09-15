@@ -1,37 +1,22 @@
 import _ from 'lodash'
+import tinycolor from 'tinycolor2'
 import { Easing } from 'react-native'
-import { DeepPartial, Theme } from './theme-types'
+import { DeepPartial, Theme, ThemeBase, ColorHex, ComplexColor } from './theme-types'
 
-const lightTheme: Theme = {
+const lightTheme: ThemeBase = {
   // COLORS
   colors: {
     fill: {
-      primary: {
-        default: '#5B6275',
-        lighter: '#FFFFFF',
-        darker: '#FFFFFF',
-      },
-      accent: {
-        default: '#EE5D71',
-        lighter: '#FFFFFF',
-        darker: '#FFFFFF',
-      },
-      accentSecondary: {
-        default: '#F7B5A1',
-        lighter: '#FFE6DE',
-        darker: '#EA947A',
-      },
+      primary: '#5B6275',
+      secondary: '#F7B5A1',
+      accent: '#EE5D71',
       background: {
         default: '#FCF8F7',
         lighter: '#FFF',
         darker: '#EDE9E4',
         inverse: '#5B6275',
       },
-      divider: {
-        default: 'rgba(0,0,0,0.10)',
-        lighter: 'rgba(0,0,0,0.05)',
-        darker: '#303131',
-      },
+      divider: 'rgba(0,0,0,0.10)',
     },
     text: {
       primary: '#454B59',
@@ -40,17 +25,12 @@ const lightTheme: Theme = {
       inverse: '#FFFFFF',
     },
     transparent: 'transparent',
-    destructive: '#FF0000',
     positive: '#63A84C',
     negative: '#D32F2F',
     status: {
-      success: {
-        default: '#A5DBCA',
-        lighter: '#D3E3DE',
-        darker: '#6BBFA5',
-      },
+      success: '#A5DBCA',
       warning: '#FAD1A2',
-      error: '#F00',
+      error: '#ef5350',
     },
   },
 
@@ -107,18 +87,25 @@ const lightTheme: Theme = {
       elevation: 2,
     },
     z4: {
-      shadowOffset: { width: 0, height: 2 },
+      shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.22,
       shadowRadius: 2.5,
       shadowColor: '#000',
       elevation: 4,
     },
     z8: {
-      shadowOffset: { width: 0, height: 3 },
+      shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.22,
-      shadowRadius: 4.5,
+      shadowRadius: 7.5,
       shadowColor: '#000',
       elevation: 8,
+    },
+    z16: {
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.22,
+      shadowRadius: 15.5,
+      shadowColor: '#000',
+      elevation: 16,
     },
   },
 
@@ -137,6 +124,10 @@ const lightTheme: Theme = {
     },
     divider: 1,
     bullet: 8,
+    breakpoints: {
+      small: 576,
+      large: 1700,
+    },
   },
 
   // SPACING
@@ -173,29 +164,83 @@ const lightTheme: Theme = {
   },
 }
 
-export const buildTheme: (theme: DeepPartial<Theme>) => Theme = theme =>
-  _.defaultsDeep(theme, lightTheme)
+export const buildTheme: (theme: DeepPartial<ThemeBase>, inverse?: boolean) => Theme = (
+  theme,
+  inverse = false,
+) => {
+  // Create new ThemeBase using lightTheme as defaults
+  const newBase: ThemeBase = _.defaultsDeep(theme, lightTheme)
 
-export const themes = {
-  light: lightTheme,
-  dark: buildTheme({
+  // Derive light and dark colors...
+  return {
+    ...newBase,
     colors: {
+      ...newBase.colors,
       fill: {
-        background: {
-          lighter: '#000000',
-          default: '#383838',
-          inverse: '#FCF8F7',
-        },
-        divider: {
-          default: '#282828',
-          lighter: '#282828',
-          darker: '#282828',
-        },
-      },
-      text: {
-        primary: '#EEEEEE',
-        inverse: '#383838',
+        ...newBase.colors.fill,
+        primary: _deriveColors(newBase.colors.fill.primary, inverse),
+        secondary: _deriveColors(newBase.colors.fill.secondary, inverse),
+        accent: _deriveColors(newBase.colors.fill.accent, inverse),
       },
     },
-  }),
+  }
+}
+
+const _deriveColors = (color: ColorHex, inverse: boolean): ComplexColor => ({
+  default: color,
+  lighter: tinycolor(color)[inverse ? 'darken' : 'lighten'](10).toString(),
+  darker: tinycolor(color)[inverse ? 'lighten' : 'darken'](10).toString(),
+})
+
+export const themes = {
+  light: buildTheme(lightTheme),
+  dark: buildTheme(
+    {
+      colors: {
+        fill: {
+          primary: '#7a849e',
+          secondary: '#ffccbc',
+          accent: '#EE5D71',
+          background: {
+            lighter: '#030d1e',
+            default: '#2c3445',
+            darker: '#565d70',
+            inverse: '#b8c4e4',
+          },
+          divider: 'rgba(255,255,255,0.30)',
+        },
+        text: {
+          primary: '#FAFAFA',
+          accent: '#EE5D71',
+          subdued: '#8a90a6',
+          inverse: '#2c3142',
+        },
+        positive: '#63A84C',
+        negative: '#D32F2F',
+        status: {
+          success: '#A5DBCA',
+          warning: '#ffb74d',
+          error: '#ef5350',
+        },
+      },
+      elevation: {
+        z0: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z2: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z4: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z8: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+        z16: {
+          shadowColor: 'rgba(255, 255, 255, 0.3)',
+        },
+      },
+    },
+    true,
+  ),
 }

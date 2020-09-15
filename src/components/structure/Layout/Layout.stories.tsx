@@ -1,21 +1,20 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { BodyText } from '../../text/BodyText/BodyText'
 import { Heading } from '../../text/Heading/Heading'
 import { Card } from '../Card/Card'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Layout } from './Layout'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Layout, LayoutProps } from './Layout'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Layout,
   subcomponents: { 'Layout.Section': Layout.Section },
-  decorators: [CenteredVertical],
 }
 
-export const MultipleSections: React.FC = () => (
-  <Layout>
+export const MultipleSections: StoryFn<LayoutProps> = props => (
+  <Layout {...props}>
     <Layout.Section>
       <Card title="Card Title (Section 1)">
         <Card.Section>
@@ -41,6 +40,10 @@ export const MultipleSections: React.FC = () => (
     </Layout.Section>
   </Layout>
 )
+
+MultipleSections.argTypes = {
+  children: { control: null },
+}
 
 export const Sectioned: React.FC = () => (
   <Layout sectioned>

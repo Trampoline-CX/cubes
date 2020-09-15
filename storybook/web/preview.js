@@ -9,6 +9,11 @@ addParameters({
     storySort: (a, b) =>
       a[1].kind === b[1].kind ? 0 : a[1].id.localeCompare(b[1].id, undefined, { numeric: true }),
   },
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
 })
 
 // Add control for toggling components theme
@@ -22,6 +27,8 @@ export const globalTypes = {
       items: [
         { value: 'light', icon: 'circlehollow', title: 'Light' },
         { value: 'dark', icon: 'circle', title: 'Dark' },
+        { value: 'side-by-side', icon: 'sidebar', title: 'side by side' },
+        { value: 'stacked', icon: 'bottombar', title: 'stacked' },
       ],
     },
   },

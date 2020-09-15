@@ -37,7 +37,7 @@ export const Pill: React.FC<PillProps> = ({
     },
     container: {
       backgroundColor: theme.colors.fill.background.lighter,
-      borderColor: theme.colors.fill.divider.default,
+      borderColor: theme.colors.fill.divider,
       borderWidth: theme.border.thinner,
       borderRadius: theme.radius.circle,
 
@@ -45,8 +45,8 @@ export const Pill: React.FC<PillProps> = ({
       paddingHorizontal: theme.spacing.medium,
     },
     containerHighlighted: {
-      backgroundColor: theme.colors.fill.accentSecondary.lighter,
-      borderColor: theme.colors.fill.accentSecondary.default,
+      backgroundColor: theme.colors.fill.secondary.lighter,
+      borderColor: theme.colors.fill.secondary.default,
     },
   }))
 

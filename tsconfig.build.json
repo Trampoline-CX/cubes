@@ -10,5 +10,5 @@
     "target": "es2017"
   },
   "include": ["src"],
-  "exclude": ["src/storybook", "**/*.stories.tsx", "src/components/docs"]
+  "exclude": ["src/storybook", "src/playroom", "**/*.stories.tsx", "src/components/docs"]
 }

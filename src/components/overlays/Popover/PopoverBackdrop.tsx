@@ -1,17 +1,23 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { TouchableWithoutFeedback, Animated, StyleSheet } from 'react-native'
 import { shameStyles } from '../../../theme/shame-styles'
 import { useStyles, useTheme } from '../../../theme'
+import { useAnimation } from '../../../utils/hooks/use-animation'
 import { PopoverContext } from './PopoverContext'
 
 export interface PopoverBackdropProps {
   open: boolean
   invisible: boolean
+  clickThrough: boolean
 }
 
 const { zIndex, backdrop } = shameStyles.popover
 
-export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ open, invisible }) => {
+export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({
+  open,
+  invisible,
+  clickThrough,
+}) => {
   const styles = useStyles(() => ({
     backdrop: {
       backgroundColor: backdrop.color,
@@ -21,25 +27,26 @@ export const PopoverBackdrop: React.FC<PopoverBackdropProps> = ({ open, invisibl
     },
   }))
   const { animation } = useTheme()
-  const [anim] = useState(new Animated.Value(0))
+  const anim = useAnimation({
+    toValue: open ? 1 : 0,
+    type: 'timing',
+    easing: animation.easing.move,
+    duration: animation.duration.shorter,
+    useNativeDriver: true,
+  })
 
   const { requestClose } = useContext(PopoverContext)
 
-  useEffect(() => {
-    Animated.timing(anim, {
-      easing: animation.easing.move,
-      toValue: open ? 1 : 0,
-      duration: animation.duration.shorter,
-      useNativeDriver: true,
-    }).start()
-  }, [open, invisible])
+  const contentView = (
+    <Animated.View
+      style={[styles.backdrop, !invisible && { opacity: anim }]}
+      pointerEvents={open && !clickThrough ? 'auto' : 'none'}
+    />
+  )
 
-  return (
-    <TouchableWithoutFeedback onPress={requestClose}>
-      <Animated.View
-        style={[styles.backdrop, !invisible && { opacity: anim }]}
-        pointerEvents={open ? 'auto' : 'none'}
-      />
-    </TouchableWithoutFeedback>
+  return clickThrough ? (
+    contentView
+  ) : (
+    <TouchableWithoutFeedback onPress={requestClose}>{contentView}</TouchableWithoutFeedback>
   )
 }

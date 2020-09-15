@@ -6,19 +6,15 @@ import React, {
   useRef,
   useImperativeHandle,
 } from 'react'
-import { TextInput, View, TextInputProps, TouchableWithoutFeedback, Platform } from 'react-native'
+import { TextInput, View, TextInputProps, Platform } from 'react-native'
 import { BodyText } from '../../text/BodyText/BodyText'
-import { TextStyle } from '../../text/TextStyle/TextStyle'
-import { InlineError } from '../InlineError/InlineError'
 import { useStyles, useTheme } from '../../../theme'
 import { useTextStyles } from '../../text/use-text-styles'
-import { Heading } from '../../text/Heading/Heading'
 import { IconButton } from '../../actions/IconButton/IconButton'
-import { Box } from '../../structure/Box/Box'
-import { Caption } from '../../text/Caption/Caption'
 import { TestProps } from '../../../utils/TestProps'
 import { IconAction } from '../../actions/actions'
 import { useUncontrolledState } from '../../../utils/hooks/use-uncontrolled-state'
+import { BaseInputContainer } from '../../base/BaseInput/BaseInputContainer'
 
 export interface TextFieldProps extends TestProps {
   /**
@@ -127,8 +123,8 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
       type = 'text',
       placeholder,
       helpText,
-      disabled,
-      error,
+      disabled = false,
+      error = false,
       returnKeyType = 'next',
       focused = false,
       onSubmit,
@@ -275,54 +271,53 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
     }, [type])
 
     return (
-      <View>
-        {hideLabel ? null : (
-          <TouchableWithoutFeedback onPress={onLabelClick}>
-            <View style={styles.labelContainer}>
-              <Heading>{label}</Heading>
+      <BaseInputContainer
+        label={label}
+        hideLabel={hideLabel}
+        error={error}
+        helpText={helpText}
+        onLabelClick={onLabelClick}
+        disabled={disabled}
+      >
+        <View
+          style={[
+            styles.inputContainer,
+            hasFocus && styles.containerFocused,
+            disabled && styles.containerDisabled,
+          ]}
+        >
+          {prefix ? (
+            <View style={styles.prefix}>
+              <BodyText variation="subdued">{prefix}</BodyText>
             </View>
-          </TouchableWithoutFeedback>
-        )}
-        <View>
-          <View
+          ) : null}
+          <TextInput
+            ref={inputRef}
+            {...inputType}
             style={[
-              styles.inputContainer,
-              hasFocus && styles.containerFocused,
-              disabled && styles.containerDisabled,
+              textStyles.body,
+              styles.input,
+              Platform.OS === 'ios' && styles.inputIos,
+              endAction ? styles.inputWithEndAction : null,
             ]}
-          >
-            {prefix ? (
-              <View style={styles.prefix}>
-                <BodyText variation="subdued">{prefix}</BodyText>
-              </View>
-            ) : null}
-            <TextInput
-              ref={inputRef}
-              {...inputType}
-              style={[
-                textStyles.body,
-                styles.input,
-                Platform.OS === 'ios' && styles.inputIos,
-                endAction ? styles.inputWithEndAction : null,
-              ]}
-              placeholder={placeholder}
-              editable={!disabled}
-              value={value}
-              onChangeText={onChange}
-              returnKeyType={returnKeyType}
-              blurOnSubmit={returnKeyType !== 'next'} // Prevent keyboard flicker when going from one field to another
-              underlineColorAndroid={currentTheme.colors.transparent}
-              placeholderTextColor={currentTheme.colors.text.subdued}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onSubmitEditing={onSubmit}
-              selectTextOnFocus={selectTextOnFocus}
-              secureTextEntry={secureTextEntry}
-              onKeyPress={onKeyPress}
-              testID={testID}
-              accessibilityLabel={accessibilityLabel}
-            />
-          </View>
+            placeholder={placeholder}
+            editable={!disabled}
+            value={value}
+            onChangeText={onChange}
+            returnKeyType={returnKeyType}
+            blurOnSubmit={returnKeyType !== 'next'} // Prevent keyboard flicker when going from one field to another
+            underlineColorAndroid={currentTheme.colors.transparent}
+            placeholderTextColor={currentTheme.colors.text.subdued}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onSubmitEditing={onSubmit}
+            selectTextOnFocus={selectTextOnFocus}
+            secureTextEntry={secureTextEntry}
+            onKeyPress={onKeyPress}
+            testID={testID}
+            accessibilityLabel={accessibilityLabel}
+          />
+
           {endAction ? (
             <View style={styles.endActionContainer}>
               <IconButton
@@ -334,19 +329,7 @@ export const TextField = React.forwardRef<TextInput, TextFieldProps>(
             </View>
           ) : null}
         </View>
-        {error && (
-          <Box paddingTop="xSmall">
-            <InlineError message={typeof error === 'string' ? error : ''} />
-          </Box>
-        )}
-        {helpText && (
-          <Box paddingTop="xSmall">
-            <Caption>
-              <TextStyle variation="subdued">{helpText}</TextStyle>
-            </Caption>
-          </Box>
-        )}
-      </View>
+      </BaseInputContainer>
     )
   },
 )

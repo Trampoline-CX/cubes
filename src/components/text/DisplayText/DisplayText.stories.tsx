@@ -1,15 +1,24 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { TextContainer } from '../TextContainer/TextContainer'
 import { LOREM_IPSUM } from '../../../storybook/utils/constants'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { DisplayText } from './DisplayText'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { DisplayText, DisplayTextProps } from './DisplayText'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: DisplayText,
-  decorators: [CenteredVertical],
+}
+
+export const Basic: StoryFn<DisplayTextProps> = props => <DisplayText {...props} />
+
+Basic.args = {
+  children: 'Wow, so big!',
+}
+
+Basic.argTypes = {
+  children: { control: 'text' },
 }
 
 export const All: React.FC = () => (

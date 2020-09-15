@@ -2,18 +2,17 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { fileAbsolute } from 'paths.macro'
 import { Button } from '../../actions/Button/Button'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { ButtonGroup } from './ButtonGroup'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { ButtonGroup, ButtonGroupProps } from './ButtonGroup'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: ButtonGroup,
-  decorators: [CenteredVertical],
 }
 
-export const DefaultFill: React.FC = () => (
-  <ButtonGroup>
+export const DefaultFill: StoryFn<ButtonGroupProps> = props => (
+  <ButtonGroup {...props}>
     <Button primary onClick={action('Button 1 click')}>
       Button 1
     </Button>
@@ -25,6 +24,10 @@ export const DefaultFill: React.FC = () => (
     </Button>
   </ButtonGroup>
 )
+
+DefaultFill.argTypes = {
+  children: { control: null },
+}
 
 export const Start: React.FC = () => (
   <ButtonGroup alignment="start">

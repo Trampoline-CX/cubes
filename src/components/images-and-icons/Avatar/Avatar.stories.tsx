@@ -4,21 +4,22 @@ import { getStoryTitle } from '../../../storybook/get-story-title'
 import { Box } from '../../structure/Box/Box'
 import { Heading } from '../../text'
 import { useTheme } from '../../../theme'
-import { Avatar } from './Avatar'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Avatar, AvatarProps } from './Avatar'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Avatar,
 }
 
-export const Basic: React.FC = () => (
-  <Avatar
-    source={{
-      uri:
-        'https://images.unsplash.com/photo-1551408687-4fa2bd0b683a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
-    }}
-  />
-)
+export const Basic: StoryFn<AvatarProps> = props => <Avatar {...props} />
+
+Basic.args = {
+  source: {
+    uri:
+      'https://images.unsplash.com/photo-1551408687-4fa2bd0b683a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
+  },
+}
 
 export const Generated: React.FC = () => (
   <Box horizontal space="medium">
@@ -27,6 +28,7 @@ export const Generated: React.FC = () => (
     <Avatar source={{ hash: 'Random Text' }} />
   </Box>
 )
+
 export const Size: React.FC = () => {
   const { size } = useTheme()
 

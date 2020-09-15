@@ -1,18 +1,37 @@
 import React from 'react'
 import { fileAbsolute } from 'paths.macro'
 import { SkeletonLoading } from '../SkeletonLoading/SkeletonLoading'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { SkeletonAvatar } from './SkeletonAvatar'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Box } from '../../structure/Box/Box'
+import { Heading } from '../../text'
+import { useTheme } from '../../../theme'
+import { SkeletonAvatar, SkeletonAvatarProps } from './SkeletonAvatar'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: SkeletonAvatar,
-  decorators: [CenteredVertical],
 }
 
-export const Default: React.FC = () => (
+export const Default: StoryFn<SkeletonAvatarProps> = props => (
   <SkeletonLoading loading>
-    <SkeletonAvatar />
+    <SkeletonAvatar {...props} />
   </SkeletonLoading>
 )
+
+export const Size: React.FC = () => {
+  const { size } = useTheme()
+
+  return (
+    <Box horizontal space="xLarge">
+      <Box>
+        <Heading>Small ({size.avatar.small}dp)</Heading>
+        <SkeletonAvatar size="small" />
+      </Box>
+      <Box>
+        <Heading>Default ({size.avatar.default}dp)</Heading>
+        <SkeletonAvatar size="default" />
+      </Box>
+    </Box>
+  )
+}

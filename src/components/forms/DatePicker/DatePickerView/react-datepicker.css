@@ -1,0 +1,10 @@
+/* To prevent bottom spacing and border. */
+.react-datepicker {
+  vertical-align: top;
+  border: none;
+}
+
+/* To prevent time header which says "Time" to show up. */
+.react-datepicker__header--time {
+  display: none;
+}

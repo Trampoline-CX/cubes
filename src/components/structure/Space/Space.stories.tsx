@@ -1,37 +1,40 @@
 import React from 'react'
-import { View } from 'react-native'
 import { fileAbsolute } from 'paths.macro'
 import { BodyText } from '../../text/BodyText/BodyText'
-import { CenteredVertical } from '../../../storybook/decorators/CenteredVertical'
 import { getStoryTitle } from '../../../storybook/get-story-title'
-import { Space } from './Space'
+import { Box } from '../Box/Box'
+import { StoryFn } from '../../../storybook/utils/storybook-types'
+import { Space, SpaceProps } from './Space'
 
 export default {
   title: getStoryTitle(fileAbsolute),
   component: Space,
-  decorators: [CenteredVertical],
 }
 
-export const Small: React.FC = () => (
-  <View>
+export const Small: StoryFn<SpaceProps> = props => (
+  <Box horizontal>
     <BodyText>Test1</BodyText>
-    <Space value="small" />
+    <Space {...props} />
     <BodyText>Test2</BodyText>
-  </View>
+  </Box>
 )
 
+Small.args = {
+  value: 'small',
+}
+
 export const Medium: React.FC = () => (
-  <View>
+  <Box horizontal>
     <BodyText>Test1</BodyText>
     <Space value="medium" />
     <BodyText>Test2</BodyText>
-  </View>
+  </Box>
 )
 
 export const Large: React.FC = () => (
-  <View>
+  <Box horizontal>
     <BodyText>Test1</BodyText>
     <Space value="large" />
     <BodyText>Test2</BodyText>
-  </View>
+  </Box>
 )

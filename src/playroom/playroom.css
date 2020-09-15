@@ -1,0 +1,24 @@
+html,
+body {
+  height: 100%;
+}
+
+body > div:first-of-type {
+  height: 100%;
+  display: flex;
+}
+
+#FrameStart {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+/* Workaround to display Splash Screen in preview correctly. */
+.preview-body #FrameStart > div:first-of-type {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  z-index: initial;
+}
