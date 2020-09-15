@@ -6,6 +6,8 @@ module.exports = {
   frameComponent: './src/playroom/FrameComponent.tsx',
   snippets: './src/playroom/snippets.ts',
   themes: './src/playroom/themes.ts',
+  htmlTemplate: './src/playroom/templates/playroom.html',
+  previewHtmlTemplate: './src/playroom/templates/preview.html',
 
   // Optional:
   title: 'Cubes',
@@ -14,19 +16,73 @@ module.exports = {
   openBrowser: true,
   exampleCode: `
   <Screen>
-      <TopBar title="Bar Title" />
-      <Screen.Content padding="medium">
-        <TextContainer>
-          <DisplayText>Title</DisplayText>
-          <BodyText>Put content here...</BodyText>
-        </TextContainer>
-      </Screen.Content>
-      <BottomNavigationBar>
-        <BottomNavigationBar.Tab icon="dashboard" selected />
-        <BottomNavigationBar.Tab icon="account-balance" />
-        <BottomNavigationBar.Tab icon="person" />
-      </BottomNavigationBar>
-    </Screen>
+    <TopBar title="Bar Title" />
+    <Screen.Content padding="medium">
+      <TextContainer>
+        <DisplayText>Cubes</DisplayText>
+        <BodyText>
+          Delightfully simple building blocks for quick prototyping 🚀
+        </BodyText>
+        <BodyText>
+          Share your prototype by sharing the link to this page 😊
+        </BodyText>
+        <Heading>Quick Links</Heading>
+        <List>
+          <List.Item>
+            See our{" "}
+            <Link
+              onClick={() =>
+                window.open("https://github.com/Trampoline-CX/cubes")
+              }
+            >
+              Github
+            </Link>{" "}
+            👨‍💻
+          </List.Item>
+          <List.Item>
+            See our{" "}
+            <Link
+              onClick={() =>
+                window.open(
+                  "https://develop--5eebb872a669600022881133.chromatic.com"
+                )
+              }
+            >
+              Storybook
+            </Link>{" "}
+            📘
+          </List.Item>
+          <List.Item>
+            See the{" "}
+            <Link
+              onClick={() =>
+                window.open("https://github.com/seek-oss/playroom")
+              }
+            >
+              Playroom
+            </Link>{" "}
+            repository 🧸
+          </List.Item>
+        </List>
+        <Divider />
+        <Box horizontal space="medium">
+          <Icon name="info" />
+          <BodyText>
+            Learn more on{" "}
+            <Link onClick={() => window.open("https://trampoline.cx/")}>
+              Trampoline
+            </Link>{" "}
+            and what we do!
+          </BodyText>
+        </Box>
+      </TextContainer>
+    </Screen.Content>
+    <BottomNavigationBar>
+      <BottomNavigationBar.Tab icon="dashboard" selected />
+      <BottomNavigationBar.Tab icon="account-balance" />
+      <BottomNavigationBar.Tab icon="person" />
+    </BottomNavigationBar>
+  </Screen>
     `,
   baseUrl: '/',
   typeScriptFiles: ['src/**/*.{ts,tsx}', '!src/storybook'],
@@ -133,5 +189,5 @@ module.exports = {
       },
     },
   }),
-  iframeSandbox: 'allow-scripts',
+  iframeSandbox: 'allow-scripts allow-popups',
 }
