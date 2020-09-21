@@ -6,6 +6,7 @@ export * from './actions/Link/Link'
 export * from './actions/Pill/Pill'
 export * from './actions/actions'
 
+export * from './base/AspectView/AspectView'
 export * from './base/Touchable/Touchable'
 
 export * from './behavior/Carousel/Carousel'

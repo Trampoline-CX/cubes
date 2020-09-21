@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Animated } from 'react-native'
+import { Animated, Image, ImageSourcePropType, StyleSheet } from 'react-native'
 import { Heading } from '../../text/Heading/Heading'
 import { useStyles, useTheme } from '../../../theme'
 import { Link } from '../../actions/Link/Link'
@@ -12,6 +12,7 @@ import { BodyText } from '../../text/BodyText/BodyText'
 import { shameStyles } from '../../../theme/shame-styles'
 import { TextAction } from '../../actions/actions'
 import { SwipeToDismiss, SwipeToDismissProps } from '../../base/SwipeToDismiss/SwipeToDismiss'
+import { AspectView } from '../../base/AspectView/AspectView'
 import { Section } from './Section/Section'
 
 export interface CardProps {
@@ -44,6 +45,16 @@ export interface CardProps {
    */
   mainActions?: TextAction[]
   /**
+   * Source of the image shown in the Card.
+   */
+  imageSource?: ImageSourcePropType
+  /**
+   * Image ratio (width / height). Defaukt is 2 / 1.
+   *
+   * For example, the default ratio of 2 / 1 means that the width will be twice the height.
+   */
+  imageRatio?: number
+  /**
    * Card content.
    */
   children: React.ReactNode
@@ -65,6 +76,8 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
   fullWidth = false,
   subdued = false,
   warning = false,
+  imageSource,
+  imageRatio = 2 / 1,
   mainActions = [],
   onDismiss,
 }) => {
@@ -74,6 +87,7 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
 
       backgroundColor: theme.colors.fill.background.lighter,
       borderRadius: fullWidth ? 0 : theme.radius.medium,
+      overflow: 'hidden',
     },
     cardSubdued: {
       backgroundColor: shameStyles.card.subdued.backgroundColor,
@@ -106,6 +120,7 @@ export const Card: React.FC<CardProps> & { Section: typeof Section } = ({
         wasSwiped ? { height: shrink } : undefined,
       ]}
     >
+      {imageSource ? <CardImage source={imageSource} ratio={imageRatio} /> : null}
       {title ? <CardHeader title={title} action={headerAction} /> : null}
       {items}
       {mainActions.map((action, index) => (
@@ -165,6 +180,23 @@ const CardMainAction: React.FC<{ action: TextAction }> = ({ action }) => (
       </Box>
     </Touchable>
   </>
+)
+
+const imageStyles = StyleSheet.create({
+  imageContainer: {
+    width: '100%',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+})
+
+const CardImage: React.FC<{ source: ImageSourcePropType; ratio: number }> = ({ source, ratio }) => (
+  // We inverse ratio to have a height / width ratio
+  <AspectView style={[imageStyles.imageContainer, { aspectRatio: 1 / ratio }]}>
+    <Image style={imageStyles.image} source={source} />
+  </AspectView>
 )
 
 Card.Section = Section

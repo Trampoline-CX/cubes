@@ -26,6 +26,7 @@ DefaultSectioned.args = {
   title: 'Card title',
   sectioned: true,
   headerAction: { label: 'Header Action', action: action('Header Action Clicked') },
+  imageSource: { uri: require('../../../../storybook/assets/images/puppy-1.jpg') },
   mainActions: [
     { label: 'Action 1', action: action('Action 1 Clicked') },
     { label: 'Action 2', action: action('Action 2 Clicked') },
