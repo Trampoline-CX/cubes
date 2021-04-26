@@ -8,6 +8,7 @@ If you like Cubes but think it could benefit from some improvements, feel free t
   - [🎨 Chromatic](#-chromatic)
 - [📁 Directory Structure](#-directory-structure)
 - [📜 Typescript Structure](#-typescript-structure)
+- [⚙️ Chromatic Configuration](#️-chromatic-configuration)
 - [🚀 Publish](#-publish)
 
 ---
@@ -96,6 +97,10 @@ There are 2 `tsconfig.json` files in this package:
 
 - `tsconfig.json`: Used by VS Code for code completion and stuff and when building Storybook (doesn't emit anything).
 - `tsconfig.build.json`: Used when building the package (output code to `dist/` folder).
+
+## ⚙️ Chromatic Configuration
+
+To configure the project token for Chromatic, simply copy the `.env.example` file to a `.env` file and put the correct Chromatic Token as an environment variable.
 
 ## 🚀 Publish
 
