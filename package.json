@@ -13,7 +13,7 @@
     "start": "start-storybook -c storybook/web -p 9009 -s public",
     "start:playroom": "playroom start",
     "prestorybook": "yarn build",
-    "chromatic": "chromatic --project-token=t00yilwkcv",
+    "chromatic": "chromatic",
     "prepublishOnly": "yarn clean && yarn build && yarn lint",
     "release": "yarn version",
     "preversion": "git diff --quiet",
