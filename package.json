@@ -98,7 +98,7 @@
     "react-is": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.0.tar.gz",
     "react-native-gesture-handler": "1.6.0",
-    "react-native-reanimated": "1.9.0",
+    "react-native-reanimated": "2.10.0",
     "react-native-safe-area-context": "3.0.7",
     "react-native-screens": "2.9.0",
     "react-native-storybook-loader": "^1.8.1",
